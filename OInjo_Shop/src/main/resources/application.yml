@@ -1,22 +1,22 @@
 server:
   port: 8081
 
-  # database 연동 설정
-  spring:
-    datasource:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      #    각자 PC에 만들어놓은 Database 이름을 사용
-      url: jdbc:mysql://localhost:3309/db_OInjo?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+# database 연동 설정
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+      #    각자 PC에 만들어놓은 Database이름 사용
+    url: jdbc:mysql://localhost:3306/db_OInjo?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
       #    mysql에 생성한 사용자 계정 정보를 사용
-      username: OInjo_root
-      password: 5dlswh
-    thymeleaf:
+    username: OInjo_root
+    password: 5dlswh
+  thymeleaf:
       cache: false
 
-    # spring data jpa 설정
-    jpa:
-      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-      open-in-view: false
-      show-sql: true
-      hibernate:
-        ddl-auto: update
+  # spring data jpa 설정
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update

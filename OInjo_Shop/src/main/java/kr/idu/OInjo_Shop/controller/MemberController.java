@@ -4,9 +4,7 @@ import kr.idu.OInjo_Shop.dto.MemberDTO;
 import kr.idu.OInjo_Shop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -15,13 +13,16 @@ public class MemberController {
     private final MemberService memberService;
 
     // 회원가입
-    @GetMapping("/member/create")
-    public String createForm() {
-        return "create";
+    @GetMapping("/member/save")
+    public String saveForm() {
+        return "save";
     }
-    @PostMapping("/member/create")
-    public String create(@ModelAttribute MemberDTO memberDTO) { // 객체 다받아옴
-        memberService.create(memberDTO);
-        return "index";
+
+    @PostMapping("/member/save")
+    public String save(@ModelAttribute MemberDTO memberDTO) {
+        System.out.println("MemberController.save");
+        System.out.println("memberDTO = " + memberDTO);
+        memberService.save(memberDTO);
+        return "login";
     }
 }
