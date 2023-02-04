@@ -20,9 +20,7 @@ public class MemberController {
 
     @PostMapping("/member/save")
     public String save(@ModelAttribute MemberDTO memberDTO) {
-        System.out.println("MemberController.save");
-        System.out.println("memberDTO = " + memberDTO);
         memberService.save(memberDTO);
-        return "login";
+        return "index";
     }
 }

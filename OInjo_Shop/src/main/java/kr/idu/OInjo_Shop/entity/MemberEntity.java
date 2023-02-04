@@ -24,11 +24,23 @@ public class MemberEntity {
     @Column
     private String memberName;
 
+    @Column
+    private String memberNickname;
+
+    @Column
+    private String memberPhone;
+
+    @Column
+    private String memberAddress;
+
     public static MemberEntity toMemberEntity(MemberDTO memberDTO) {
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setMemberEmail(memberDTO.getMemberEmail());
         memberEntity.setMemberPassword(memberDTO.getMemberPassword());
         memberEntity.setMemberName(memberDTO.getMemberName());
+        memberEntity.setMemberNickname(memberDTO.getMemberNickname());
+        memberEntity.setMemberPhone(memberDTO.getMemberPhone());
+        memberEntity.setMemberAddress(memberDTO.getMemberAddress());
         return memberEntity;
     }
 }
