@@ -1,5 +1,6 @@
 package kr.idu.OInjo_Shop.dto;
 
+import kr.idu.OInjo_Shop.entity.MemberEntity;
 import lombok.*;
 
 @Getter
@@ -15,4 +16,16 @@ public class MemberDTO {
     private String memberNickname;
     private String memberPhone;
     private String memberAddress;
+
+    public static MemberDTO toMemberDTO(MemberEntity memberEntity){
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setId(memberEntity.getId());
+        memberDTO.setMemberEmail(memberEntity.getMemberEmail());
+        memberDTO.setMemberPassword(memberEntity.getMemberPassword());
+        memberDTO.setMemberName(memberEntity.getMemberName());
+        memberDTO.setMemberNickname(memberEntity.getMemberNickname());
+        memberDTO.setMemberPhone(memberEntity.getMemberPhone());
+        memberDTO.setMemberAddress(memberEntity.getMemberAddress());
+        return memberDTO;
+    }
 }
