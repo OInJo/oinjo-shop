@@ -7,6 +7,8 @@ import kr.idu.OInjo_Shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,5 +43,20 @@ public class MemberService {
             //조회 결과가 부재
             return null;
         }
+    }
+    public List<MemberDTO> findAll() {
+        List<MemberEntity> memberEntityList = memberRepository.findAll();
+        // 여기서 findAll()은 repository에서 제공하는 메서드 [List 객체 넘어옴]
+        // repository <=> entity로 주고 받기
+        List<MemberDTO> memberDTOList = new ArrayList<>();
+        for (MemberEntity memberEntity: memberEntityList) {
+            // for each문 사용 memberDTOList => DTO 객체를 받음
+            memberDTOList.add(MemberDTO.toMemberDTO(memberEntity));
+            //entity list 객체를 dto로 변환 후 controller로 넘김
+            // 아래와 같이 두줄로 가능
+            //MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
+            //memberDTOList.add(memberDTO);
+        }
+        return memberDTOList;
     }
 }

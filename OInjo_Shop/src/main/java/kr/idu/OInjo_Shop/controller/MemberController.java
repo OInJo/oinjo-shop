@@ -4,9 +4,11 @@ import kr.idu.OInjo_Shop.dto.MemberDTO;
 import kr.idu.OInjo_Shop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -42,5 +44,15 @@ public class MemberController {
             // login 실패
             return "login";
         }
+    }
+
+    @GetMapping("/member/")
+    public String findAll(Model model) {
+        // Model 객체 => html로 가져갈 데이터가 있을 경우 사용
+        List<MemberDTO> memberDTOList = memberService.findAll();
+        // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
+        model.addAttribute("memberList", memberDTOList);
+        // model 객체로 list 담아감감
+        return "list";
     }
 }
