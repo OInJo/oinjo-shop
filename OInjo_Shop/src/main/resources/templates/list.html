@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>list.html</h2>
+<table>
+    <tr>
+        <th>id</th>
+        <th>memberEmail</th>
+        <th>memberPassword</th>
+        <th>memberName</th>
+        <th>memberNickname</th>
+        <th>상세조회</th>
+        <th>삭제</th>
+    </tr>
+    <tr th:each="member: ${memberList}">
+        <td th:text="${member.id}"></td>
+        <td th:text="${member.memberEmail}"></td>
+        <td th:text="${member.memberPassword}"></td>
+        <td th:text="${member.memberName}"></td>
+        <td th:text="${member.memberNickname}"></td>
+        <td>
+        <!-- query string 방식 => /member?id=1
+             rest api 방식 (주소로 알기쉽게) =>  /member/1   -->
+            <a th:href="@{|/member/${member.id}|}">조회</a>
+        </td>
+        <td>
+            <a th:href="@{|/member/delete/${member.id}|}">삭제</a>
+    <!-- 비동기 통신으로 삭제 요청 메서드도 /member/1 로 하게 바꿔야함(ajax,axios) -->
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -3,10 +3,13 @@ package kr.idu.OInjo_Shop.controller;
 import kr.idu.OInjo_Shop.dto.MemberDTO;
 import kr.idu.OInjo_Shop.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -42,5 +45,43 @@ public class MemberController {
             // login 실패
             return "login";
         }
+    }
+
+    @GetMapping("/member/")
+    public String findAll(Model model) {
+        // Model 객체 => html로 가져갈 데이터가 있을 경우 사용
+        List<MemberDTO> memberDTOList = memberService.findAll();
+        // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
+        model.addAttribute("memberList", memberDTOList);
+        // model 객체로 list 담아감감
+        return "list";
+    }
+
+    @GetMapping("/member/{id}")
+    public String findById(@PathVariable Long id, Model model){
+        // qurey 방식은 request param 사용
+        // 경로상에 있는 값은 pathvariable 사용
+        MemberDTO memberDTO = memberService.findById(id);
+        model.addAttribute("member", memberDTO);
+        // html에서 member.memberEmail 형식으로 사용
+        return "detail";
+    }
+
+    @GetMapping("/member/update")
+    public String updateForm(HttpSession session, Model model) {
+        // 정보 수정 -> 세션에 있는 로그인 값으로 전체 정보를 DB로부터 가져와서 model에 담음
+        String myEmail = (String) session.getAttribute("loginEmail"); // 캐스팅 - 강제 형변환(Object -> String)
+        MemberDTO memberDTO = memberService.updateForm(myEmail);
+        model.addAttribute("updateMember", memberDTO);
+        return "update";
+    }
+
+    @PostMapping("/member/update")
+    public String update(@ModelAttribute MemberDTO memberDTO) {
+        memberService.update(memberDTO);
+        // 이대로 detail return 시 값 출력 x
+        // findById 형식으로 memberDTO를 model에 담아서 return 가능
+        // 다른 메서드가 가지고 있는 주소를 요청 - redirect 사용
+        return "redirect:/member/" + memberDTO.getId();
     }
 }

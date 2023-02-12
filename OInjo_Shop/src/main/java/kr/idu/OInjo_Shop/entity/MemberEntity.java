@@ -43,4 +43,16 @@ public class MemberEntity {
         memberEntity.setMemberAddress(memberDTO.getMemberAddress());
         return memberEntity;
     }
+
+    public static MemberEntity toUpdateMemberEntity(MemberDTO memberDTO) {
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setId(memberDTO.getId()); // Id 쿼리도 같이 수행해야 에러 x
+        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
+        memberEntity.setMemberPassword(memberDTO.getMemberPassword());
+        memberEntity.setMemberName(memberDTO.getMemberName());
+        memberEntity.setMemberNickname(memberDTO.getMemberNickname());
+        memberEntity.setMemberPhone(memberDTO.getMemberPhone());
+        memberEntity.setMemberAddress(memberDTO.getMemberAddress());
+        return memberEntity;
+    }
 }

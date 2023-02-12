@@ -7,6 +7,8 @@ import kr.idu.OInjo_Shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,6 +30,7 @@ public class MemberService {
         if (byMemberEmail.isPresent()) {
             //조회 결과가 존재
             MemberEntity memberEntity = byMemberEmail.get();
+            // get 메서드로 optional 객체를 언래핑
             if (memberEntity.getMemberPassword().equals(memberDTO.getMemberPassword())){
                 // 비밀번호 일치
                 // entity -> dto로 변환 후 리턴
@@ -41,5 +44,48 @@ public class MemberService {
             //조회 결과가 부재
             return null;
         }
+    }
+    public List<MemberDTO> findAll() {
+        List<MemberEntity> memberEntityList = memberRepository.findAll();
+        // 여기서 findAll()은 repository에서 제공하는 메서드 [List 객체 넘어옴]
+        // repository <=> entity로 주고 받기
+        List<MemberDTO> memberDTOList = new ArrayList<>();
+        for (MemberEntity memberEntity: memberEntityList) {
+            // for each문 사용 memberDTOList => DTO 객체를 받음
+            memberDTOList.add(MemberDTO.toMemberDTO(memberEntity));
+            //entity list 객체를 dto로 변환 후 controller로 넘김
+            // 아래와 같이 두줄로 가능
+            //MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
+            //memberDTOList.add(memberDTO);
+        }
+        return memberDTOList;
+    }
+
+    public MemberDTO findById(Long id) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
+        if (optionalMemberEntity.isPresent()) {
+            /*
+            MemberEntity memberEntity = optionalMemberEntity.get();
+            MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
+            return memberDTO;
+            */
+            return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+        } else {
+            return null;
+        }
+    }
+
+    public MemberDTO updateForm(String myEmail) {
+        Optional<MemberEntity> optionalMemberEmail = memberRepository.findByMemberEmail(myEmail);
+        if (optionalMemberEmail.isPresent()) {
+            return MemberDTO.toMemberDTO(optionalMemberEmail.get());
+        } else {
+            return null;
+        }
+    }
+
+    public void update(MemberDTO memberDTO) {
+        memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
+        // save 메서드는 ID가 없으면 insert 쿼리 수행, DB에 있을 경우 update 쿼리 수행
     }
 }
