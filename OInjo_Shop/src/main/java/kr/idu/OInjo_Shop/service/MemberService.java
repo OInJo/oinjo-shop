@@ -30,6 +30,7 @@ public class MemberService {
         if (byMemberEmail.isPresent()) {
             //조회 결과가 존재
             MemberEntity memberEntity = byMemberEmail.get();
+            // get 메서드로 optional 객체를 언래핑
             if (memberEntity.getMemberPassword().equals(memberDTO.getMemberPassword())){
                 // 비밀번호 일치
                 // entity -> dto로 변환 후 리턴
@@ -58,5 +59,19 @@ public class MemberService {
             //memberDTOList.add(memberDTO);
         }
         return memberDTOList;
+    }
+
+    public MemberDTO findById(Long id) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
+        if (optionalMemberEntity.isPresent()) {
+            /*
+            MemberEntity memberEntity = optionalMemberEntity.get();
+            MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
+            return memberDTO;
+            */
+            return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+        } else {
+            return null;
+        }
     }
 }

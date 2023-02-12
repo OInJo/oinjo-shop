@@ -55,4 +55,15 @@ public class MemberController {
         // model 객체로 list 담아감감
         return "list";
     }
+
+    @GetMapping("/member/{id}")
+    public String findById(@PathVariable Long id, Model model){
+        // qurey 방식은 request param 사용
+        // 경로상에 있는 값은 pathvariable 사용
+        MemberDTO memberDTO = memberService.findById(id);
+        model.addAttribute("member", memberDTO);
+        // html에서 member.memberEmail 형식으로 사용
+        return "detail";
+    }
+
 }
