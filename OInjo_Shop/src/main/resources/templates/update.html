@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>update</title>
+</head>
+<body>
+<form action="/member/update" method="post">
+    <!-- th:value 로 model 값 사용  id는 노출 x -->
+    <input type="hidden" th:value="${updateMember.id}" name="id"><br>
+    이메일: <input type="text" th:value="${updateMember.memberEmail}" name="memberEmail" readonly> <br>
+    비밀번호: <input type="text" th:value="${updateMember.memberPassword}" name="memberPassword"> <br>
+    이름: <input type="text" th:value="${updateMember.memberName}" name="memberName"> <br>
+    닉네임: <input type="text" th:value="${updateMember.memberNickname}" name="memberNickname"> <br>
+    폰번호: <input type="text" th:value="${updateMember.memberPhone}" name="memberPhone"> <br>
+    주소: <input type="text" th:value="${updateMember.memberAddress}" name="memberAddress"> <br>
+    <!-- name 속성은 반드시 존재 / DTO 필드랑 일치해야 model Attribute 사용 가능-->
+    <input type="submit" value="정보수정">
+</form>
+</body>
+</html>

@@ -74,4 +74,19 @@ public class MemberService {
             return null;
         }
     }
+    
+    public MemberDTO updateForm(String myEmail) {
+        Optional<MemberEntity> optionalMemberEmail = memberRepository.findByMemberEmail(myEmail);
+        if (optionalMemberEmail.isPresent()) {
+            return MemberDTO.toMemberDTO(optionalMemberEmail.get());
+        } else {
+            return null;
+        }
+    }
+
+    public void update(MemberDTO memberDTO) {
+        memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
+        // save 메서드는 ID가 없으면 insert 쿼리 수행, DB에 있을 경우 update 쿼리 수행
+    }
+
 }
