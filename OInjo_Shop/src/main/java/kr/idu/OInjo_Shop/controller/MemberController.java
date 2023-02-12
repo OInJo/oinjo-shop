@@ -66,7 +66,7 @@ public class MemberController {
         // html에서 member.memberEmail 형식으로 사용
         return "detail";
     }
-
+ 
     @GetMapping("/member/update")
     public String updateForm(HttpSession session, Model model) {
         // 정보 수정 -> 세션에 있는 로그인 값으로 전체 정보를 DB로부터 가져와서 model에 담음
@@ -85,4 +85,5 @@ public class MemberController {
         return "redirect:/member/" + memberDTO.getId();
 
     }
+
 }
