@@ -89,4 +89,7 @@ public class MemberService {
         // save 메서드는 ID가 없으면 insert 쿼리 수행, DB에 있을 경우 update 쿼리 수행
     }
 
+    public void deleteById(Long id) {
+        memberRepository.deleteById(id);
+    }
 }
