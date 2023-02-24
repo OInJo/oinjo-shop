@@ -1,0 +1,79 @@
+h1 {
+    font-size: 40px;
+    padding-top: 55px;
+}
+.join {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: auto 450px auto 450px;
+    height: 900px;  
+    background: #fff;
+}
+/* .uid input {
+    background-color:rgb(236, 237, 233);
+    border-radius: 5px;
+    width: 300px;
+    height: 30px;
+}
+.pw input {
+    background-color:rgb(236, 237, 233);
+    border-radius: 5px;
+    width: 300px;
+    height: 30px;
+}
+.name input {
+    background-color:rgb(236, 237, 233);
+    border-radius: 5px;
+    width: 300px;
+    height: 30px;
+}
+.nickname input {
+    background-color:rgb(236, 237, 233);
+    border-radius: 5px;
+    width: 300px;
+    height: 30px;
+}
+.email input {
+    background-color:rgb(236, 237, 233);
+    border-radius: 5px;
+    width: 300px;
+    height: 30px;
+}
+.address input {
+    background-color:rgb(236, 237, 233);
+    border-radius: 5px;
+    width: 245px;
+    height: 30px;
+}
+.address button {
+    background-color:rgb(236, 237, 233);
+    border-radius: 5px;
+    width: 50px;
+    height: 35px;
+    cursor: pointer;
+}
+.phone input {
+    background-color:rgb(236, 237, 233);
+    border-radius: 5px;
+    width: 245px;
+    height: 30px;
+}
+.phone button {
+    border-radius: 5px;
+    width: 50px;
+    height: 35px;
+    cursor: pointer;
+    background-color:rgb(236, 237, 233);
+}
+.sign button {
+    border-radius: 5px;
+    width: 307px;
+    height: 30px;
+    margin-top: 40px;
+    cursor: pointer;
+    background-color:rgb(236, 237, 233);
+} */
+body {
+    background: #e2e2e2;
+}

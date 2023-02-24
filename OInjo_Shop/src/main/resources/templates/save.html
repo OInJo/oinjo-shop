@@ -1,37 +1,68 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>save</title>
-    <!-- jquery cdn -->
+    <link rel="stylesheet" type="text/css" href="/css/save.css">
+    <title>회원가입</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/css/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/css/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/css/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/css/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/css/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <script
             src="https://code.jquery.com/jquery-3.6.3.min.js"
             integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous">
+    </script>
 </head>
 <body>
-<!-- action속성: form에 작성한 데이터를 어디로 보낼지 지정 -->
-<form action="/member/save" method="post">
-    <!-- name속성: 서버로 전송할 때 변수이름의 역할 -->
-    이메일: <input type="text" name="memberEmail" id="memberEmail" onblur="emailCheck()"> <br>
-    <p id="check-result"></p>
-    비밀번호: <input type="password" name="memberPassword"> <br>
-    이름: <input type="text" name="memberName"> <br>
-    닉네임: <input type="text" name="memberNickname"> <br>
-    폰번호: <input type="text" name="memberPhone"> <br>
-    주소: <input type="text" name="memberAddress"> <br>
-    <input type="submit" value="회원가입">
+    <div class="join">
+        <form action="/member/save" method="post">
+        <h1>OInJo</h1>
+            <!-- <span>이메일 </span> -->
+            <div class="form-group last mb-4 email_input">
+                <label for="memail" id="mailTxt">이메일을 입력해주세요</label>
+                <input type="text" class="form-control" name="memail" id="memail">
+            </div>
+            <!-- <span>이메일 인증번호</span> -->
+            <button class="btn btn-outline-primary" type="button" id="checkEmail">인증번호</button>
 
-</form>
+
+            <div class="form-group last mb-4 check_input">
+                <label for="memailconfirm" id="memailconfirmTxt">인증번호를 입력해주세요</label>
+                <input type="text" class="form-control" id="memailconfirm">
+            </div>
+        <div class="uid">
+            <p>아이디</p>
+            <input type="text" name="memberEmail" placeholder="영문, 숫자 5~11자">
+        </div>
+        <div class="pw">
+            <p>비밀번호</p>
+            <input type="password" name="memberPassword" placeholder="영문, 숫자, 특수문자 포함 10자 이상">
+
+        </div>
+        <div class="name">
+            <p>이름</p>
+            <input type="text" name="memberName">
+        </div>
+        <div class="nickname">
+            <p>닉네임</p>
+            <input type="text" name="memberNickname">
+        </div>
+        <div class="address">
+            <p>주소</p>
+            <input type="text" name="memberAddress">
+            <button>검색</button>
+        </div>
+        <div class="phone">
+            <p>휴대폰번호</p>
+            <input type="text" name="memberPhone">
+            <button>인증</button>
+        </div>
+            <input type="submit" value="회원가입">
+        </form>
+    </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
