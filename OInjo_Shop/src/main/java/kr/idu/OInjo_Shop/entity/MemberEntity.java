@@ -24,7 +24,7 @@ public class MemberEntity {
     @Column
     private String memberName;
 
-    @Column
+    @Column(unique = true)
     private String memberNickname;
 
     @Column
