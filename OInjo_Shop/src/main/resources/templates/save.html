@@ -1,37 +1,72 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>save</title>
-    <!-- jquery cdn -->
-    <script
-            src="https://code.jquery.com/jquery-3.6.3.min.js"
-            integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-            crossorigin="anonymous"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/save.css">
+    <title>회원가입</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <script src="/js/save.js" defer></script>
+    <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 </head>
 <body>
-<!-- action속성: form에 작성한 데이터를 어디로 보낼지 지정 -->
-<form action="/member/save" method="post">
-    <!-- name속성: 서버로 전송할 때 변수이름의 역할 -->
-    이메일: <input type="text" name="memberEmail" id="memberEmail" onblur="emailCheck()"> <br>
-    <p id="check-result"></p>
-    비밀번호: <input type="password" name="memberPassword"> <br>
-    이름: <input type="text" name="memberName"> <br>
-    닉네임: <input type="text" name="memberNickname"> <br>
-    폰번호: <input type="text" name="memberPhone"> <br>
-    주소: <input type="text" name="memberAddress"> <br>
-    <input type="submit" value="회원가입">
-
-</form>
+    <section class="join">
+        <form action="/member/save" method="post">
+            <a href="index.html"><h1 class="logo-text">OInJo</h1></a>
+            <h3>회원가입</h3>
+            <div class="uid">
+                <p>이메일</p>
+                <input type="email" name="memberEmail" id="user-email" placeholder="a.naver.com">
+            </div>
+            <div class="pw">
+                <p>비밀번호</p>
+                <div class="password-box">
+                    <input type="password" name="memberPassword" id="user-password" placeholder="영문, 숫자, 특수문자 포함 8자 이상">          
+                    <div class="password-clear">X</div>
+                </div>
+            </div>
+            <div class="rpw">
+                <p>비밀번호확인</p>
+                <div class="password-box">
+                    <input type="password" name="memberPassword" id="user-password2" onchange="check_password()" placeholder="비밀번호 다시 입력">           
+                    &nbsp;&nbsp;<span id="check"></span>   
+                </div>
+            </div>
+            <div class="name">
+                <p>이름</p>
+                <input type="text" name="memberName">
+            </div>
+            <div class="nickname">
+                <p>닉네임</p>
+                <input type="text" name="memberNickname" id="user-nickname">
+            </div>
+            <div class="address">
+                <p>주소</p>
+                <input type="text" name="memberAddress" class="addressphone">
+                <button type="button" class="search-button"><span>검색</span></button>
+            </div>
+            <div class="phone">
+                <p>휴대폰번호</p>
+                <input type="text" name="memberPhone" class="addressphone" id="phone-number" maxlength="11" onchange="check_number()">
+                <button type="button" class="search-button certification-start-button"><span>인증</span></button>
+            </div>
+            <div class="certification hidden">
+                <p>인증번호</p>
+                <input type="number" name="memberPhone" class="addressphone" id="phone-number" maxlength="11">
+                <button type="button" class="search-button"><span>확인</span></button>
+            </div>
+                <input type="submit" class="save-button" value="회원가입">
+            <div class="back-signin">
+                <a href="/member/login">로그인으로 돌아가기</a>
+            </div>
+        </form>
+    </section>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

@@ -1,0 +1,184 @@
+h1 {
+    text-align: center;
+    font-size: 40px;
+}
+
+h3 {
+    font-family: 'GangwonEdu_OTFBoldA';
+    text-align: left;
+    font-size: 25px;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.join {
+    height: 100%;
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    text-align: center;
+    align-items: center;
+    /* background-color: #f8fafa; */
+}
+
+/* logo 관련 */
+.logo {
+    padding: 10px;
+    height: 100px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logo-text {
+    font-family: 'Noto Serif KR', serif;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 밑 부분 폰트 */
+@font-face {
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'GangwonEdu_OTFBoldA';
+    width: 90px;
+    height: 30px;
+    margin-top: 18px;
+    background: rgb(230, 243, 247);
+    text-align: center;
+}
+
+/* 입력란 */
+.uid,
+.pw,
+.rpw,
+.name,
+.nickname,
+.address,
+.phone,
+.certification {
+    font-family: 'GangwonEdu_OTFBoldA';
+    display: flex;
+    width: 450px;
+    font-size: 15px;
+    border-bottom: 2px solid #6f6f70;
+}
+
+.uid input,
+.pw input,
+.name input,
+.nickname input,
+.rpw input {
+    font-family: 'GangwonEdu_OTFBoldA';
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 15px;
+    height: 40px;
+    width: 350px;
+    border: none;
+    border-radius: 3px;
+}
+
+/* 주소 휴대폰 */
+.addressphone {
+    font-family: 'GangwonEdu_OTFBoldA';
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 15px;
+    height: 40px;
+    width: 300px;
+    border: none;
+    border-radius: 3px;
+}
+
+/* 검색 인증 */
+.search-button {
+    font-family: 'GangwonEdu_OTFBoldA';
+    border: none;
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius: 3px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background-color: #ffffff;
+    float: right;
+    text-align: center
+}
+
+/* 회원가입 버튼 */
+.save-button {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    font-family: 'GangwonEdu_OTFBoldA';
+    border-radius: 5px;
+    border-color: rgb(193, 199, 199);
+    width: 450px;
+    height: 40px;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.back-signin {
+    font-family: 'GangwonEdu_OTFBoldA';
+    margin-top: 10px;
+}
+
+#check {
+    font-family: 'GangwonEdu_OTFBoldA';
+    margin-right: -50px;
+    margin-top: 25px;
+    width: 40px;
+    height: 40px;
+    float: right;
+    text-align: center;
+}
+
+/* 비밀번호 한번에 지우기 */
+.password-box {
+    display: flex;
+}
+
+.password-clear {
+    margin-left: -30px;
+    margin-top: 15px;
+    margin-top: 25px;
+    opacity: 0.5;
+    width: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+body {
+    height: 1024px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: #efefef
+}
