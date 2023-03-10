@@ -1,8 +1,10 @@
-package kr.idu.OInjo_Shop.controller;
+package kr.idu.OInjo_Shop.repository;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 
 public interface MailServiceInter {
     // 메일 내용 작성
