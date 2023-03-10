@@ -1,30 +1,166 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>detail</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/images/logo.png">
+  <link rel="stylesheet" href="/css/detail.css">
+  <script src="/js/detail.js" defer></script>
+  <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
+  <title>상품 상세</title>
 </head>
+
 <body>
-<table>
-    <tr>
-        <th>id</th>
-        <th>email</th>
-        <th>password</th>
-        <th>name</th>
-        <th>nickname</th>
-        <th>phone</th>
-        <th>address</th>
-    </tr>
-    <tr>
-        <td th:text="${member.id}"></td>
-        <td th:text="${member.memberEmail}"></td>
-        <td th:text="${member.memberPassword}"></td>
-        <td th:text="${member.memberName}"></td>
-        <td th:text="${member.memberNickname}"></td>
-        <td th:text="${member.memberPhone}"></td>
-        <td th:text="${member.memberAddress}"></td>
-    </tr>
-</table>
+  <header>
+    <div class="header-top">
+      <a href="index.html"><img src="/images/logo.png" alt="OInJo 로고" class="header-top-logo"></a>
+      <div class="header-top-right">
+        <div class="header-top-right-search"><input type="text" placeholder="Search" class="input-search"><i
+            class="fa-solid fa-magnifying-glass"></i></div>
+        <div class="header-top-right-ranking"><button>실시간 검색어</button>후드티 [1위]</div>
+      </div>
+    </div>
+    <ul class="header-nav">
+      <a href="member/login" class="header-nav-list">
+        <li>로그인</li>
+      </a>
+      <a href="signin.html" class="header-nav-list">
+        <li>최근본상품</li>
+      </a>
+      <a href="signin.html" class="header-nav-list">
+        <li>장바구니</li>
+      </a>
+      <a href="signin.html" class="header-nav-list">
+        <li>배송조회</li>
+      </a>
+    </ul>
+  </header>
+  <main>
+    <aside class="aside-category-wrapper">
+      <div class="aside-category">
+        <input type="radio" name="category" id="category01">
+        <label for="category01">상의<span>Top</span></label>
+        <ul>
+          <li class="select-name">후드 티셔츠</li>
+          <li class="select-name">스웨트 셔츠</li>
+          <li class="select-name">후드 티셔츠</li>
+          <li class="select-name">후드 티셔츠</li>
+        </ul>
+        <input type="radio" name="category" id="category02">
+        <label for="category02">하의<span>Pants</span></label>
+        <ul>
+          <li class="select-name">데님 팬츠</li>
+          <li class="select-name">트레이닝 팬츠</li>
+          <li class="select-name">코튼 팬츠</li>
+          <li class="select-name">레깅스</li>
+        </ul>
+        <input type="radio" name="category" id="category03">
+        <label for="category03">신발<span>Shoes</span></label>
+        <ul>
+          <li class="select-name">스니커즈</li>
+          <li class="select-name">구두</li>
+          <li class="select-name">운동화</li>
+          <li class="select-name">슬리퍼</li>
+        </ul>
+        <input type="radio" name="category" id="category04">
+        <label for="category04">반려동물<span>Pet</span></label>
+        <ul>
+          <li class="select-name">반려동물 의류</li>
+          <li class="select-name">반려동물 용품</li>
+          <li class="select-name">반려동물 푸드</li>
+          <li class="select-name">반려동물 잡화</li>
+        </ul>
+      </div>
+    </aside>
+    <section>
+      <div class="detail-wrapper">
+        <div class="detail-left">
+          <img src="/images/product.png" alt="상품 이미지" class="main-image">
+          <div class="sub-image-wrapper">
+            <img src="/images/product.png" alt="상품 서브 이미지" class="sub-image">
+            <img src="/images/product.png" alt="상품 서브 이미지" class="sub-image">
+            <img src="/images/product.png" alt="상품 서브 이미지" class="sub-image">
+          </div>
+        </div>
+        <div class="detail-right">
+          <h4 class="detail-title">유스풀 벌룬 후드집업 그레이</h4>
+          <div class="detail-content-wrapper">
+            <div class="detail-content-left">
+              <div>상품명</div>
+              <div>브랜드</div>
+              <div>상품번호</div>
+              <div>좋아요</div>
+              <div>판매가</div>
+              <div>색상</div>
+              <div>사이즈</div>
+            </div>
+            <div class="detail-content-right">
+              <div>페플 유스풀 벌룬 후드집업 그레이</div>
+              <div>페플</div>
+              <div>FG3149</div>
+              <div>397</div>
+              <div class="detail-price">39,400</div>
+              <div>
+                <select name="" id="" class="color-select">
+                  <option value="">색상 선택</option>
+                  <option value="black">Black</option>
+                  <option value="white">White</option>
+                  <option value="ivory">Ivory</option>
+                </select>
+              </div>
+              <div>
+                <select name="" id="" class="size-select">
+                  <option value="">사이즈 선택</option>
+                  <option value="s">S</option>
+                  <option value="m">M</option>
+                  <option value="l">L</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="select-product-notice"><i class="fa-solid fa-cart-shopping select-product-notice-icon"></i>색상과
+            사이즈를 선택하시면 아래에 상품이 추가됩니다.</div>
+          <div class="select-product-wrapper">
+            <div class="select-product-title-content">
+              <div class="select-product-title">페플 유스풀 벌룬 후드집업</div>
+              <div class="select-product-option">Black M</div>
+            </div>
+            <div class="select-product-count">
+              <input type="number" value="1" class="select-product-count-input">
+            </div>
+            <div class="select-product-delete-button-wrapper">
+              <button class="select-product-delete-button"><i
+                  class="fa-solid fa-x select-product-delete-icon"></i></button>
+            </div>
+            <div class="select-product-price-wrapper">
+              <span class="select-product-price">36,000</span>원
+            </div>
+          </div>
+          <div class="select-product-total-price-wrapper">
+            <div class="select-product-total-price-title">총 상품 금액</div>
+            <div class="select-product-total-price-content">
+              <span class="select-product-total-price">72,000</span>원
+            </div>
+          </div>
+          <div class="buy-button-wrapper">
+            <button class="buy-button now-buy-button">바로 구매하기</button>
+            <button class="buy-button shopping-bag-button">장바구니 담기</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <footer>
+
+  </footer>
+
+  <div class="move-btn-wrapper">
+    <div class="move-top-btn"><i class="fa-solid fa-arrow-up"></i></div>
+    <div class="move-bottom-btn"><i class="fa-solid fa-arrow-down"></i></div>
+  </div>
 </body>
+
 </html>
