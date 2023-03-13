@@ -1,4 +1,4 @@
-package kr.idu.OInjo_Shop.repository;
+package kr.idu.OInjo_Shop.controller;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
