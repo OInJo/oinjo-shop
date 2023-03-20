@@ -1,20 +1,23 @@
 package kr.idu.OInjo_Shop.service;
 
-import kr.idu.OInjo_Shop.dto.ItemFormDto;
+import kr.idu.OInjo_Shop.dto.ItemFormDTO;
 import kr.idu.OInjo_Shop.entity.ItemEntity;
 import kr.idu.OInjo_Shop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ItemService {
 
     private final ItemRepository itemRepository;
 
-    public Long saveItem(ItemFormDto itemFormDto) throws Exception{
+
+    public Long saveItem(ItemFormDTO itemFormDto) throws Exception{
 
         // 상품 등록
         ItemEntity item = itemFormDto.createItem();
@@ -23,7 +26,7 @@ public class ItemService {
         return item.getId();
     }
 
-    public Long updateItem(ItemFormDto itemFormDto) throws Exception{
+    public Long updateItem(ItemFormDTO itemFormDto) throws Exception{
 
         // 상품 수정
         ItemEntity item = itemRepository.findById(itemFormDto.getId())
