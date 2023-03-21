@@ -23,7 +23,7 @@ public class ItemService {
         ItemEntity item = itemFormDto.createItem();
         itemRepository.save(item);
 
-        return item.getId();
+        return item.getProductId();
     }
 
     public Long updateItem(ItemFormDTO itemFormDto) throws Exception{
@@ -33,6 +33,6 @@ public class ItemService {
                 .orElseThrow(EntityNotFoundException::new);
         item.updateItem(itemFormDto);
 
-        return item.getId();
+        return item.getProductId();
     }
 }
