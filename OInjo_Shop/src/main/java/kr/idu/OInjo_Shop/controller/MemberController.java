@@ -27,7 +27,7 @@ public class MemberController {
     @PostMapping("/member/save")
     public String save(@ModelAttribute MemberDTO memberDTO) {
         memberService.save(memberDTO);
-        return "index";
+        return "redirect:/";
     }
 
     @PostMapping("login/mailConfirm")
@@ -50,7 +50,7 @@ public class MemberController {
         if (loginResult != null) {
             // login 성공
             session.setAttribute("loginEmail", loginResult.getMemberEmail());
-            return "main";
+            return "index";
         } else {
             // login 실패
             return "login";
@@ -106,7 +106,7 @@ public class MemberController {
     public String logout(HttpSession session){
         session.invalidate();
         // 세션 초기화
-        return "index";
+        return "redirect:/";
     }
 
 }

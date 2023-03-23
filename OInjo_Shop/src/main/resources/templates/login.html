@@ -21,15 +21,18 @@
 </head>
 <body>
     <section class="login-form">
-        <a href="index.html"><h1>OInJo</h1></a>
+        <a href="../"><h1>OInJo</h1></a>
         <h2 class="login-text">로그인</h2>
-        <div class="id-pw-input-wrapper">
-            <input type="text" placeholder="아이디" title="아이디입력">
-            <div class="pw-input"><input type="password" id="input-text" placeholder="비밀번호" title="비밀번호입력">
-                <button class="delete">X</button>
+        <form action="/member/login" method="post">
+            <div class="id-pw-input-wrapper">
+                <input type="text" placeholder="아이디" title="아이디입력">
+                <div class="pw-input">
+                    <input type="password" id="input-text" placeholder="비밀번호" title="비밀번호입력">
+                    <button class="delete">X</button>
+                </div>
             </div>
-        </div>
-        <a href="member/login" ><input type="submit" class="login-button" value="로그인"><a>
+            <input type="submit" class="login-button" value="로그인">
+        </form>
         <div class="signin-button-wrapper">
             <a href="./save">회원가입</a>
             |
