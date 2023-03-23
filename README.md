@@ -1,5 +1,4 @@
-# OInjo_Shop
-쇼핑몰 프로젝트
+# OInJo 쇼핑몰 프로젝트
 
 프로젝트 구성
 1. Entity 객체는 Service 클래스에서만 사용
