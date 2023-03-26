@@ -49,6 +49,7 @@ public class MemberController {
         if (loginResult != null) {
             // login 성공
             session.setAttribute("loginEmail", loginResult.getMemberEmail());
+            System.out.print(session);
             return "redirect:/";
 
         } else {
@@ -83,7 +84,7 @@ public class MemberController {
         String myEmail = (String) session.getAttribute("loginEmail"); // 캐스팅 - 강제 형변환(Object -> String)
         MemberDTO memberDTO = memberService.updateForm(myEmail);
         model.addAttribute("updateMember", memberDTO);
-        return "update";
+        return "memberupdate";
     }
 
     @PostMapping("/member/update")

@@ -18,7 +18,7 @@ public class ItemController {
     @GetMapping(value = "/admin/item/new")
     public String productForm(Model model) {
         model.addAttribute("itemFormDTO", new ItemFormDTO());
-        return "item/itemForm";
+        return "upload";
     }
 
     @PostMapping(value = "/admin/item/new")
@@ -26,14 +26,14 @@ public class ItemController {
                           Model model){
 
         if(bindingResult.hasErrors()){
-            return "item/itemForm";
-        }
+            return "upload";
+    }
 
         try {
             itemService.saveItem(itemFormDTO);
         } catch (Exception e){
             model.addAttribute("errorMessage", "상품 등록 중 에러가 발생하였습니다.");
-            return "item/itemForm";
+            return "upload";
         }
 
         return "redirect:/";
