@@ -20,11 +20,12 @@
 <body>
     <form action="/member/login" method="post">
     <section class="login-form">
-        <a href="../../../../../../../../.."><h1>OInJo</h1></a>
+        <a href="../"><h1>OInJo</h1></a>
         <h2 class="login-text">로그인</h2>
         <div class="id-pw-input-wrapper">
-            <input type="text" placeholder="아이디" title="아이디입력" class="id-input">
-            <div class="pw-input"><input class="password-input"type="password" id="input-text" placeholder="비밀번호" title="비밀번호입력" >
+            <input type="text" placeholder="아이디" title="아이디입력" class="id-input" name="memberEmail">
+            <div class="pw-input">
+                <input class="password-input" type="password" id="input-text" placeholder="비밀번호" title="비밀번호입력" name="memberPassword">
                 <button class="delete">X</button>
             </div>
 

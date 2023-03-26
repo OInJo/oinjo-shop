@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org/">
 
 <head>
   <meta charset="UTF-8">
@@ -24,6 +24,12 @@
     </div>
     <ul class="header-nav">
       <a href="member/login" class="header-nav-list">
+        <!-- 내정보 수정하기 기본 참고
+        <a href="/member/update">내 정보 수정하기</a>
+
+        세션값 확인 (로그인 했을때 추가됨)
+        session 값 확인: <p th:text="${session.loginEmail}"></p>
+        !-->
         <li>로그인</li>
       </a>
       <a href="signin.html" class="header-nav-list">
