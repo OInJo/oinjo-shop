@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,58 +16,138 @@
     <meta name="theme-color" content="#ffffff">
     <script src="/js/save.js" defer></script>
     <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <section class="join">
+    <div class="save-form">
         <form action="/member/save" method="post">
-            <a href="index.html"><h1 class="logo-text">OInJo</h1></a>
-            <h3>회원가입</h3>
-            <div class="uid">
-                <p>이메일</p>
-                <input type="email" name="memberEmail" id="user-email" placeholder="a.naver.com">
-            </div>
-            <div class="pw">
-                <p>비밀번호</p>
-                <div class="password-box">
-                    <input type="password" name="memberPassword" id="user-password" placeholder="영문, 숫자, 특수문자 포함 8자 이상">          
-                    <div class="password-clear">X</div>
+            <section class="save-first-form" id="first-form">
+                <a href="./">
+                    <h1 class="logo-text">OInJo</h1>
+                </a>
+                <h3>회원가입</h3>
+                <div id="name-form">
+                    <div class="user-form">
+                        <input id="user-name" class="user-input" name="memberName" type="text" placeholder="이름" />
+                        <label for="user-name" class="user-label" data-content="이름">
+                            <span class="hidden--visually">
+                                이름</span></label>
+                    </div>
+
+                    <div class="user-form">
+                        <input id="user-nickname" type="text" class="user-input" name="memberNickname"
+                            placeholder="닉네임" />
+                        <label for="user-nickname" class="user-label" data-content="닉네임"><span
+                                class="hidden--visually">닉네임</span></label>
+                    </div>
+                    <div class="first-page-btn">
+                        <button type="button" class="next-button first-page-move-btn" onclick="js:begin()"><i
+                                class="fa-solid fa-angles-right"></i></button>
+                    </div>
                 </div>
-            </div>
-            <div class="rpw">
-                <p>비밀번호확인</p>
-                <div class="password-box">
-                    <input type="password" name="memberPassword" id="user-password2" onchange="check_password()" placeholder="비밀번호 다시 입력">           
-                    &nbsp;&nbsp;<span id="check"></span>   
+            </section>
+
+
+            <section id="second-form" class="save-second-form">
+                <a href="./">
+                    <h1 class="logo-text">OInJo</h1>
+                </a>
+                <h3>회원가입</h3>
+                <div id="phone-form">
+                    <div class="user-form">
+                        <input id="user-phone" class="user-input" name="memberPhone" type="text"
+                            onkeypress="return checkNumber(event)" maxlength="11" placeholder="전화번호" />
+                        <label for="user-phone" class="user-label" data-content="전화번호">
+                            <span class="hidden--visually">
+                                전화번호</span></label>
+                    </div>
+
+                    <div class="user-form">
+                        <input id="user-address" type="text" class="user-input" name="memberAddress" placeholder="주소" />
+                        <label for="user-address" class="user-label" data-content="주소"><span
+                                class="hidden--visually">주소</span></label>
+                    </div>
+                    <div class="center-page-btn">
+                    <button type="button" class="next-button" onclick="first_page()"><i
+                        class="fa-solid fa-angles-left"></i></button>
+
+                    <button type="button" class="back-page" onclick="second_third()"><i
+                        class="fa-solid fa-angles-right"></i></button>
                 </div>
-            </div>
-            <div class="name">
-                <p>이름</p>
-                <input type="text" name="memberName">
-            </div>
-            <div class="nickname">
-                <p>닉네임</p>
-                <input type="text" name="memberNickname" id="user-nickname">
-            </div>
-            <div class="address">
-                <p>주소</p>
-                <input type="text" name="memberAddress" class="addressphone">
-                <button type="button" class="search-button"><span>검색</span></button>
-            </div>
-            <div class="phone">
-                <p>휴대폰번호</p>
-                <input type="text" name="memberPhone" class="addressphone" id="phone-number" maxlength="11" onchange="check_number()">
-                <button type="button" class="search-button certification-start-button"><span>인증</span></button>
-            </div>
-            <div class="certification hidden">
-                <p>인증번호</p>
-                <input type="number" name="memberPhone" class="addressphone" id="phone-number" maxlength="11">
-                <button type="button" class="search-button"><span>확인</span></button>
-            </div>
-                <input type="submit" class="save-button" value="회원가입">
-            <div class="back-signin">
-                <a href="/member/login">로그인으로 돌아가기</a>
-            </div>
+
+                </div>
+            </section>
+
+
+            <section id="third-form" class="save-third-form">
+                <a href="index.html">
+                    <h1 class="logo-text">OInJo</h1>
+                </a>
+                <h3>회원가입</h3>
+                <div id="email-form">
+                    <div class="user-form">
+                        <input id="user-email" class="user-input" name="memberEmail" type="email" placeholder="이메일" />
+                        <label for="user-email" class="user-label" data-content="이메일">
+
+                            <span class="hidden--visually">
+                                이메일</span></label>
+                        <button type="button" class="search-button certification-start-button"><span>인증</span></button>
+                    </div>
+
+                    <div class="user-form">
+                        <input id="user-certification" class="user-input" name="certification" type="text"
+                            placeholder="인증번호" />
+                        <label for="user-certification" class="user-label" data-content="인증번호">
+                            <span class="hidden--visually">
+                                인증번호</span></label>
+                        <button type="button" class="search-button certification"><span>확인</span></button>
+                    </div>
+                    
+                    <div class="center-page-btn">
+                    <button type="button" class="next-button" onclick="second_page()"><i
+                        class="fa-solid fa-angles-left"></i></button>
+
+                    <button type="button" class="back-page" onclick="third_fourth()"><i
+                        class="fa-solid fa-angles-right"></i></button>
+                </div>
+                </div>
+            </section>
+
+
+            <section id="fourth-form" class="save-fourth-form">
+                <a href="index.html">
+                    <h1 class="logo-text">OInJo</h1>
+                </a>
+                <h3>회원가입</h3>
+                <div class="password-form">
+                    <div class="user-form">
+                        <input id="user-password" type="password" class="user-input password-input"
+                            name="memberPassword" placeholder="비밀번호" />
+                        <label for="user-password" class="user-label" data-content="비밀번호"><span
+                                class="hidden--visually">비밀번호</span></label>
+                        <div class="password-clear">X</div>
+                    </div>
+
+                    <div class="user-form">
+                        <input id="user-password2" type="password" class="user-input re-password-input"
+                            name="memberPassword2" onchange="check_password()" placeholder="비밀번호 확인" />
+                        <label for="user-password2" class="user-label" data-content="비밀번호 확인"><span
+                                class="hidden--visually">비밀번호 확인</span></label>
+                        <span id="check"></span>
+                    </div>
+                    <div class="last-page-btn">
+                    <button type="button" class="back-page" onclick="third_page()"><i
+                        class="fa-solid fa-angles-left"></i></button>
+                    <input type="submit" class="save-button" value="가입" onclick="send()">
+                </div>
+                </div>
+            </section>
         </form>
-    </section>
+    </div>
 </body>
+
+</html>
+</body>
+
 </html>

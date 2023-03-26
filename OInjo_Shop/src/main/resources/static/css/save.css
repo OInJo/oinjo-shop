@@ -1,52 +1,3 @@
-h1 {
-    text-align: center;
-    font-size: 40px;
-}
-
-h3 {
-    font-family: 'GangwonEdu_OTFBoldA';
-    text-align: left;
-    font-size: 25px;
-    margin: 0;
-}
-
-a {
-    text-decoration: none;
-    color: black;
-}
-
-.join {
-    height: 100%;
-    width: 700px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    text-align: center;
-    align-items: center;
-    /* background-color: #f8fafa; */
-}
-
-/* logo 관련 */
-.logo {
-    padding: 10px;
-    height: 100px;
-    width: auto;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.logo-text {
-    font-family: 'Noto Serif KR', serif;
-}
-
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* 밑 부분 폰트 */
 @font-face {
     font-family: 'GangwonEdu_OTFBoldA';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
@@ -54,78 +5,173 @@ form {
     font-style: normal;
 }
 
-p {
+#second-form, #third-form, #fourth-form {
+    display: none;
+}
+
+.save-first-form, .save-second-form, .save-third-form, .save-fourth-form {
+    margin-top: 15%;
+}
+h1 {
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Noto Serif KR', serif;
+    margin-left: auto;
+    text-align: center;
+    height: 50px;
+    width: 300px;
+    font-size: 40px;
+    color: #000000;
+}
+
+a {
+    text-decoration: none;
+    color:black;
+}
+
+h3 {
+    width: 80px;
+    height: 30px;
+    font-family: 'GangwonEdu_OTFBoldA';
+    font-size: 25px;
+}
+
+form {
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    /* gap:20px; */
+
+    /* justify-content: center; */
+}
+
+.save-form {
+    height: 55%;
+    width: 700px;
+    border-radius: 7px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    font-family: 'GangwonEdu_OTFBoldA';
-    width: 90px;
-    height: 30px;
-    margin-top: 18px;
-    background: rgb(230, 243, 247);
-    text-align: center;
+    flex-wrap: nowrap;
+    align-items: center;
+    background: #f7f8f6;
 }
 
-/* 입력란 */
-.uid,
-.pw,
-.rpw,
-.name,
-.nickname,
-.address,
-.phone,
-.certification {
+.user-form {
+    position: relative;
+    width: 500px;
     font-family: 'GangwonEdu_OTFBoldA';
-    display: flex;
-    width: 450px;
-    font-size: 15px;
-    border-bottom: 2px solid #6f6f70;
+    margin-bottom: 2rem;
+    transition: background-color 0.2s ease;
+    /* background-color: #f1f7fc; */
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
-.uid input,
-.pw input,
-.name input,
-.nickname input,
-.rpw input {
+.user-input {
     font-family: 'GangwonEdu_OTFBoldA';
-    margin-left: 10px;
-    margin-top: 10px;
-    font-size: 15px;
-    height: 40px;
-    width: 350px;
-    border: none;
-    border-radius: 3px;
+    padding: 1.8rem 1rem 0.6rem;
+    font-size: 1rem;
+    border-bottom: 0.1rem solid rgb(149, 145, 145);
+    transition: border-color 0.2s ease;
 }
 
-/* 주소 휴대폰 */
-.addressphone {
-    font-family: 'GangwonEdu_OTFBoldA';
-    margin-left: 10px;
-    margin-top: 10px;
-    font-size: 15px;
-    height: 40px;
-    width: 300px;
-    border: none;
-    border-radius: 3px;
+.user-form:hover .user-input {
+    border-color: rgb(149, 145, 145);
 }
 
-/* 검색 인증 */
-.search-button {
-    font-family: 'GangwonEdu_OTFBoldA';
-    border: none;
-    margin-left: 10px;
-    margin-top: 10px;
-    border-radius: 3px;
+.user-input::placeholder {
+    color: rgba(0, 0, 0, 0);
+}
+
+.user-label {
+    display: block;
+    position: relative;
+    max-height: 0;
+    font-weight: 500;
+    pointer-events: none;
+}
+
+.user-label::before {
+    color: #222;
+    content: attr(data-content);
+    display: inline-block;
+    filter: blur(0);
+    backface-visibility: hidden;
+    transform-origin: left top;
+    transition: transform 0.2s ease;
+    left: 1rem;
+    position: relative;
+}
+
+.user-label::after {
+    bottom: 1rem;
+    content: "";
+    height: 0.1rem;
+    position: absolute;
+    transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 180ms cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+    opacity: 0;
+    left: 0;
+    top: 100%;
+    margin-top: -0.1rem;
+    transform: scale3d(0, 1, 1);
+    width: 100%;
+}
+
+.user-input:focus + .user-label::after {
+    transform: scale3d(1, 1, 1);
+    opacity: 1;
+}
+
+.user-input:placeholder-shown + .user-label::before {
+    transform: translate3d(0, -2.2rem, 0) scale3d(1, 1, 1);
+}
+
+.user-label::before,
+.user-input:focus + .user-label::before {
+    transform: translate3d(0, -3.12rem, 0) scale3d(0.82, 0.82, 1);
+}
+
+.user-input:focus + .user-label::before {
+    color: #222;
+}
+
+input {
+    background: none;
+    border-width: 0;
+    /* display: block; */
+    width: 100%;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+.hidden--visually {
+    border: 0;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+:focus {
+    outline: none;    
+}
+
+.next-button, .back-page {
     width: 40px;
-    height: 40px;
-    cursor: pointer;
-    background-color: #ffffff;
-    float: right;
-    text-align: center
-}
-
-/* 회원가입 버튼 */
-.save-button {
+    height: 30px;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -133,43 +179,35 @@ p {
     align-items: center;
     font-family: 'GangwonEdu_OTFBoldA';
     border-radius: 5px;
-    border-color: rgb(193, 199, 199);
-    width: 450px;
-    height: 40px;
-    margin-top: 20px;
+    border-color: #ffffff;
     cursor: pointer;
     background-color: #ffffff;
     text-align: center;
+    opacity: 0.5;
 }
 
-.back-signin {
-    font-family: 'GangwonEdu_OTFBoldA';
-    margin-top: 10px;
-}
-
-#check {
-    font-family: 'GangwonEdu_OTFBoldA';
-    margin-right: -50px;
-    margin-top: 25px;
-    width: 40px;
-    height: 40px;
-    float: right;
-    text-align: center;
-}
-
-/* 비밀번호 한번에 지우기 */
-.password-box {
-    display: flex;
+.search-button {
+    position: absolute;
+    border: none;
+    cursor: pointer;
+    right: 5px;
+    bottom: 12px;
+    background-color: transparent;
 }
 
 .password-clear {
-    margin-left: -30px;
-    margin-top: 15px;
-    margin-top: 25px;
+    position: absolute;
+    margin-left: 475px;
+    margin-top: -32px;
     opacity: 0.5;
     width: 20px;
     text-align: center;
     cursor: pointer;
+}
+
+#check {
+    float: right;
+    margin-top: -32px;
 }
 
 body {
@@ -179,6 +217,32 @@ body {
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    /* padding: 1rem 3rem; */
+    /* max-width: 40rem; */
     margin: 0;
-    background-color: #efefef
+    background: #e2e2e2;
+}
+
+.first-page-btn {
+    display:flex;
+    justify-content: flex-end;
+}
+
+.center-page-btn {
+    display:flex;
+    justify-content: space-between;
+}
+
+.last-page-btn {
+    display:flex;
+    justify-content: space-between;
+}
+
+.save-button {
+    all:unset;
+    background-color: black;
+    color:white;
+    padding:10px 30px;
+    font-weight: 600;
+    border-radius: 5%;
 }
