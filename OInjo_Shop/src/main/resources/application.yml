@@ -8,8 +8,8 @@ spring:
       #    각자 PC에 만들어놓은 Database이름 사용
     url: jdbc:mysql://localhost:3306/db_OInjo?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
       #    mysql에 생성한 사용자 계정 정보를 사용
-    username: OInjo_root
-    password: 5dlswh
+    username: root
+    password: als435125
   thymeleaf:
       cache: false
 
@@ -20,3 +20,4 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+

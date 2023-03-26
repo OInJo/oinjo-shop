@@ -1,9 +1,9 @@
 package kr.idu.OInjo_Shop.controller;
 
 import kr.idu.OInjo_Shop.dto.MemberDTO;
+import kr.idu.OInjo_Shop.repository.MailServiceInter;
 import kr.idu.OInjo_Shop.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +16,7 @@ import java.util.List;
 public class MemberController {
     // 생성자 주입
     private final MemberService memberService;
+    private MailServiceInter EmailServiceImpl;
 
     // 회원가입
     @GetMapping("/member/save")
@@ -26,7 +27,16 @@ public class MemberController {
     @PostMapping("/member/save")
     public String save(@ModelAttribute MemberDTO memberDTO) {
         memberService.save(memberDTO);
-        return "index";
+        return "redirect:/";
+    }
+
+    @PostMapping("login/mailConfirm")
+    public @ResponseBody
+    String mailConfirm(@RequestParam("email") String email) throws Exception {
+        
+        String code = EmailServiceImpl.sendSimpleMessage(email);
+        System.out.println("인증코드 : " + code);
+        return code;
     }
 
     @GetMapping("/member/login")
@@ -40,7 +50,7 @@ public class MemberController {
         if (loginResult != null) {
             // login 성공
             session.setAttribute("loginEmail", loginResult.getMemberEmail());
-            return "main";
+            return "index";
         } else {
             // login 실패
             return "login";
@@ -54,7 +64,7 @@ public class MemberController {
         // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
         model.addAttribute("memberList", memberDTOList);
         // model 객체로 list 담아감감
-        return "list";
+        return "memberlist";
     }
 
     @GetMapping("/member/{id}")
@@ -64,7 +74,7 @@ public class MemberController {
         MemberDTO memberDTO = memberService.findById(id);
         model.addAttribute("member", memberDTO);
         // html에서 member.memberEmail 형식으로 사용
-        return "detail";
+        return "memberdetail";
     }
  
     @GetMapping("/member/update")
@@ -84,6 +94,20 @@ public class MemberController {
         // 다른 메서드가 가지고 있는 주소를 요청 - redirect 사용
         return "redirect:/member/" + memberDTO.getId();
 
+    }
+
+    @GetMapping("/member/delete/{id}")
+    public String deleteById(@PathVariable Long id)
+    {
+        memberService.deleteById(id);
+        return "redirect:/member/";
+    }
+
+    @GetMapping("/member/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        // 세션 초기화
+        return "redirect:/";
     }
 
 }

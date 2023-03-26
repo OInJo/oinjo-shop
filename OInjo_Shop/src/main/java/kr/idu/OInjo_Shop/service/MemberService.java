@@ -1,6 +1,5 @@
 package kr.idu.OInjo_Shop.service;
 
-import com.sun.source.tree.MemberReferenceTree;
 import kr.idu.OInjo_Shop.dto.MemberDTO;
 import kr.idu.OInjo_Shop.entity.MemberEntity;
 import kr.idu.OInjo_Shop.repository.MemberRepository;
@@ -15,13 +14,22 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
+
     public void save(MemberDTO memberDTO) {
         // 1. dto -> entity 변환
         // 2. repository의 save 메서드 호출
         MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
         memberRepository.save(memberEntity);
+        // validateDuplicateMember(memberEntity); 중복 회원 기능 미구현
         // repository의 save메서드 호출 (조건. entity객체를 넘겨줘야 함)
     }
+
+    /* 중복 회원 기능 미구현 private void validateDuplicateMember(MemberEntity member) {
+        Optional<MemberEntity> findMember = memberRepository.findByMemberEmail(member.getMemberEmail());
+        if(findMember != null) {
+            throw new IllegalStateException("이미 가입된 회원입니다");
+        }
+    } */
 
     public MemberDTO login(MemberDTO memberDTO) {
         // 1. 회원이 입력한 이메일로 DB에서 조회
@@ -89,4 +97,7 @@ public class MemberService {
         // save 메서드는 ID가 없으면 insert 쿼리 수행, DB에 있을 경우 update 쿼리 수행
     }
 
+    public void deleteById(Long id) {
+        memberRepository.deleteById(id);
+    }
 }
