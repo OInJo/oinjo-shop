@@ -50,6 +50,7 @@ public class MemberController {
             // login 성공
             session.setAttribute("loginEmail", loginResult.getMemberEmail());
             return "redirect:/";
+
         } else {
             // login 실패
             return "login";
@@ -63,17 +64,17 @@ public class MemberController {
         // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
         model.addAttribute("memberList", memberDTOList);
         // model 객체로 list 담아감감
-        return "list";
+        return "memberlist";
     }
 
     @GetMapping("/member/{id}")
-    public String findById(@PathVariable Long id, Model model){
+    public String findById(@PathVariable Long id, Model model) {
         // qurey 방식은 request param 사용
         // 경로상에 있는 값은 pathvariable 사용
         MemberDTO memberDTO = memberService.findById(id);
         model.addAttribute("member", memberDTO);
         // html에서 member.memberEmail 형식으로 사용
-        return "detail";
+        return "memberdetail";
     }
  
     @GetMapping("/member/update")
@@ -92,6 +93,7 @@ public class MemberController {
         // findById 형식으로 memberDTO를 model에 담아서 return 가능
         // 다른 메서드가 가지고 있는 주소를 요청 - redirect 사용
         return "redirect:/member/" + memberDTO.getId();
+
     }
 
     @GetMapping("/member/delete/{id}")
@@ -105,7 +107,7 @@ public class MemberController {
     public String logout(HttpSession session){
         session.invalidate();
         // 세션 초기화
-        return "index";
+        return "redirect:/";
     }
 
 }
