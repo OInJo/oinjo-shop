@@ -39,15 +39,25 @@
             <p class="count">개</p>
         </div>
         <div class="product-detail-wrapper">
-            <label for="product-detail" class="label-box">상품 설명</label>
-            <input type="text" value="등록하기" id="product-detail" name="productDetail"
-                class="input-box small-input-box detail-button">
-            <input type="submit" value="등록">
+            <label for="" class="label-box">상품 설명</label>
+            <button type="button" id="" name="" class="input-box small-input-box detail-button">설명 등록
+            </button>
         </div>
+        <div class="modal">
+            <div class="modal-content">
+                <p class="detail-limit">0/300</p>
+                <h4 class="modal-title">상품 설명</h4>
+                <textarea name="productDetail" class="modal-input">
+                </textarea>
+
+                <div class="modal-button-wrapper">
+                    <button type="button" class="modal-button modal-reset-button">초기화</button>
+                    <button type="button" class="modal-button modal-save-button">저장</button>
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="등록하기" class="submit-button">
     </form>
-    <!-- 상품 이름, 상품 가격, 상품 상태, 상품 상세, 상품 재고, 상품 카테고리 -->
-    <!-- productName, productPrice, productStatus, productDetail, productStock, productCategory -->
-    <!-- admin 폴더 아래에 upload로 만들으라고 말해주기 -->
 </body>
 
 </html>

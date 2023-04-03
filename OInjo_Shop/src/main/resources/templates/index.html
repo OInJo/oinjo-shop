@@ -23,15 +23,22 @@
       </div>
     </div>
     <ul class="header-nav">
-      <a href="member/login" class="header-nav-list">
-        <!-- 내정보 수정하기 기본 참고
+      <!-- 내정보 수정하기 기본 참고
         <a href="/member/update">내 정보 수정하기</a>
 
         세션값 확인 (로그인 했을때 추가됨)
         session 값 확인: <p th:text="${session.loginEmail}"></p>
         !-->
-        <li>로그인</li>
-      </a>
+      <li>
+        <a href="/member/update" class="header-nav-list">
+          <p th:text="${session.loginEmail}"></p>
+        </a>
+      </li>
+
+      <li>
+        <a href="member/login" class="header-nav-list">로그인</a>
+      </li>
+
       <a href="signin.html" class="header-nav-list">
         <li>최근본상품</li>
       </a>
