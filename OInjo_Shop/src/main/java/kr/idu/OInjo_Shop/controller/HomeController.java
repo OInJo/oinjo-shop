@@ -10,4 +10,9 @@ public class HomeController {
     public String index() {
         return "index"; // templates/index.html
     }
+    @GetMapping("/email")
+    public String email() {
+        return "email"; // templates/email.html
+    }
+
 }

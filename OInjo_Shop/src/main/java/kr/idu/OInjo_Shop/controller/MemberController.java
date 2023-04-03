@@ -15,7 +15,7 @@ import java.util.List;
 public class MemberController {
     // 생성자 주입
     private final MemberService memberService;
-    private MailServiceInter EmailServiceImpl;
+    private final MailServiceInter EmailServiceImpl;
 
     // 회원가입
     @GetMapping("/member/save")
@@ -29,10 +29,10 @@ public class MemberController {
         return "redirect:/";
     }
 
+
+    @ResponseBody
     @PostMapping("login/mailConfirm")
-    public @ResponseBody
-    String mailConfirm(@RequestParam("email") String email) throws Exception {
-        
+    public String mailConfirm(@RequestParam("email") String email) throws Exception {
         String code = EmailServiceImpl.sendSimpleMessage(email);
         System.out.println("인증코드 : " + code);
         return code;

@@ -24,8 +24,8 @@ public class RegisterMail implements MailServiceInter {
     // 메일 내용 작성
     @Override
     public MimeMessage createMessage(String to) throws MessagingException, UnsupportedEncodingException {
-//		System.out.println("보내는 대상 : " + to);
-//		System.out.println("인증 번호 : " + ePw);
+		System.out.println("보내는 대상 : " + to);
+		System.out.println("인증 번호 : " + ePw);
 
         MimeMessage message = emailsender.createMimeMessage();
 
@@ -47,7 +47,7 @@ public class RegisterMail implements MailServiceInter {
         msgg += "</div>";
         message.setText(msgg, "utf-8", "html");// 내용, charset 타입, subtype
         // 보내는 사람의 이메일 주소, 보내는 사람 이름
-        message.setFrom(new InternetAddress("goodjobproject@naver.com", "GoodJob_Admin"));// 보내는 사람
+        message.setFrom(new InternetAddress("oinjo5@gmail.com", "Admin"));// 보내는 사람
 
         return message;
     }
