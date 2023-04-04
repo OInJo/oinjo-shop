@@ -17,9 +17,9 @@ public class EmailConfig {
 
         javaMailSender.setHost("smtp.gmail.com"); // 메인 도메인 서버 주소 => 정확히는 smtp 서버 주소
         javaMailSender.setUsername("oinjo5@gmail.com"); // 구글 아이디
-        javaMailSender.setPassword("55555oinjo%"); // 구글 비밀번호
+        javaMailSender.setPassword("ucemvraexyopzneu"); // 구글 비밀번호
 
-        javaMailSender.setPort(587); // 메일 인증서버 포트
+        javaMailSender.setPort(465); // 메일 인증서버 포트
 
         javaMailSender.setJavaMailProperties(getMailProperties()); // 메일 인증서버 정보 가져오기
 
