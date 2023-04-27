@@ -51,6 +51,7 @@ public class MemberController {
             // login 성공
             session.setAttribute("loginEmail", loginResult.getMemberEmail());
             return "redirect:/";
+
         } else {
             // login 실패
             return "login";
@@ -63,8 +64,8 @@ public class MemberController {
         List<MemberDTO> memberDTOList = memberService.findAll();
         // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
         model.addAttribute("memberList", memberDTOList);
-        // model 객체로 list 담아감감
-        return "list";
+        // model 객체로 list 담아감
+        return "memberlist";
     }
 
     @GetMapping("/member/{id}")
@@ -74,7 +75,7 @@ public class MemberController {
         MemberDTO memberDTO = memberService.findById(id);
         model.addAttribute("member", memberDTO);
         // html에서 member.memberEmail 형식으로 사용
-        return "detail";
+        return "memberdetail";
     }
  
     @GetMapping("/member/update")
@@ -106,7 +107,7 @@ public class MemberController {
     public String logout(HttpSession session){
         session.invalidate();
         // 세션 초기화
-        return "index";
+        return "redirect:/";
     }
 
 }

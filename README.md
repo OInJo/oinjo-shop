@@ -15,3 +15,11 @@
 
 회원 수정 기능
 1. 로그인 후 회원 수정 (자동으로 상세 조회)
+
+회원 삭제 기능
+1. 회원 삭제
+
+데이터베이스 구성
+1. MemberEntity 클래스 (id, memberEmail, memberPassword, memberName, memberNickname, memberPhone, memberAddress)
+2. BaseTimeEntity 추상 클래스로 구현 (등록 시간, 수정 시간)
+3. BaseEntity 추상 클래스로 구현 (등록자, 수정자)
