@@ -20,24 +20,29 @@
 <body>
     <form action="/member/login" method="post">
     <section class="login-form">
-        <a href="../../../../../../../../.."><h1>OInJo</h1></a>
+
+        <a href="/"><h1>OInJo</h1></a>
         <h2 class="login-text">로그인</h2>
         <div class="id-pw-input-wrapper">
-            <input type="text" placeholder="아이디" title="아이디입력" class="id-input">
-            <div class="pw-input"><input class="password-input"type="password" id="input-text" placeholder="비밀번호" title="비밀번호입력" >
+            <input type="text" placeholder="아이디" name="memberEmail" title="아이디입력" class="id-input">
+            <div class="pw-input"><input class="password-input"type="password" name="memberPassword" id="input-text" placeholder="비밀번호" title="비밀번호입력" >
                 <button class="delete">X</button>
             </div>
 
         </div>
         <input type="submit" class="login-button" value="로그인">
+
         <div class="signin-button-wrapper">
             <a href="/member/save" class="save-button">회원가입</a>
             |
-            <a href="findid.html" class="id-button">아이디 찾기</a>
+            <a href="/member/findid" class="id-button">아이디 찾기</a>
+
             |
             <a href="#" class="pw-button">비밀번호 찾기</a>
         </div>
         <div class="signin-or">OR</div>
+        <a href="/oauth2/authorization/naver"><img src="/images/naver.png"></a>
+        <a href="/oauth2/authorization/naver"><img src="/images/kakao.png"></a>
 
         <img src="/images/naver.png">
         <img src="/images/kakao.png">
@@ -46,7 +51,7 @@
             <option value="en">영어</option>
           </select> 
     </section>
-</form>
+    </form>
 </body>
 
 </html>
