@@ -164,7 +164,7 @@ body {
     margin-right: 40px;
 }
 
-.ko-en-btn {
+.select-bar {
     display: flex;
     flex-direction: column;
     position: fixed;
