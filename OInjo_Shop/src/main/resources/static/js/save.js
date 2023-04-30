@@ -34,14 +34,14 @@ function second_third() {
 /////////////// 가입 버튼이 안눌림 ////////////////
 // 네번째 페이지만 보이기
 function third_fourth() {
-  const email = document.querySelector("#user-email");
-  const certification = document.querySelector("#user-certification");
-  if (email.value.length > 0 && certification.value.length > 0) {
+  // const email = document.querySelector("#user-email");
+  // const certification = document.querySelector("#user-certification");
+  // if (email.value.length > 0 && certification.value.length > 0) {
     first.style.display = "none";
     second.style.display = "none";
     third.style.display = "none";
     fourth.style.display = "block";
-  }
+  // }
 }
 //
 

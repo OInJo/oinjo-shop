@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org/">
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 
 <head>
   <meta charset="UTF-8">
@@ -15,7 +17,8 @@
 <body>
   <header>
     <div class="header-top">
-      <a href="./index"><img src="/images/logo.png" alt="OInJo 로고" class="header-top-logo"></a>
+      <a href="/"><img src="/images/logo.png" alt="OInJo 로고" class="header-top-logo"></a>
+
       <div class="header-top-right">
         <div class="header-top-right-search"><input type="text" placeholder="Search" class="input-search"><i
             class="fa-solid fa-magnifying-glass"></i></div>
@@ -35,11 +38,25 @@
         </a>
       </li>
 
+
+
+      <div sec:authorize="isAuthenticated()">
+        Logged in as: <span id="user" th:text="${usernickname}">None</span>
+        [[${session.user.email}]],[[${session.user.nickname}]]
+        <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+      </div>
+
+
+
+
       <li>
         <a href="member/login" class="header-nav-list">로그인</a>
       </li>
 
-      <a href="email.html" class="header-nav-list">
+      <a href="member/login" class="header-nav-list">
+        <li>로그인</li>
+      </a>
+      <a href="signin.html" class="header-nav-list">
         <li>최근본상품</li>
       </a>
       <a href="signin.html" class="header-nav-list">
