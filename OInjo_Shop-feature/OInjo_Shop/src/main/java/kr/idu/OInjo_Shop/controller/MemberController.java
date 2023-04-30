@@ -64,7 +64,11 @@ public class MemberController {
         List<MemberDTO> memberDTOList = memberService.findAll();
         // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
         model.addAttribute("memberList", memberDTOList);
+<<<<<<< HEAD:OInjo_Shop-feature/OInjo_Shop/src/main/java/kr/idu/OInjo_Shop/controller/MemberController.java
         // model 객체로 list 담아감감
+=======
+        // model 객체로 list 담아감
+>>>>>>> 60bdf51582ddc2fb528805df900325b2bd137709:OInjo_Shop/src/main/java/kr/idu/OInjo_Shop/controller/MemberController.java
         return "memberlist";
     }
 

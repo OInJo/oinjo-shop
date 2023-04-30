@@ -7,9 +7,17 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
       #    각자 PC에 만들어놓은 Database이름 사용
     url: jdbc:mysql://localhost:3306/db_OInjo?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+<<<<<<< HEAD:OInjo_Shop-feature/OInjo_Shop/src/main/resources/application.yml
       #    mysql에 생성한 사용자 계정 정보를 사용
     username: root
     password: 1234
+=======
+
+      #    mysql에 생성한 사용자 계정 정보를 사용
+    username: root
+    password: als435125
+    
+>>>>>>> 60bdf51582ddc2fb528805df900325b2bd137709:OInjo_Shop/src/main/resources/application.yml
   thymeleaf:
       cache: false
 
