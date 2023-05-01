@@ -1,6 +1,7 @@
 package kr.idu.OInjo_Shop.dto;
 
 import kr.idu.OInjo_Shop.entity.ItemEntity;
+import kr.idu.OInjo_Shop.entity.categoryEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
@@ -17,6 +18,9 @@ public class ItemFormDTO {
     private String productDetail;
     private Integer productStock;
     private Integer productCategory;
+    private String productOpt1;
+    private String productOpt2;
+    private categoryEntity category;
     private LocalDateTime regTime;
     private LocalDateTime updateTime;
     private static ModelMapper modelMapper = new ModelMapper();
