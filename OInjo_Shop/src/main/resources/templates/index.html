@@ -36,7 +36,10 @@
         <a href="/member/update" class="header-nav-list">
           <p th:text="${session.loginEmail}"></p>
         </a>
+        <a href="/member/logout">로그아웃</a>
       </li>
+
+      <!-- session.loginEmail이 있으면 로그아웃을 표시, 아니면 히든 -->
 
 
 
@@ -47,6 +50,11 @@
       </div>
 
 
+
+
+      <li>
+        <a href="member/login" class="header-nav-list">로그인</a>
+      </li>
 
       <a href="member/login" class="header-nav-list">
         <li>로그인</li>

@@ -47,16 +47,24 @@ selectBar.addEventListener("change", function (e) {
 // })
 
 const id = document.querySelector(".id-input");
-const pw = document.querySelector("#input-text");
+const pw = document.querySelector(".password-input");
 const btn = document.querySelector(".login-button");
 
 
-btn.addEventListener("click", () => { // 한번 disabled 되면 addEventListener 작동 안함
+id.addEventListener("change", () => { // 한번 disabled 되면 addEventListener 작동 안함
   if(id.value.length > 0 && pw.value.length > 0){
     btn.disabled = false;
   }
   else {
     btn.disabled = true;
-    alert("이메일, 비밀번호를 입력하시오.")
+  }
+});
+
+pw.addEventListener("change", () => { // 한번 disabled 되면 addEventListener 작동 안함
+  if(pw.value.length > 0 && pw.value.length > 0){
+    btn.disabled = false;
+  }
+  else {
+    btn.disabled = true;
   }
 });

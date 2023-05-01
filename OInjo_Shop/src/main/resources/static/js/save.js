@@ -82,6 +82,9 @@ function send() {
   if((password.value.length > 0) && (repassword.value.length > 0) && (password.value === repassword.value)) {
     savebtn.disabled = false;
   }
+  else {
+    savebtn.disabled = true;
+  }
 }
 ///////////////////////
 
@@ -141,4 +144,23 @@ function checkNumber(event) {
 
   return false;
 }
-//
+
+
+//이메일 인증 구현 시작
+const certificationStartButton = document.querySelector(".certification-start-button");
+const emailInput = document.querySelector("#user-email");
+certificationStartButton.addEventListener("click", () => {
+  fetch("/login/mailConfirm?email=" + emailInput.value, {
+    method: "POST",
+    body: JSON.stringify({
+        email: emailInput.value
+    }),
+    headers: {
+        "Content-Type": "application/json"
+    }
+})
+    .then((response) => {
+        console.log("response:", response);
+    })
+    .catch(error => console.log("error:", error));
+})

@@ -1,6 +1,7 @@
 package kr.idu.OInjo_Shop.controller;
 
 import kr.idu.OInjo_Shop.dto.ItemFormDTO;
+import kr.idu.OInjo_Shop.dto.MemberDTO;
 import kr.idu.OInjo_Shop.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ public class ItemController {
         model.addAttribute("itemFormDTO", new ItemFormDTO());
         return "upload";
     }
+
 
     @PostMapping(value = "/admin/item/new")
     public String itemNew(ItemFormDTO itemFormDTO, BindingResult bindingResult,
