@@ -31,17 +31,16 @@ function second_third() {
 
 
 
-/////////////// 가입 버튼이 안눌림 ////////////////
 // 네번째 페이지만 보이기
 function third_fourth() {
-  // const email = document.querySelector("#user-email");
-  // const certification = document.querySelector("#user-certification");
-  // if (email.value.length > 0 && certification.value.length > 0) {
+  const email = document.querySelector("#user-email");
+  const certification = document.querySelector("#user-certification");
+  if (email.value.length > 0 && certification.value.length > 0) {
     first.style.display = "none";
     second.style.display = "none";
     third.style.display = "none";
     fourth.style.display = "block";
-  // }
+  }
 }
 //
 
@@ -75,23 +74,16 @@ function third_page() {
 //
 
 
-
-
-
 ///////// 가입 버튼 비활성화 -> 활성화로 바꿔야 함
-///////// 안넘어가게 만들고 싶은데 그걸 모르겠고, 지금 상태는 틀리면 
-///////// 문장 뜨고 확인 누르면 넘어감
 function send() {
   const password = document.querySelector("#user-password");
   const repassword = document.querySelector("#user-password2");
-  const savebtn = document.querySelector(".save-button");
-  if(password.value != repassword.value) {
-    alert("비밀번호를 확인해주세요");
+  const savebtn = document.querySelector("#savebtn");
+  if((password.value.length > 0) && (repassword.value.length > 0) && (password.value === repassword.value)) {
+    savebtn.disabled = false;
   }
 }
 ///////////////////////
-
-
 
 
 

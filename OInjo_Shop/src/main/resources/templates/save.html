@@ -23,7 +23,7 @@
     <div class="save-form">
         <form action="/member/save" method="post">
             <section class="save-first-form" id="first-form">
-                <a href="./">
+                <a href="index.html">
                     <h1 class="logo-text">OInJo</h1>
                 </a>
                 <h3>회원가입</h3>
@@ -50,7 +50,7 @@
 
 
             <section id="second-form" class="save-second-form">
-                <a href="./">
+                <a href="index.html">
                     <h1 class="logo-text">OInJo</h1>
                 </a>
                 <h3>회원가입</h3>
@@ -96,7 +96,7 @@
                     </div>
 
                     <div class="user-form">
-                        <input id="user-certification" class="user-input" name="certification" type="text"
+                        <input id="user-certification" class="user-input" name="certification" type="number"
                             placeholder="인증번호" />
                         <label for="user-certification" class="user-label" data-content="인증번호">
                             <span class="hidden--visually">
@@ -123,7 +123,7 @@
                 <div class="password-form">
                     <div class="user-form">
                         <input id="user-password" type="password" class="user-input password-input"
-                            name="memberPassword" placeholder="비밀번호" />
+                            name="memberPassword" onkeyup="send()" placeholder="비밀번호" />
                         <label for="user-password" class="user-label" data-content="비밀번호"><span
                                 class="hidden--visually">비밀번호</span></label>
                         <div class="password-clear">X</div>
@@ -131,7 +131,7 @@
 
                     <div class="user-form">
                         <input id="user-password2" type="password" class="user-input re-password-input"
-                            name="memberPassword2" onchange="check_password()" placeholder="비밀번호 확인" />
+                            name="memberPassword2" onchange="check_password()" onkeyup="send()" placeholder="비밀번호 확인" />
                         <label for="user-password2" class="user-label" data-content="비밀번호 확인"><span
                                 class="hidden--visually">비밀번호 확인</span></label>
                         <span id="check"></span>
@@ -139,7 +139,7 @@
                     <div class="last-page-btn">
                     <button type="button" class="back-page" onclick="third_page()"><i
                         class="fa-solid fa-angles-left"></i></button>
-                    <input type="submit" class="save-button" value="가입" onclick="send()">
+                    <input type="submit" class="save-button" id="savebtn" value="가입" disabled>
                 </div>
                 </div>
             </section>
