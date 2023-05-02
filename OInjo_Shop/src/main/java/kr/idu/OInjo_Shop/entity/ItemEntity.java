@@ -34,15 +34,22 @@ public class ItemEntity extends BaseEntity {
     @Column
     private String productDetail; // 상품 설명
 
-    @Column
-    private String productOpt1;
 
-    @Column
-    private String productOpt2;
+    @OneToOne
+    @JoinColumn(name ="brandName")
+    private BrandEntity brand;
+
+    @OneToOne
+    @JoinColumn(name ="colorName")
+    private ColorEntity color;
+
+    @OneToOne
+    @JoinColumn(name ="sizeName")
+    private SizeEntity size;
 
     @OneToOne
     @JoinColumn(name ="categoryName")
-    private categoryEntity category;
+    private CategoryEntity category;
 
     public void updateItem(ItemFormDTO itemFormDto){
         this.productName = itemFormDto.getProductName();
@@ -50,8 +57,9 @@ public class ItemEntity extends BaseEntity {
         this.productStock = itemFormDto.getProductStock();
         this.productStatus = itemFormDto.getProductStatus();
         this.productDetail = itemFormDto.getProductDetail();
-        this.productOpt1 = itemFormDto.getProductOpt1();
-        this.productOpt2 = itemFormDto.getProductOpt2();
+        this.brand = itemFormDto.getBrand();
+        this.color = itemFormDto.getColor();
+        this.size = itemFormDto.getSize();
         this.category = itemFormDto.getCategory();
     }
 }
