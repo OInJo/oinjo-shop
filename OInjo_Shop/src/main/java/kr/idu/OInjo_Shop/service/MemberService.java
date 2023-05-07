@@ -4,6 +4,8 @@ import kr.idu.OInjo_Shop.dto.MemberDTO;
 import kr.idu.OInjo_Shop.entity.MemberEntity;
 import kr.idu.OInjo_Shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,12 +15,19 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class MemberService {
+
     private final MemberRepository memberRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
+
 
     public void save(MemberDTO memberDTO) {
         // 1. dto -> entity 변환
         // 2. repository의 save 메서드 호출
+        String rawPassword = memberDTO.getMemberPassword(); // 사용자가 입력한 비밀번호
+        String encodedPassword = passwordEncoder.encode(rawPassword); // 비밀번호 해싱
+
         MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
+        memberEntity.setMemberPassword(encodedPassword); // 해싱된 비밀번호로 변경
         memberRepository.save(memberEntity);
         // validateDuplicateMember(memberEntity); 중복 회원 기능 미구현
         // repository의 save메서드 호출 (조건. entity객체를 넘겨줘야 함)
@@ -39,8 +48,12 @@ public class MemberService {
             //조회 결과가 존재
             MemberEntity memberEntity = byMemberEmail.get();
             // get 메서드로 optional 객체를 언래핑
-            if (memberEntity.getMemberPassword().equals(memberDTO.getMemberPassword())){
-                // 비밀번호 일치
+            String encodedPassword = memberEntity.getMemberPassword();
+            /* matches 사용 안하면 아래와 같이도 가능
+            System.out.println(memberEntity.getMemberPassword().equals(encodedPassword));
+            */
+            if (passwordEncoder.matches(memberDTO.getMemberPassword(), encodedPassword)){
+                // 해싱 비밀번호 일치(matches(해싱 전 비밀번호, 인코딩된 비밀번호)
                 // entity -> dto로 변환 후 리턴
                 MemberDTO dto = MemberDTO.toMemberDTO(memberEntity);
                 return dto;
