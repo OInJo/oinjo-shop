@@ -10,6 +10,7 @@
   <link rel="icon" href="/images/logo.png">
   <link rel="stylesheet" href="/css/index.css">
   <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../static/css/index.css">
   <script src="/js/index.js" defer></script>
   <title>OInJo</title>
 </head>
@@ -26,39 +27,26 @@
       </div>
     </div>
     <ul class="header-nav">
-      <!-- 내정보 수정하기 기본 참고
-        <a href="/member/update">내 정보 수정하기</a>
-
-        세션값 확인 (로그인 했을때 추가됨)
-        session 값 확인: <p th:text="${session.loginEmail}"></p>
-        !-->
-      <li>
-        <a href="/member/update" class="header-nav-list">
-          <p th:text="${session.loginEmail}"></p>
-        </a>
-        <a href="/member/logout">로그아웃</a>
-      </li>
-
-      <!-- session.loginEmail이 있으면 로그아웃을 표시, 아니면 히든 -->
-
-
-
-      <div sec:authorize="isAuthenticated()">
+      <!-- 네이버 아이디로 로그인을 하면 이름이 뜨도록 구현한 소스 -->
+      <!-- <div sec:authorize="isAuthenticated()">
         Logged in as: <span id="user" th:text="${usernickname}">None</span>
         [[${session.user.email}]],[[${session.user.nickname}]]
         <a href="/logout" class="btn btn-info active" role="button">Logout</a>
-      </div>
+      </div> -->
+      <p class="login-check" th:text="${session.loginEmail}"></p>
 
+      <a href="member/update" class="header-nav-list update-link">
+        <li>정보수정</li>
+      </a>
 
+      <a href="member/logout" class="header-nav-list logout-link">
+        <li>로그아웃</li>
+      </a>
 
-
-      <li>
-        <a href="member/login" class="header-nav-list">로그인</a>
-      </li>
-
-      <a href="member/login" class="header-nav-list">
+      <a href="member/login" class="header-nav-list login-link">
         <li>로그인</li>
       </a>
+
       <a href="signin.html" class="header-nav-list">
         <li>최근본상품</li>
       </a>

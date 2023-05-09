@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/upload.css">
     <script src="/js/upload.js" defer></script>
+    <link rel="stylesheet" href="../static/css/upload.css">
+    <script src="../static/js/upload.js" defer></script>
+    <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
     <title>상품 등록</title>
 </head>
 
@@ -22,6 +25,7 @@
         <div class="product-category-wrapper">
             <label for="product-category" class="label-box">상품 카테고리</label>
             <input type="text" id="product-category" name="productCategory" class="input-box small-input-box">
+            <i class="fa-solid fa-plus plus-button"></i>
         </div>
 
         <div class="product-status-wrapper">
@@ -43,12 +47,13 @@
             <button type="button" id="" name="" class="input-box small-input-box detail-button">설명 등록
             </button>
         </div>
-        <div class="modal">
+        <div class="modal hidden">
             <div class="modal-content">
-                <p class="detail-limit">0/300</p>
-                <h4 class="modal-title">상품 설명</h4>
-                <textarea name="productDetail" class="modal-input">
+                <div class="detail-content">
+                    <textarea name="productDetail" class="modal-input">
                 </textarea>
+                    <p class="detail-limit">0/300</p>
+                </div>
 
                 <div class="modal-button-wrapper">
                     <button type="button" class="modal-button modal-reset-button">초기화</button>

@@ -33,3 +33,22 @@ inputSearch.addEventListener("focus", () => {
 inputSearch.addEventListener("blur", () => {
   inputSearch.placeholder = "Search";
 });
+
+const loginCheck = document.querySelector(".login-check");
+const updateLink = document.querySelector(".update-link");
+const logoutLink = document.querySelector(".logout-link");
+const loginLink = document.querySelector(".login-link");
+loginCheck.style.display = "none";
+
+loginCheck.textContent.addEventListener("change", () => {
+  if(loginCheck.textContent == "") {
+    updateLink.style.display = "none"
+    logoutLink.style.display = "none"
+    loginLink.style.display = "block"
+  }
+  else if(loginCheck.textContent.length >= 1) {
+    updateLink.style.display = "block"
+    logoutLink.style.display = "block"
+    loginLink.style.display = "none"
+  }
+})
