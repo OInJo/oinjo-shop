@@ -1,7 +1,7 @@
-package kr.idu.OInjo_Shop.dto;
+package kr.idu.OInjo_Shop.dto.Member;
 
 import kr.idu.OInjo_Shop.Role.Role;
-import kr.idu.OInjo_Shop.entity.User;
+import kr.idu.OInjo_Shop.entity.Member.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

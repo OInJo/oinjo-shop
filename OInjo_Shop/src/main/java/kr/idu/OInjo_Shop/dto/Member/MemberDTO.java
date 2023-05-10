@@ -1,6 +1,6 @@
-package kr.idu.OInjo_Shop.dto;
+package kr.idu.OInjo_Shop.dto.Member;
 
-import kr.idu.OInjo_Shop.entity.MemberEntity;
+import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import lombok.*;
 
 @Getter

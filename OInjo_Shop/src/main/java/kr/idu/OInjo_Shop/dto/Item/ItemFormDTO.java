@@ -1,6 +1,6 @@
-package kr.idu.OInjo_Shop.dto;
+package kr.idu.OInjo_Shop.dto.Item;
 
-import kr.idu.OInjo_Shop.entity.*;
+import kr.idu.OInjo_Shop.entity.Item.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
@@ -21,8 +21,12 @@ public class ItemFormDTO {
     private ColorEntity color;
     private SizeEntity size;
     private CategoryEntity category;
+
     private LocalDateTime regTime;
     private LocalDateTime updateTime;
+
+    private String createdBy;
+    private String modifiedBy;
     private static ModelMapper modelMapper = new ModelMapper();
 
     public ItemEntity createItem() {

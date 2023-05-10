@@ -1,9 +1,8 @@
-package kr.idu.OInjo_Shop.entity;
+package kr.idu.OInjo_Shop.entity.Item;
 
-import kr.idu.OInjo_Shop.dto.ItemFormDTO;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
+import kr.idu.OInjo_Shop.entity.BaseEntity;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +11,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class ItemEntity extends BaseEntity {
 
     @Id

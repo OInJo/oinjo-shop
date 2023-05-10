@@ -28,11 +28,6 @@
     </div>
     <ul class="header-nav">
       <!-- 네이버 아이디로 로그인을 하면 이름이 뜨도록 구현한 소스 -->
-      <!-- <div sec:authorize="isAuthenticated()">
-        Logged in as: <span id="user" th:text="${usernickname}">None</span>
-        [[${session.user.email}]],[[${session.user.nickname}]]
-        <a href="/logout" class="btn btn-info active" role="button">Logout</a>
-      </div> -->
       <p class="login-check" th:text="${session.loginEmail}"></p>
 
       <a href="member/update" class="header-nav-list update-link">

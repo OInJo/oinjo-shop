@@ -1,10 +1,9 @@
 package kr.idu.OInjo_Shop.service;
 
-import kr.idu.OInjo_Shop.dto.MemberDTO;
-import kr.idu.OInjo_Shop.entity.MemberEntity;
+import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
+import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +17,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    // final 선언으로 객체 생성, 할당 이후 변경 x
 
 
     public void save(MemberDTO memberDTO) {

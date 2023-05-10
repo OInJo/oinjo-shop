@@ -1,4 +1,4 @@
-package kr.idu.OInjo_Shop.entity;
+package kr.idu.OInjo_Shop.entity.Item;
 
 import lombok.Getter;
 import lombok.Setter;

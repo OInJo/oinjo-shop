@@ -1,7 +1,7 @@
 package kr.idu.OInjo_Shop.service;
 
-import kr.idu.OInjo_Shop.dto.ItemFormDTO;
-import kr.idu.OInjo_Shop.entity.ItemEntity;
+import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
+import kr.idu.OInjo_Shop.entity.Item.ItemEntity;
 import kr.idu.OInjo_Shop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package kr.idu.OInjo_Shop.repository;
 
-import kr.idu.OInjo_Shop.entity.MemberEntity;
+import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

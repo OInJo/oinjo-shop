@@ -40,7 +40,7 @@ const logoutLink = document.querySelector(".logout-link");
 const loginLink = document.querySelector(".login-link");
 loginCheck.style.display = "none";
 
-loginCheck.textContent.addEventListener("change", () => {
+loginCheck.addEventListener("change", () => {
   if(loginCheck.textContent == "") {
     updateLink.style.display = "none"
     logoutLink.style.display = "none"
