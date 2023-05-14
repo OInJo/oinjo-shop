@@ -1,4 +1,4 @@
-package kr.idu.OInjo_Shop.controller.Mail;
+package kr.idu.OInjo_Shop.service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
@@ -8,6 +8,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 
+import kr.idu.OInjo_Shop.entity.Mail.MailEntity;
+import kr.idu.OInjo_Shop.repository.MailRepository;
+import kr.idu.OInjo_Shop.repository.MailServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,6 +22,8 @@ public class RegisterMail implements MailServiceInter {
     @Autowired
     JavaMailSender emailsender; // Bean 등록해둔 MailConfig 를 emailsender 라는 이름으로 autowired
 
+    @Autowired
+    private MailRepository mailRepository;
     private String ePw; // 인증번호
 
     // 메일 내용 작성
@@ -88,6 +93,15 @@ public class RegisterMail implements MailServiceInter {
     public String sendSimpleMessage(String to) throws Exception {
 
         ePw = createKey(); // 랜덤 인증번호 생성
+
+        MailEntity mailEntity = mailRepository.findByEmail(to);
+        if (mailEntity != null) {
+            mailEntity.setCode(ePw);
+        } else {
+            mailEntity = new MailEntity(to, ePw);
+        }
+        mailRepository.save(mailEntity);
+
 
         // TODO Auto-generated method stub
         MimeMessage message = createMessage(to); // 메일 발송
