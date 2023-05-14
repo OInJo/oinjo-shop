@@ -11,49 +11,50 @@
   <link rel="stylesheet" href="/css/index.css">
   <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="../static/css/index.css">
-  <script src="/js/index.js" defer></script>
+   <script src="/js/index.js" defer></script>
   <title>OInJo</title>
 </head>
 
 <body>
   <header>
-    <div class="header-top">
-      <a href="/"><img src="/images/logo.png" alt="OInJo 로고" class="header-top-logo"></a>
-
-      <div class="header-top-right">
-        <div class="header-top-right-search"><input type="text" placeholder="Search" class="input-search"><i
-            class="fa-solid fa-magnifying-glass"></i></div>
-        <div class="header-top-right-ranking"><button>실시간 검색어</button>후드티 [1위]</div>
+    <div class="header-left">
+      <a href="/"><img src="/images/logo.png" alt="LOGO" class="header-logo"></a>
+      <div class="header-search">
+        <input type="text" placeholder="상품을 검색해보세요" class="header-search-input">
+        <i class="fa-solid fa-magnifying-glass header-search-icon"></i>
       </div>
     </div>
-    <ul class="header-nav">
-      <!-- 네이버 아이디로 로그인을 하면 이름이 뜨도록 구현한 소스 -->
+    <nav class="header-right">
       <p class="login-check" th:text="${session.loginEmail}"></p>
-
-      <a href="member/update" class="header-nav-list update-link">
-        <li>정보수정</li>
+      <a href="member/update" class="update-link header-link">
+        <i class="fa-solid fa-user-pen header-link-icon"></i>
+        정보수정
       </a>
-
-      <a href="member/logout" class="header-nav-list logout-link">
-        <li>로그아웃</li>
+      <a href="member/logout" class="logout-link header-link">
+        <i class="fa-solid fa-user-minus header-link-icon"></i>
+        로그아웃
       </a>
-
-      <a href="member/login" class="header-nav-list login-link">
-        <li>로그인</li>
+      <a href="member/login" class="login-link header-link">
+        <i class="fa-solid fa-user-plus header-link-icon"></i>
+        로그인
       </a>
-
-      <a href="signin.html" class="header-nav-list">
-        <li>최근본상품</li>
+      <a href="" class="header-link">
+        <i class="fa-solid fa-tags header-link-icon"></i>
+        최근본상품
       </a>
-      <a href="signin.html" class="header-nav-list">
-        <li>장바구니</li>
+      <a href="" class="header-link shopping-bag">
+        <i class="fa-solid fa-cart-shopping header-link-icon"></i>
+        장바구니
+        <div class="shopping-bag-count">1</div>
       </a>
-      <a href="signin.html" class="header-nav-list">
-        <li>배송조회</li>
+      <a href="" class="header-link">
+        <i class="fa-solid fa-house header-link-icon"></i>
+        마이페이지
       </a>
-    </ul>
+    </nav>
   </header>
   <main>
+
     <aside class="aside-category-wrapper">
       <div class="aside-category">
         <input type="radio" name="category" id="category01">
@@ -92,13 +93,13 @@
     </aside>
     <section>
       <div class="article-product-top">
-        <div class="now-category">OUTER</div>
-        <select name="sort-option" class="now-select-option">
-          <option value="">판매 많은 순</option>
-          <option value="">가격 낮은 순</option>
-          <option value="">가격 높은 순</option>
-          <option value="">최근 상품 순</option>
-        </select>
+        <div class="now-category">전체</div>
+        <div class="sort-option">
+          <button type="button" class="sort-option-button">최신순</button>
+          <button type="button" class="sort-option-button">인기순</button>
+          <button type="button" class="sort-option-button">가격 높은 순</button>
+          <button type="button" class="sort-option-button">가격 낮은 순</button>
+        </div>
       </div>
       <div class="article-product-wrapper">
         <article class="article-product">
@@ -108,9 +109,12 @@
             <li class="article-product-size-list">M</li>
             <li class="article-product-size-list">L</li>
           </ul>
-          <div class="article-product-name">루키 언스트럭쳐 볼캡 NY</div>
           <div class="article-product-brand">MLB</div>
-          <div class="article-product-price">19,000원</div>
+          <div class="article-product-name">루키 언스트럭쳐 볼캡 NY</div>
+          <div class="article-product-price">
+            <div class="article-product-price-won">19,000</div>
+            원
+          </div>
           <div class="article-product-hit-sale-wrapper">
             <div class="article-product-hit-sale hit">HIT</div>
             <div class="article-product-hit-sale sale">SALE</div>
@@ -119,119 +123,6 @@
             <i class="fa-solid fa-circle red-color"></i>
             <i class="fa-solid fa-circle blue-color"></i>
           </div>
-          <div class="article-product-heart"><i class="fa-solid fa-heart product-heart-icon"></i>123</div>
-        </article>
-        <article class="article-product">
-          <img src="/images/product.png" alt="상품 이미지" class="article-product-image">
-          <ul class="article-product-size">
-            <li class="article-product-size-list">S</li>
-            <li class="article-product-size-list">M</li>
-            <li class="article-product-size-list">L</li>
-          </ul>
-          <div class="article-product-name">루키 언스트럭쳐 볼캡 NY</div>
-          <div class="article-product-brand">MLB</div>
-          <div class="article-product-price">19,000원</div>
-          <div class="article-product-color">
-            <i class="fa-solid fa-circle red-color"></i>
-            <i class="fa-solid fa-circle blue-color"></i>
-          </div>
-          <div class="article-product-heart"><i class="fa-solid fa-heart product-heart-icon"></i>123</div>
-        </article>
-        <article class="article-product">
-          <img src="/images/product.png" alt="상품 이미지" class="article-product-image">
-          <ul class="article-product-size">
-            <li class="article-product-size-list">S</li>
-            <li class="article-product-size-list">M</li>
-            <li class="article-product-size-list">L</li>
-          </ul>
-          <div class="article-product-name">루키 언스트럭쳐 볼캡 NY</div>
-          <div class="article-product-brand">MLB</div>
-          <div class="article-product-price">19,000원</div>
-          <div class="article-product-color">
-            <i class="fa-solid fa-circle red-color"></i>
-            <i class="fa-solid fa-circle blue-color"></i>
-          </div>
-          <div class="article-product-heart"><i class="fa-solid fa-heart product-heart-icon"></i>123</div>
-        </article>
-        <article class="article-product">
-          <img src="/images/product.png" alt="상품 이미지" class="article-product-image">
-          <ul class="article-product-size">
-            <li class="article-product-size-list">S</li>
-            <li class="article-product-size-list">M</li>
-            <li class="article-product-size-list">L</li>
-          </ul>
-          <div class="article-product-name">루키 언스트럭쳐 볼캡 NY</div>
-          <div class="article-product-brand">MLB</div>
-          <div class="article-product-price">19,000원</div>
-          <div class="article-product-color">
-            <i class="fa-solid fa-circle red-color"></i>
-            <i class="fa-solid fa-circle blue-color"></i>
-          </div>
-          <div class="article-product-heart"><i class="fa-solid fa-heart product-heart-icon"></i>123</div>
-        </article>
-        <article class="article-product">
-          <img src="/images/product.png" alt="상품 이미지" class="article-product-image">
-          <ul class="article-product-size">
-            <li class="article-product-size-list">S</li>
-            <li class="article-product-size-list">M</li>
-            <li class="article-product-size-list">L</li>
-          </ul>
-          <div class="article-product-name">루키 언스트럭쳐 볼캡 NY</div>
-          <div class="article-product-brand">MLB</div>
-          <div class="article-product-price">19,000원</div>
-          <div class="article-product-color">
-            <i class="fa-solid fa-circle red-color"></i>
-            <i class="fa-solid fa-circle blue-color"></i>
-          </div>
-          <div class="article-product-heart"><i class="fa-solid fa-heart product-heart-icon"></i>123</div>
-        </article>
-        <article class="article-product">
-          <img src="/images/product.png" alt="상품 이미지" class="article-product-image">
-          <ul class="article-product-size">
-            <li class="article-product-size-list">S</li>
-            <li class="article-product-size-list">M</li>
-            <li class="article-product-size-list">L</li>
-          </ul>
-          <div class="article-product-name">루키 언스트럭쳐 볼캡 NY</div>
-          <div class="article-product-brand">MLB</div>
-          <div class="article-product-price">19,000원</div>
-          <div class="article-product-color">
-            <i class="fa-solid fa-circle red-color"></i>
-            <i class="fa-solid fa-circle blue-color"></i>
-          </div>
-          <div class="article-product-heart"><i class="fa-solid fa-heart product-heart-icon"></i>123</div>
-        </article>
-        <article class="article-product">
-          <img src="/images/product.png" alt="상품 이미지" class="article-product-image">
-          <ul class="article-product-size">
-            <li class="article-product-size-list">S</li>
-            <li class="article-product-size-list">M</li>
-            <li class="article-product-size-list">L</li>
-          </ul>
-          <div class="article-product-name">루키 언스트럭쳐 볼캡 NY</div>
-          <div class="article-product-brand">MLB</div>
-          <div class="article-product-price">19,000원</div>
-          <div class="article-product-color">
-            <i class="fa-solid fa-circle red-color"></i>
-            <i class="fa-solid fa-circle blue-color"></i>
-          </div>
-          <div class="article-product-heart"><i class="fa-solid fa-heart product-heart-icon"></i>123</div>
-        </article>
-        <article class="article-product">
-          <img src="/images/product.png" alt="상품 이미지" class="article-product-image">
-          <ul class="article-product-size">
-            <li class="article-product-size-list">S</li>
-            <li class="article-product-size-list">M</li>
-            <li class="article-product-size-list">L</li>
-          </ul>
-          <div class="article-product-name">루키 언스트럭쳐 볼캡 NY</div>
-          <div class="article-product-brand">MLB</div>
-          <div class="article-product-price">19,000원</div>
-          <div class="article-product-color">
-            <i class="fa-solid fa-circle red-color"></i>
-            <i class="fa-solid fa-circle blue-color"></i>
-          </div>
-          <div class="article-product-heart"><i class="fa-solid fa-heart product-heart-icon"></i>123</div>
         </article>
 
       </div>
@@ -246,6 +137,7 @@
     <div class="move-top-btn"><i class="fa-solid fa-arrow-up"></i></div>
     <div class="move-bottom-btn"><i class="fa-solid fa-arrow-down"></i></div>
   </div>
+
 </body>
 
 </html>
