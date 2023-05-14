@@ -2,20 +2,81 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <title>update</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/memberupdate.css">
+  <script src="/js/memberupdate.js" defer></script>
+  <title>정보수정</title>
 </head>
-<body>
-<form action="/member/update" method="post">
-    <input type="hidden" th:value="${updateMember.id}" name="id"><br>
-    이메일: <input type="text" th:value="${updateMember.memberEmail}" name="memberEmail" readonly> <br>
-    비밀번호: <input type="text" th:value="${updateMember.memberPassword}" name="memberPassword"> <br>
-    이름: <input type="text" th:value="${updateMember.memberName}" name="memberName"> <br>
-    닉네임: <input type="text" th:value="${updateMember.memberName}" name="memberNickname" readonly> <br>
-    폰번호: <input type="text" th:value="${updateMember.memberPhone}" name="memberPhone"> <br>
-    주소: <input type="text" th:value="${updateMember.memberPhone}" name="memberAddress"> <br>
 
-    <input type="submit" value="정보수정">
-</form>
+<body>
+  <header>
+    <div class="header-left">
+      <a href="/"><img src="/images/logo.png" alt="LOGO" class="header-logo"></a>
+    </div>
+    <nav class="header-right">
+      <p class="login-check" th:text="${session.loginEmail}"></p>
+      <a href="member/update" class="update-link header-link">
+        <i class="fa-solid fa-user-pen header-link-icon"></i>
+        정보수정
+      </a>
+      <a href="member/logout" class="logout-link header-link">
+        <i class="fa-solid fa-user-minus header-link-icon"></i>
+        로그아웃
+      </a>
+      <a href="member/login" class="login-link header-link">
+        <i class="fa-solid fa-user-plus header-link-icon"></i>
+        로그인
+      </a>
+      <a href="" class="header-link">
+        <i class="fa-solid fa-tags header-link-icon"></i>
+        최근본상품
+      </a>
+      <a href="" class="header-link shopping-bag">
+        <i class="fa-solid fa-cart-shopping header-link-icon"></i>
+        장바구니
+        <div class="shopping-bag-count">1</div>
+      </a>
+      <a href="" class="header-link">
+        <i class="fa-solid fa-house header-link-icon"></i>
+        마이페이지
+      </a>
+    </nav>
+  </header>
+  <form action="/member/update" method="post">
+    <h4 class="update-title">회원정보 수정</h4>
+    <div class="update-wrapper">
+      <p class="update-content">이메일</p>
+      <input type="text" th:value="${updateMember.memberEmail}" name="memberEmail" class="update-input email-update-input" readonly>
+      <button type="button" class="update-button email-update-button">변경</button>
+    </div>
+    <div class="update-wrapper">
+      <p class="update-content">이름</p>
+      <input type="text" th:value="${updateMember.memberName}" name="memberName" class="update-input name-update-input" readonly>
+      <button type="button" class="update-button name-update-button">변경</button>
+    </div>
+    <div class="update-wrapper">
+      <p class="update-content">닉네임</p>
+      <input type="text" th:value="${updateMember.memberNickname}" name="memberNickname" class="update-input nickname-update-input" readonly>
+      <button type="button" class="update-button nickname-update-button">변경</button>
+    </div>
+    <div class="update-wrapper">
+      <p class="update-content">휴대폰 번호</p>
+      <input type="text" th:value="${updateMember.memberPhone}" name="memberPhone" class="update-input phone-update-input" readonly>
+      <button type="button" class="update-button phone-update-button">변경</button>
+    </div>
+    <div class="update-wrapper">
+      <p class="update-content">주소</p>
+      <input type="text" th:value="${updateMember.memberAddress}" name="memberAddress" class="update-input address-update-input" readonly>
+      <button type="button" class="update-button address-update-button">변경</button>
+    </div>
+    <div class="update-bottom-button">
+      <a href="/" class="password-update-button">비밀번호 변경</a>
+      <input type="submit" value="정보수정" class="update-submit-button">
+    </div>
+  </form>
 </body>
+
 </html>
