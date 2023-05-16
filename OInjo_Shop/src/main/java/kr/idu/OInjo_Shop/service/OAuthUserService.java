@@ -1,8 +1,8 @@
 package kr.idu.OInjo_Shop.service;
 
-import kr.idu.OInjo_Shop.dto.OAuthAttributes;
-import kr.idu.OInjo_Shop.dto.SessionUser;
-import kr.idu.OInjo_Shop.entity.User;
+import kr.idu.OInjo_Shop.dto.Member.OAuthAttributes;
+import kr.idu.OInjo_Shop.dto.Member.SessionUser;
+import kr.idu.OInjo_Shop.entity.Member.User;
 import kr.idu.OInjo_Shop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

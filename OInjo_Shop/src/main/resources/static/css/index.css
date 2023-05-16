@@ -10,9 +10,84 @@
 /* 기본 레이아웃 styling */
 header {
   width: 100%;
-  height: 130px;
+  height: 110px;
   margin-bottom: 10px;
   border-bottom: 1px solid black;
+  padding-right: 3%;
+  padding-top: 1%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  margin-left:1%;
+}
+
+.header-logo {
+  width: 70px;
+  height: 80%;
+  margin-right: 30px;
+}
+
+.header-search {
+  width: 300px;
+  height: 45%;
+  border: 3px solid cornflowerblue;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: 10px;
+}
+
+.header-search-input {
+  all: unset;
+  width: 80%;
+  padding-left: 10px;
+}
+
+.header-search-icon {
+  position: absolute;
+  right: 15px;
+  color: cornflowerblue;
+}
+
+.header-right {
+  display: flex;
+  gap: 25px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.header-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #72716d;
+}
+
+.header-link-icon {
+  font-size: 20px;
+  color: black;
+  margin-bottom: 5px;
+}
+
+.shopping-bag {
+  position: relative;
+}
+
+.shopping-bag-count {
+  position: absolute;
+  top: -10px;
+  right: 5px;
+  width: 22px;
+  background-color: red;
+  border-radius: 50px;
+  font-size: 20px;
+  color: white;
+  z-index: -100;
 }
 
 a {
@@ -52,73 +127,6 @@ section {
   flex-basis: 85%;
 }
 
-/* header styling */
-.header-top {
-  display: flex;
-  justify-content: space-between;
-}
-
-.header-nav {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 20px;
-  margin-right: 3px;
-  /* width:95vw; */
-}
-
-.header-nav-list {
-  /* width:7%; */
-}
-
-
-.header-top-logo {
-  padding: 10px;
-  width: 70px;
-}
-
-.header-top-right {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: black;
-  font-weight: 600;
-  width: 25%;
-  min-width: 300px;
-}
-
-.header-top-right-search {
-  background-color: #dddddd;
-  display: flex;
-  align-items: center;
-  margin: 10px;
-  padding-left: 10px;
-  width: 85%;
-  height: 40px;
-  font-size: 20px;
-}
-
-.header-top-right-search input {
-  all: unset;
-  border-right: 1px solid black;
-  width: 270px;
-}
-
-.header-top-right-search i {
-  margin: 0 5px;
-}
-
-.header-top-right-ranking button {
-  all: unset;
-  width: 100px;
-  font-weight: 600;
-  border: 1px solid black;
-  background-color: #5bbad5;
-  color: white;
-  padding: 1px;
-  text-align: center;
-  margin-right: 2px;
-}
 
 /* aside styling */
 .aside-category-wrapper {
@@ -194,10 +202,23 @@ input[id*="category"]:checked+label+ul {
   padding: 10px 20px;
   font-size: 18px;
   font-weight: 600;
+  border-radius:50px;
 }
 
-.now-select-option {
-  /* 추가 예정 */
+.sort-option {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.5);
+  cursor:pointer;
+}
+
+.sort-option-button {
+  all: unset;
+}
+
+.sort-option-button:hover {
+  color: black;
 }
 
 /* article styling */
@@ -213,11 +234,12 @@ input[id*="category"]:checked+label+ul {
   height: 380px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
   padding: 10px;
   position: relative;
+}
+
+.article-product:hover {
+  background-color: rgba(202, 189, 189, 0.1);
 }
 
 .article-product-image {
@@ -263,12 +285,20 @@ input[id*="category"]:checked+label+ul {
 }
 
 .article-product-brand {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .article-product-price {
-  font-size: 16px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.article-product-price-won {
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .article-product-hit-sale-wrapper {
@@ -296,7 +326,7 @@ input[id*="category"]:checked+label+ul {
 
 .article-product-color {
   position: absolute;
-  bottom: 30px;
+  bottom: 20px;
   left: 10px;
   gap: 3px;
   display: none;
@@ -323,15 +353,6 @@ input[id*="category"]:checked+label+ul {
 
 .article-product {
   position: relative;
-}
-
-.article-product-heart {
-  padding-left: 130px;
-}
-
-.article-product-heart i {
-  color: red;
-  padding-right: 3px;
 }
 
 /* footer styling */

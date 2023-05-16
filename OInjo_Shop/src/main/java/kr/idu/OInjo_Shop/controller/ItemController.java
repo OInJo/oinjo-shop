@@ -1,7 +1,6 @@
 package kr.idu.OInjo_Shop.controller;
 
-import kr.idu.OInjo_Shop.dto.ItemFormDTO;
-import kr.idu.OInjo_Shop.dto.MemberDTO;
+import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

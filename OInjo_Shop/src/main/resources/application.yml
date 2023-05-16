@@ -21,6 +21,7 @@ spring:
     hibernate:
       ddl-auto: update
 
+
   #OAuth2.0 설정
   security:
     oauth2:

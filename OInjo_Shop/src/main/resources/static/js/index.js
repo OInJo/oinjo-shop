@@ -25,11 +25,21 @@ for (let i = 0; i < redColor.length; i++) {
   });
 }
 
-// inputSearch가 focus되면 Search라는 placeholder가 사라지도록 구현
-const inputSearch = document.querySelector(".input-search");
-inputSearch.addEventListener("focus", () => {
-  inputSearch.placeholder = "";
-});
-inputSearch.addEventListener("blur", () => {
-  inputSearch.placeholder = "Search";
-});
+const loginCheck = document.querySelector(".login-check");
+const updateLink = document.querySelector(".update-link");
+const logoutLink = document.querySelector(".logout-link");
+const loginLink = document.querySelector(".login-link");
+loginCheck.style.display = "none";
+
+window.onload = () => {
+  if(loginCheck.textContent == "") {
+    updateLink.style.display = "none"
+    logoutLink.style.display = "none"
+    loginLink.style.display = "flex"
+  }
+  else if(loginCheck.textContent.length >= 1) {
+    updateLink.style.display = "flex"
+    logoutLink.style.display = "flex"
+    loginLink.style.display = "none"
+  }
+}

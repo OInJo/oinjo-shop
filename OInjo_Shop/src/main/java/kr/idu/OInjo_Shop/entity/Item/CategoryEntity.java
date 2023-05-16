@@ -1,9 +1,8 @@
-package kr.idu.OInjo_Shop.entity;
+package kr.idu.OInjo_Shop.entity.Item;
 
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -11,7 +10,7 @@ import javax.persistence.*;
 @Table(name="category")
 @Getter
 @Setter
-public class categoryEntity {
+public class CategoryEntity {
 
     @Id
     @Column(name="categoryId")
