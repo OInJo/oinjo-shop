@@ -1,13 +1,12 @@
 package kr.idu.OInjo_Shop.entity.Mail;
 
-import kr.idu.OInjo_Shop.service.AutoDeleteListener;
-import org.hibernate.annotations.CreationTimestamp;
+import kr.idu.OInjo_Shop.service.EntityCleanupScheduler;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@EntityListeners(AutoDeleteListener.class)
+@EntityListeners(EntityCleanupScheduler.class)
 public class MailEntity {
 
     @Id
@@ -34,7 +33,4 @@ public class MailEntity {
         this.createdTime = LocalDateTime.now();
     }
 
-    public LocalDateTime getCreatedTime() {
-        return createdTime;
-    }
 }

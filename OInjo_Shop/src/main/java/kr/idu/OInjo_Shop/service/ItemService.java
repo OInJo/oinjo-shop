@@ -1,7 +1,7 @@
 package kr.idu.OInjo_Shop.service;
 
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
-import kr.idu.OInjo_Shop.entity.Item.ItemEntity;
+import kr.idu.OInjo_Shop.entity.Item.*;
 import kr.idu.OInjo_Shop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,13 +26,21 @@ public class ItemService {
         return item.getProductId();
     }
 
-    public Long updateItem(ItemFormDTO itemFormDto) throws Exception{
+    // ItemService.java
 
-        // 상품 수정
-        ItemEntity item = itemRepository.findById(itemFormDto.getId())
+//...
+
+    public Long updateItem(Long itemId, String productName, int productPrice, int productStock, String productStatus,
+                           String productDetail, BrandEntity brand, ColorEntity color, SizeEntity size,
+                           CategoryEntity category) throws EntityNotFoundException {
+        ItemEntity item = itemRepository.findById(itemId)
                 .orElseThrow(EntityNotFoundException::new);
-        item.updateItem(itemFormDto);
+        // .orElseThrow(Entity..) => itemId에 해당하는 상품이 레포지토리에 없을 경우,
+        // EntityNotFoundException 발생
+        item.updateItem(productName, productPrice, productStock, productStatus, productDetail,
+                brand, color, size, category);
 
         return item.getProductId();
     }
+
 }

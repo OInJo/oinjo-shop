@@ -5,6 +5,8 @@ import kr.idu.OInjo_Shop.entity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="product")
@@ -37,30 +39,44 @@ public class ItemEntity extends BaseEntity {
 
 
     @OneToOne
-    @JoinColumn(name ="brandName")
+    @JoinColumn(name ="brandId")
     private BrandEntity brand;
 
     @OneToOne
-    @JoinColumn(name ="colorName")
+    @JoinColumn(name ="colorId")
     private ColorEntity color;
 
     @OneToOne
-    @JoinColumn(name ="sizeName")
+    @JoinColumn(name ="sizeId")
     private SizeEntity size;
 
     @OneToOne
-    @JoinColumn(name ="categoryName")
+    @JoinColumn(name ="categoryId")
     private CategoryEntity category;
 
-    public void updateItem(ItemFormDTO itemFormDto){
-        this.productName = itemFormDto.getProductName();
-        this.productPrice = itemFormDto.getProductPrice();
-        this.productStock = itemFormDto.getProductStock();
-        this.productStatus = itemFormDto.getProductStatus();
-        this.productDetail = itemFormDto.getProductDetail();
-        this.brand = itemFormDto.getBrand();
-        this.color = itemFormDto.getColor();
-        this.size = itemFormDto.getSize();
-        this.category = itemFormDto.getCategory();
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemImgEntity> itemImgs = new ArrayList<>();
+
+    public void updateItem(String productName, int productPrice, int productStock, String productStatus,
+                           String productDetail, BrandEntity brand, ColorEntity color, SizeEntity size,
+                           CategoryEntity category){
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productStock = productStock;
+        this.productStatus = productStatus;
+        this.productDetail = productDetail;
+        this.brand = brand;
+        this.color = color;
+        this.size = size;
+        this.category = category;
+    }
+    public void addItemImg(ItemImgEntity itemImg) {
+        itemImgs.add(itemImg);
+        itemImg.setItem(this);
+    }
+
+    public void removeItemImg(ItemImgEntity itemImg) {
+        itemImgs.remove(itemImg);
+        itemImg.setItem(null);
     }
 }

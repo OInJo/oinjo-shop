@@ -29,10 +29,10 @@ public class ItemFormDTO {
     private String modifiedBy;
 
     private static ModelMapper modelMapper = new ModelMapper();
-
+    // DTO와 객체 간의 매핑을 처리
     public ItemEntity createItem() {
         return modelMapper.map(this, ItemEntity.class);
-    }
+    } // entity와 dto의 필드 이름과 타입이 일치하면 매핑 수행
     public static ItemFormDTO of(ItemEntity item){
         return modelMapper.map(item, ItemFormDTO.class);
     }

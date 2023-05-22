@@ -85,6 +85,10 @@ public class RegisterMail implements MailServiceInter {
         return key.toString();
     }
 
+    public void deleteAll() {
+        mailRepository.deleteAll();
+    }
+
     // 메일 발송
     // sendSimpleMessage 의 매개변수로 들어온 to 는 곧 이메일 주소가 되고,
     // MimeMessage 객체 안에 내가 전송할 메일의 내용을 담는다.
