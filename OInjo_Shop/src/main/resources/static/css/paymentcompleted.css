@@ -1,0 +1,82 @@
+.button{
+    display: flex;
+    margin-top: 30px;
+    margin-left: 400px;    
+}
+.payment-receipt{
+    width: 100px;
+    height: 40px;
+    margin-right: 10px;
+    background-color: white;
+    color:  rgb(252, 68, 99);
+    border: 2px solid rgb(252, 68, 99);
+    border-radius: 5px;
+    font-size: 15px;
+}
+.Statement-transactions{
+    width: 100px;
+    height: 40px;
+    background-color: #ffffff;
+    color: rgb(252, 68, 99);
+    border: 2px solid rgb(252, 68, 99);
+    border-radius: 5px;
+    font-size: 15px;
+}
+h1{
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+    width: 650px;
+    border-top: 1px solid black;
+    padding-top: 25px;
+    margin-top: 13px;
+}
+
+.order-complete-form{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    background-color: #FFFFFF;
+    position: relative;
+}
+
+.order-information{
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid #d9d9d9;
+
+    width: 500px;
+    height: 120px;
+    padding-left: 40px;
+    padding-right: 20px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    margin-top: 60px;
+    background-color: #f9f9ff;
+    
+}
+.order-information div {
+    width: 50%;
+}
+
+.button-form{
+    display: flex;
+    margin-top: 30px;
+}
+.order-check {
+    width: 100px;
+    height: 40px;
+    margin-right: 20px;
+    background-color: white;
+    border: 2px solid #d9d9d9;
+    border-radius: 5px;
+}
+.main-page{
+    width: 100px;
+    height: 40px;
+    background-color: #31363d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
