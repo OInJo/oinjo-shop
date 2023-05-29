@@ -1,5 +1,12 @@
 @import url(./root.css);
 
+@font-face {
+  font-family: 'GangwonEdu_OTFBoldA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 form {
   margin-left: 2%;
   width: 500px;
@@ -44,11 +51,79 @@ form {
 }
 
 .password-update-button {
-  color: rgba(0, 0, 0, 0.4);
+  all: unset;
+  cursor: pointer;
+  /* color: rgba(0, 0, 0, 0.4); */
 }
 
 .update-submit-button {
   all: unset;
   font-size: 20px;
   font-weight: 600;
+}
+
+.password-update-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.modal__overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.change-password {
+  font-family: 'GangwonEdu_OTFBoldA';
+  background-color: white;
+  padding: 50px 100px;
+  text-align: center;
+  position: relative;
+  width: 10%;
+  height: 30%;
+  top: 0px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.current-password, .new-password, .renew-password {
+  font-family: 'GangwonEdu_OTFBoldA';
+  /* border: 0 solid black; */
+  width: 150px;
+  height: 30px;
+  align-items: center;
+  margin: 5px;
+  /* margin-right: 20px; */
+  /* margin-left: -20px; */
+}
+
+.change-password > input:focus {
+  outline: 0 solid black;
+}
+
+.save-password {
+  font-family: 'GangwonEdu_OTFBoldA';
+  width: 50px;
+  height: 25px;
+  text-align: center;
+  background-color: none;
+  border-radius: none;
+}
+
+.hidden {
+  display: none;
+}
+
+#check {
+  float: right;
+  margin-right: -35px;
+  margin-top: -45px;
 }
