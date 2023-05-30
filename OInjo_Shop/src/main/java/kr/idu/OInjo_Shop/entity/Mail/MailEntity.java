@@ -1,12 +1,9 @@
 package kr.idu.OInjo_Shop.entity.Mail;
 
-import kr.idu.OInjo_Shop.service.EntityCleanupScheduler;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@EntityListeners(EntityCleanupScheduler.class)
 public class MailEntity {
 
     @Id
