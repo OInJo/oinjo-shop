@@ -1,9 +1,9 @@
-package kr.idu.OInjo_Shop.service;
+package kr.idu.OInjo_Shop.service.Member;
 
 import kr.idu.OInjo_Shop.dto.Member.OAuthAttributes;
 import kr.idu.OInjo_Shop.dto.Member.SessionUser;
 import kr.idu.OInjo_Shop.entity.Member.User;
-import kr.idu.OInjo_Shop.repository.UserRepository;
+import kr.idu.OInjo_Shop.repository.Member.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;

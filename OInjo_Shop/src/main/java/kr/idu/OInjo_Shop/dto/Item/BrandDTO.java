@@ -1,16 +1,26 @@
 package kr.idu.OInjo_Shop.dto.Item;
 
+import kr.idu.OInjo_Shop.entity.Item.BrandEntity;
+import kr.idu.OInjo_Shop.entity.Item.ItemEntity;
 import lombok.Getter;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
 
 @Getter
 @Setter
 public class BrandDTO {
-    private Integer brandId;
+    private Long brandId;
     private String brandName;
 
-    public BrandDTO(Integer brandId, String brandName) {
-        this.brandId = brandId;
-        this.brandName = brandName;
+    private static ModelMapper modelMapper = new ModelMapper();
+    // DTO와 객체 간의 매핑을 처리 (양이 적어서 수정하는 것도 좋아보임)
+
+    public BrandEntity createBrand() {
+        return modelMapper.map(this, BrandEntity.class);
+    } // entity와 dto의 필드 이름과 타입이 일치하면 매핑 수행
+
+    public static BrandDTO of(BrandEntity brand){
+        return modelMapper.map(brand, BrandDTO.class);
     }
+
 }

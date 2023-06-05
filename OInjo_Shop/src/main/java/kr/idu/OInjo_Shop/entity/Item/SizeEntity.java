@@ -14,8 +14,8 @@ public class SizeEntity {
 
     @Id
     @Column(name="sizeId")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer sizeId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long sizeId;
 
     @Column( name="sizeName", nullable=false, length=100 )
     private String sizeName;

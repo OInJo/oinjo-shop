@@ -1,4 +1,4 @@
-package kr.idu.OInjo_Shop.service;
+package kr.idu.OInjo_Shop.service.Mail;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
@@ -9,8 +9,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 
 import kr.idu.OInjo_Shop.entity.Mail.MailEntity;
-import kr.idu.OInjo_Shop.repository.MailRepository;
-import kr.idu.OInjo_Shop.repository.MailServiceInter;
+import kr.idu.OInjo_Shop.repository.Member.MailRepository;
+import kr.idu.OInjo_Shop.repository.Member.MailServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
