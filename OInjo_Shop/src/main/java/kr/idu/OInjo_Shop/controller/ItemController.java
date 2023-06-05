@@ -6,6 +6,7 @@ import kr.idu.OInjo_Shop.dto.Item.Relation.CategoryDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.ColorDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.SizeDTO;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
+import kr.idu.OInjo_Shop.service.Item.RelationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -20,17 +21,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemController {
 
-    private final ItemService itemService;
-    List<BrandDTO> brandDTOList = itemService.findAllBrand(); // 브랜드 리스트
+    private final ItemService itemService; // 아이템 및 아이템 이미지
+    private final RelationService relationService; // 카테고리, 브랜드, 컬러, 사이즈
 
     @GetMapping(value = "/admin/item/new")
     public String productForm(Model model) {
+        List<BrandDTO> brandDTOList = relationService.findAllBrand(); // 브랜드 리스트
+        List<CategoryDTO> categoryDTOList = relationService.findAllCategory(); // 카테고리 리스트
+        List<ColorDTO> colorDTOList = relationService.findAllColor(); // 컬러 리스트
+        List<SizeDTO> sizeDTOList = relationService.findAllSize(); // 사이즈 리스트
         model.addAttribute("brandList", brandDTOList); // 브랜드 리스트 받아오기
+        model.addAttribute("categoryList", categoryDTOList); // 카테고리 리스트 받아오기
+        model.addAttribute("colorList", colorDTOList); // 컬러 리스트 받아오기
+        model.addAttribute("sizeList", sizeDTOList); // 사이즈 리스트 받아오기
         model.addAttribute("itemFormDTO", new ItemFormDTO());
         return "upload";
     }
     @GetMapping(value = "/admin/brand/new")
     public String categoryForm(Model model) {
+        List<BrandDTO> brandDTOList = relationService.findAllBrand(); // 브랜드 리스트
         // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
         model.addAttribute("brandList", brandDTOList);
         model.addAttribute("brandDTO", new BrandDTO());
@@ -56,24 +65,24 @@ public class ItemController {
         return "redirect:/";
     }
 
-    @PostMapping(value = "/admin/brand/new")
+    @PostMapping(value = "/admin/item/classification")
     public String brandNew(BrandDTO brandDTO, CategoryDTO categoryDTO, ColorDTO colorDTO, SizeDTO sizeDTO,Model model){
 
         try {
             if (brandDTO.getBrandName() != null) {
-                itemService.saveBrand(brandDTO);
+                relationService.saveBrand(brandDTO);
             }
 
             if (categoryDTO.getCategoryName() != null) {
-                itemService.saveCategory(categoryDTO);
+                relationService.saveCategory(categoryDTO);
             }
 
             if (colorDTO.getColorName() != null) {
-                itemService.saveColor(colorDTO);
+                relationService.saveColor(colorDTO);
             }
 
             if (sizeDTO.getSizeName() != null) {
-                itemService.saveSize(sizeDTO);
+                relationService.saveSize(sizeDTO);
             }
         } catch (Exception e){
             model.addAttribute("errorMessage", "브랜드 등록 중 에러가 발생하였습니다.");

@@ -27,10 +27,6 @@ public class ItemService {
 
     private final ItemRepository itemRepository;
     private final ItemImgRepository itemImgRepository;
-    private final BrandRepository brandRepository;
-    private final CategoryRepository categoryRepository;
-    private final ColorRepository colorRepository;
-    private final SizeRepository sizeRepository;
 
     public Long saveItem(ItemFormDTO itemFormDto) throws Exception{
 
@@ -40,57 +36,6 @@ public class ItemService {
 
         return item.getProductId();
     }
-
-    public Long saveBrand(BrandDTO brandDTO) throws Exception{
-
-        // 브랜드 등록
-        BrandEntity brand = brandDTO.createBrand();
-        brandRepository.save(brand);
-
-        return brand.getBrandId();
-    }
-    public Long saveCategory(CategoryDTO categoryDTO) throws Exception{
-
-        // 브랜드 등록
-        CategoryEntity category = categoryDTO.createCategory();
-        categoryRepository.save(category);
-
-        return category.getCategoryId();
-    }
-
-    public Long saveColor(ColorDTO colorDTO) throws Exception{
-
-        // 브랜드 등록
-        ColorEntity color = colorDTO.createColor();
-        colorRepository.save(color);
-
-        return color.getColorId();
-    }
-
-    public Long saveSize(SizeDTO sizeDTO) throws Exception{
-
-        // 브랜드 등록
-        SizeEntity size = sizeDTO.createSize();
-        sizeRepository.save(size);
-
-        return size.getSizeId();
-    }
-    public List<BrandDTO> findAllBrand() {
-        List<BrandEntity> brandEntityList = brandRepository.findAll();
-        // 여기서 findAll()은 repository에서 제공하는 메서드 [List 객체 넘어옴]
-        // repository <=> entity로 주고 받기
-        List<BrandDTO> brandDTOList = new ArrayList<>();
-        for (BrandEntity brandEntity: brandEntityList) {
-            // for each문 사용 memberDTOList => DTO 객체를 받음
-            brandDTOList.add(BrandDTO.of(brandEntity));
-            //entity list 객체를 dto로 변환 후 controller로 넘김
-            // 아래와 같이 두줄로 가능
-            //MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
-            //memberDTOList.add(memberDTO);
-        }
-        return brandDTOList;
-    }
-
 
     // ItemService.java
 
