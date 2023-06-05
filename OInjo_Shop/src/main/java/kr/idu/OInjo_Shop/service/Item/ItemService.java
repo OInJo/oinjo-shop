@@ -76,4 +76,9 @@ public class ItemService {
         return item.getProductId();
     }
 
+    // 특정 상품 조회
+    public ItemEntity itemView(Long id){
+        return itemRepository.findById(id).get();
+    }
+
 }
