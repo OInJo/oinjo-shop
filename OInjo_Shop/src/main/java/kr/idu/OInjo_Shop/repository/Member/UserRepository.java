@@ -1,4 +1,4 @@
-package kr.idu.OInjo_Shop.repository;
+package kr.idu.OInjo_Shop.repository.Member;
 import kr.idu.OInjo_Shop.entity.Member.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

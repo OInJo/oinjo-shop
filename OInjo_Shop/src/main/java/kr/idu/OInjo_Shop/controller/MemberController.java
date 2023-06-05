@@ -1,8 +1,8 @@
 package kr.idu.OInjo_Shop.controller;
 
-import kr.idu.OInjo_Shop.repository.MailServiceInter;
+import kr.idu.OInjo_Shop.repository.Member.MailServiceInter;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
-import kr.idu.OInjo_Shop.service.MemberService;
+import kr.idu.OInjo_Shop.service.Member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

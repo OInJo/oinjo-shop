@@ -20,6 +20,7 @@ public class ItemEntity extends BaseEntity {
     @Id
     @Column(name="productId")
     @GeneratedValue(strategy = GenerationType.AUTO)
+    // (strategy = GenerationType.AUTO)
     private Long productId; // 상품 코드
 
     @Column (nullable = false, length = 50)

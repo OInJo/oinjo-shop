@@ -1,4 +1,4 @@
-package kr.idu.OInjo_Shop.repository;
+package kr.idu.OInjo_Shop.repository.Member;
 
 import kr.idu.OInjo_Shop.entity.Item.ItemEntity;
 import kr.idu.OInjo_Shop.entity.Mail.MailEntity;
