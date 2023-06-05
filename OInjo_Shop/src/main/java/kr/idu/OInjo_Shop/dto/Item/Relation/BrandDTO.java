@@ -1,7 +1,6 @@
-package kr.idu.OInjo_Shop.dto.Item;
+package kr.idu.OInjo_Shop.dto.Item.Relation;
 
-import kr.idu.OInjo_Shop.entity.Item.BrandEntity;
-import kr.idu.OInjo_Shop.entity.Item.ItemEntity;
+import kr.idu.OInjo_Shop.entity.Item.Relation.BrandEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;

@@ -1,6 +1,10 @@
 package kr.idu.OInjo_Shop.dto.Item;
 
 import kr.idu.OInjo_Shop.entity.Item.*;
+import kr.idu.OInjo_Shop.entity.Item.Relation.BrandEntity;
+import kr.idu.OInjo_Shop.entity.Item.Relation.CategoryEntity;
+import kr.idu.OInjo_Shop.entity.Item.Relation.ColorEntity;
+import kr.idu.OInjo_Shop.entity.Item.Relation.SizeEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;

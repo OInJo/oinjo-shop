@@ -1,9 +1,10 @@
 package kr.idu.OInjo_Shop.controller;
 
-import kr.idu.OInjo_Shop.dto.Item.BrandDTO;
-import kr.idu.OInjo_Shop.dto.Item.CategoryDTO;
+import kr.idu.OInjo_Shop.dto.Item.Relation.BrandDTO;
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
-import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
+import kr.idu.OInjo_Shop.dto.Item.Relation.CategoryDTO;
+import kr.idu.OInjo_Shop.dto.Item.Relation.ColorDTO;
+import kr.idu.OInjo_Shop.dto.Item.Relation.SizeDTO;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -55,10 +57,24 @@ public class ItemController {
     }
 
     @PostMapping(value = "/admin/brand/new")
-    public String brandNew(BrandDTO brandDTO, Model model){
+    public String brandNew(BrandDTO brandDTO, CategoryDTO categoryDTO, ColorDTO colorDTO, SizeDTO sizeDTO,Model model){
 
         try {
-            itemService.saveBrand(brandDTO);
+            if (brandDTO.getBrandName() != null) {
+                itemService.saveBrand(brandDTO);
+            }
+
+            if (categoryDTO.getCategoryName() != null) {
+                itemService.saveCategory(categoryDTO);
+            }
+
+            if (colorDTO.getColorName() != null) {
+                itemService.saveColor(colorDTO);
+            }
+
+            if (sizeDTO.getSizeName() != null) {
+                itemService.saveSize(sizeDTO);
+            }
         } catch (Exception e){
             model.addAttribute("errorMessage", "브랜드 등록 중 에러가 발생하였습니다.");
             return "upload";

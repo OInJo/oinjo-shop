@@ -1,11 +1,17 @@
 package kr.idu.OInjo_Shop.service.Item;
 
-import kr.idu.OInjo_Shop.dto.Item.BrandDTO;
+import kr.idu.OInjo_Shop.dto.Item.Relation.BrandDTO;
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
-import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
+import kr.idu.OInjo_Shop.dto.Item.Relation.CategoryDTO;
+import kr.idu.OInjo_Shop.dto.Item.Relation.ColorDTO;
+import kr.idu.OInjo_Shop.dto.Item.Relation.SizeDTO;
 import kr.idu.OInjo_Shop.entity.Item.*;
-import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
+import kr.idu.OInjo_Shop.entity.Item.Relation.BrandEntity;
+import kr.idu.OInjo_Shop.entity.Item.Relation.CategoryEntity;
+import kr.idu.OInjo_Shop.entity.Item.Relation.ColorEntity;
+import kr.idu.OInjo_Shop.entity.Item.Relation.SizeEntity;
 import kr.idu.OInjo_Shop.repository.Item.*;
+import kr.idu.OInjo_Shop.repository.Item.Relation.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +30,7 @@ public class ItemService {
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
     private final ColorRepository colorRepository;
+    private final SizeRepository sizeRepository;
 
     public Long saveItem(ItemFormDTO itemFormDto) throws Exception{
 
@@ -42,7 +49,32 @@ public class ItemService {
 
         return brand.getBrandId();
     }
+    public Long saveCategory(CategoryDTO categoryDTO) throws Exception{
 
+        // 브랜드 등록
+        CategoryEntity category = categoryDTO.createCategory();
+        categoryRepository.save(category);
+
+        return category.getCategoryId();
+    }
+
+    public Long saveColor(ColorDTO colorDTO) throws Exception{
+
+        // 브랜드 등록
+        ColorEntity color = colorDTO.createColor();
+        colorRepository.save(color);
+
+        return color.getColorId();
+    }
+
+    public Long saveSize(SizeDTO sizeDTO) throws Exception{
+
+        // 브랜드 등록
+        SizeEntity size = sizeDTO.createSize();
+        sizeRepository.save(size);
+
+        return size.getSizeId();
+    }
     public List<BrandDTO> findAllBrand() {
         List<BrandEntity> brandEntityList = brandRepository.findAll();
         // 여기서 findAll()은 repository에서 제공하는 메서드 [List 객체 넘어옴]
@@ -58,6 +90,7 @@ public class ItemService {
         }
         return brandDTOList;
     }
+
 
     // ItemService.java
 
