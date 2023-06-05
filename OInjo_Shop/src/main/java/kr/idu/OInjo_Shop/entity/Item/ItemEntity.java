@@ -2,6 +2,7 @@ package kr.idu.OInjo_Shop.entity.Item;
 
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.entity.BaseEntity;
+import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -51,6 +52,11 @@ public class ItemEntity extends BaseEntity {
     @OneToOne
     @JoinColumn(name ="categoryName")
     private CategoryEntity category;
+
+    // 판매자랑 연결
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "member_id")
+    private MemberEntity member;
 
     public void updateItem(ItemFormDTO itemFormDto){
         this.productName = itemFormDto.getProductName();
