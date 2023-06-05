@@ -2,6 +2,7 @@ package kr.idu.OInjo_Shop.entity.Item;
 
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.entity.BaseEntity;
+import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,7 +21,6 @@ public class ItemEntity extends BaseEntity {
     @Id
     @Column(name="productId")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    // (strategy = GenerationType.AUTO)
     private Long productId; // 상품 코드
 
     @Column (nullable = false, length = 50)
@@ -40,19 +40,19 @@ public class ItemEntity extends BaseEntity {
 
 
     @OneToOne
-    @JoinColumn(name ="brandId")
+    @JoinColumn(name ="brandName")
     private BrandEntity brand;
 
     @OneToOne
-    @JoinColumn(name ="colorId")
+    @JoinColumn(name ="colorName")
     private ColorEntity color;
 
     @OneToOne
-    @JoinColumn(name ="sizeId")
+    @JoinColumn(name ="sizeName")
     private SizeEntity size;
 
     @OneToOne
-    @JoinColumn(name ="categoryId")
+    @JoinColumn(name ="categoryName")
     private CategoryEntity category;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
