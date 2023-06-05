@@ -64,3 +64,57 @@ addressUpdateButton.addEventListener("click", ()=>{
     addressUpdateButton.textContent ="변경"
   }
 })
+
+
+// 모달창 없애기
+const openButton = document.getElementById("open-password");
+const modal = document.querySelector(".password-update-modal");
+const overlay = modal.querySelector(".modal__overlay");
+const closeBtn = modal.querySelector(".save-password");
+const openModal = () => {
+  modal.classList.remove("hidden");
+}
+const closeModal = () => {
+  modal.classList.add("hidden");
+}
+overlay.addEventListener("click", closeModal);
+closeBtn.addEventListener("click", closeModal);
+openButton.addEventListener("click", openModal);
+
+// 비밀번호 일치 불일치
+function check_password() {
+  if (
+    document.getElementById("new-password").value != "" &&
+    document.getElementById("renew-password").value != ""
+  ) {
+    if (
+      document.getElementById("new-password").value ==
+      document.getElementById("renew-password").value
+    ) {
+      document.getElementById("check").innerHTML = "일치";
+      document.getElementById("check").style.color = "blue";
+    } else {
+      document.getElementById("check").innerHTML = "불일치";
+      document.getElementById("check").style.color = "red";
+    }
+  }
+  if (
+    document.getElementById("new-password").value == "" ||
+    document.getElementById("renew-password").value == ""
+  ) {
+    document.getElementById("check").innerHTML = "";
+  }
+}
+//
+
+// 비밀번호 불일치 시 저장 안눌리게
+function save() {
+  const currentpassword = document.querySelector("#current-password");
+  const newpassword = document.querySelector("#new-password");
+  const renewpassword = document.querySelector("#renew-password");
+  const savebtn = document.querySelector("#savebtn");
+  if((currentpassword.value.length > 0) && (newpassword.value === renewpassword.value)) {
+    savebtn.disabled = false;
+  }
+}
+//

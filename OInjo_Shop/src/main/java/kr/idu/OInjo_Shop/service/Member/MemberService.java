@@ -1,8 +1,8 @@
-package kr.idu.OInjo_Shop.service;
+package kr.idu.OInjo_Shop.service.Member;
 
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
-import kr.idu.OInjo_Shop.repository.MemberRepository;
+import kr.idu.OInjo_Shop.repository.Member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

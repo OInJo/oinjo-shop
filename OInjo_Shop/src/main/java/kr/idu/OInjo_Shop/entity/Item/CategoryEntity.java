@@ -14,8 +14,8 @@ public class CategoryEntity {
 
     @Id
     @Column(name="categoryId")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer categoryId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long categoryId;
 
     @Column( name="categoryName", nullable=false, length=100 )
     private String categoryName;
