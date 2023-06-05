@@ -1,8 +1,12 @@
 package kr.idu.OInjo_Shop.entity.Item;
 
-import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.entity.BaseEntity;
+import kr.idu.OInjo_Shop.entity.Item.Relation.BrandEntity;
+import kr.idu.OInjo_Shop.entity.Item.Relation.CategoryEntity;
+import kr.idu.OInjo_Shop.entity.Item.Relation.ColorEntity;
+import kr.idu.OInjo_Shop.entity.Item.Relation.SizeEntity;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
+
 import lombok.*;
 
 import javax.persistence.*;
