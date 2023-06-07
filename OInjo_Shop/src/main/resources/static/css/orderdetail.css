@@ -16,7 +16,7 @@ body {
   }
 
 .order-detail-form {
-    height: 450px;
+    height: 440px;
     width: 1000px;
     display: flex;
     flex-direction: column;
@@ -30,14 +30,13 @@ body {
 }
 
 .gumun {
-    margin-top: 10px;
-    font-size: 35px;
+    font-size: 30px;
     height: 39px;
     width: 150px;
     text-align: center;
     /* background-color: rgb(218, 172, 172); */
-    margin-left: -465px;
-    margin-top: 35px;
+    margin-left: -460px;
+    margin-top: 25px;
     margin-bottom: 10px;
     color: rgb(65, 62, 62);
 }
@@ -45,29 +44,48 @@ body {
 .search-list {
     width: 550px;
     height: 35px;
-    font-size: 15px;
+    font-size: 12px;
     margin-left: -340px;
     border-radius: 10px;
-    border: none;  
+    border: none;
+}
+
+.select-date {
+    margin-top: 10px;
+    background-color: bisque;
+}
+
+.recent {
+    cursor: pointer;
+    margin-left: -440px;
+}
+
+.period {
+    margin-left: -350px;
+    margin-top: -22.1px;
+}
+
+.period-select {
+    margin-right: 5px;
 }
 
 .order-item {
     width: 750px;
-    height: 220px;
+    height: 230px;
     background-color: rgb(255, 255, 255);
-    /* margin-left: 125px; */
-    margin-top: 30px;
+    margin-top: 15px;
     border-radius: 10px;
 }
 
 .order-date {
     margin-left: 30px;
     margin-top: 10px;
-    font-size: 25px;
+    font-size: 22px;
 }
 
 .line {
     border: solid 1px rgb(219, 218, 218);
+    
 }
 
 .item-img {
@@ -89,19 +107,19 @@ body {
 }
 
 .item-name {
-    font-size: 25px;
+    font-size: 20px;
     margin-left: 20px;
     margin-top: 10px;
 }
 
 .item-price {
-    font-size: 15px;
+    font-size: 13px;
     margin-left: 20px;
     margin-top: 15px;
 }
 
 .item-number {
-    font-size: 15px;
+    font-size: 13px;
     margin-left: 20px;
     margin-top: 15px;
 }
