@@ -41,16 +41,11 @@ public class ItemService {
 
 //...
 
-    public Long updateItem(Long itemId, String productName, int productPrice, int productStock, String productStatus,
-                           String productDetail, BrandEntity brand, ColorEntity color, SizeEntity size,
-                           CategoryEntity category) throws EntityNotFoundException {
-        ItemEntity item = itemRepository.findById(itemId)
-                .orElseThrow(EntityNotFoundException::new);
+    public Long updateItem(ItemFormDTO itemFormDTO) throws EntityNotFoundException {
+        ItemEntity item = itemRepository.findById(itemFormDTO.getId()).orElseThrow(EntityNotFoundException::new);
         // .orElseThrow(Entity..) => itemId에 해당하는 상품이 레포지토리에 없을 경우,
         // EntityNotFoundException 발생
-        item.updateItem(productName, productPrice, productStock, productStatus, productDetail,
-                brand, color, size, category);
-
+        item.updateItem(itemFormDTO);
         return item.getProductId();
     }
 
