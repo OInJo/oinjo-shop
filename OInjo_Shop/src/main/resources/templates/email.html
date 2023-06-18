@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+
+<body>
+<input type="text" placeholder="이메일을 입력하세요" class="email-input">
+<button class="number-submit">인증번호</button>
+<div>
+    <label for="number-confirm">인증번호를 입력해주세요</label>
+    <input type="text" id="number-confirm">
+</div>
+<script>
+    data = 3333; //인증번호가 3333이라고 가정
+    numberConfirm = document.querySelector("#number-confirm")
+    emailInput = document.querySelector(".email-input")
+
+    // 이메일 인증번호 체크 함수
+    function checkEmailFunction(data, numberConfirm) {
+        numberConfirm.addEventListener("keyup", () => {
+            if (data != numberConfirm.value) {
+                console.log(`인증번호가 잘못되었습니다 입력하신 인증번호는 ${numberConfirm.value}이고, 정답 인증번호는 ${data}입니다`)
+                console.log(emailInput.value)
+            } else {
+                console.log("인증이 완료되었습니다")
+            }
+        })
+    }
+
+    // 이메일 인증번호
+    document.querySelector(".number-submit").addEventListener("click", () => {
+        fetch("/login/mailConfirm?email=" + emailInput.value, {
+            method: "POST",
+            body: JSON.stringify({
+                email: emailInput.value
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(response => {
+                console.log("response:", response);
+                checkEmailFunction(data, numberConfirm);
+            })
+            .catch(error => console.log("error:", error));
+    })
+
+
+</script>
+</body>
+
+</html>

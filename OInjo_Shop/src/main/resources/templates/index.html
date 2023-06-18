@@ -1,0 +1,144 @@
+<!--  -->
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/images/logo.png">
+  <link rel="stylesheet" href="/css/index.css">
+  <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../static/css/index.css">
+   <script src="/js/index.js" defer></script>
+  <title>OInJo</title>
+</head>
+
+<body>
+  <header>
+    <div class="header-left">
+      <a href="/"><img src="/images/logo.png" alt="LOGO" class="header-logo"></a>
+      <div class="header-search">
+        <input type="text" placeholder="상품을 검색해보세요" class="header-search-input">
+        <i class="fa-solid fa-magnifying-glass header-search-icon"></i>
+      </div>
+    </div>
+    <nav class="header-right">
+      <p class="login-check" th:text="${session.loginEmail}"></p>
+      <a href="member/update" class="update-link header-link">
+        <i class="fa-solid fa-user-pen header-link-icon"></i>
+        정보수정
+      </a>
+      <a href="member/logout" class="logout-link header-link">
+        <i class="fa-solid fa-user-minus header-link-icon"></i>
+        로그아웃
+      </a>
+      <a href="member/login" class="login-link header-link">
+        <i class="fa-solid fa-user-plus header-link-icon"></i>
+        로그인
+      </a>
+      <a href="" class="header-link">
+        <i class="fa-solid fa-tags header-link-icon"></i>
+        최근본상품
+      </a>
+      <a href="" class="header-link shopping-bag">
+        <i class="fa-solid fa-cart-shopping header-link-icon"></i>
+        장바구니
+        <div class="shopping-bag-count">1</div>
+      </a>
+      <a href="" class="header-link">
+        <i class="fa-solid fa-house header-link-icon"></i>
+        마이페이지
+      </a>
+    </nav>
+  </header>
+  <main>
+
+    <aside class="aside-category-wrapper">
+      <div class="aside-category">
+        <input type="radio" name="category" id="category01">
+        <label for="category01">상의<span>Top</span></label>
+        <ul>
+          <li class="select-name">후드 티셔츠</li>
+          <li class="select-name">스웨트 셔츠</li>
+          <li class="select-name">후드 티셔츠</li>
+          <li class="select-name">후드 티셔츠</li>
+        </ul>
+        <input type="radio" name="category" id="category02">
+        <label for="category02">하의<span>Pants</span></label>
+        <ul>
+          <li class="select-name">데님 팬츠</li>
+          <li class="select-name">트레이닝 팬츠</li>
+          <li class="select-name">코튼 팬츠</li>
+          <li class="select-name">레깅스</li>
+        </ul>
+        <input type="radio" name="category" id="category03">
+        <label for="category03">신발<span>Shoes</span></label>
+        <ul>
+          <li class="select-name">스니커즈</li>
+          <li class="select-name">구두</li>
+          <li class="select-name">운동화</li>
+          <li class="select-name">슬리퍼</li>
+        </ul>
+        <input type="radio" name="category" id="category04">
+        <label for="category04">반려동물<span>Pet</span></label>
+        <ul>
+          <li class="select-name">반려동물 의류</li>
+          <li class="select-name">반려동물 용품</li>
+          <li class="select-name">반려동물 푸드</li>
+          <li class="select-name">반려동물 잡화</li>
+        </ul>
+      </div>
+    </aside>
+    <section>
+      <div class="article-product-top">
+        <div class="now-category">전체</div>
+        <div class="sort-option">
+          <button type="button" class="sort-option-button">최신순</button>
+          <button type="button" class="sort-option-button">인기순</button>
+          <button type="button" class="sort-option-button">가격 높은 순</button>
+          <button type="button" class="sort-option-button">가격 낮은 순</button>
+        </div>
+      </div>
+      <div class="article-product-wrapper">
+        <article class="article-product">
+          <img src="/images/product.png" alt="상품 이미지" class="article-product-image">
+          <ul class="article-product-size">
+            <li class="article-product-size-list">S</li>
+            <li class="article-product-size-list">M</li>
+            <li class="article-product-size-list">L</li>
+          </ul>
+          <div class="article-product-brand">MLB</div>
+          <div class="article-product-name">루키 언스트럭쳐 볼캡 NY</div>
+          <div class="article-product-price">
+            <div class="article-product-price-won">19,000</div>
+            원
+          </div>
+          <div class="article-product-hit-sale-wrapper">
+            <div class="article-product-hit-sale hit">HIT</div>
+            <div class="article-product-hit-sale sale">SALE</div>
+          </div>
+          <div class="article-product-color">
+            <i class="fa-solid fa-circle red-color"></i>
+            <i class="fa-solid fa-circle blue-color"></i>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+  <footer>
+
+  </footer>
+
+  <div class="move-btn-wrapper">
+    <div class="move-top-btn"><i class="fa-solid fa-arrow-up"></i></div>
+    <div class="move-bottom-btn"><i class="fa-solid fa-arrow-down"></i></div>
+  </div>
+
+</body>
+
+</html>

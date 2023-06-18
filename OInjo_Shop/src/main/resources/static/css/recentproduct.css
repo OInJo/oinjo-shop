@@ -1,0 +1,56 @@
+@import url(./root.css);
+
+.recentproduct-main {
+  margin: 1% 3%;
+}
+
+.recentproduct-title {
+  font-size: 27px;
+  font-weight: 600;
+  padding-bottom: 1%;
+  border-bottom: 2px solid black;
+}
+
+.no-recentproduct {
+  text-align: center;
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.4)
+}
+
+.recentproduct-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.recentproduct {
+  width: 280px;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.recentproduct-image {
+  width: 250px;
+  height: 280px;
+}
+
+.recentproduct-brand {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.recentproduct-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.recentproduct-price {
+  display: flex;
+  align-items: center;
+}
+
+.recentproduct-price-won {
+  font-size: 18px;
+  font-weight: 500;
+}

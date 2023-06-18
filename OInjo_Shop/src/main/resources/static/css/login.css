@@ -1,0 +1,187 @@
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    font-family: 'OTWelcomeRA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.login-form {
+    height: 100%;
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    background-color: #FFFFFF;
+    position: relative;
+}
+
+.back-button {
+    position: absolute;
+    left:10px;
+    bottom:10px;
+    font-size:25px;
+}
+
+body {
+    height: 1024px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background: #D9D9D9;
+}
+
+.login-form h1 {
+    font-family: 'Song Myung', serif;
+    font-size: 50px;
+    color: black;
+}
+
+.login-form ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-form li {
+    padding: 0 0 19px;
+    list-style: none;
+}
+
+.id-pw-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+}
+
+.login-form .id-pw-input-wrapper input {
+    font-size: 20px;
+    width: 385px;
+    height: 54px;
+    box-sizing: border-box;
+    background: #EEECEC;
+    padding-left:10px;
+    margin-bottom: 15px;
+}
+
+
+.login-form h2 {
+    font-size: 32px;
+    color: black;
+    font-family: 'NanumSquareNeo-Variable';
+    margin-top: 80px;
+    margin-bottom: 50px;
+}
+
+.login-form h3 {
+    font-size: 32px;
+    color: black;
+
+}
+
+.login-button {
+    width: 307px;
+    height: 40px;
+    cursor: pointer;
+    background: #31363d;
+    color: white;
+    margin: 15px;
+    font-size: 20px;
+    border: none;
+    font-family: 'OTWelcomeRA';
+}
+
+.id-pw-input-wrapper input {
+    all: unset;
+    padding: 5px;
+}
+
+.pw-input {
+    position: relative;
+}
+
+.signin-button-wrapper {
+    margin-bottom: 20px;
+}
+
+.login-form img {
+    width: 250px;
+    height: 54px;
+    padding: 0 0 15px;
+}
+
+.login-form a {
+    padding: 0 5px 0;
+    text-decoration: none;
+    color: #111;
+}
+
+.delete {
+    position: absolute;
+    width: 50px;
+    height: 54px;
+    border: 0;
+    background-color: #eeecec;
+    color: gray;
+    font-size:20px;
+}
+
+#input-text {
+    width: 335px;
+}
+
+.signin-or {
+    position: relative;
+    margin-top: 24px;
+    font-weight: 400;
+    font-size: 20px;
+    color: #d9d9d9;
+    text-align: center;
+    vertical-align: top;
+    line-height: 14px;
+    margin-bottom: 50px;
+}
+
+.signin-or:after,
+.signin-or:before {
+    position: absolute;
+    top: 6px;
+    content: "";
+    display: block;
+    width: 165px;
+    height: 3px;
+    background-color: #d9d9d9;
+
+}
+
+.signin-or:before {
+    /* OR */
+    left: 0;
+    margin-left: 40px;
+}
+
+.signin-or:after {
+    /* OR */
+    right: 0;
+    margin-right: 40px;
+}
+
+.select-bar {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom:10px;
+    right:10px;
+    border: 0;
+    font-size: 15px;
+    color: black;
+    background-color: transparent;
+    margin-right: 25px;
+    margin-top: 10px;
+}
+

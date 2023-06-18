@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/upload.css">
+  <script src="/js/upload.js" defer></script>
+  <link rel="stylesheet" href="../static/css/upload.css">
+  <script src="../static/js/upload.js" defer></script>
+  <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
+  <title>상품 등록</title>
+</head>
+
+<body>
+<form action="/admin/item/new" method="post" class="upload-form">
+  <p class="title">상품 등록</p>
+  <div class="product-name-wrapper">
+    <label for="product-name" class="label-box">상품 이름</label>
+    <input type="text" id="product-name" name="productName" class="input-box">
+    <p class="length-limit">0/30</p>
+  </div>
+
+  <div class="product-category-wrapper">
+    <label for="product-category" class="label-box">상품 카테고리</label>
+    <input type="text" id="product-category" name="productCategory" class="input-box small-input-box">
+    <i class="fa-solid fa-plus plus-button category-plus-button"></i>
+  </div>
+
+  <div class="product-status-wrapper">
+    <label for="product-status" class="label-box">상품 상태</label>
+    <input type="text" id="product-status" name="productStatus" class="input-box small-input-box">
+  </div>
+  <div class="product-price-wrapper">
+    <label for="product-price" class="label-box">상품 가격</label>
+    <input type="text" id="product-price" name="productPrice" class="input-box small-input-box">
+    <p class="won">원</p>
+  </div>
+  <div class="product-stock-wrapper">
+    <label for="product-stock" class="label-box">상품 재고</label>
+    <input type="text" id="product-stock" name="productStock" class="input-box small-input-box">
+    <p class="count">개</p>
+  </div>
+  <div class="product-detail-wrapper">
+    <label for="" class="label-box">상품 설명</label>
+    <button type="button" id="" name="" class="input-box small-input-box detail-button">설명 등록
+    </button>
+  </div>
+  <div class="modal hidden">
+    <div class="modal-content">
+      <div class="detail-content">
+                    <textarea name="productDetail" class="modal-input">
+                </textarea>
+        <p class="detail-limit">0/300</p>
+      </div>
+
+      <div class="modal-button-wrapper">
+        <button type="button" class="modal-button modal-reset-button">초기화</button>
+        <button type="button" class="modal-button modal-save-button">저장</button>
+      </div>
+    </div>
+  </div>
+  <input type="submit" value="등록하기" class="submit-button">
+</form>
+
+<!-- 상품 이름, 상품 가격, 상품 상태, 상품 상세, 상품 재고, 상품 카테고리 -->
+<!-- productName, productPrice, productStatus, productDetail, productStock, productCategory -->
+<!-- admin 폴더 아래에 upload로 만들으라고 말해주기 -->
+</body>
+
+</html>

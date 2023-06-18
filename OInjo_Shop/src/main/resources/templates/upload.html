@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>등록 테스트 페이지</title>
+</head>
+
+<body>
+
+<table>
+    <tr th:each="brandDto : ${brandList}">
+        브랜드 목록들 Id, Name
+        <td th:text="${brandDto.brandId}"></td>
+        <td th:text="${brandDto.brandName}"></td>
+    </tr>
+
+    <tr th:each="category : ${categoryList}">
+        카테고리 목록들 Id, Name
+        <td th:text="${category.categoryId}"/>
+        <td th:text="${category.categoryName}"/>
+    </tr>
+
+    <tr th:each="color : ${colorList}">
+        컬러 목록들 Id, Name
+        <td th:text="${color.colorId}"></td>
+        <td th:text="${color.colorName}"></td>
+    </tr>
+
+    <tr th:each="size : ${sizeList}">
+        사이즈 목록들 Id, Name
+        <td th:text="${size.sizeId}"></td>
+        <td th:text="${size.sizeName}"></td>
+    </tr>
+</table>
+
+<form action="/admin/item/classification" method="post">
+    <h3>브랜드 등록 테스트</h3>
+    브랜드<input type="text" name="brandName" id="">
+    <input type="submit" value="브랜드 등록하기">
+</form>
+<form action="/admin/item/classification" method="post">
+    <h3>카테고리 등록 테스트</h3>
+    카테고리<input type="text" name="categoryName" id="">
+    <input type="submit" value="카테고리 등록하기">
+</form>
+<form action="/admin/item/classification" method="post">
+    <h3>컬러 등록 테스트</h3>
+    컬러<input type="text" name="colorName" id="">
+    <input type="submit" value="컬러 등록하기">
+</form>
+<form action="/admin/item/classification" method="post">
+    <h3>사이즈 등록 테스트</h3>
+    사이즈<input type="text" name="sizeName" id="">
+    <input type="submit" value="사이즈 등록하기">
+</form>
+<form action="/admin/item/new" method="post">
+    <h3>상품 이미지 등록 테스트</h3>
+    상품 이미지<input type="text" name="imageUrl" id="">
+    <input type="submit" value="상품 이미지 등록하기">
+</form>
+<form action="/admin/item/new" method="post">
+    <h3>상품 등록 테스트</h3>
+    <div>
+        상품 이름<input type="text" name="productName"></div>
+    <div>
+        상품 상태<input type="text" name="productStatus"></div>
+    <div>
+        상품 가격<input type="text" name="productPrice"></div>
+    <div>
+        상품 재고<input type="text" name="productStock"></div>
+    <div>
+        상품 설명<input type="text" name="productDetail"></div>
+    <input type="submit" value="상품 등록하기">
+</form>
+</body>
+
+</html>

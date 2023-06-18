@@ -1,0 +1,142 @@
+@import url(index.css);
+
+
+section {
+  margin: 2% 5%;
+}
+
+.detail-wrapper {
+  display: flex;
+}
+
+.detail-left {
+  flex-basis: 50%;
+  height: 700px;
+}
+
+.main-image {
+  height: 600px;
+}
+
+.sub-image-wrapper {
+  height: 100px;
+  display: flex;
+  gap: 10px;
+}
+
+.sub-image {
+  width: 25%;
+  height: 100%;
+  border: 1px solid black;
+}
+
+.detail-right {
+  flex-basis: 50%;
+}
+
+.detail-title {
+  font-size: 22px;
+  font-weight: 600;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.detail-content-wrapper {
+  display: flex;
+  gap: 50px;
+  border-bottom: 1px solid dimgray;
+  padding-bottom: 30px;
+}
+
+.detail-content-left,
+.detail-content-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detail-price {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.select-product-notice {
+  margin-top: 20px;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.select-product-notice-icon {
+  color: red;
+  margin-right: 5px;
+}
+
+.select-product-wrapper {
+  display: none;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid dimgray;
+  margin-bottom: 20px;
+}
+
+.select-product-title-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.select-product-option {
+  font-size: 16px;
+  color: dimgray;
+}
+
+.select-product-count {
+  width: 50px;
+}
+
+.select-product-count-input {
+  width: 100%;
+}
+
+.select-product-delete-button {
+  all: unset;
+  border: 1px solid black;
+  padding: 3px 5px;
+  color: red;
+}
+
+.select-product-price {
+  font-weight: 600;
+}
+
+.select-product-total-price-wrapper {
+  display: none;
+  justify-content: space-between;
+  border-bottom: 1px solid dimgray;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.select-product-total-price-title {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+
+.select-product-total-price {
+  color: red;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.buy-button-wrapper {
+  display: flex;
+  gap: 50px;
+}
+
+.buy-button {
+  all: unset;
+  font-size: 20px;
+  border: 1px solid black;
+  padding: 10px 20px;
+}

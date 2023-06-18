@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/orderdetail.css">
+    <title>주문내역</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <script src="/js/orderdetail.js" defer></script>
+    <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <section class="order-detail-form">
+        <div class="order-list"> 
+            <p class="gumun">주문목록</p>
+        </div>
+        <div class="search-items">
+            <input type="text" class="search-list" placeholder="주문한 상품 검색">
+        </div>
+        <div class="select-date">
+            <div class="recent">최근 3개월</div>
+            <div class="period">
+                <span class="period-select">기간 선택</span>
+                <input type="date" class="calendar" id="select-calendar-start"> -
+                <input type="date" class="calendar" id="select-calendar-end">
+            </div>
+        </div>
+        <div class="order-item">
+            <div class="order-date">주문날짜(2023.6.3 주문)</div>
+            <hr class="line">
+            <div class="item-img">상품 사진</div>
+            <div class="item-information">
+                <div class="item-name">상품 이름(--반팔)</div>
+                <div class="item-price">- 상품 가격(20000원)</div>
+                <div class="item-number">- 상품 개수(1개)</div>
+            </div>
+            <div class="delivery-state">
+                <a href="#" class="delivery-check">배송조회</a>
+                <a href="#" class="cancel">취소 신청</a>
+                <a href="#" class="exchange">교환 신청</a>
+                <a href="#" class="refund">환불 신청</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
