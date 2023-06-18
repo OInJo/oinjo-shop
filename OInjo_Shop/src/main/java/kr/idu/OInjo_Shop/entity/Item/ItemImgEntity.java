@@ -18,10 +18,16 @@ public class ItemImgEntity extends BaseEntity {
     @Column(name = "item_img_id")
     private Long itemImgId;
 
-    @Column(nullable = false)
-    private String imageUrl;
+    private String imgName;
 
-    @ManyToOne
+    private String oriName;
+
+    private String imgUrl;
+
+    private String repImgYn;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private ItemEntity item;
 }
