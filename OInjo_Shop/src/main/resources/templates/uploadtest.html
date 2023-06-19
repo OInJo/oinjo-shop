@@ -10,63 +10,237 @@
   <link rel="stylesheet" href="../static/css/upload.css">
   <script src="../static/js/upload.js" defer></script>
   <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #d9d9d9;
+    }
+
+    .upload-form {
+      width: 50%;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      position: relative;
+    }
+
+    .title {
+      font-size: 35px;
+      font-weight: 600;
+    }
+
+    .product-category-wrapper,
+    .product-name-wrapper,
+    .product-price-wrapper,
+    .product-stock-wrapper,
+    .product-status-wrapper,
+    .product-detail-wrapper {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid #d9d9d9;
+    }
+
+    #product-category {
+      border: none;
+      border-bottom: 1px solid #d9d9d9;
+    }
+
+    .plus-button {
+      border-bottom: 1px solid #d9d9d9;
+      padding: 12px;
+    }
+
+    .label-box {
+      width: 30%;
+      height: 100%;
+      background-color: rgba(233, 160, 171, 0.705);
+      margin-right: 15px;
+      text-align: center;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .input-box {
+      all: unset;
+      width: 60%;
+      height: 100%;
+      border: 1px solid #d9d9d9;
+      padding-left: 10px;
+    }
+
+    .small-input-box {
+      width: 20%;
+    }
+
+    .length-limit,
+    .won,
+    .count {
+      margin-left: 10px;
+    }
+
+    .detail-button {
+      width: 10%;
+      border: none;
+      background-color: white;
+      color: black;
+    }
+
+
+    .modal {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      display: flex;
+      justify-content: center;
+    }
+
+    .modal-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .detail-content {
+      display: flex;
+      position: relative;
+    }
+
+
+    .modal-input {
+      width: 700px;
+      height: 400px;
+    }
+
+    .detail-limit {
+      position: absolute;
+      bottom: 5px;
+      right: 10px;
+    }
+
+    .modal-button-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .modal-reset-button,
+    .modal-save-button {
+      all: unset;
+      background-color: black;
+      color: white;
+      padding: 3px;
+      text-align: center;
+      width: 50px;
+      height: 25px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .submit-button {
+      all: unset;
+      font-size: 30px;
+      background-color: black;
+      color: white;
+      padding: 5px 8px;
+      margin-top: 10px;
+    }
+  </style>
   <title>상품 등록</title>
 </head>
 
 <body>
-<form action="/admin/item/new" method="post" class="upload-form">
-  <p class="title">상품 등록</p>
-  <div class="product-name-wrapper">
-    <label for="product-name" class="label-box">상품 이름</label>
-    <input type="text" id="product-name" name="productName" class="input-box">
-    <p class="length-limit">0/30</p>
-  </div>
+  <form action="/admin/item/new" method="post" class="upload-form">
+    <p class="title">상품 등록</p>
+    <div class="product-name-wrapper">
+      <label for="product-name" class="label-box">상품 이름</label>
+      <input type="text" id="product-name" name="productName" class="input-box">
+      <p class="length-limit">0/30</p>
+    </div>
 
-  <div class="product-category-wrapper">
-    <label for="product-category" class="label-box">상품 카테고리</label>
-    <input type="text" id="product-category" name="productCategory" class="input-box small-input-box">
-    <i class="fa-solid fa-plus plus-button category-plus-button"></i>
-  </div>
-
-  <div class="product-status-wrapper">
-    <label for="product-status" class="label-box">상품 상태</label>
-    <input type="text" id="product-status" name="productStatus" class="input-box small-input-box">
-  </div>
-  <div class="product-price-wrapper">
-    <label for="product-price" class="label-box">상품 가격</label>
-    <input type="text" id="product-price" name="productPrice" class="input-box small-input-box">
-    <p class="won">원</p>
-  </div>
-  <div class="product-stock-wrapper">
-    <label for="product-stock" class="label-box">상품 재고</label>
-    <input type="text" id="product-stock" name="productStock" class="input-box small-input-box">
-    <p class="count">개</p>
-  </div>
-  <div class="product-detail-wrapper">
-    <label for="" class="label-box">상품 설명</label>
-    <button type="button" id="" name="" class="input-box small-input-box detail-button">설명 등록
-    </button>
-  </div>
-  <div class="modal hidden">
-    <div class="modal-content">
-      <div class="detail-content">
-                    <textarea name="productDetail" class="modal-input">
+    <div class="product-status-wrapper">
+      <label for="product-status" class="label-box">상품 상태</label>
+      <input type="text" id="product-status" name="productStatus" class="input-box small-input-box">
+    </div>
+    <div class="product-price-wrapper">
+      <label for="product-price" class="label-box">상품 가격</label>
+      <input type="text" id="product-price" name="productPrice" class="input-box small-input-box">
+      <p class="won">원</p>
+    </div>
+    <div class="product-stock-wrapper">
+      <label for="product-stock" class="label-box">상품 재고</label>
+      <input type="text" id="product-stock" name="productStock" class="input-box small-input-box">
+      <p class="count">개</p>
+    </div>
+    <div class="product-detail-wrapper">
+      <label for="" class="label-box">상품 설명</label>
+      <button type="button" id="" name="" class="input-box small-input-box detail-button">설명 등록
+      </button>
+    </div>
+    <div class="modal hidden">
+      <div class="modal-content">
+        <div class="detail-content">
+          <textarea name="productDetail" class="modal-input">
                 </textarea>
-        <p class="detail-limit">0/300</p>
-      </div>
+          <p class="detail-limit">0/300</p>
+        </div>
 
-      <div class="modal-button-wrapper">
-        <button type="button" class="modal-button modal-reset-button">초기화</button>
-        <button type="button" class="modal-button modal-save-button">저장</button>
+        <div class="modal-button-wrapper">
+          <button type="button" class="modal-button modal-reset-button">초기화</button>
+          <button type="button" class="modal-button modal-save-button">저장</button>
+        </div>
       </div>
     </div>
-  </div>
-  <input type="submit" value="등록하기" class="submit-button">
-</form>
+    <input type="submit" value="등록하기" class="submit-button">
+  </form>
+  <script>
+    const modal = document.querySelector('.modal');
+    const modalInput = document.querySelector('.modal-input');
 
-<!-- 상품 이름, 상품 가격, 상품 상태, 상품 상세, 상품 재고, 상품 카테고리 -->
-<!-- productName, productPrice, productStatus, productDetail, productStock, productCategory -->
-<!-- admin 폴더 아래에 upload로 만들으라고 말해주기 -->
+    const openModal = () => {
+      modal.classList.remove('hidden');
+      modalInput.focus();
+    };
+
+    const closeModal = () => {
+      modal.classList.add('hidden');
+    };
+
+    const modalSaveButton = document.querySelector('.modal-save-button');
+    modalSaveButton.addEventListener('click', closeModal);
+
+    const detailButton = document.querySelector('.detail-button');
+    detailButton.addEventListener('click', openModal);
+
+    const modalResetButton = document.querySelector('.modal-reset-button');
+    modalResetButton.addEventListener('click', () => {
+      modalInput.value = '';
+      detailLimit.textContent = `${modalInput.value.length}/300`;
+    });
+
+    const detailLimit = document.querySelector('.detail-limit');
+    modalInput.addEventListener('input', () => {
+      detailLimit.textContent = `${modalInput.value.length}/300`;
+    });
+  </script>
+
 </body>
 
 </html>
