@@ -2,8 +2,7 @@
 쇼핑몰 프로젝트
 
 프로젝트 구성
-1. Entity 객체는 Service 클래스에서만 사용
-2. Controller에서는 DTO 객체 사용
+상품, 회원, 장바구니, 주문(CRUD, Pagination, Sort, Search)
 
 회원 가입 및 로그인 
 1. 회원 가입 시 데이터베이스에 데이터 저장 (중복 ID 불가능)
