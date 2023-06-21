@@ -1,0 +1,140 @@
+.delivery-informaion {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info {
+    margin-top: 100px;
+}
+
+.user-info, .info-box {
+    margin-left: 10%;
+}
+
+.info-box {
+    width: 80%;
+    height: 40%;
+    border: 1px solid rgb(190, 188, 188);
+    border-radius: 3px;
+    padding-bottom: 10px;
+}
+
+.address, .name-number, .go-delivery{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    border-bottom: 1px solid rgb(190, 188, 188);
+}
+
+.requested {
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.new-address {
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.items-info {
+    padding-top: 10px;
+    padding-left: 10%;
+}
+
+.items-img {
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.info-box2 {
+    display: flex;
+    width: 80%;
+    height: 40%;
+    border: 1px solid rgb(190, 188, 188);
+    border-radius: 3px;
+    padding-bottom: 10px;
+    margin-left: 10%;
+}
+
+.items-option-info {
+    padding-left: 50px;
+    margin-top: 90px;
+}
+
+.total-price {
+    margin-top: 90px;
+}
+
+.items-name, .won, .items-option1, .free{
+    margin-right: 50px;
+}
+
+.payment-info {
+    padding-top: 10px;
+    padding-left: 10%;
+}
+
+.payment-method {
+    display: flex;
+    width: 80%;
+    height: 40%;
+    border: 1px solid rgb(190, 188, 188);
+    border-radius: 3px;
+    padding-bottom: 10px;
+    margin-left: 10%;
+}
+
+.payment-button {
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 50px;
+    width: 100px;
+    height: 50px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.go-payment {
+    border: none;
+    width: 200px;
+    height: 50px;
+    background-color: rgb(192, 202, 237);
+    margin-top: 50px;
+    margin-left: 750px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.address > input {
+    margin-left: 75px;
+}
+.name-number > span:not(:last-child) {
+    margin-left: 35px;
+}
+.postcode {
+    border: 1px solid #cbcbcb;
+    border-radius: 4px;
+    width: 55px;
+    height: 25px;
+    margin-left: 90px;
+}
+.detail-address {
+    border: 1px solid #cbcbcb;
+    border-radius: 4px;
+    width: 300px;
+    height: 25px;
+    margin-left: 10px;
+}
+.requested > select {
+    width: 250px;
+    height: 30px;
+    border: 1px solid #cbcbcb;
+    border-radius: 4px;
+    margin-left: 20px;
+}
