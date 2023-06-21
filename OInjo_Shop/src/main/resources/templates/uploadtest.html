@@ -35,6 +35,7 @@
       font-weight: 600;
     }
 
+    .upload-section,
     .product-category-wrapper,
     .product-name-wrapper,
     .product-price-wrapper,
@@ -167,8 +168,26 @@
 </head>
 
 <body>
+
   <form action="/admin/item/new" method="post" class="upload-form">
-    <p class="title">상품 등록</p>
+    <nav class="upload-nav">
+      <a href="" class="upload-link">상품 등록</a>
+      <a href="" class="upload-link">브랜드 등록</a>
+      <a href="" class="upload-link">카테고리 등록</a>
+      <a href="" class="upload-link">색상 등록</a>
+      <a href="" class="upload-link">사이즈 등록</a>
+      <a href="" class="upload-link">이미지 등록</a>
+    </nav>
+    <section class="upload-section">
+      <ul class="upload-ul brand-ul">브랜드
+        <li class="upload-li brand-li">나이키</li>
+        <li class="upload-li brand-li">아디다스</li>
+      </ul>
+      <ul>카테고리</ul>
+      <ul>색상</ul>
+      <ul>사이즈</ul>
+      <ul>이미지</ul>
+    </section>
     <div class="product-name-wrapper">
       <label for="product-name" class="label-box">상품 이름</label>
       <input type="text" id="product-name" name="productName" class="input-box">
