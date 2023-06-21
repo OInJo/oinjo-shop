@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout1}">
-    <th:block layout:fragment="script">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <th:block layout:fragment="script">
     <script th:inline="javascript">
         $(document).ready(function(){
             var errorMessage = [[${errorMessage}]];
@@ -38,12 +39,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>등록 테스트 페이지</title>
     <style>
-        .id-input {
-            display: none;
-        }
 
         .id {
             display: none;
+        }
+
+        .ul-wrapper {
+            display:flex;
+            justify-content: space-between;
         }
     </style>
     <script src="/js/productupload.js" defer></script>
@@ -53,39 +56,75 @@
 
     <form action="/admin/item/new" method="post" enctype="multipart/form-data" th:object="${itemFormDTO}">
         <h3>상품 등록 테스트</h3>
+        <input type="text" class="id-input brand-id-input" name="brand" placeholder="브랜드으">
+        <input type="text" class="id-input category-id-input" name="category" placeholder="카테고리이">
+        <input type="text" class="id-input color-id-input" name="color" placeholder="컬러어">
+        <input type="text" class="id-input size-id-input" name="size">
+        <div class="ul-wrapper">
+        <ul>
+            <h4>브랜드</h4>
+            <li th:each="brandDto : ${brandList}">
+                <span th:text="${brandDto.brandId}" class="id brand-id"></span>
+                <span th:text="${brandDto.brandName}" class="brand-name"></span>
+            </li>
+        </ul>
 
-        <table>
+        <ul>
+            <h4>카테고리</h4>
+            <li th:each="categoryDto : ${categoryList}">
+                <span th:text="${categoryDto.categoryId}" class="id category-id"></span>
+                <span th:text="${categoryDto.categoryName}" class="category-name"></span>
+            </li>
+        </ul>
+
+        <ul>
+            <h4>컬러</h4>
+            <li th:each="colorDto : ${colorList}">
+                <span th:text="${colorDto.colorId}" class="id color-id"></span>
+                <span th:text="${colorDto.colorName}" class="color-name"></span>
+            </li>
+        </ul>
+
+        <ul>
+            <h4>사이즈</h4>
+            <li th:each="sizeDto : ${sizeList}">
+                <span th:text="${sizeDto.sizeId}" class="id size-id"></span>
+                <span th:text="${sizeDto.sizeName}" class="size-name"></span>
+            </li>
+        </ul>
+    </div>
+        <!-- <table class="table-design">
+            <div class="table-design-row">
+                <h4>브랜드</h4>
             <tr th:each="brandDto : ${brandList}">
-                브랜드 목록들 Id, Name
-                <!-- 브랜드 Name을 띄워서 그걸 누르면 brandId가 input으로 들어가야함 -->
-                <!-- brandId를 히든하고, brandName을 클릭하면 해당하는 id가 input값에 들어가도록 -->
-                <!-- brandName에 온클릭 메소드를 만들고, 온클릭하면 input의 value 값이 id로 들어가도록 -->
-                <input type="text" class="brand-id-input" name="brand">
-                <td th:text="${brandDto.brandId}" class="brand-id"></td>
+                <td th:text="${brandDto.brandId}" class="id brand-id"></td>
                 <td th:text="${brandDto.brandName}" class="brand-name"></td>
             </tr>
-
+        </div>
+        <div class="table-desgin-row">
+            <h4>카테고리</h4>
             <tr th:each="category : ${categoryList}">
-                카테고리 목록들 Id, Name
-                <input type="text" class="id-input category-id-input" name="category">
                 <td th:text="${category.categoryId}" class="id category-id" />
                 <td th:text="${category.categoryName}" class="category-name" />
             </tr>
-
+        </div>
+        <div class="table-design-row">
+            <h4>컬러</h4>
             <tr th:each="color : ${colorList}">
-                컬러 목록들 Id, Name
-                <input type="text" class="id-input color-id-input" name="color">
                 <td th:text="${color.colorId}" class="id color-id"></td>
                 <td th:text="${color.colorName}" class="color-name"></td>
             </tr>
-
+        </div>
+        <div class="table-design-row">
+            <h4>사이즈</h4>
             <tr th:each="size : ${sizeList}">
-                사이즈 목록들 Id, Name
-                <input type="text" class="id-input size-id-input" name="size">
                 <td th:text="${size.sizeId}" class="id size-id"></td>
                 <td th:text="${size.sizeName}" class="size-name"></td>
             </tr>
+        </div>
+            
         </table>
+         -->
 
         <div>
             상품 이름<input type="text" name="itemName"></div>
