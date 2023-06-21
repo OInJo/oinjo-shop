@@ -20,7 +20,7 @@ public class CartDTO {
     private Long id;
     private int count;
     private MemberEntity member;  //장바구니 사용자
-    private List<CartItemDTO> cartItems = new ArrayList<>();    //상품들
+    private List<CartItemDTO> cartItems;   //상품들
 
     private LocalDate createDate; // 날짜
 
