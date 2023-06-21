@@ -30,4 +30,10 @@ public class ItemImgEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private ItemEntity item;
+
+    public void updateItemImg(String oriName, String imgName, String imgUrl){
+        this.oriName = oriName;
+        this.imgName = imgName;
+        this.imgUrl = imgUrl;
+    }
 }

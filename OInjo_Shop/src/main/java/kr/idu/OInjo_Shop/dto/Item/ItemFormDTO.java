@@ -1,5 +1,6 @@
 package kr.idu.OInjo_Shop.dto.Item;
 
+import kr.idu.OInjo_Shop.constant.ItemSellStatus;
 import kr.idu.OInjo_Shop.entity.Item.*;
 import kr.idu.OInjo_Shop.entity.Item.Relation.BrandEntity;
 import kr.idu.OInjo_Shop.entity.Item.Relation.CategoryEntity;
@@ -19,12 +20,14 @@ import java.util.List;
 public class ItemFormDTO {
 
     private Long id;
-    private String productName;
-    private Integer productPrice;
-    private String productStatus;
-    private String productDetail;
-    private Integer productStock;
-    private Integer productCategory;
+    private String itemName;
+    private Integer itemPrice;
+    private String itemDetail;
+    private Integer itemStock;
+    private Integer itemCategory;
+
+    private ItemSellStatus itemSellStatus;
+
     private BrandEntity brand;
     private ColorEntity color;
     private SizeEntity size;

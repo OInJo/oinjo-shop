@@ -21,6 +21,9 @@ spring:
     hibernate:
       ddl-auto: update
 
+  # file
+  itemImgLocation: /Users/minwook/Documents/GitHub/OInjo_shop/productImg
+  uploadPath: file:////Users/minwook/Documents/GitHub/OInjo_shop/
 
   #OAuth2.0 설정
   security:

@@ -1,23 +1,14 @@
 package kr.idu.OInjo_Shop.service.Item;
 
-import kr.idu.OInjo_Shop.dto.Item.Relation.BrandDTO;
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
-import kr.idu.OInjo_Shop.dto.Item.Relation.CategoryDTO;
-import kr.idu.OInjo_Shop.dto.Item.Relation.ColorDTO;
-import kr.idu.OInjo_Shop.dto.Item.Relation.SizeDTO;
 import kr.idu.OInjo_Shop.entity.Item.*;
-import kr.idu.OInjo_Shop.entity.Item.Relation.BrandEntity;
-import kr.idu.OInjo_Shop.entity.Item.Relation.CategoryEntity;
-import kr.idu.OInjo_Shop.entity.Item.Relation.ColorEntity;
-import kr.idu.OInjo_Shop.entity.Item.Relation.SizeEntity;
 import kr.idu.OInjo_Shop.repository.Item.*;
-import kr.idu.OInjo_Shop.repository.Item.Relation.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,13 +17,29 @@ import java.util.List;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+
+    private final ItemImgService itemImgService;
+
     private final ItemImgRepository itemImgRepository;
 
-    public Long saveItem(ItemFormDTO itemFormDto) throws Exception{
+    public Long saveItem(ItemFormDTO itemFormDto, List<MultipartFile> itemImgFileList) throws Exception{
 
         // 상품 등록
         ItemEntity item = itemFormDto.createItem();
         itemRepository.save(item);
+
+        for (int i = 0; i < itemImgFileList.size(); i++) {
+            ItemImgEntity itemImg = new ItemImgEntity();
+            itemImg.setItem(item);
+
+            if(i == 0) {
+                itemImg.setRepImgYn("Y");
+            } else {
+                itemImg.setRepImgYn("N");
+            }
+
+            itemImgService.saveItemImg(itemImg, itemImgFileList.get(i));
+        }
 
         return item.getProductId();
     }
