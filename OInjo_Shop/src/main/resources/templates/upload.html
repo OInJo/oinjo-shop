@@ -51,32 +51,7 @@
 
 <body>
 
-    <form action="/admin/item/classification" method="post">
-        <h3>브랜드 등록 테스트</h3>
-        브랜드<input type="text" name="brandName" id="">
-        <input type="submit" value="브랜드 등록하기">
-    </form>
-    <form action="/admin/item/classification" method="post">
-        <h3>카테고리 등록 테스트</h3>
-        카테고리<input type="text" name="categoryName" id="">
-        <input type="submit" value="카테고리 등록하기">
-    </form>
-    <form action="/admin/item/classification" method="post">
-        <h3>컬러 등록 테스트</h3>
-        컬러<input type="text" name="colorName" id="">
-        <input type="submit" value="컬러 등록하기">
-    </form>
-    <form action="/admin/item/classification" method="post">
-        <h3>사이즈 등록 테스트</h3>
-        사이즈<input type="text" name="sizeName" id="">
-        <input type="submit" value="사이즈 등록하기">
-    </form>
-    <form action="/admin/item/new" method="post">
-        <h3>상품 이미지 등록 테스트</h3>
-        상품 이미지<input type="text" name="imageUrl" id="">
-        <input type="submit" value="상품 이미지 등록하기">
-    </form>
-    <form action="/admin/item/new" enctype="multipart/form-data" th:object="${itemFormDTO}" method="post">
+    <form action="/admin/item/new" method="post" enctype="multipart/form-data" th:object="${itemFormDTO}">
         <h3>상품 등록 테스트</h3>
 
         <table>
