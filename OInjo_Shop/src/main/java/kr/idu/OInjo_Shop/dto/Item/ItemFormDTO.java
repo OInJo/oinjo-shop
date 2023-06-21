@@ -40,7 +40,7 @@ public class ItemFormDTO {
     private String modifiedBy;
 
 
-    private List<ItemImgDTO> itemImgDtoList = new ArrayList<>();
+    private List<ItemImgDTO> itemImgDTOList = new ArrayList<>();
     private List<Long> itemImgIds = new ArrayList<>();
 
 

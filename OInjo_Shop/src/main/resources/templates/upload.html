@@ -76,7 +76,7 @@
         상품 이미지<input type="text" name="imageUrl" id="">
         <input type="submit" value="상품 이미지 등록하기">
     </form>
-    <form action="/admin/item/new" method="post">
+    <form action="/admin/item/new" enctype="multipart/form-data" th:object="${itemFormDTO}" method="post">
         <h3>상품 등록 테스트</h3>
 
         <table>
@@ -114,8 +114,6 @@
 
         <div>
             상품 이름<input type="text" name="itemName"></div>
-        <div>
-            상품 상태<input type="text" name="itemStatus"></div>
         <div>
             상품 가격<input type="text" name="itemPrice"></div>
         <div>
