@@ -25,52 +25,53 @@ import java.util.List;
 public class ItemEntity extends BaseEntity {
 
     @Id
-    @Column(name="productId")
+    @Column(name="itemId")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long productId; // 상품 코드
+    private Long itemId; // 상품 코드
 
     @Column (nullable = false, length = 50)
-    private String productName; // 상품명
+    private String itemName; // 상품명
 
     @Column (name="price", nullable = false)
-    private int productPrice; // 상품 가격
+    private int itemPrice; // 상품 가격
 
     @Column (nullable = false)
-    private int productStock; //재고수량
+    private int itemStock; //재고수량
 
     @Enumerated(EnumType.STRING)
-    private ItemSellStatus productStatus; // 상품 상태 (품절 or 판매 가능)
+    private ItemSellStatus itemSellStatus; // 상품 상태 (품절 or 판매 가능)
 
     @Column(nullable = false)
-    private String productDetail; // 상품 설명
+    private String itemDetail; // 상품 설명
 
 
     @OneToOne
-    @JoinColumn(name ="brandName")
+    @JoinColumn(name ="brandId")
     private BrandEntity brand;
 
     @OneToOne
-    @JoinColumn(name ="colorName")
+    @JoinColumn(name ="colorId")
     private ColorEntity color;
 
     @OneToOne
-    @JoinColumn(name ="sizeName")
+    @JoinColumn(name ="sizeId")
     private SizeEntity size;
 
     @OneToOne
-    @JoinColumn(name ="categoryName")
+    @JoinColumn(name ="categoryId")
     private CategoryEntity category;
 
 
-    public void updateItem(ItemFormDTO itemFormDTO){
-        this.productName = productName;
-        this.productPrice = productPrice;
-        this.productStock = productStock;
-        this.productStatus = productStatus;
-        this.productDetail = productDetail;
-        this.brand = brand;
-        this.color = color;
-        this.size = size;
-        this.category = category;
+    public void updateItem(ItemFormDTO itemFormDTO) {
+        this.itemName= itemFormDTO.getItemName();
+        this.itemPrice = itemFormDTO.getItemPrice();
+        this.itemStock = itemFormDTO.getItemStock();
+        this.itemSellStatus = itemFormDTO.getItemSellStatus();
+        this.itemDetail = itemFormDTO.getItemDetail();
+        this.brand = itemFormDTO.getBrand();
+        this.color = itemFormDTO.getColor();
+        this.size = itemFormDTO.getSize();
+        this.category = itemFormDTO.getCategory();
     }
+
 }
