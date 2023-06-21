@@ -52,3 +52,18 @@ body {
   right: 10px;
   top: 10px;
 }
+
+/* productupload */
+
+.hidden {
+  display:none;
+}
+
+.upload-section {
+  justify-content: space-around;
+  text-align: center;
+}
+/* 
+.upload-li {
+  display:none;
+} */

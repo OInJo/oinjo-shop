@@ -1,40 +1,55 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout1}">
+    <th:block layout:fragment="script">
+
+    <script th:inline="javascript">
+        $(document).ready(function(){
+            var errorMessage = [[${errorMessage}]];
+            if(errorMessage != null){
+                alert(errorMessage);
+            }
+
+            bindDomEvent();
+
+        });
+
+        function bindDomEvent(){
+            $(".custom-file-input").on("change", function() {
+                var fileName = $(this).val().split("\\").pop();  //이미지 파일명
+                var fileExt = fileName.substring(fileName.lastIndexOf(".")+1); // 확장자 추출
+                fileExt = fileExt.toLowerCase(); //소문자 변환
+
+                if(fileExt != "jpg" && fileExt != "jpeg" && fileExt != "gif" && fileExt != "png" && fileExt != "bmp"){
+                    alert("이미지 파일만 등록이 가능합니다.");
+                    return;
+                }
+
+                $(this).siblings(".custom-file-label").html(fileName);
+            });
+        }
+
+    </script>
+
+</th:block>
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>등록 테스트 페이지</title>
+    <style>
+        .id-input {
+            display: none;
+        }
+
+        .id {
+            display: none;
+        }
+    </style>
+    <script src="/js/productupload.js" defer></script>
 </head>
 
 <body>
-
-    <table>
-        <tr th:each="brandDto : ${brandList}">
-            브랜드 목록들 Id, Name
-            <td th:text="${brandDto.brandId}"></td>
-            <td th:text="${brandDto.brandName}"></td>
-        </tr>
-
-        <tr th:each="category : ${categoryList}">
-            카테고리 목록들 Id, Name
-            <td th:text="${category.categoryId}" />
-            <td th:text="${category.categoryName}" />
-        </tr>
-
-        <tr th:each="color : ${colorList}">
-            컬러 목록들 Id, Name
-            <td th:text="${color.colorId}"></td>
-            <td th:text="${color.colorName}"></td>
-        </tr>
-
-        <tr th:each="size : ${sizeList}">
-            사이즈 목록들 Id, Name
-            <td th:text="${size.sizeId}"></td>
-            <td th:text="${size.sizeName}"></td>
-        </tr>
-    </table>
 
     <form action="/admin/item/classification" method="post">
         <h3>브랜드 등록 테스트</h3>
@@ -63,16 +78,77 @@
     </form>
     <form action="/admin/item/new" method="post">
         <h3>상품 등록 테스트</h3>
+
+        <table>
+            <tr th:each="brandDto : ${brandList}">
+                브랜드 목록들 Id, Name
+                <!-- 브랜드 Name을 띄워서 그걸 누르면 brandId가 input으로 들어가야함 -->
+                <!-- brandId를 히든하고, brandName을 클릭하면 해당하는 id가 input값에 들어가도록 -->
+                <!-- brandName에 온클릭 메소드를 만들고, 온클릭하면 input의 value 값이 id로 들어가도록 -->
+                <input type="text" class="brand-id-input" name="brand">
+                <td th:text="${brandDto.brandId}" class="brand-id"></td>
+                <td th:text="${brandDto.brandName}" class="brand-name"></td>
+            </tr>
+
+            <tr th:each="category : ${categoryList}">
+                카테고리 목록들 Id, Name
+                <input type="text" class="id-input category-id-input" name="category">
+                <td th:text="${category.categoryId}" class="id category-id" />
+                <td th:text="${category.categoryName}" class="category-name" />
+            </tr>
+
+            <tr th:each="color : ${colorList}">
+                컬러 목록들 Id, Name
+                <input type="text" class="id-input color-id-input" name="color">
+                <td th:text="${color.colorId}" class="id color-id"></td>
+                <td th:text="${color.colorName}" class="color-name"></td>
+            </tr>
+
+            <tr th:each="size : ${sizeList}">
+                사이즈 목록들 Id, Name
+                <input type="text" class="id-input size-id-input" name="size">
+                <td th:text="${size.sizeId}" class="id size-id"></td>
+                <td th:text="${size.sizeName}" class="size-name"></td>
+            </tr>
+        </table>
+
         <div>
-            상품 이름<input type="text" name="productName"></div>
+            상품 이름<input type="text" name="itemName"></div>
         <div>
-            상품 상태<input type="text" name="productStatus"></div>
+            상품 상태<input type="text" name="itemStatus"></div>
         <div>
-            상품 가격<input type="text" name="productPrice"></div>
+            상품 가격<input type="text" name="itemPrice"></div>
         <div>
-            상품 재고<input type="text" name="productStock"></div>
+            상품 재고<input type="text" name="itemStock"></div>
         <div>
-            상품 설명<input type="text" name="productDetail"></div>
+            상품 설명<input type="text" name="itemDetail"></div>
+
+        <div class="form-group">
+            <select th:field="*{itemSellStatus}" class="custom-select">
+                <option value="SELL">판매중</option>
+                <option value="SOLD_OUT">품절</option>
+            </select>
+        </div>
+
+        <div th:if="${#lists.isEmpty(itemFormDTO.itemImgDTOList)}">
+            <div class="form-group" th:each="num: ${#numbers.sequence(1,5)}">
+                <div class="custom-file img-div">
+                    <input type="file" class="custom-file-input" name="itemImgFile">
+                    <label class="custom-file-label" th:text="상품이미지 + ${num}"></label>
+                </div>
+            </div>
+        </div>
+
+        <div th:if = "${not #lists.isEmpty(itemFormDTO.itemImgDTOList)}">
+            <div th:each="itemImgDTO, status: ${itemFormDTO.itemImgDTOList}">
+                <div>
+                    <input type="file" class="custom-file-input" name="itemImgFile">
+                    <input type="hidden" name="itemImgId" th:value="${itemImgDTO.itemImgId}">
+                    <label th:text="${not #strings.isEmpty(itemImgDTO.oriName)} ? ${itemImgDTO.oriName} : '상품이미지' + ${status.index+1}"></label>
+                </div>
+            </div>
+        </div>
+
         <input type="submit" value="상품 등록하기">
     </form>
 </body>
