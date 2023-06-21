@@ -46,7 +46,7 @@ public class CartController {
 
             int totalPrice = 0;
             for(CartItemEntity cartItem : cartItems){
-                totalPrice += ( cartItem.getProduct().getProductPrice() * cartItem.getCount());
+                totalPrice += ( cartItem.getProduct().getItemPrice() * cartItem.getCount());
             }
 
             model.addAttribute("cartItemList",cartItems);
