@@ -11,7 +11,6 @@ spring:
       #    mysql에 생성한 사용자 계정 정보를 사용
     username: root
     password: als435125
-    
   thymeleaf:
     cache: false
 

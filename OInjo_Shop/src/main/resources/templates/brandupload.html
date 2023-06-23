@@ -15,12 +15,11 @@
 <body>
   <section class="upload-section">
     <nav class="upload-nav">
-      <a href="" class="upload-link">상품 등록</a>
-      <a href="" class="upload-link">브랜드 등록</a>
-      <a href="" class="upload-link">카테고리 등록</a>
-      <a href="" class="upload-link">색상 등록</a>
-      <a href="" class="upload-link">사이즈 등록</a>
-      <a href="" class="upload-link">이미지 등록</a>
+      <a href="admin/item/new" class="upload-link">상품 등록</a>
+      <a href="admin/brand/new" class="upload-link">브랜드 등록</a>
+      <a href="admin/category/new" class="upload-link">카테고리 등록</a>
+      <a href="admin/color/new" class="upload-link">색상 등록</a>
+      <a href="admin/size/new" class="upload-link">사이즈 등록</a>
     </nav>
     <form action="/admin/brand/new" method="post" class="upload-form">
       <label for="brand" class="upload-label">브랜드 등록</label>
@@ -29,6 +28,13 @@
         <i class="fa-solid fa-plus upload-button"></i>
       </div>
     </form>
+    <ul class="ul-wrapper">
+      <li th:each="brandDto : ${brandList}" class="database-list">
+          <span th:text="${brandDto.brandId}" class="id brand-id"></span>
+          <span th:text="${brandDto.brandName}" class="name brand-name">나이키</span>
+          <i class="fa-solid fa-trash delete-button"></i>
+      </li>
+  </ul>
   </section>
   
 </body>
