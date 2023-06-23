@@ -1,8 +1,6 @@
 <!--  -->
 <!DOCTYPE html>
-
-<html lang="ko" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
-
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout1}">
 
 <head>
   <meta charset="UTF-8">
@@ -38,45 +36,6 @@
       <a href="member/login" class="login-link header-link">
         <i class="fa-solid fa-user-plus header-link-icon"></i>
         로그인
-    <div class="header-top">
-      <a href="/"><img src="/images/logo.png" alt="OInJo 로고" class="header-top-logo"></a>
-
-      <div class="header-top-right">
-        <div class="header-top-right-search"><input type="text" placeholder="Search" class="input-search"><i
-            class="fa-solid fa-magnifying-glass"></i></div>
-        <div class="header-top-right-ranking"><button>실시간 검색어</button>후드티 [1위]</div>
-      </div>
-    </div>
-    <ul class="header-nav">
-      <!-- 내정보 수정하기 기본 참고
-        <a href="/member/update">내 정보 수정하기</a>
-
-        세션값 확인 (로그인 했을때 추가됨)
-        session 값 확인: <p th:text="${session.loginEmail}"></p>
-        !-->
-      <li>
-        <a href="/member/update" class="header-nav-list">
-          <p th:text="${session.loginEmail}"></p>
-        </a>
-      </li>
-
-
-
-      <div sec:authorize="isAuthenticated()">
-        Logged in as: <span id="user" th:text="${usernickname}">None</span>
-        [[${session.user.email}]],[[${session.user.nickname}]]
-        <a href="/logout" class="btn btn-info active" role="button">Logout</a>
-      </div>
-
-
-
-
-      <li>
-        <a href="member/login" class="header-nav-list">로그인</a>
-      </li>
-
-      <a href="member/login" class="header-nav-list">
-        <li>로그인</li>
       </a>
       <a href="" class="header-link">
         <i class="fa-solid fa-tags header-link-icon"></i>
@@ -142,7 +101,7 @@
         </div>
       </div>
       <div class="article-product-wrapper">
-        <article class="article-product">
+        <!-- <article class="article-product">
           <img src="/images/product.png" alt="상품 이미지" class="article-product-image">
           <ul class="article-product-size">
             <li class="article-product-size-list">S</li>
@@ -163,8 +122,29 @@
             <i class="fa-solid fa-circle red-color"></i>
             <i class="fa-solid fa-circle blue-color"></i>
           </div>
+        </article> -->
+        <article class="article-product" th:each="ItemFormDTO : ${itemFormDTOList}">
+          <img src="/images/product.png" alt="상품 이미지" class="article-product-image">
+          <ul class="article-product-size">
+            <li class="article-product-size-list">S</li>
+            <li class="article-product-size-list">M</li>
+            <li class="article-product-size-list">L</li>
+          </ul>
+          <div class="article-product-brand">MLB</div>
+          <div class="article-product-name" th:text="${ItemFormDTO.itemName}"></div>
+          <div class="article-product-price">
+            <div class="article-product-price-won">19,000</div>
+            원
+          </div>
+          <div class="article-product-hit-sale-wrapper">
+            <div class="article-product-hit-sale hit">HIT</div>
+            <div class="article-product-hit-sale sale">SALE</div>
+          </div>
+          <div class="article-product-color">
+            <i class="fa-solid fa-circle red-color"></i>
+            <i class="fa-solid fa-circle blue-color"></i>
+          </div>
         </article>
-
       </div>
     </section>
 
