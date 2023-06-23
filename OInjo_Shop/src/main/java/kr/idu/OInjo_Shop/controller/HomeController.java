@@ -6,7 +6,6 @@ import kr.idu.OInjo_Shop.dto.Item.Relation.BrandDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.CategoryDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.ColorDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.SizeDTO;
-import kr.idu.OInjo_Shop.dto.Member.SessionUser;
 import kr.idu.OInjo_Shop.service.Item.ItemImgService;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
 import kr.idu.OInjo_Shop.service.Item.RelationService;
@@ -15,15 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
-
 
 @RequiredArgsConstructor
 @Controller
 public class HomeController {
-
     // 기본페이지 요청 메서드
+
     private final ItemService itemService; // 아이템 및 아이템 이미지
     private final ItemImgService itemImgService; // 아이템 및 아이템 이미지
     private final RelationService relationService; // 브랜드,카테고리,사이즈,컬러

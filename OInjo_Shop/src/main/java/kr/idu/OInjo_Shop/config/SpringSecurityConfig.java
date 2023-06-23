@@ -3,7 +3,6 @@ package kr.idu.OInjo_Shop.config;
 
 import kr.idu.OInjo_Shop.Role.Role;
 import kr.idu.OInjo_Shop.service.Member.OAuthUserService;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +24,7 @@ public class SpringSecurityConfig {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf()
