@@ -64,7 +64,7 @@ public class MemberController {
         List<MemberDTO> memberDTOList = memberService.findAll();
         // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
         model.addAttribute("memberList", memberDTOList);
-        // model 객체로 list 담아감감
+        // model 객체로 list 담아감
         return "memberlist";
     }
 
