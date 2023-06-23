@@ -1,9 +1,12 @@
 package kr.idu.OInjo_Shop.controller;
 
+import kr.idu.OInjo_Shop.entity.Mail.MailEntity;
 import kr.idu.OInjo_Shop.repository.Member.MailServiceInter;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
+import kr.idu.OInjo_Shop.service.Mail.MailService;
 import kr.idu.OInjo_Shop.service.Member.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +20,7 @@ public class MemberController {
     // 생성자 주입
     private final MemberService memberService;
     private final MailServiceInter EmailServiceImpl;
+    private final MailService mailService;
 
     // 회원가입
     @GetMapping("/member/save")
@@ -32,12 +36,42 @@ public class MemberController {
 
 
     @ResponseBody
-    @PostMapping("login/mailConfirm")
+    @PostMapping("/login/mailAuthentication")
     public String mailConfirm(@RequestParam("email") String email) throws Exception {
         String code = EmailServiceImpl.sendSimpleMessage(email);
         System.out.println("인증코드 : " + code);
         return code;
     }
+
+    @ResponseBody
+    @PostMapping("/login/mailConfirm")
+    public ResponseEntity<String> confirmMail(@RequestParam("email") String email, @RequestParam("code") String code) {
+        // 이메일과 인증 코드를 받아온다
+
+        // 이메일과 인증 코드를 사용하여 저장된 인증 정보를 조회한다
+        MailEntity mailEntity = mailService.findByEmail(email);
+        if (mailEntity == null) {
+            return ResponseEntity.badRequest().body("이메일 주소가 유효하지 않습니다.");
+        }
+
+        // 입력된 인증 코드와 저장된 인증 코드를 비교한다
+        if (mailEntity.getCode().equals(code)) {
+            // 인증 코드 일치. 인증 성공 처리를 수행한다
+
+            // TODO: 인증 성공 처리 로직 추가
+
+            // 인증 성공 응답을 전송한다
+            return ResponseEntity.ok("이메일 인증이 완료되었습니다.");
+        } else {
+            // 인증 코드 불일치. 인증 실패 처리를 수행한다
+
+            // TODO: 인증 실패 처리 로직 추가
+
+            // 인증 실패 응답을 전송한다
+            return ResponseEntity.badRequest().body("인증 코드가 일치하지 않습니다.");
+        }
+    }
+
 
     @GetMapping("/member/login")
     public String loginForm() {
