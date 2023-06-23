@@ -32,12 +32,12 @@ public class HomeController {
         List<CategoryDTO> categoryDTOList = relationService.findAllCategory(); // 카테고리 리스트
         List<ColorDTO> colorDTOList = relationService.findAllColor(); // 컬러 리스트
         List<SizeDTO> sizeDTOList = relationService.findAllSize(); // 사이즈 리스트
-        model.addAttribute("itemFormDTOList", itemFormDTOList); // 아이템 리스트 받아오기
-        model.addAttribute("itemImgDTOList", itemImgDTOList); // 아이템 이미지 리스트 받아오기
         model.addAttribute("brandList", brandDTOList); // 브랜드 리스트 받아오기
         model.addAttribute("categoryList", categoryDTOList); // 카테고리 리스트 받아오기
         model.addAttribute("colorList", colorDTOList); // 컬러 리스트 받아오기
         model.addAttribute("sizeList", sizeDTOList); // 사이즈 리스트 받아오기
+        model.addAttribute("itemImgDTOList", itemImgDTOList); // 아이템 이미지 리스트 받아오기
+        model.addAttribute("itemFormDTOList", itemFormDTOList); // 아이템 리스트 받아오기
         return "index"; // templates/index.html
     }
     @GetMapping("/email")
