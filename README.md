@@ -1,8 +1,9 @@
 # OInjo_Shop
-쇼핑몰 프로젝트
+쇼핑몰 프로젝트 
 
 프로젝트 구성
 상품, 회원, 장바구니, 주문(CRUD, Pagination, Sort, Search)
+
 
 회원 가입 및 로그인 
 1. 회원 가입 시 데이터베이스에 데이터 저장 (중복 ID 불가능)
@@ -17,6 +18,10 @@
 
 회원 삭제 기능
 1. 회원 삭제
+
+이메일 인증 기능
+1. 이메일 입력 후 인증 시 인증번호 전송
+2. 이메일 인증번호 일치하면 회원가입
 
 데이터베이스 구성
 1. MemberEntity 클래스 (id, memberEmail, memberPassword, memberName, memberNickname, memberPhone, memberAddress)
