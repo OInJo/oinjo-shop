@@ -29,8 +29,6 @@ function second_third() {
 }
 //
 
-
-
 // 네번째 페이지만 보이기
 function third_fourth() {
   const email = document.querySelector("#user-email");
@@ -43,8 +41,6 @@ function third_fourth() {
   }
 }
 //
-
-
 
 // 첫번째 페이지로 돌아가기
 function first_page() {
@@ -73,22 +69,22 @@ function third_page() {
 }
 //
 
-
 ///////// 가입 버튼 비활성화 -> 활성화로 바꿔야 함
 function send() {
   const password = document.querySelector("#user-password");
   const repassword = document.querySelector("#user-password2");
   const savebtn = document.querySelector("#savebtn");
-  if((password.value.length > 0) && (repassword.value.length > 0) && (password.value === repassword.value)) {
+  if (
+    password.value.length > 0 &&
+    repassword.value.length > 0 &&
+    password.value === repassword.value
+  ) {
     savebtn.disabled = false;
-  }
-  else {
+  } else {
     savebtn.disabled = true;
   }
 }
 ///////////////////////
-
-
 
 // 비밀번호 일치 불일치
 function check_password() {
@@ -145,22 +141,43 @@ function checkNumber(event) {
   return false;
 }
 
-
 //이메일 인증 구현 시작
-const certificationStartButton = document.querySelector(".certification-start-button");
+const certificationStartButton = document.querySelector(
+  ".certification-start-button"
+);
 const emailInput = document.querySelector("#user-email");
 certificationStartButton.addEventListener("click", () => {
-  fetch("/login/mailConfirm?email=" + emailInput.value, {
+  fetch("/login/mailAuthentication?email=" + emailInput.value, {
     method: "POST",
     body: JSON.stringify({
-        email: emailInput.value
+      email: emailInput.value,
     }),
     headers: {
-        "Content-Type": "application/json"
-    }
-})
+      "Content-Type": "application/json",
+    },
+  })
     .then((response) => {
-        console.log("response:", response);
+      console.log("response:", response);
     })
-    .catch(error => console.log("error:", error));
-})
+    .catch((error) => console.log("error:", error));
+});
+
+const certificationButton = document.querySelector(".certification-button");
+const certificationNumber = document.querySelector(".certification-number");
+certificationButton.addEventListener("click", () => {
+  const url = `/login/mailConfirm?email=${emailInput.value}&code=${certificationNumber.value}`;
+  fetch(url, {
+    method: "POST",
+    body: JSON.stringify({
+      email: emailInput.value,
+      certificationNumber: certificationNumber.value,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      console.log("response:", response);
+    })
+    .catch((error) => console.log("error:", error));
+});
