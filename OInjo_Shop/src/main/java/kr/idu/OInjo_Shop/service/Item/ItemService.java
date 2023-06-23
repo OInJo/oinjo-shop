@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,9 +27,7 @@ public class ItemService {
 
         // 상품 등록
         ItemEntity item = itemFormDto.createItem();
-        System.out.println("이것도 못했어");
         itemRepository.save(item);
-        System.out.println("이건 되네");
 
         for (int i = 0; i < itemImgFileList.size(); i++) {
             ItemImgEntity itemImg = new ItemImgEntity();
@@ -36,23 +35,15 @@ public class ItemService {
 
             if(i == 0) {
                 itemImg.setRepImgYn("Y");
-                System.out.println("Y에러");
             } else {
                 itemImg.setRepImgYn("N");
-                System.out.println("N에러");
             }
-
-            System.out.println("여기까지 왔어");
             itemImgService.saveItemImg(itemImg, itemImgFileList.get(i));
-            System.out.println("이놈이 문제네");
         }
 
         return item.getItemId();
     }
 
-    // ItemService.java
-
-//...
 
     public Long updateItem(ItemFormDTO itemFormDTO) throws EntityNotFoundException {
         ItemEntity item = itemRepository.findById(itemFormDTO.getId()).orElseThrow(EntityNotFoundException::new);
@@ -65,6 +56,15 @@ public class ItemService {
     // 특정 상품 조회
     public ItemEntity itemView(Long id){
         return itemRepository.findById(id).get();
+    }
+
+    public List<ItemFormDTO> findAllItem() {
+        List<ItemEntity> itemEntityList = itemRepository.findAll();
+        List<ItemFormDTO> itemDTOList = new ArrayList<>();
+        for (ItemEntity itemEntity: itemEntityList) {
+            itemDTOList.add(ItemFormDTO.of(itemEntity));
+        }
+        return itemDTOList;
     }
 
 }

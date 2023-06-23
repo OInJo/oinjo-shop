@@ -1,7 +1,10 @@
 package kr.idu.OInjo_Shop.service.Item;
 
 import kr.idu.OInjo_Shop.dto.Item.ItemImgDTO;
+import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
+import kr.idu.OInjo_Shop.entity.Item.ItemEntity;
 import kr.idu.OInjo_Shop.entity.Item.ItemImgEntity;
+import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.repository.Item.ItemImgRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +15,8 @@ import org.thymeleaf.util.StringUtils;
 import javax.persistence.EntityNotFoundException;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -40,6 +45,8 @@ public class ItemImgService {
 
     }
 
+
+
     public void updateItemImg(Long itemImgId, MultipartFile itemImgFile) throws IOException {
 
         if(!itemImgFile.isEmpty()) {
@@ -56,6 +63,15 @@ public class ItemImgService {
 
             itemImg.updateItemImg(oriImgName, imgName, imgUrl);
         }
+    }
+
+    public List<ItemImgDTO> findAllItemImg() {
+        List<ItemImgEntity> itemImgEntityList = itemImgRepository.findAll();
+        List<ItemImgDTO> itemImgDTOList = new ArrayList<>();
+        for (ItemImgEntity itemImgEntity: itemImgEntityList) {
+            itemImgDTOList.add(ItemImgDTO.of(itemImgEntity));
+        }
+        return itemImgDTOList;
     }
 
 }
