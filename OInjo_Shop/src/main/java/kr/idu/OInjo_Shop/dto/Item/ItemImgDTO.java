@@ -1,6 +1,7 @@
 package kr.idu.OInjo_Shop.dto.Item;
 
 
+import kr.idu.OInjo_Shop.entity.Item.ItemEntity;
 import kr.idu.OInjo_Shop.entity.Item.ItemImgEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,8 @@ public class ItemImgDTO {
     private String imgUrl;
 
     private String repImgYn;
+
+    private ItemEntity itemId;
 
     private static ModelMapper modelMapper = new ModelMapper();
 
