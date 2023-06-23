@@ -24,8 +24,6 @@ public class ItemFormDTO {
     private Integer itemPrice;
     private String itemDetail;
     private Integer itemStock;
-    private Integer itemCategory;
-
     private ItemSellStatus itemSellStatus;
 
     private BrandEntity brand;
