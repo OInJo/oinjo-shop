@@ -6,22 +6,21 @@ import kr.idu.OInjo_Shop.dto.Item.Relation.BrandDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.CategoryDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.ColorDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.SizeDTO;
+import kr.idu.OInjo_Shop.dto.Member.SessionUser;
 import kr.idu.OInjo_Shop.service.Item.ItemImgService;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
 import kr.idu.OInjo_Shop.service.Item.RelationService;
-import kr.idu.OInjo_Shop.dto.SessionUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.ui.Model;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
 @RequiredArgsConstructor
 @Controller
-@RequiredArgsConstructor
 public class HomeController {
 
     private final HttpSession httpSession;  //RequiredArgsConstructor 어노테이션으로 생성자 자동 생성
