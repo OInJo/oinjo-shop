@@ -44,6 +44,7 @@ public class ItemService {
         return item.getItemId();
     }
 
+    // ItemService.java
 
     public Long updateItem(ItemFormDTO itemFormDTO) throws EntityNotFoundException {
         ItemEntity item = itemRepository.findById(itemFormDTO.getId()).orElseThrow(EntityNotFoundException::new);
@@ -66,5 +67,4 @@ public class ItemService {
         }
         return itemDTOList;
     }
-
 }
