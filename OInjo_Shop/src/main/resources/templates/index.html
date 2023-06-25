@@ -76,45 +76,19 @@
         </div>
       </div>
       <div class="article-product-wrapper">
-        <!-- <article class="article-product">
-          <img src="/images/product.png" alt="상품 이미지" class="article-product-image">
-          <ul class="article-product-size">
-            <li class="article-product-size-list">S</li>
-            <li class="article-product-size-list">M</li>
-            <li class="article-product-size-list">L</li>
-          </ul>
-          <div class="article-product-brand">MLB</div>
-          <div class="article-product-name">루키 언스트럭쳐 볼캡 NY</div>
-          <div class="article-product-price">
-            <div class="article-product-price-won">19,000</div>
-            원
-          </div>
-          <div class="article-product-hit-sale-wrapper">
-            <div class="article-product-hit-sale hit">HIT</div>
-            <div class="article-product-hit-sale sale">SALE</div>
-          </div>
-          <div class="article-product-color">
-            <i class="fa-solid fa-circle red-color"></i>
-            <i class="fa-solid fa-circle blue-color"></i>
-          </div>
-        </article> -->
         <article class="article-product" th:each="ItemFormDTO : ${itemFormDTOList}">
-          <img th:each="ItemImgDTO : ${itemImgDTOList}" th:src="${ItemImgDTO.imgUrl}" alt="상품 이미지" class="article-product-image" id="item-img-src">
+          <img th:each="ItemImgDTO : ${itemImgDTOList}" th:src="${ItemImgDTO.imgUrl}" alt="상품 이미지" class="article-product-image" id="item-img-src" th:if="${ItemImgDTO.itemId.itemId == ItemFormDTO.id && ItemImgDTO.repImgYn == 'Y'}">
           <ul class="article-product-size">
             <li class="article-product-size-list">S</li>
             <li class="article-product-size-list">M</li>
             <li class="article-product-size-list">L</li>
           </ul>
-          <div class="article-product-brand">MLB</div>
+          <div class="article-product-brand"></div>
           <div class="article-product-name" th:text="${ItemFormDTO.itemName}"></div>
           <div class="article-product-price">
             <div class="article-product-price-won" th:text="${ItemFormDTO.itemPrice}"></div>
             원
           </div>
-          <!-- <div class="article-product-hit-sale-wrapper">
-            <div class="article-product-hit-sale hit">HIT</div>
-            <div class="article-product-hit-sale sale">SALE</div>
-          </div> -->
           <div class="article-product-color">
             <i class="fa-solid fa-circle red-color"></i>
             <i class="fa-solid fa-circle blue-color"></i>
