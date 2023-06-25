@@ -23,6 +23,7 @@ public class CartEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="cart_id")
     private Long id;
 
     private int count; // 카트에 담긴 상품 개수

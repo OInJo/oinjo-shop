@@ -32,8 +32,8 @@ public class CartService {
 
     //장바구니에 상품 추가
     @Transactional
-    public void addCart(MemberDTO member, ItemFormDTO item, int count) {
-        CartEntity cart = cartRepository.findByMember(member);
+    public void addCart(Long id, ItemFormDTO item, int count) {
+        CartEntity cart = cartRepository.findByMember(id);
 
         if(cart == null) {  //카트가 비어있다면 생성
             cart = CartDTO.toCartEntity(CartDTO.toCartDTO(null));
