@@ -55,7 +55,7 @@ public class ItemService {
     }
 
     // 특정 상품 조회
-    public ItemEntity itemView(Long id){
+    public ItemEntity findItemId(Long id){
         return itemRepository.findById(id).get();
     }
 

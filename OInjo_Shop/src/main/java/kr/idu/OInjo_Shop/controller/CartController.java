@@ -63,7 +63,7 @@ public class CartController {
     @PostMapping("/member/{id}/cart/{itemId}")
     public String myCartAdd(@PathVariable("id") Long id, @PathVariable("itemId") Long itemId, int count){
         MemberDTO member = MemberDTO.toMemberDTO(MemberEntity.toMemberEntity(memberService.findById(id)));
-        ItemFormDTO item = ItemFormDTO.of(itemService.itemView(itemId));
+        ItemFormDTO item = ItemFormDTO.of(itemService.findItemId(itemId));
 
         cartService.addCart(member, item, count);
 
