@@ -123,6 +123,10 @@ public class ItemControllerTest {
         }); // 아이템 ID는 null
     }
 
+    @Test
+    void deleteItemTest() {
+        itemService.deleteItemById(1L);
+    }
 
 }
 

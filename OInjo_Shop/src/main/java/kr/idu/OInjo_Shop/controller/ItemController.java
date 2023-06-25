@@ -41,7 +41,7 @@ public class ItemController {
         model.addAttribute("colorList", colorDTOList); // 컬러 리스트 받아오기
         model.addAttribute("sizeList", sizeDTOList); // 사이즈 리스트 받아오기
         model.addAttribute("itemFormDTO", new ItemFormDTO());
-        return "upload";
+        return "/test/upload";
     }
 
 
@@ -51,19 +51,19 @@ public class ItemController {
                           Model model, @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
 
         if (bindingResult.hasErrors()) {
-            return "upload";
+            return "/test/upload";
         }
 
         if(itemImgFileList.get(0).isEmpty() && itemFormDTO.getId() == null) {
             model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입력값 입니다.");
-            return "upload";
+            return "/test/upload";
         }
 
         try {
             itemService.saveItem(itemFormDTO, itemImgFileList);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "상품 등록 중 에러가 발생하였습니다.");
-            return "upload";
+            return "/test/upload";
         }
 
         return "redirect:/";
@@ -116,9 +116,9 @@ public class ItemController {
     }
 
     @DeleteMapping("/admin/item/{itemId}/delete")
-    public String deleteItemById(@ModelAttribute("item") ItemFormDTO item)
+    public String deleteItemById(@PathVariable("itemId") Long id)
     {
-        itemService.deleteItemById(item);
+        itemService.deleteItemById(id);
         return "redirect:/member/";
     }
 
