@@ -18,7 +18,6 @@ import java.time.LocalDate;
 public class CartItemEntity {
 
     @Id
-    @Column(name="cart_items")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
