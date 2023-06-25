@@ -27,7 +27,7 @@ public class CartItemEntity {
     private CartEntity cart;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="product_id")
+    @JoinColumn(name="itemId")
     private ItemEntity product;
 
     private int count; // 카트에 담긴 상품 개수
