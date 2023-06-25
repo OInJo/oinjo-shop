@@ -99,9 +99,7 @@
           </div>
         </article> -->
         <article class="article-product" th:each="ItemFormDTO : ${itemFormDTOList}">
-          <p th:each="ItemImgDTO : ${itemImgDTOList}">
-          <img th:if="${ItemFormDTO.id == ItemImgDTO.itemImgId}" th:src="${ItemImgDTO.imgUrl}" alt="상품 이미지" class="article-product-image" id="item-img-src">
-          </p>
+          <img th:each="ItemImgDTO : ${itemImgDTOList}" th:src="${ItemImgDTO.imgUrl}" alt="상품 이미지" class="article-product-image" id="item-img-src">
           <ul class="article-product-size">
             <li class="article-product-size-list">S</li>
             <li class="article-product-size-list">M</li>
