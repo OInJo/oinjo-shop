@@ -57,36 +57,11 @@
     <aside class="aside-category-wrapper">
       <div class="aside-category">
         <input type="radio" name="category" id="category01">
-        <label for="category01">상의<span>Top</span></label>
+        <label for="category01">전체<span>All</span></label>
         <ul>
-          <li class="select-name">후드 티셔츠</li>
-          <li class="select-name">스웨트 셔츠</li>
-          <li class="select-name">후드 티셔츠</li>
-          <li class="select-name">후드 티셔츠</li>
-        </ul>
-        <input type="radio" name="category" id="category02">
-        <label for="category02">하의<span>Pants</span></label>
-        <ul>
-          <li class="select-name">데님 팬츠</li>
-          <li class="select-name">트레이닝 팬츠</li>
-          <li class="select-name">코튼 팬츠</li>
-          <li class="select-name">레깅스</li>
-        </ul>
-        <input type="radio" name="category" id="category03">
-        <label for="category03">신발<span>Shoes</span></label>
-        <ul>
-          <li class="select-name">스니커즈</li>
-          <li class="select-name">구두</li>
-          <li class="select-name">운동화</li>
-          <li class="select-name">슬리퍼</li>
-        </ul>
-        <input type="radio" name="category" id="category04">
-        <label for="category04">반려동물<span>Pet</span></label>
-        <ul>
-          <li class="select-name">반려동물 의류</li>
-          <li class="select-name">반려동물 용품</li>
-          <li class="select-name">반려동물 푸드</li>
-          <li class="select-name">반려동물 잡화</li>
+          <li th:each="categoryDto : ${categoryList}">
+            <span th:text="${categoryDto.categoryName}" class="select-name"></span>
+          </li>
         </ul>
       </div>
     </aside>
