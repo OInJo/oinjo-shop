@@ -1,0 +1,29 @@
+@import url(findid.css);
+
+.email-input-box-wrapper,
+.certification-number-input-box-wrapper {
+  width: 340px;
+  position: relative;
+  margin-top: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.email-input,
+.certification-number-input {
+  all: unset;
+  width: 340px;
+  height: 40px;
+  padding:10px 5px;
+  box-sizing: border-box;
+}
+
+.input-submit-button {
+  all: unset;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+}
