@@ -10,7 +10,7 @@ spring:
     #    mysql에 생성한 사용자 계정 정보를 사용
     username: root
     # password: cometrue
-    password: Rud1352486@
+    password: als435125
   thymeleaf:
     cache: false
 
