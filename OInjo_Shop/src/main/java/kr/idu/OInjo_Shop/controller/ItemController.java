@@ -5,6 +5,7 @@ import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.CategoryDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.ColorDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.SizeDTO;
+import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
 import kr.idu.OInjo_Shop.service.Item.RelationService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +67,59 @@ public class ItemController {
         }
 
         return "redirect:/";
+    }
+
+    @GetMapping("/admin/item")
+    public String findAllItem(Model model) {
+        List<ItemFormDTO> itemFormDTOList = itemService.findAllItem();
+        model.addAttribute("itemList", itemFormDTOList);
+        return "itemList";
+    }
+
+    @GetMapping("/admin/item/{itemId}")
+    public String itemDetail(@PathVariable("itemId") Long itemId, Model model) {
+
+        try {
+            ItemFormDTO itemFormDTO = itemService.getItemDetail(itemId);
+            model.addAttribute("itemFormDTO", itemFormDTO);
+
+        } catch (EntityNotFoundException e) {
+            model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
+            model.addAttribute("itemFormDTO", new ItemFormDTO());
+            return "itemView";
+        }
+
+        return "itemView";
+    }
+
+    @PostMapping("/admin/item/{itemId}")
+    public String itemUpdate(ItemFormDTO itemFormDTO, BindingResult bindingResult,
+                             @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Model model) {
+
+        if(bindingResult.hasErrors()) {
+            return "itemForm";
+        }
+
+        if(itemImgFileList.get(0).isEmpty() && itemFormDTO.getId() == null) {
+            model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입니다.");
+            return "itemForm";
+        }
+
+        try {
+            itemService.updateItem(itemFormDTO, itemImgFileList);
+        } catch (IOException e) {
+            model.addAttribute("errorMessage", "상품 수정 중에 오류가 발생했습니다.");
+            return "itemForm";
+        }
+
+        return "redirect:/";
+    }
+
+    @DeleteMapping("/admin/item/{itemId}/delete")
+    public String deleteItemById(@ModelAttribute("item") ItemFormDTO item)
+    {
+        itemService.deleteItemById(item);
+        return "redirect:/member/";
     }
 
 

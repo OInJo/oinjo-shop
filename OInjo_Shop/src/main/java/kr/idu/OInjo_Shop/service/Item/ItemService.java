@@ -94,4 +94,9 @@ public class ItemService {
 
         return itemFormDTO;
     }
+
+    public void deleteItemById(ItemFormDTO item) {
+        itemImgRepository.deleteByItem(item.createItem());
+        itemRepository.deleteById(item.getId());
+    }
 }
