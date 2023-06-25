@@ -1,6 +1,7 @@
 package kr.idu.OInjo_Shop.service.Item;
 
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
+import kr.idu.OInjo_Shop.dto.Item.ItemImgDTO;
 import kr.idu.OInjo_Shop.entity.Item.*;
 import kr.idu.OInjo_Shop.repository.Item.*;
 import lombok.RequiredArgsConstructor;
@@ -9,8 +10,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -46,11 +49,17 @@ public class ItemService {
 
     // ItemService.java
 
-    public Long updateItem(ItemFormDTO itemFormDTO) throws EntityNotFoundException {
+    public Long updateItem(ItemFormDTO itemFormDTO, List<MultipartFile> itemImgFileList) throws EntityNotFoundException, IOException {
+        // 상품 수정
         ItemEntity item = itemRepository.findById(itemFormDTO.getId()).orElseThrow(EntityNotFoundException::new);
-        // .orElseThrow(Entity..) => itemId에 해당하는 상품이 레포지토리에 없을 경우,
-        // EntityNotFoundException 발생
         item.updateItem(itemFormDTO);
+
+        List<Long> itemImgIds = itemFormDTO.getItemImgIds();
+
+        // 이미지 수정
+        for (int i = 0; i < itemImgFileList.size(); i++) {
+            itemImgService.updateItemImg(itemImgIds.get(i), itemImgFileList.get(i));
+        }
         return item.getItemId();
     }
 
@@ -66,5 +75,23 @@ public class ItemService {
             itemDTOList.add(ItemFormDTO.of(itemEntity));
         }
         return itemDTOList;
+    }
+
+    public ItemFormDTO getItemDetail(Long itemId) {
+
+        List<ItemImgEntity> itemImgList = itemImgRepository.findByItem(itemId);
+        List<ItemImgDTO> itemImgDTOList = new ArrayList<>();
+
+        for(ItemImgEntity itemImg : itemImgList) {
+            ItemImgDTO itemImgDTO = ItemImgDTO.of(itemImg);
+            itemImgDTOList.add(itemImgDTO);
+        }
+
+        ItemEntity item = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
+
+        ItemFormDTO itemFormDTO = ItemFormDTO.of(item);
+        itemFormDTO.setItemImgDTOList(itemImgDTOList);
+
+        return itemFormDTO;
     }
 }

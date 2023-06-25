@@ -97,4 +97,19 @@ public class RelationService {
         return sizeDTOList;
     }
 
+    public void deleteBrandById(Long id) {
+        brandRepository.deleteById(id);
+    }
+
+    public void deleteCategoryById(Long id) {
+        categoryRepository.deleteById(id);
+    }
+
+    public void deleteColorById(Long id) {
+        colorRepository.deleteById(id);
+    }
+
+    public void deleteSizeById(Long id) {
+        sizeRepository.deleteById(id);
+    }
 }
