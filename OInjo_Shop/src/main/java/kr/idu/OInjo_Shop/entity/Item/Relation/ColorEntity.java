@@ -1,5 +1,6 @@
 package kr.idu.OInjo_Shop.entity.Item.Relation;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Table(name="color")
 @Getter
 @Setter
+@Builder
 public class ColorEntity {
 
     @Id

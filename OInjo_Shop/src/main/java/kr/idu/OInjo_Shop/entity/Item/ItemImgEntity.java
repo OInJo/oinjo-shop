@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table(name = "item_img")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ItemImgEntity extends BaseEntity {
