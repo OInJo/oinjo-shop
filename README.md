@@ -21,7 +21,7 @@
 
 이메일 인증 기능
 1. 이메일 입력 후 인증 시 인증번호 전송
-2. 이메일 인증번호 일치하면 회원가입
+2. 이메일 인증번호 확인하면 회원가입
 
 데이터베이스 구성
 1. MemberEntity 클래스 (id, memberEmail, memberPassword, memberName, memberNickname, memberPhone, memberAddress)
