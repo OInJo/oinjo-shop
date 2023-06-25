@@ -20,8 +20,10 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@SequenceGenerator(sequenceName = "item_seq", name = "item_seq_gen", initialValue = 1, allocationSize = 1)
 public class ItemEntity extends BaseEntity {
 
     @Id

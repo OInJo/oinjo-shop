@@ -1,15 +1,18 @@
 package kr.idu.OInjo_Shop.entity.Member;
 
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Setter
 @Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "member_table")
+@SequenceGenerator(sequenceName = "member_seq", name = "member_seq_gen", initialValue = 1, allocationSize = 1)
 public class MemberEntity {
     @Id // pk 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
