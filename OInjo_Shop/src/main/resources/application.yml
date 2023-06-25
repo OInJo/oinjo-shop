@@ -10,7 +10,7 @@ spring:
     #    mysql에 생성한 사용자 계정 정보를 사용
     username: root
     # password: cometrue
-    password: Rud1352486@
+    password: als435125
   thymeleaf:
     cache: false
 
@@ -23,8 +23,8 @@ spring:
       ddl-auto: update
 
   # file
-  itemImgLocation: /Users/minwook/Documents/GitHub/OInjo_shop/productImg
-  uploadPath: file:////Users/minwook/Documents/GitHub/OInjo_shop/
+  itemImgLocation: /Users/minwook/Documents/GitHub/OInjo_shop/OInjo_shop/src/main/resource/static/productImg
+  uploadPath: file:////Users/minwook/Documents/GitHub/OInjo_shop/OInjo_shop/src/main/resource/static/productImg
 
   #OAuth2.0 설정
   security:
