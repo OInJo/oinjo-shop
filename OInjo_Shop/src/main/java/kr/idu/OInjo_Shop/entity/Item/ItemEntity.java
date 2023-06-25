@@ -27,7 +27,7 @@ import java.util.List;
 public class ItemEntity extends BaseEntity {
 
     @Id
-    @Column(name="itemId")
+    @Column(name="item_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long itemId; // 상품 코드
 
