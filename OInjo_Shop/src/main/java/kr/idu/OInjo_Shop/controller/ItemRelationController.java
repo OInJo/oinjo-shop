@@ -28,7 +28,7 @@ public class ItemRelationController {
         // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
         model.addAttribute("brandList", brandDTOList);
         model.addAttribute("brandDTO", new BrandDTO());
-        return "brandupload";
+        return "admin/brandupload";
     }
 
     @GetMapping("/admin/brand/delete/{id}")
@@ -44,14 +44,14 @@ public class ItemRelationController {
         // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
         model.addAttribute("categoryList", categoryDTOList);
         model.addAttribute("categoryDTO", new CategoryDTO());
-        return "categoryupload";
+        return "admin/categoryupload";
     }
 
     @GetMapping("/admin/category/delete/{id}")
     public String deleteCategoryById(@PathVariable Long id)
     {
         relationService.deleteCategoryById(id);
-        return "redirect:categoryupload";
+        return "redirect:/admin/categoryupload";
     }
 
     @GetMapping(value = "/admin/color/new")
@@ -60,14 +60,14 @@ public class ItemRelationController {
         // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
         model.addAttribute("colorList", colorDTOList);
         model.addAttribute("colorDTO", new ColorDTO());
-        return "colorupload";
+        return "admin/colorupload";
     }
 
     @GetMapping("/admin/color/delete/{id}")
     public String deleteColorById(@PathVariable Long id)
     {
         relationService.deleteColorById(id);
-        return "redirect:/colorupload";
+        return "redirect:/admin/colorupload";
     }
 
     @GetMapping(value = "/admin/size/new")
@@ -76,7 +76,7 @@ public class ItemRelationController {
         // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
         model.addAttribute("sizeList", sizeDTOList);
         model.addAttribute("sizeDTO", new SizeDTO());
-        return "sizeupload";
+        return "admin/sizeupload";
     }
 
     @GetMapping("/admin/size/delete/{id}")

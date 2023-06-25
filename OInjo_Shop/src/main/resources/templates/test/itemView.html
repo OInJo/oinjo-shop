@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:input="http://www.w3.org/1999/html" layout:decorate="~{layouts/layout1}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이템 수정 테스트</title>
+</head>
+<body>
+    <div th:each="ItemFormDTO : ${itemFormDTO}">
+        <form id="itemForm" action="" method="post">
+            상품이름<input type="text" th:value="${ItemFormDTO.itemName}" />
+            상품가격<input type="text" th:value="${ItemFormDTO.itemPrice}" />
+            상품설명<input type="text" th:value="${ItemFormDTO.itemDetail}" />
+            상품재고<input type="text" th:value="${ItemFormDTO.itemStock}" />
+            <input type="hidden" name="id" th:value="${ItemFormDTO.id}" id="id">
+            <input type="submit" value="수정" id="update-btn">
+            <input type="submit" value="삭제" id="delete-btn">
+        </form>
+    </div>
+    <script>
+        const itemForm = document.querySelector("#itemForm");
+        const id = document.querySelector("#id").value;
+        const updateBtn = document.querySelector("#update-btn");
+        const deleteBtn = document.querySelector("#delete-btn");
+        
+        updateBtn.addEventListener("click", function(event) {
+            event.preventDefault();
+            itemForm.action = "/admin/item/" + id;
+            itemForm.submit();
+        });
+        
+        deleteBtn.addEventListener("click", function(event) {
+            event.preventDefault();
+            itemForm.action = "/admin/item/" + id + "/delete";
+            itemForm.submit();
+        });
+    </script>
+</body>
+</html>

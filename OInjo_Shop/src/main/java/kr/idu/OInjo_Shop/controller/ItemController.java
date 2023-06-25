@@ -73,7 +73,7 @@ public class ItemController {
     public String findAllItem(Model model) {
         List<ItemFormDTO> itemFormDTOList = itemService.findAllItem();
         model.addAttribute("itemList", itemFormDTOList);
-        return "itemList";
+        return "/test/itemList";
     }
 
     @GetMapping("/admin/item/{itemId}")
@@ -86,10 +86,10 @@ public class ItemController {
         } catch (EntityNotFoundException e) {
             model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
             model.addAttribute("itemFormDTO", new ItemFormDTO());
-            return "itemView";
+            return "test/itemView";
         }
 
-        return "itemView";
+        return "test/itemView";
     }
 
     @PostMapping("/admin/item/{itemId}")
@@ -97,19 +97,19 @@ public class ItemController {
                              @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Model model) {
 
         if(bindingResult.hasErrors()) {
-            return "itemView";
+            return "test/itemView";
         }
 
         if(itemImgFileList.get(0).isEmpty() && itemFormDTO.getId() == null) {
             model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입니다.");
-            return "itemView";
+            return "test/itemView";
         }
 
         try {
             itemService.updateItem(itemFormDTO, itemImgFileList);
         } catch (IOException e) {
             model.addAttribute("errorMessage", "상품 수정 중에 오류가 발생했습니다.");
-            return "itemView";
+            return "test/itemView";
         }
 
         return "redirect:/";

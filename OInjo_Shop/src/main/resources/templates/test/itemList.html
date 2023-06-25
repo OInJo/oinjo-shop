@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:input="http://www.w3.org/1999/html" layout:decorate="~{layouts/layout1}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이템 리스트</title>
+</head>
+<body>
+    <a th:each="ItemFormDTO : ${itemList}" th:text="${ItemFormDTO.itemName}" th:href="'/admin/item/' + ${ItemFormDTO.id}"></a>
+</body>
+</html>
