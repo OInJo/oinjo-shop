@@ -51,13 +51,16 @@ form {
 }
 
 .password-update-button {
-  all: unset;
-  cursor: pointer;
+  /* all: unset;
+  cursor: pointer; */
   /* color: rgba(0, 0, 0, 0.4); */
 }
 
 .update-submit-button {
   all: unset;
+  width:100%;
+  text-align: right;
+  margin-top:15px;
   font-size: 20px;
   font-weight: 600;
 }

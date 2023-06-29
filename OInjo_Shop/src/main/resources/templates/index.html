@@ -25,15 +25,19 @@
     </div>
     <nav class="header-right">
       <p class="login-check" th:text="${session.loginEmail}"></p>
-      <a href="member/update" class="update-link header-link">
+      <a href="/admin/item/new" class="header-link">
+        <i class="fa-solid fa-hammer header-link-icon"></i>
+        관리자
+      </a>
+      <a href="/member/update" class="update-link header-link">
         <i class="fa-solid fa-user-pen header-link-icon"></i>
         정보수정
       </a>
-      <a href="member/logout" class="logout-link header-link">
+      <a href="/member/logout" class="logout-link header-link">
         <i class="fa-solid fa-user-minus header-link-icon"></i>
         로그아웃
       </a>
-      <a href="member/login" class="login-link header-link">
+      <a href="/member/login" class="login-link header-link">
         <i class="fa-solid fa-user-plus header-link-icon"></i>
         로그인
       </a>
