@@ -25,7 +25,7 @@ public class MemberController {
     // 회원가입
     @GetMapping("/member/save")
     public String saveForm() {
-        return "save";
+        return "/member/save";
     }
 
     @PostMapping("/member/save")
@@ -75,7 +75,7 @@ public class MemberController {
 
     @GetMapping("/member/login")
     public String loginForm() {
-        return "login";
+        return "/member/login";
     }
 
     @PostMapping("/member/login")
@@ -89,7 +89,7 @@ public class MemberController {
 
         } else {
             // login 실패
-            return "login";
+            return "/member/login";
         }
     }
 
@@ -100,7 +100,7 @@ public class MemberController {
         // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
         model.addAttribute("memberList", memberDTOList);
         // model 객체로 list 담아감감
-        return "memberlist";
+        return "/test/memberlist";
     }
 
     @GetMapping("/member/{id}")
@@ -110,7 +110,7 @@ public class MemberController {
         MemberDTO memberDTO = memberService.findById(id);
         model.addAttribute("member", memberDTO);
         // html에서 member.memberEmail 형식으로 사용
-        return "memberdetail";
+        return "test/memberdetail";
     }
  
     @GetMapping("/member/update")
@@ -119,7 +119,7 @@ public class MemberController {
         String myEmail = (String) session.getAttribute("loginEmail"); // 캐스팅 - 강제 형변환(Object -> String)
         MemberDTO memberDTO = memberService.updateForm(myEmail);
         model.addAttribute("updateMember", memberDTO);
-        return "memberupdate";
+        return "member/memberupdate";
     }
 
     @PostMapping("/member/update")

@@ -79,7 +79,7 @@ public class ItemService {
 
     public ItemFormDTO getItemDetail(Long itemId) {
 
-        List<ItemImgEntity> itemImgList = itemImgRepository.findByItem(itemId);
+        List<ItemImgEntity> itemImgList = itemImgRepository.findByItemItemId(itemId);
         List<ItemImgDTO> itemImgDTOList = new ArrayList<>();
 
         for(ItemImgEntity itemImg : itemImgList) {
