@@ -175,10 +175,10 @@ body {
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom:10px;
-    right:10px;
+    bottom:15px;
+    right:0;
     border: 0;
-    font-size: 15px;
+    font-size: 20px;
     color: black;
     background-color: transparent;
     margin-right: 25px;
