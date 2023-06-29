@@ -19,7 +19,7 @@
     padding-bottom: 10px;
 }
 
-.address, .name-number, .go-delivery{
+.address, .name-number{
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 10px;
@@ -117,19 +117,49 @@
 .name-number > span:not(:last-child) {
     margin-left: 35px;
 }
-.postcode {
+.juso {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    border-bottom: 1px solid rgb(190, 188, 188);
+}
+
+#postcode {
     border: 1px solid #cbcbcb;
     border-radius: 4px;
     width: 55px;
     height: 25px;
     margin-left: 90px;
+    padding-top: -10px;
 }
-.detail-address {
+#road-address {
     border: 1px solid #cbcbcb;
     border-radius: 4px;
-    width: 300px;
+    width: 250px;
     height: 25px;
-    margin-left: 10px;
+    margin-left: 5px;
+}
+#jibun-address {
+    border: 1px solid #cbcbcb;
+    border-radius: 4px;
+    width: 250px;
+    height: 25px;
+    margin-left: 5px;
+
+}
+#detail-address {
+    border: 1px solid #cbcbcb;
+    border-radius: 4px;
+    width: 250px;
+    height: 25px;
+    margin-left: 5px;
+}
+#extra-address {
+    border: 1px solid #cbcbcb;
+    border-radius: 4px;
+    width: 250px;
+    height: 25px;
+    margin-left: 5px;
 }
 .requested > select {
     width: 250px;
@@ -137,4 +167,9 @@
     border: 1px solid #cbcbcb;
     border-radius: 4px;
     margin-left: 20px;
+}
+
+.go-delivery {
+    margin-left: 37px;
+    margin-top: -23px;
 }
