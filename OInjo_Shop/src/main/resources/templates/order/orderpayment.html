@@ -28,7 +28,7 @@
                 <div class="address">
                     <span>배송지</span>
                     <input type="radio" class="current-address">기존 배송지
-                    <button type="button" class="new-address" onclick="DaumPostcode()">배송지 변경</button>
+                    <button type="button" class="new-address" onclick="address_popup()">배송지 변경</button>
                 </div>
 
                 <div class="name-number">이름/연락처
@@ -36,11 +36,14 @@
                     <span>010-1111-1111</span>
                 </div>
 
-                <div class="go-delivery">주소
-                    <input type="text" class="postcode" id="user-postcode" placeholder="우편번호">
-                    <input type="text" class="detail-address" id="user-road-address" placeholder="도로명주소">
-                    <input type="text" class="detail-address" id="user-jibun-address" placeholder="지번주소">
-                    <input type="text" class="detail-address" id="user-detail-address" placeholder="상세주소">
+                <div class="juso">주소
+                <div class="go-delivery">
+                        <input type="text" id="postcode" placeholder="우편번호">
+                        <input type="text" id="road-address" placeholder="도로명주소">
+                        <input type="text" id="jibun-address" placeholder="지번주소">
+                        <input type="text" id="detail-address" placeholder="상세주소">
+                        <input type="text" id="extra-address" placeholder="참고항목">
+                </div>
                 </div>
 
                 <div class="requested">배송 요청사항
