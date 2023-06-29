@@ -1,6 +1,9 @@
 package kr.idu.OInjo_Shop.controller;
 
+import kr.idu.OInjo_Shop.dto.Page.PageRequestDTO;
+import kr.idu.OInjo_Shop.dto.Page.PageResultDTO;
 import kr.idu.OInjo_Shop.entity.Mail.MailEntity;
+import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.repository.Member.MailServiceInter;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.service.Mail.MailService;
@@ -93,12 +96,24 @@ public class MemberController {
         }
     }
 
-    @GetMapping("/member/")
-    public String findAll(Model model) {
+    @GetMapping(value = {"/member/","/member"})
+    public String findAll(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                          @RequestParam(value = "perPage", required = false, defaultValue = "10") int perPage,
+                          @RequestParam(value = "perPagination", required = false, defaultValue = "5") int perPagination,
+                          @RequestParam(value = "type", required = false, defaultValue = "e") String type,
+                          @RequestParam(value = "keyword", required = false, defaultValue = "@") String keyword,
+                          Model model) {
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(page)
+                .perPage(perPage)
+                .perPagination(perPagination)
+                .type(type)
+                .keyword(keyword)
+                .build();
         // Model 객체 => html로 가져갈 데이터가 있을 경우 사용
-        List<MemberDTO> memberDTOList = memberService.findAll();
+        PageResultDTO<MemberDTO, MemberEntity> resultDTO = memberService.getAllList(pageRequestDTO);
         // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
-        model.addAttribute("memberList", memberDTOList);
+        model.addAttribute("result", resultDTO);
         // model 객체로 list 담아감감
         return "/test/memberlist";
     }
