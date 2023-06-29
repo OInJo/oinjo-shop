@@ -1,15 +1,24 @@
 package kr.idu.OInjo_Shop.service.Member;
 
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
+import kr.idu.OInjo_Shop.dto.Page.PageRequestDTO;
+import kr.idu.OInjo_Shop.dto.Page.PageResultDTO;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
+import kr.idu.OInjo_Shop.entity.Member.QMemberEntity;
 import kr.idu.OInjo_Shop.repository.Member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Service
 @RequiredArgsConstructor
@@ -66,6 +75,15 @@ public class MemberService {
             return null;
         }
     }
+    public PageResultDTO<MemberDTO, MemberEntity> getAllList(PageRequestDTO requestDTO) {
+        Sort sort = Sort.by("id").ascending();
+        Pageable pageable = requestDTO.getPageable(sort);
+        BooleanBuilder booleanBuilder = findByCondition(requestDTO);
+        Page<MemberEntity> result = memberRepository.findAll(booleanBuilder, pageable);
+        Function<MemberEntity, MemberDTO> fn = (entity -> MemberDTO.toMemberDTO(entity));
+        PageResultDTO pageResultDTO = new PageResultDTO<>(result, fn, requestDTO.getPerPagination());
+        return pageResultDTO;
+    }
     public List<MemberDTO> findAll() {
         List<MemberEntity> memberEntityList = memberRepository.findAll();
         // 여기서 findAll()은 repository에서 제공하는 메서드 [List 객체 넘어옴]
@@ -94,6 +112,35 @@ public class MemberService {
         } else {
             return null;
         }
+    }
+
+    private BooleanBuilder findByCondition(PageRequestDTO pageRequestDTO) {
+
+        String type = pageRequestDTO.getType();
+
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+
+        QMemberEntity qMemberEntity = QMemberEntity.memberEntity;
+        // 없을 경우 Gradle clean 후 build
+
+        BooleanExpression expression = qMemberEntity.id.gt(0L);
+        booleanBuilder.and(expression);
+
+        if(type == null || type.trim().length() == 0) {
+            return booleanBuilder;
+        }
+
+        String keyword = pageRequestDTO.getKeyword();
+
+        BooleanBuilder conditionBuilder = new BooleanBuilder();
+        if(type.contains("e")) { // email로 검색
+            conditionBuilder.or(qMemberEntity.memberEmail.contains(keyword));
+        }
+        if(type.contains("n")) { // name로 검색
+            conditionBuilder.or(qMemberEntity.memberName.contains(keyword));
+        }
+        booleanBuilder.and(conditionBuilder);
+        return booleanBuilder;
     }
     
     public MemberDTO updateForm(String myEmail) {

@@ -45,6 +45,11 @@ dependencies {
 	//lombok Implementation
 	implementation 'org.projectlombok:lombok:1.18.22'
 
+	// querydsl : jpa로 고급 질의 처리 어려움을 해결, 자바기반 통합 질의 방법 - JPQL, Querydsl
+	implementation 'com.querydsl:querydsl-jpa:5.0.0'
+	annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jpa'
+	annotationProcessor 'jakarta.annotation:jakarta.annotation-api:1.3.5'
+	annotationProcessor 'jakarta.persistence:jakarta.persistence-api:2.2.3'
 }
 tasks.named('test') {
 	useJUnitPlatform()
