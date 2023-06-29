@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface ItemImgRepository extends JpaRepository<ItemImgEntity, Long> {
 
-    List<ItemImgEntity> findByItem(Long itemId);
+    List<ItemImgEntity> findByItemItemId(Long itemId);
 
     @Modifying
     @Query("delete from ItemImgEntity i where i.item.itemId = :itemId")
