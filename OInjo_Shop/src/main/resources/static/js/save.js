@@ -33,12 +33,12 @@ function second_third() {
 function third_fourth() {
   const email = document.querySelector("#user-email");
   const certification = document.querySelector("#user-certification");
-  if (email.value.length > 0 && certification.value.length > 0) {
+  // if (email.value.length > 0 && certification.value.length > 0) { //이메일, 인증번호값 아무것도 입력하지 않으면 다음 페이지로 안넘어가던거 수정, server에서 인증번호 값 검사 후 로직 구현 예정
     first.style.display = "none";
     second.style.display = "none";
     third.style.display = "none";
     fourth.style.display = "block";
-  }
+  // }
 }
 //
 
