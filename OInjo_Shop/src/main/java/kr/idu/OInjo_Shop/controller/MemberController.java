@@ -119,7 +119,7 @@ public class MemberController {
     }
 
     @GetMapping("/member/{id}")
-    public String findById(@PathVariable Long id, Model model) {
+    public String findById(@PathVariable("id") Long id, Model model) {
         // qurey 방식은 request param 사용
         // 경로상에 있는 값은 pathvariable 사용
         MemberDTO memberDTO = memberService.findById(id);
