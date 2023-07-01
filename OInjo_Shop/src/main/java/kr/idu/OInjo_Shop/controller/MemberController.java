@@ -115,7 +115,7 @@ public class MemberController {
         // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
         model.addAttribute("result", resultDTO);
         // model 객체로 list 담아감감
-        return "/test/memberlist";
+        return "/admin/memberlist";
     }
 
     @GetMapping("/member/{id}")
