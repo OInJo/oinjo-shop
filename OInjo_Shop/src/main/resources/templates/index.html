@@ -25,6 +25,10 @@
     </div>
     <nav class="header-right">
       <p class="login-check" th:text="${session.loginEmail}"></p>
+      <a href="/member" class="header-link">
+        <i class="fa-solid fa-hammer header-link-icon"></i>
+        회원목록
+      </a>
       <a href="/admin/item/new" class="header-link">
         <i class="fa-solid fa-hammer header-link-icon"></i>
         관리자
