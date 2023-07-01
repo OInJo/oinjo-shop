@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/upload.css">
   <script src="/js/upload.js" defer></script>
-  <link rel="stylesheet" href="../static/css/upload.css">
-  <script src="../static/js/upload.js" defer></script>
+  <link rel="stylesheet" href="../../static/css/upload.css">
+  <script src="../../static/js/upload.js" defer></script>
   <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
   <title>상품 등록</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -57,31 +57,38 @@
 
     <form action="/admin/item/new" method="post" enctype="multipart/form-data" th:object="${itemFormDTO}"
       class="upload-form">
+      <input type="hidden" class="id-input brand-id-input" name="brand">
+      <input type="hidden" class="id-input category-id-input" name="category">
+      <input type="hidden" class="id-input color-id-input" name="color">
+      <input type="hidden" class="id-input size-id-input" name="size">
       <section class="connection-table-ul-wrapper">
         <!-- <input type="hidden" name=""> -->
         <ul class="connection-table-ul">
+          <p class="connection-table-title">브랜드</p>
           <li th:each="brandDto : ${brandList}" class="connection-table-li">
-            <span th:text="${brandDto.brandId}" class="id brand-id">1</span>
-            <span th:text="${brandDto.brandName}" class="brand-name">나이키</span>
+            <span th:text="${brandDto.brandId}" class="id brand-id"></span>
+            <span th:text="${brandDto.brandName}" class="brand-name"></span>
           </li>
         </ul>
         <ul class="connection-table-ul">
-          <li th:each="brandDto : ${brandList}" class="connection-table-li">
-            <span th:text="${brandDto.brandId}" class="id brand-id">1</span>
-            <span th:text="${brandDto.brandName}" class="brand-name">나이키</span>
-          </li>
-        </ul>
-
-        <ul class="connection-table-ul">
-          <li th:each="brandDto : ${brandList}" class="connection-table-li">
-            <span th:text="${brandDto.brandId}" class="id brand-id">1</span>
-            <span th:text="${brandDto.brandName}" class="brand-name">나이키</span>
+          <p class="connection-table-title">카테고리</p>
+          <li th:each="categoryDto : ${categoryList}" class="connection-table-li">
+            <span th:text="${categoryDto.categoryId}" class="id category-id"></span>
+            <span th:text="${categoryDto.categoryName}" class="category-name"></span>
           </li>
         </ul>
         <ul class="connection-table-ul">
-          <li th:each="brandDto : ${brandList}" class="connection-table-li">
-            <span th:text="${brandDto.brandId}" class="id brand-id">1</span>
-            <span th:text="${brandDto.brandName}" class="brand-name">나이키</span>
+          <p class="connection-table-title">색상</p>
+          <li th:each="colorDto : ${colorList}" class="connection-table-li">
+            <span th:text="${colorDto.colorId}" class="id color-id"></span>
+            <span th:text="${colorDto.colorName}" class="color-name"></span>
+          </li>
+        </ul>
+        <ul class="connection-table-ul">
+          <p class="connection-table-title">사이즈</p>
+          <li th:each="sizeDto : ${sizeList}" class="connection-table-li">
+            <span th:text="${sizeDto.sizeId}" class="id size-id"></span>
+            <span th:text="${sizeDto.sizeName}" class="size-name"></span>
           </li>
         </ul>
       </section>
@@ -98,6 +105,10 @@
       <div class="upload-input-button-wrapper item-upload-input-button-wrapper">
         <input type="text" name="itemStock" id="item-stock" class="upload-input">
         <span class="upload-input-right-text">개</span>
+      </div>
+      <label for="item-detail">상품설명</label>
+      <div class="upload-input-button-wrapper item-upload-input-button-wrapper">
+        <input type="text" name="itemDetail" id="item-detail" class="upload-input">
       </div>
 
       <p>상품상태</p>
