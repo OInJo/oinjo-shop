@@ -6,6 +6,8 @@ import kr.idu.OInjo_Shop.dto.Item.Relation.CategoryDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.ColorDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.SizeDTO;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
+import kr.idu.OInjo_Shop.dto.Page.PageRequestDTO;
+import kr.idu.OInjo_Shop.dto.Page.PageResultDTO;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
 import kr.idu.OInjo_Shop.service.Item.RelationService;
 import lombok.RequiredArgsConstructor;
@@ -69,9 +71,22 @@ public class ItemController {
         return "redirect:/";
     }
 
-    @GetMapping("/admin/item")
-    public String findAllItem(Model model) {
-        List<ItemFormDTO> itemFormDTOList = itemService.findAllItem();
+    @GetMapping(value = {"/admin/item","/admin/item/"})
+    public String findAllItem(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                              @RequestParam(value = "perPage", required = false, defaultValue = "10") int perPage,
+                              @RequestParam(value = "perPagination", required = false, defaultValue = "5") int perPagination,
+                              @RequestParam(value = "type", required = false, defaultValue = "n") String type,
+                              @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+                              Model model) {
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(page)
+                .perPage(perPage)
+                .perPagination(perPagination)
+                .type(type)
+                .keyword(keyword)
+                .build();
+
+        PageResultDTO<ItemFormDTO, Object[]> itemFormDTOList = itemService.getAllItemList(pageRequestDTO);
         model.addAttribute("itemList", itemFormDTOList);
         return "/test/itemList";
     }
