@@ -43,7 +43,7 @@ public class ItemController {
         model.addAttribute("colorList", colorDTOList); // 컬러 리스트 받아오기
         model.addAttribute("sizeList", sizeDTOList); // 사이즈 리스트 받아오기
         model.addAttribute("itemFormDTO", new ItemFormDTO());
-        return "/test/upload";
+        return "/admin/itemupload";
     }
 
 
@@ -53,19 +53,19 @@ public class ItemController {
                           Model model, @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
 
         if (bindingResult.hasErrors()) {
-            return "/test/upload";
+            return "/admin/itemupload";
         }
 
         if(itemImgFileList.get(0).isEmpty() && itemFormDTO.getId() == null) {
             model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입력값 입니다.");
-            return "/test/upload";
+            return "/admin/itemupload";
         }
 
         try {
             itemService.saveItem(itemFormDTO, itemImgFileList);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "상품 등록 중 에러가 발생하였습니다.");
-            return "/test/upload";
+            return "/admin/itemupload";
         }
 
         return "redirect:/";

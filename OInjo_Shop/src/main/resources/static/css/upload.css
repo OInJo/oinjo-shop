@@ -6,7 +6,7 @@ body {
 
 .upload-section {
   background-color: white;
-  height: 100vh;
+  height: 100%;
   padding: 3% 5%;
 }
 
@@ -38,6 +38,7 @@ body {
 .upload-input-button-wrapper {
   position: relative;
   width: 300px;
+  border-bottom:1px solid black;
 }
 
 .upload-input {
@@ -111,6 +112,7 @@ body {
 .item-upload-button-wrapper {
   width:300px;
   position: relative;
+  margin:20px 0;
 }
 
 .item-upload-button {
@@ -122,17 +124,33 @@ body {
   border:1px solid rgba(0, 0, 0, 0.2);
 }
 
-/* productupload ul li css */
+/* itemupload ul li css */
 
 .connection-table-ul-wrapper {
   margin-bottom:10px;
-  padding:10px;
+  padding:15px;
   border:1px solid rgba(0, 0, 0, 0.1);
   display:flex;
   justify-content: space-between;
 }
+
 .connection-table-ul {
   list-style: none;
   margin:0;
   padding:0;
+}
+
+.connection-table-title {
+  font-weight: 600;
+  margin-bottom:5px;
+  margin-top:3px;
+}
+
+.connection-table-li {
+  color:rgba(0, 0, 0, 0.4);
+}
+
+.connection-table-li:hover {
+  color:red;
+  font-weight: 600;
 }

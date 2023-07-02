@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../../static/css/memberlist.css">
+  <link rel="stylesheet" href="/css/memberlist.css">
+  <title>회원조회</title>
+</head>
+
+<body>
+  <section>
+    <h3 class="section-title">회원조회</h3>
+    <form th:action="@{'/member'}" th:method="get" class="member-search-form">
+      <div class="search-wrapper">
+        <select name="type" aria-controls="dataTable" class="search-select">
+          <option value="e" class="select-option">이메일</option>
+          <option value="n" class="select-option">이름</option>
+        </select>
+        <input type="text" name="keyword" aria-controls="dataTable" class="search-input">
+        <button type="submit" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+    </form>
+    <article class="member-list-wrapper">
+      <div class="member-list-title">
+        <p class="member-list-title-email">이메일</p>
+        <p class="member-list-title-name">이름</p>
+        <p class="member-list-title-nickname">닉네임</p>
+      </div>
+      <div class="member-list-row" th:each="member: ${result.dtoList}">
+        <a th:href="@{|/member/${member.id}|}" th:text="${member.memberEmail}" class="member-email"></a>
+        <a th:href="@{|/member/${member.id}|}" th:text="${member.memberName}" class="member-name"></a>
+        <a th:href="@{|/member/${member.id}|}" class="member-nickname" th:text="${member.memberNickname}"></a>
+        <a th:href="@{|/member/delete/${member.id}|}" class="member-delete">삭제</a>
+      </div>
+    </article>
+  </section>
+</body>
+
+</html>
