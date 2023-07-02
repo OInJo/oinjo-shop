@@ -1,10 +1,22 @@
 package kr.idu.OInjo_Shop.service.Item;
 
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.dto.Item.ItemImgDTO;
+import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
+import kr.idu.OInjo_Shop.dto.Page.PageRequestDTO;
+import kr.idu.OInjo_Shop.dto.Page.PageResultDTO;
 import kr.idu.OInjo_Shop.entity.Item.*;
+import kr.idu.OInjo_Shop.entity.Item.Relation.BrandEntity;
+import kr.idu.OInjo_Shop.entity.Item.Relation.CategoryEntity;
+import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
+import kr.idu.OInjo_Shop.entity.Member.QMemberEntity;
 import kr.idu.OInjo_Shop.repository.Item.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Service
 @Transactional
@@ -99,4 +112,16 @@ public class ItemService {
         itemImgRepository.deleteByItem(id);
         itemRepository.deleteById(id);
     }
+
+    public PageResultDTO<ItemFormDTO, Object[]> getAllItemList(PageRequestDTO pageRequestDTO) {
+
+        //Pageable pageable = pageRequestDTO.getPageable(Sort.by("itemId").descending());
+        Page<Object[]> result = itemRepository.searchPage(
+                pageRequestDTO.getType(),
+                pageRequestDTO.getKeyword(),
+                pageRequestDTO.getPageable(Sort.by("itemId").descending()));
+        Function<Object[], ItemFormDTO> fn = (entity -> ItemFormDTO.of((ItemEntity) entity[0]));
+        return new PageResultDTO<>(result, fn, 5);
+    }
+
 }
