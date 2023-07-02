@@ -115,11 +115,11 @@ public class MemberController {
         // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
         model.addAttribute("result", resultDTO);
         // model 객체로 list 담아감감
-        return "/test/memberlist";
+        return "/admin/memberlist";
     }
 
     @GetMapping("/member/{id}")
-    public String findById(@PathVariable Long id, Model model) {
+    public String findById(@PathVariable("id") Long id, Model model) {
         // qurey 방식은 request param 사용
         // 경로상에 있는 값은 pathvariable 사용
         MemberDTO memberDTO = memberService.findById(id);

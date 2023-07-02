@@ -6,6 +6,30 @@
 </head>
 <body>
 <h2>memberlist.html</h2>
+<form th:action="@{'/member'}" th:method="get">
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <div class="dataTables_length" id="dataTable_length">
+        <label>Show
+          <select name="type" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+            <option value="e">email</option>
+            <option value="n">name</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div id="dataTable_filter" class="dataTables_filter">
+        <label>검색어:
+          <input type="text" name="keyword" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
+        </label>
+        <button type="submit" class="btn btn-default">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
 <table>
   <tr>
     <th>id</th>
