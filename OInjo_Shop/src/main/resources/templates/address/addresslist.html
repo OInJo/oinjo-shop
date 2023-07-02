@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+
+<h2 class="mb-4">
+    주소 정보
+</h2>
+
+<div th:each="member : ${addresses.getContent()}">
+
+
+    <div class="card d-flex">
+        <div th:each="address : ${member.addressList}" class="d-flex mb-3">
+            <div class="align-self-center w-75">
+                <form th:action="@{'/address/up-form/'+ ${address.addressId}}" th:object="${address}" method="get">
+                    <span th:text="${member.name}" class="fs24 font-weight-bold"></span>
+                    <br>
+                    <span th:text="${address.address}" class="fs24 font-weight-bold"></span>
+                    <button type="submit" class="btn btn-primary" style="" onclick="">수정</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:with="start=${(addresses.number/maxPage)*maxPage + 1}, end=(${(addresses.totalPages == 0) ? 1 : (start + (maxPage - 1) < addresses.totalPages ? start + (maxPage - 1) : addresses.totalPages)})">
+    <ul class="pagination justify-content-center">
+
+        <li class="page-item" th:classappend="${addresses.number eq 0}?'disabled':''">
+            <a th:href="@{'/address/list/' + ${addresses.number-1}}" aria-label='Previous' class="page-link">
+                <span aria-hidden='true'>Previous</span>
+            </a>
+        </li>
+
+        <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}"
+            th:classappend="${addresses.number eq page-1}?'active':''">
+            <a th:href="@{'/address/list/' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
+        </li>
+
+        <li class="page-item" th:classappend="${addresses.number+1 ge addresses.totalPages}?'disabled':''">
+            <a th:href="@{'/address/list/' + ${addresses.number+1}}" aria-label='Next' class="page-link">
+                <span aria-hidden='true'>Next</span>
+            </a>
+        </li>
+
+    </ul>
+</div>
+
+
+</html>

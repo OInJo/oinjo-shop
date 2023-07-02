@@ -19,16 +19,16 @@ spring:
 
   # spring data jpa 설정
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     open-in-view: false
     show-sql: true
     hibernate:
       ddl-auto: update
 
-  # file
-  itemImgLocation: D:\Project\OInjo_Shop\OInjo_Shop\src\main\resources\static\productImg
-  uploadPath: file://D:\Project\OInjo_Shop\OInjo_Shop\src\main\resources\static\productImg
 
+  # file
+  itemImgLocation: D:/Project/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg
+  uploadPath: file:///D:/Project/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg
 
 
 

@@ -11,7 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table
+@Table(name="address")
 @Getter
 @Setter
 @ToString
@@ -36,6 +36,7 @@ public class AddressEntity extends BaseEntity {
                 .address(addressDto.getAddress())
                 .build();
     }
+
     public void updateForm(AddressDto addressDto) {
         this.address = addressDto.getAddress();                 //this를 이용
 
