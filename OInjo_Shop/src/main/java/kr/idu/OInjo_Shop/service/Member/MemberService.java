@@ -153,15 +153,22 @@ public class MemberService {
     }
 
     public void update(MemberDTO memberDTO) {
-        String rawPassword = memberDTO.getMemberPassword(); // 사용자가 입력한 비밀번호
-        String encodedPassword = passwordEncoder.encode(rawPassword); // 비밀번호 해싱
+        // 사용자가 입력한 비밀번호
+        String rawPassword = memberDTO.getMemberPassword();
+        // 비밀번호 해싱
+        String encodedPassword = passwordEncoder.encode(rawPassword);
 
-        MemberEntity updatedMemberEntity = MemberEntity.toUpdateMemberEntity(memberDTO);
-        updatedMemberEntity.setMemberPassword(encodedPassword); // 해싱된 비밀번호로 변경
+        // 업데이트할 회원 엔티티 가져오기
+        MemberEntity updatedMemberEntity = memberRepository.findById(memberDTO.getId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
 
+        // 업데이트할 필드 설정
+        updatedMemberEntity.setMemberPassword(encodedPassword);
+
+        // 회원 정보 저장
         memberRepository.save(updatedMemberEntity);
-        // save 메서드는 ID가 없으면 insert 쿼리 수행, DB에 있을 경우 update 쿼리 수행
     }
+
 
     public void deleteById(Long id) {
         memberRepository.deleteById(id);
