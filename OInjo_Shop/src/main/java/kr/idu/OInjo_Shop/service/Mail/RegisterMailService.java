@@ -10,14 +10,14 @@ import javax.mail.internet.MimeMessage.RecipientType;
 
 import kr.idu.OInjo_Shop.entity.Mail.MailEntity;
 import kr.idu.OInjo_Shop.repository.Member.MailRepository;
-import kr.idu.OInjo_Shop.repository.Member.MailServiceInter;
+import kr.idu.OInjo_Shop.repository.Member.RegisterMailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegisterMail implements MailServiceInter {
+public class RegisterMailService implements RegisterMailRepository {
 
     @Autowired
     JavaMailSender emailsender; // Bean 등록해둔 MailConfig 를 emailsender 라는 이름으로 autowired
@@ -118,5 +118,12 @@ public class RegisterMail implements MailServiceInter {
 
 
         return ePw; // 메일로 보냈던 인증 코드를 서버로 반환
+    }
+
+    @Override
+    public String sendPassword(String to) throws Exception {
+
+        ePw = createKey();
+        return null;
     }
 }

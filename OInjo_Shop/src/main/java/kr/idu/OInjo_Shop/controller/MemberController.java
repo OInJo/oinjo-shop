@@ -4,26 +4,24 @@ import kr.idu.OInjo_Shop.dto.Page.PageRequestDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageResultDTO;
 import kr.idu.OInjo_Shop.entity.Mail.MailEntity;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
-import kr.idu.OInjo_Shop.repository.Member.MailServiceInter;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.service.Mail.MailService;
+import kr.idu.OInjo_Shop.service.Mail.RegisterMailService;
 import kr.idu.OInjo_Shop.service.Member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
     // 생성자 주입
     private final MemberService memberService;
-    private final MailServiceInter EmailServiceImpl;
+    private final RegisterMailService registerMailService;
     private final MailService mailService;
 
     // 회원가입
@@ -42,7 +40,7 @@ public class MemberController {
     @ResponseBody
     @PostMapping("/login/mailAuthentication")
     public String mailConfirm(@RequestParam("email") String email) throws Exception {
-        String code = EmailServiceImpl.sendSimpleMessage(email);
+        String code = registerMailService.sendSimpleMessage(email);
         System.out.println("인증코드 : " + code);
         return code;
     }
@@ -163,7 +161,7 @@ public class MemberController {
     }
 
     @GetMapping("/member/findid")
-    public String findEmailForm(){
+    public String findEmail(){
         return "/member/findid";
     }
 
@@ -178,10 +176,14 @@ public class MemberController {
         return "/member/findid";
     }
 
-
-
     @GetMapping("/member/findpw")
     public String findPassword(){
+        return "/member/findpw";
+    }
+
+    @PostMapping("/member/findpw")
+    public String findPassword(@RequestParam(value = "email") String email, Model model) throws Exception {
+        String pw = registerMailService.sendPassword(email);
         return "/member/findpw";
     }
 
