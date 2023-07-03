@@ -4,12 +4,18 @@ import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.repository.Member.MemberRepository;
 import kr.idu.OInjo_Shop.service.Member.MemberService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
+
+
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class MemberControllerTest {
@@ -41,6 +47,7 @@ public class MemberControllerTest {
             memberRepository.save(member);
         });
     }
+
 
 
 }
