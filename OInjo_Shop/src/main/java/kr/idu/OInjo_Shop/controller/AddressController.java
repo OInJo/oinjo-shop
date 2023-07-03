@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
-import java.security.Principal;
 import java.util.Optional;
 
 @Controller
@@ -30,12 +29,6 @@ public class AddressController {
     private final AddressService addressService;
 
 
-    @GetMapping("/address/new")
-    public String getAddress(Model model) {
-        AddressDto addressDto = new AddressDto();
-        model.addAttribute("addressDto", addressDto);
-        return "order/orderpayment";
-    }
 
     @GetMapping(value = {"/address/list", "/address/list/{page}"})
     public String listAddress(@PathVariable("page") Optional<Integer> page, Model model, HttpSession session) {
@@ -45,6 +38,7 @@ public class AddressController {
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 4);  //화면에 나올 주소의 개수는 4개로 설정
         Page<AddressListDto> addressListDtoList =
                 addressService.getAddressList(member.getMemberEmail(), pageable);
+        model.addAttribute("memberDto", MemberDTO.toMemberDTO(member));
         model.addAttribute("addresses", addressListDtoList);
         model.addAttribute("page", pageable.getPageNumber());
         model.addAttribute("maxPage", 5);
@@ -94,15 +88,15 @@ public class AddressController {
 
 
 
-    @GetMapping("/orders/test/payment")
+    @GetMapping("/address/new")
     public String orders(Model model) {
 
         AddressEntity address = new AddressEntity();
         model.addAttribute("addressDto", new AddressDto());
-        return "order/test/orderpayment";
+        return "address/addresspaymentpopup";
     }
 
-    @PostMapping("/orders/new")
+    @PostMapping("/address/new")
     public String postAddress(AddressDto addressDto, HttpSession session) {
         String email = (String) session.getAttribute("loginEmail"); // 캐스팅 - 강제 형변환(Object -> String)
         System.out.println("===========================" + email);
@@ -111,23 +105,6 @@ public class AddressController {
         AddressEntity address = AddressEntity.createAddress(member, addressDto);
         addressRepository.save(address);
         member.addAddress(address);         //member에 addresses에도 저장이 됨
-        return "redirect:/";
+        return "redirect:/address/list";
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

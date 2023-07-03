@@ -31,7 +31,7 @@
                 <button type="button" class="new-address" onclick="address_popup()">배송지 변경</button>
             </div>
 
-            <form th:action="@{'/address/form'}" th:method="get"  th:object="${memberDto}">
+
             <div class="name-number">이름/연락처
                 <span>[[${memberDto.memberName}]]</span>/
                 <span>[[${memberDto.memberPhone}]]</span>
@@ -40,14 +40,12 @@
 
             <div class="juso">주소
                 <div class="go-delivery">
-                    <input type="text" id="postcode" placeholder="우편번호">
-                        <span th:text="${memberDto.memberAddress}" id="address"></span>
+                    <input type="text" id>="postcode" placeholder="우편번호">
+                    <span th:text="${memberDto.memberAddress}" id="address"></span>
                     <input type="text" id="detail-address" placeholder="상세주소">
                 </div>
             </div>
 
-                <!--        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
-            </form>
 
             <div class="requested">배송 요청사항
                 <select class="requested-selected">

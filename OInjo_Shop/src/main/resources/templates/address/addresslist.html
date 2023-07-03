@@ -1,20 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout1}">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
 
 
 <h2 class="mb-4">
     주소 정보
 </h2>
 
-<div th:each="member : ${addresses.getContent()}">
+<form action="/address/new" method="get">
+    <button type="submit">새 배송지 등록</button>
+</form>
 
+<div th:each="member : ${addresses.getContent()}">
 
     <div class="card d-flex">
         <div th:each="address : ${member.addressList}" class="d-flex mb-3">
             <div class="align-self-center w-75">
                 <form th:action="@{'/address/up-form/'+ ${address.addressId}}" th:object="${address}" method="get">
+                    <span th:if="${address.address == memberDto.memberAddress}" class="n-label delv reserv">기본배송지</span>
                     <span th:text="${member.name}" class="fs24 font-weight-bold"></span>
                     <br>
                     <span th:text="${address.address}" class="fs24 font-weight-bold"></span>

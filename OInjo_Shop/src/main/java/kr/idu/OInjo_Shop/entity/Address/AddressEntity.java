@@ -22,9 +22,8 @@ public class AddressEntity extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
-    private MemberEntity member;    //한번의 주문은 여러 주문 상품을 주문할 수 있으므로
-    //주문 상품 엔티티와 주문 엔티티를 다대일 단방향 매핑을 먼저 설정함.
+    @JoinColumn(name = "member_id")
+    private MemberEntity member;
 
     @Column(nullable = false)
     private String address;
@@ -41,5 +40,6 @@ public class AddressEntity extends BaseEntity {
         this.address = addressDto.getAddress();                 //this를 이용
 
     }
+
 
 }
