@@ -153,7 +153,13 @@ public class MemberService {
     }
 
     public void update(MemberDTO memberDTO) {
-        memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
+        String rawPassword = memberDTO.getMemberPassword(); // 사용자가 입력한 비밀번호
+        String encodedPassword = passwordEncoder.encode(rawPassword); // 비밀번호 해싱
+
+        MemberEntity updatedMemberEntity = MemberEntity.toUpdateMemberEntity(memberDTO);
+        updatedMemberEntity.setMemberPassword(encodedPassword); // 해싱된 비밀번호로 변경
+
+        memberRepository.save(updatedMemberEntity);
         // save 메서드는 ID가 없으면 insert 쿼리 수행, DB에 있을 경우 update 쿼리 수행
     }
 
