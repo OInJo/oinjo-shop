@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -159,6 +160,29 @@ public class MemberController {
         session.invalidate();
         // 세션 초기화
         return "redirect:/";
+    }
+
+    @GetMapping("/member/findid")
+    public String findEmailForm(){
+        return "/member/findid";
+    }
+
+    @PostMapping("/member/findid")
+    public String findEmail(@RequestParam(value = "name") String name, @RequestParam(value = "phone") String phone, Model model) {
+        MemberDTO memberDTO = memberService.findByMember(name, phone);
+        if (memberDTO != null) {
+            model.addAttribute("email", memberDTO.getMemberEmail());
+        } else {
+            model.addAttribute("email", "아이디가 존재하지 않습니다.");
+        }
+        return "/member/findid";
+    }
+
+
+
+    @GetMapping("/member/findpw")
+    public String findPassword(){
+        return "/member/findpw";
     }
 
 }

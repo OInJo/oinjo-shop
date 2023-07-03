@@ -173,4 +173,14 @@ public class MemberService {
     public void deleteById(Long id) {
         memberRepository.deleteById(id);
     }
+
+    public MemberDTO findByMember(String name, String phone) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberNameAndMemberPhone(name, phone);
+        if (optionalMemberEntity.isPresent()) {
+            MemberEntity memberEntity = optionalMemberEntity.get();
+            return MemberDTO.toMemberDTO(memberEntity);
+        } else {
+            return null;
+        }
+    }
 }
