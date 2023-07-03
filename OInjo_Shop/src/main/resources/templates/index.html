@@ -92,7 +92,7 @@
         </div>
       </div>
       <div class="article-product-wrapper">
-        <article class="article-product" th:each="ItemFormDTO : ${itemFormDTOList}">
+        <article class="article-product" th:each="ItemFormDTO : ${itemFormDTOList.dtoList}">
           <img th:each="ItemImgDTO : ${itemImgDTOList}" th:src="${ItemImgDTO.imgUrl}" alt="상품 이미지" class="article-product-image" id="item-img-src" th:if="${ItemImgDTO.itemId.itemId == ItemFormDTO.id && ItemImgDTO.repImgYn == 'Y'}">
           <ul class="article-product-size">
             <li th:each="size : ${sizeList}" th:text="${size.sizeName}" class="article-product-size-list"></li>
