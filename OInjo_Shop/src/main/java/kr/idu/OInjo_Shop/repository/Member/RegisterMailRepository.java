@@ -18,5 +18,4 @@ public interface RegisterMailRepository {
     // 그리고 bean 으로 등록해둔 javaMail 객체를 사용해서 이메일 send!!
     String sendSimpleMessage(String to) throws Exception;
 
-    String sendPassword(String to) throws Exception;
 }
