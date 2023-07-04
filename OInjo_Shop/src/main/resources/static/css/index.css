@@ -203,6 +203,17 @@ input[id*="category"]:checked+label+ul {
   font-size: 18px;
   font-weight: 600;
   border-radius:50px;
+  margin-right: 10px;
+}
+
+.brand-category-choose {
+  display: flex;
+}
+
+.close-button {
+  margin-left: 10px;
+  color: #707ce8;
+  cursor: pointer;
 }
 
 .sort-option {
