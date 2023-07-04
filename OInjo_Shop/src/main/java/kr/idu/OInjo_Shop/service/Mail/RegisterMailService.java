@@ -35,7 +35,7 @@ public class RegisterMailService implements RegisterMailRepository {
         MimeMessage message = emailsender.createMimeMessage();
 
         message.addRecipients(RecipientType.TO, to);// 보내는 대상
-        message.setSubject("OInjo 회원가입 이메일 인증");// 제목
+        message.setSubject("OInjo 이메일 인증");// 제목
 
         String msgg = "";
         msgg += "<div style='margin:100px;'>";
@@ -120,10 +120,4 @@ public class RegisterMailService implements RegisterMailRepository {
         return ePw; // 메일로 보냈던 인증 코드를 서버로 반환
     }
 
-    @Override
-    public String sendPassword(String to) throws Exception {
-
-        ePw = createKey();
-        return null;
-    }
 }

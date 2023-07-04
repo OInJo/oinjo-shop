@@ -74,7 +74,6 @@ public class MemberController {
         }
     }
 
-
     @GetMapping("/member/login")
     public String loginForm() {
         return "/member/login";
@@ -181,10 +180,32 @@ public class MemberController {
         return "/member/findpw";
     }
 
+    @ResponseBody
     @PostMapping("/member/findpw")
-    public String findPassword(@RequestParam(value = "email") String email, Model model) throws Exception {
-        String pw = registerMailService.sendPassword(email);
-        return "/member/findpw";
+    public ResponseEntity<String> temporaryPassword(@RequestParam("email") String email, @RequestParam("code") String code) throws Exception {
+        // 이메일과 인증 코드를 받아온다
+
+        // 이메일과 인증 코드를 사용하여 저장된 인증 정보를 조회한다
+        MailEntity mailEntity = mailService.findByEmail(email);
+        if (mailEntity == null) {
+            return ResponseEntity.badRequest().body("이메일 주소가 유효하지 않습니다.");
+        }
+
+        // 입력된 인증 코드와 저장된 인증 코드를 비교한다
+        if (mailEntity.getCode().equals(code)) {
+            // 인증 코드 일치. 인증 성공 처리를 수행한다
+            memberService.temporaryPassword(email);
+            // 인증 성공 응답을 전송한다
+            return ResponseEntity.ok("이메일 인증이 완료되었습니다.");
+        } else {
+            // 인증 코드 불일치. 인증 실패 처리를 수행한다
+
+            // TODO: 인증 실패 처리 로직 추가
+
+            // 인증 실패 응답을 전송한다
+            return ResponseEntity.badRequest().body("인증 코드가 일치하지 않습니다.");
+        }
     }
+
 
 }

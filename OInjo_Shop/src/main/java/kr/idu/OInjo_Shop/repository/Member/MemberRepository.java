@@ -13,4 +13,5 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Long>,
     // 기본적으로 하나를 조회할 때 Repository는 Optional로 넘겨줌
 
     Optional<MemberEntity> findByMemberNameAndMemberPhone(String name, String phone);
+
 }
