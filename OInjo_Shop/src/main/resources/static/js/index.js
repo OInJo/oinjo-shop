@@ -1,11 +1,41 @@
 // 카테고리에서 후드 티셔츠를 클릭 시 상품 부분 맨 위에 후드 티셔츠로 표시되도록 하는 소스
 const selectName = document.querySelectorAll(".select-name");
-const nowCategory = document.querySelector(".now-category");
-const selectNameClickEvent = (event) => {
-  nowCategory.innerText = event.target.innerText;
-};
-for (let i = 0; i < selectName.length; i++) {
-  selectName[i].addEventListener("click", selectNameClickEvent);
+
+selectName.forEach((element) => {
+  element.addEventListener("click", selectNameClickEvent);
+});
+
+function selectNameClickEvent(event) {
+  const selectedValue = event.target.innerText.trim();
+  const isAlreadySelected = Array.from(document.querySelectorAll(".now-category")).some(category => category.textContent === selectedValue);
+
+  const allCategory = document.querySelector(".now-category");
+  if (allCategory && allCategory.textContent === "전체") {
+    allCategory.remove();
+  }
+
+  if (!isAlreadySelected) {
+    const newCategory = document.createElement("p");
+    newCategory.classList.add("now-category");
+    newCategory.textContent = selectedValue;
+
+    const closeButton = document.createElement("span");
+    closeButton.classList.add("close-button");
+    closeButton.textContent = "X";
+    closeButton.addEventListener("click", () => {
+      newCategory.remove();
+
+      if (!document.querySelector(".now-category")) {
+        const allCategory = document.createElement("div");
+        allCategory.classList.add("now-category");
+        allCategory.textContent = "전체";
+        document.querySelector(".brand-category-choose").appendChild(allCategory);
+      }
+    });
+
+    newCategory.appendChild(closeButton);
+    document.querySelector(".brand-category-choose").appendChild(newCategory);
+  }
 }
 
 const $topBtn = document.querySelector(".move-top-btn");
@@ -25,21 +55,3 @@ for (let i = 0; i < redColor.length; i++) {
   });
 }
 
-const loginCheck = document.querySelector(".login-check");
-const updateLink = document.querySelector(".update-link");
-const logoutLink = document.querySelector(".logout-link");
-const loginLink = document.querySelector(".login-link");
-loginCheck.style.display = "none";
-
-window.onload = () => {
-  if(loginCheck.textContent == "") {
-    updateLink.style.display = "none"
-    logoutLink.style.display = "none"
-    loginLink.style.display = "flex"
-  }
-  else if(loginCheck.textContent.length >= 1) {
-    updateLink.style.display = "flex"
-    logoutLink.style.display = "flex"
-    loginLink.style.display = "none"
-  }
-}

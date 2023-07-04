@@ -5,9 +5,13 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageRequestDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageResultDTO;
+import kr.idu.OInjo_Shop.entity.Mail.MailEntity;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.entity.Member.QMemberEntity;
+import kr.idu.OInjo_Shop.repository.Member.MailRepository;
 import kr.idu.OInjo_Shop.repository.Member.MemberRepository;
+import kr.idu.OInjo_Shop.repository.Member.RegisterMailRepository;
+import kr.idu.OInjo_Shop.service.Mail.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +30,8 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final RegisterMailRepository registerMailRepository;
+    private final MailRepository mailRepository;
     // final 선언으로 객체 생성, 할당 이후 변경 x
 
 
@@ -153,11 +159,62 @@ public class MemberService {
     }
 
     public void update(MemberDTO memberDTO) {
-        memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
-        // save 메서드는 ID가 없으면 insert 쿼리 수행, DB에 있을 경우 update 쿼리 수행
+        // 사용자가 입력한 비밀번호
+        String rawPassword = memberDTO.getMemberPassword();
+        // 비밀번호 해싱
+        String encodedPassword = passwordEncoder.encode(rawPassword);
+
+        // 업데이트할 회원 엔티티 가져오기
+        MemberEntity updatedMemberEntity = memberRepository.findById(memberDTO.getId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+
+        // 업데이트할 필드 설정
+        updatedMemberEntity.setMemberPassword(encodedPassword);
+
+        // 회원 정보 저장
+        memberRepository.save(updatedMemberEntity);
     }
+
 
     public void deleteById(Long id) {
         memberRepository.deleteById(id);
+    }
+
+    public MemberDTO findByMember(String name, String phone) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberNameAndMemberPhone(name, phone);
+        if (optionalMemberEntity.isPresent()) {
+            MemberEntity memberEntity = optionalMemberEntity.get();
+            return MemberDTO.toMemberDTO(memberEntity);
+        } else {
+            return null;
+        }
+    }
+
+
+    public String temporaryPassword(String email) throws Exception {
+        String ePw;
+        ePw = registerMailRepository.createKey(); // 랜덤 인증번호 생성
+
+        MailEntity mailEntity = mailRepository.findByEmail(email);
+        if (mailEntity != null) {
+            mailEntity.setCode(ePw);
+        } else {
+            mailEntity = new MailEntity(email, ePw);
+        }
+        mailRepository.save(mailEntity);
+
+        String encodedPassword = passwordEncoder.encode(ePw);
+
+        // 업데이트할 회원 엔티티 가져오기
+        MemberEntity updatedMemberEntity = memberRepository.findByMemberEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+
+        // 업데이트할 필드 설정
+        updatedMemberEntity.setMemberPassword(encodedPassword);
+
+        // 회원 정보 저장
+        memberRepository.save(updatedMemberEntity);
+
+        return ePw;
     }
 }

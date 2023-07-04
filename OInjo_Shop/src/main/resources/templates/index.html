@@ -1,17 +1,21 @@
-<!--  -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout1}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/layout1}">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="/images/logo.png">
+  <link rel="icon" href="images/logo.png">
+  <link rel="stylesheet" href="../static/css/root.css">
+  <link rel="stylesheet" href="../static/css/index.css">
+  <link rel="stylesheet" href="/root/index.css">
   <link rel="stylesheet" href="/css/index.css">
-  <link rel="stylesheet" href="../static/css/index.css">
   <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="../static/css/index.css">
-   <script src="/js/index.js" defer></script>
+  <script src="../static/js/root.js" defer></script>
+  <script src="../static/js/index.css" defer></script>
+  <script src="/js/root.js"></script>
+  <script src="/js/index.js" defer></script>
   <title>OInJo</title>
 </head>
 
@@ -81,36 +85,42 @@
         </ul>
       </div>
     </aside>
-<!--    <section>-->
-<!--      <div class="article-product-top">-->
-<!--        <div class="now-category">전체</div>-->
-<!--        <div class="sort-option">-->
-<!--          <button type="button" class="sort-option-button">최신순</button>-->
-<!--          <button type="button" class="sort-option-button">인기순</button>-->
-<!--          <button type="button" class="sort-option-button">가격 높은 순</button>-->
-<!--          <button type="button" class="sort-option-button">가격 낮은 순</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="article-product-wrapper">-->
-<!--        <article class="article-product" th:each="ItemFormDTO : ${itemFormDTOList}">-->
-<!--          <img th:each="ItemImgDTO : ${itemImgDTOList}" th:src="${ItemImgDTO.imgUrl}" alt="상품 이미지" class="article-product-image" id="item-img-src" th:if="${ItemImgDTO.itemId.itemId == ItemFormDTO.id && ItemImgDTO.repImgYn == 'Y'}">-->
-<!--          <ul class="article-product-size">-->
-<!--            <li th:each="size : ${sizeList}" th:text="${size.sizeName}" class="article-product-size-list"></li>-->
-<!--          </ul>-->
-<!--          <div class="article-product-name" th:text="${ItemFormDTO.itemName}"></div>-->
-<!--          <div class="article-product-brand" th:each="brand : ${brandList}"  th:if="${ItemFormDTO.brand.brandId == brand.brandId}" th:text="${brand.brandName}"></div>-->
-<!--          <div class="article-product-price">-->
-<!--            <div class="article-product-price-won" th:text="${ItemFormDTO.itemPrice}"></div>-->
-<!--            원-->
-<!--          </div>-->
-<!--          <div class="article-product-color">-->
-<!--            <p th:each="color : ${colorList}" th:if="${ItemFormDTO.color.colorId == color.colorId}" th:text="${color.colorName}"></p> 이렇게 하면 색상 테이블이 받아와지긴하는데 색상 테이블은 String이라서 색깔을 어떻게 표현해야 할지 고려 필요-->
-<!--            <i class="fa-solid fa-circle red-color"></i>-->
-<!--            <i class="fa-solid fa-circle blue-color"></i>-->
-<!--          </div>-->
-<!--        </article>-->
-<!--      </div>-->
-<!--    </section>-->
+
+    <section>
+      <div class="article-product-top">
+        <div class="brand-category-choose">
+          <p class="now-category">전체</p>
+        </div>
+        <div class="sort-option">
+          <button type="button" class="sort-option-button">최신순</button>
+          <button type="button" class="sort-option-button">인기순</button>
+          <button type="button" class="sort-option-button">가격 높은 순</button>
+          <button type="button" class="sort-option-button">가격 낮은 순</button>
+        </div>
+      </div>
+      <div class="article-product-wrapper">
+        <article class="article-product" th:each="ItemFormDTO : ${itemFormDTOList.dtoList}">
+          <img th:each="ItemImgDTO : ${itemImgDTOList}" th:src="${ItemImgDTO.imgUrl}" alt="상품 이미지"
+            class="article-product-image" id="item-img-src"
+            th:if="${ItemImgDTO.itemId.itemId == ItemFormDTO.id && ItemImgDTO.repImgYn == 'Y'}">
+          <ul class="article-product-size">
+            <li th:each="size : ${sizeList}" th:text="${size.sizeName}" class="article-product-size-list"></li>
+          </ul>
+          <div class="article-product-name" th:text="${ItemFormDTO.itemName}"></div>
+          <div class="article-product-brand" th:each="brand : ${brandList}"
+            th:if="${ItemFormDTO.brand.brandId == brand.brandId}" th:text="${brand.brandName}"></div>
+          <div class="article-product-price">
+            <div class="article-product-price-won" th:text="${ItemFormDTO.itemPrice}"></div>
+            원
+          </div>
+          <div class="article-product-color">
+            <i class="fa-solid fa-circle red-color"></i>
+            <i class="fa-solid fa-circle blue-color"></i>
+          </div>
+        </article>
+      </div>
+    </section>
+
 
   </main>
   <footer>

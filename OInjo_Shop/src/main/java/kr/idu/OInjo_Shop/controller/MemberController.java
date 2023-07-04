@@ -4,9 +4,9 @@ import kr.idu.OInjo_Shop.dto.Page.PageRequestDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageResultDTO;
 import kr.idu.OInjo_Shop.entity.Mail.MailEntity;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
-import kr.idu.OInjo_Shop.repository.Member.MailServiceInter;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.service.Mail.MailService;
+import kr.idu.OInjo_Shop.service.Mail.RegisterMailService;
 import kr.idu.OInjo_Shop.service.Member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +15,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
     // 생성자 주입
     private final MemberService memberService;
-    private final MailServiceInter EmailServiceImpl;
+    private final RegisterMailService registerMailService;
     private final MailService mailService;
 
     // 회원가입
@@ -41,7 +40,7 @@ public class MemberController {
     @ResponseBody
     @PostMapping("/login/mailAuthentication")
     public String mailConfirm(@RequestParam("email") String email) throws Exception {
-        String code = EmailServiceImpl.sendSimpleMessage(email);
+        String code = registerMailService.sendSimpleMessage(email);
         System.out.println("인증코드 : " + code);
         return code;
     }
@@ -74,7 +73,6 @@ public class MemberController {
             return ResponseEntity.badRequest().body("인증 코드가 일치하지 않습니다.");
         }
     }
-
 
     @GetMapping("/member/login")
     public String loginForm() {
@@ -160,5 +158,54 @@ public class MemberController {
         // 세션 초기화
         return "redirect:/";
     }
+
+    @GetMapping("/member/findid")
+    public String findEmail(){
+        return "/member/findid";
+    }
+
+    @PostMapping("/member/findid")
+    public String findEmail(@RequestParam(value = "name") String name, @RequestParam(value = "phone") String phone, Model model) {
+        MemberDTO memberDTO = memberService.findByMember(name, phone);
+        if (memberDTO != null) {
+            model.addAttribute("email", memberDTO.getMemberEmail());
+        } else {
+            model.addAttribute("email", "아이디가 존재하지 않습니다.");
+        }
+        return "/member/findid";
+    }
+
+    @GetMapping("/member/findpw")
+    public String findPassword(){
+        return "/member/findpw";
+    }
+
+    @ResponseBody
+    @PostMapping("/member/findpw")
+    public ResponseEntity<String> temporaryPassword(@RequestParam("email") String email, @RequestParam("code") String code) throws Exception {
+        // 이메일과 인증 코드를 받아온다
+
+        // 이메일과 인증 코드를 사용하여 저장된 인증 정보를 조회한다
+        MailEntity mailEntity = mailService.findByEmail(email);
+        if (mailEntity == null) {
+            return ResponseEntity.badRequest().body("이메일 주소가 유효하지 않습니다.");
+        }
+
+        // 입력된 인증 코드와 저장된 인증 코드를 비교한다
+        if (mailEntity.getCode().equals(code)) {
+            // 인증 코드 일치. 인증 성공 처리를 수행한다
+            memberService.temporaryPassword(email);
+            // 인증 성공 응답을 전송한다
+            return ResponseEntity.ok("이메일 인증이 완료되었습니다.");
+        } else {
+            // 인증 코드 불일치. 인증 실패 처리를 수행한다
+
+            // TODO: 인증 실패 처리 로직 추가
+
+            // 인증 실패 응답을 전송한다
+            return ResponseEntity.badRequest().body("인증 코드가 일치하지 않습니다.");
+        }
+    }
+
 
 }
