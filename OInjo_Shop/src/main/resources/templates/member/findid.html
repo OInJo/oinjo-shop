@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -10,19 +10,21 @@
 </head>
 
 <body>
-  <form action="">
+  <form action="/member/findid" method="post">
     <h3>아이디 찾기</h3>
     <div class="page-button-wrapper">
       <a href="#" class="page-button now-page">아이디 찾기</a>
       <a href="#" class="page-button other-page">비밀번호 찾기</a>
     </div>
     <div class="input-box-wrapper">
-      <input type="text" placeholder="이름" class="input-box name-input">
-      <input type="text" name="" id="" placeholder="전화번호(-없이)" class="input-box phone-number-input">
+      <input type="text" name="name" placeholder="이름" class="input-box name-input">
+      <input type="text" name="phone" id="" placeholder="전화번호(-없이)" class="input-box phone-number-input">
       <p class="phone-number-certification-error-message">전화번호 형식이 잘못되었습니다.</p>
     </div>
     <input type="submit" value="아이디 찾기" class="find-button">
   </form>
+  <p class="result-message">찾은 아이디: <span th:text="${email}"></span></p>
+
 </body>
 
 </html>
