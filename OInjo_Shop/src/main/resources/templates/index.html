@@ -99,7 +99,7 @@
         </div>
       </div>
       <div class="article-product-wrapper">
-        <article class="article-product" th:each="ItemFormDTO : ${itemFormDTOList.dtoList}">
+        <a class="article-product" th:each="ItemFormDTO : ${itemFormDTOList.dtoList}" th:href="@{'/item/view/' + ${ItemFormDTO.id}}">
           <img th:each="ItemImgDTO : ${itemImgDTOList}" th:src="${ItemImgDTO.imgUrl}" alt="상품 이미지"
             class="article-product-image" id="item-img-src"
             th:if="${ItemImgDTO.itemId.itemId == ItemFormDTO.id && ItemImgDTO.repImgYn == 'Y'}">
@@ -117,7 +117,7 @@
             <i class="fa-solid fa-circle red-color"></i>
             <i class="fa-solid fa-circle blue-color"></i>
           </div>
-        </article>
+        </a>
       </div>
     </section>
 
