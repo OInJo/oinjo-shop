@@ -48,9 +48,11 @@ public class MemberService {
         // repository의 save메서드 호출 (조건. entity객체를 넘겨줘야 함)
     }
 
-    /* 중복 회원 기능 미구현 private void validateDuplicateMember(MemberEntity member) {
+    /*
+    중복 회원 기능 미구현
+    private void validateDuplicateMember(MemberEntity member) {
         Optional<MemberEntity> findMember = memberRepository.findByMemberEmail(member.getMemberEmail());
-        if(findMember != null) {
+        if(findMember.isPresent()) {
             throw new IllegalStateException("이미 가입된 회원입니다");
         }
     } */
