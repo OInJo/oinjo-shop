@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.Address;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
@@ -27,8 +28,6 @@ public class AddressController {
     private final MemberRepository memberRepository;
     private final AddressRepository addressRepository;
     private final AddressService addressService;
-
-
 
     @GetMapping(value = {"/address/list", "/address/list/{page}"})
     public String listAddress(@PathVariable("page") Optional<Integer> page, Model model, HttpSession session) {
@@ -80,6 +79,13 @@ public class AddressController {
             return ResponseEntity.badRequest().body("주소 업데이트에 실패했습니다아.");
         }
     }
+
+    @DeleteMapping("/address/delete/{id}")
+    public String deleteAddress(@PathVariable("id") Long id, HttpSession session) {
+        addressRepository.deleteById(id);
+        return "redirect:/address/list";
+    }
+
 
 
 

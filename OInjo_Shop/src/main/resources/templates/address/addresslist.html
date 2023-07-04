@@ -19,12 +19,15 @@
     <div class="card d-flex">
         <div th:each="address : ${member.addressList}" class="d-flex mb-3">
             <div class="align-self-center w-75">
-                <form th:action="@{'/address/up-form/'+ ${address.addressId}}" th:object="${address}" method="get">
+                <form th:action="@{'/address/up-form/'+ ${address.addressId}}"method="get">
                     <span th:if="${address.address == memberDto.memberAddress}" class="n-label delv reserv">기본배송지</span>
                     <span th:text="${member.name}" class="fs24 font-weight-bold"></span>
                     <br>
                     <span th:text="${address.address}" class="fs24 font-weight-bold"></span>
                     <button type="submit" class="btn btn-primary" style="" onclick="">수정</button>
+                </form>
+                <form th:action="@{'/address/delete/'+ ${address.addressId}}" th:method="delete">
+                    <button type="submit" class="btn btn-primary" style="" onclick="">삭제</button>
                 </form>
             </div>
         </div>
