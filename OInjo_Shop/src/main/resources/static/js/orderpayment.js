@@ -1,5 +1,5 @@
 function address_popup() {
-    var popup = window.open('orderpaymentpopup.html', '배송지', 'width=600, height=700, left=0, top=0');
+    var popup = window.open('/address/list', '배송지', 'width=600, height=700, left=0, top=0');
 
     '<p><button onclick="window.close()">닫기</button>';
   // 팝업 창의 document 객체를 사용하여 내용 삽입

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -18,89 +18,93 @@
     <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
-    <section class="delivery-information">
+<section class="delivery-information">
 
-        <div class="location-info">
-            <h3 class="user-info">배송 정보</h3>
-            <div class="info-box">
-                <div class="address">
-                    <span>배송지</span>
-                    <input type="radio" class="current-address">기존 배송지
-                    <button type="button" class="new-address" onclick="address_popup()">배송지 변경</button>
-                </div>
+    <div class="location-info">
+        <h3 class="user-info">배송 정보</h3>
+        <div class="info-box">
+            <div class="address">
+                <span>배송지</span>
+                <input type="radio" class="current-address">기존 배송지
+                <button type="button" class="new-address" onclick="address_popup()">배송지 변경</button>
+            </div>
 
-                <div class="name-number">이름/연락처
-                    <span>이름딴</span>/
-                    <span>010-1111-1111</span>
-                </div>
 
-                <div class="juso">주소
+            <div class="name-number">이름/연락처
+                <span>[[${memberDto.memberName}]]</span>/
+                <span>[[${memberDto.memberPhone}]]</span>
+            </div>
+
+
+            <div class="juso">주소
                 <div class="go-delivery">
-                        <input type="text" id="postcode" placeholder="우편번호">
-                        <input type="text" id="road-address" placeholder="도로명주소">
-                        <input type="text" id="jibun-address" placeholder="지번주소">
-                        <input type="text" id="detail-address" placeholder="상세주소">
-                        <input type="text" id="extra-address" placeholder="참고항목">
+                    <input type="text" id="postcode" placeholder="우편번호">
+                    <span th:text="${memberDto.memberAddress}" id="address"></span>
+                    <input type="text" id="detail-address" placeholder="상세주소">
                 </div>
-                </div>
+            </div>
 
-                <div class="requested">배송 요청사항
-                    <select class="requested-selected">
-                        <option value="" selected="selected">배송 시 요청사항 선택해주세요</option>
-                        <option value="경비실에 맡겨주세요">경비실에 맡겨주세요</option>
-                        <option value="집 앞에 놔주세요">집 앞에 놔주세요</option>
-                        <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다</option>
-                        <option value="안전하게 배송 부탁드립니다">안전하게 배송 부탁드립니다</option>
-                    </select>
-                </div>
+
+            <div class="requested">배송 요청사항
+                <select class="requested-selected">
+                    <option value="" selected="selected">배송 시 요청사항 선택해주세요</option>
+                    <option value="경비실에 맡겨주세요">경비실에 맡겨주세요</option>
+                    <option value="집 앞에 놔주세요">집 앞에 놔주세요</option>
+                    <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다</option>
+                    <option value="안전하게 배송 부탁드립니다">안전하게 배송 부탁드립니다</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="items-info-box">
+        <h3 class="items-info">상품 정보</h3>
+        <div class="info-box2">
+            <img th:src="${itemDto.itemImgDTOList[0].imgUrl}" class="items-img"> <!--상품이미지-->
+            <div class="items-option-info">
+                <span class="items-name">이름: </span>
+                <span th:text="${itemDto.itemName}"></span>
+                <span class="items-one-price">가격: </span>
+                <span th:text="${itemDto.itemPrice}"></span>
+                <span class="won">원</span>
+                <span class="items-option">옵션: </span>
+                <span class="items-option1">white</span>
+                <span class="items-option-num">수량:</span>
+                <span class="items-option2">2</span>
+                <span class="won">개</span>
+                <span class="delivery-price">배송비:</span>
+                <span class="free">무료</span>
+            </div>
+            <div class="total-price">총 주문금액:
+                <span class="total-order-price">40000</span>
+                <span class="won">원</span>
 
             </div>
         </div>
+    </div>
 
-        <div class="items-info-box">
-            <h3 class="items-info">상품 정보</h3>
-            <div class="info-box2">
-                <img src="" class="items-img"> <!--상품이미지-->
-                <div class="items-option-info">
-                    <span class="items-name">상품이름(반팔)</span>
-                    <span class="items-one-price">가격:</span>
-                    <span class="items-option-price">20000</span>
-                    <span class="won">원</span>
-                    <span class="items-option">옵션: </span>
-                    <span class="items-option1">white</span>
-                    <span class="items-option-num">수량:</span>
-                    <span class="items-option2">2</span>
-                    <span class="won">개</span>
-                    <span class="delivery-price">배송비:</span>
-                    <span class="free">무료</span>
-                </div>
-                <div class="total-price">총 주문금액: 
-                    <span class="total-order-price">40000</span>
-                    <span class="won">원</span>
-
-                </div>
-            </div>
+    <div class="payment-info-box">
+        <h3 class="payment-info">결제 정보</h3>
+        <div class="payment-method">
+            <button class="payment-button">카드</button>
+            <button class="payment-button">휴대폰결제</button>
+            <button class="payment-button">가상계좌</button>
+            <button class="payment-button">계좌이체</button>
+            <button class="payment-button">카카오페이</button>
+            <button class="payment-button">네이버페이</button>
+            <button class="payment-button">삼성페이</button>
+            <button class="payment-button">다른 방식</button>
         </div>
+    </div>
+    </div>
 
-        <div class="payment-info-box">
-            <h3 class="payment-info">결제 정보</h3>
-            <div class="payment-method">
-                <button class="payment-button">카드</button>
-                <button class="payment-button">휴대폰결제</button>
-                <button class="payment-button">가상계좌</button>
-                <button class="payment-button">계좌이체</button>
-                <button class="payment-button">카카오페이</button>
-                <button class="payment-button">네이버페이</button>
-                <button class="payment-button">삼성페이</button>
-                <button class="payment-button">다른 방식</button>
-                </div>
-            </div>
-        </div>
+    <input type="submit" class="go-payment" onclick="order()" value="결제하기">
 
-        <input type="submit" class="go-payment" value="결제하기">
 
-    </section>
+</section>
 </body>
 </html>

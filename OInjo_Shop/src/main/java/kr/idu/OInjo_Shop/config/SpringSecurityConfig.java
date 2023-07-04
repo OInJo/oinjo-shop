@@ -38,7 +38,7 @@ public class SpringSecurityConfig {
                 .antMatchers("/api/**").hasRole(Role.USER.name())   //USER 권한을 가진 사람만 접근 가능
 
                 //.anyRequest(): 설정된 값 외에 나머지 URL
-                .anyRequest().authenticated()   //나머지 URL은 인증된 사용자에게만 허용(로그인한 사용자만)
+                .anyRequest().permitAll()   //나머지 URL은 인증된 사용자에게만 허용(로그인한 사용자만)
                 .and()  //authorizeRequests() 종료 지점
                 .logout().logoutSuccessUrl("/") //로그아웃 후 이동 페이지 지정
                 .and()
