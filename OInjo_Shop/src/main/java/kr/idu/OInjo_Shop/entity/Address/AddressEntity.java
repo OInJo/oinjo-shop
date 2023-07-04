@@ -24,10 +24,7 @@ public class AddressEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private MemberEntity member;
-
-    @Column(nullable = false)
     private String address;
-
 
     public static AddressEntity createAddress(MemberEntity member, AddressDto addressDto) {
         return AddressEntity.builder()

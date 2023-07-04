@@ -9,6 +9,7 @@ import kr.idu.OInjo_Shop.entity.Item.Relation.ColorEntity;
 import kr.idu.OInjo_Shop.entity.Item.Relation.SizeEntity;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 
+import kr.idu.OInjo_Shop.exception.OutOfStockException;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="item")
+@Table(name = "item")
 @Getter
 @Setter
 @ToString
@@ -27,17 +28,17 @@ import java.util.List;
 public class ItemEntity extends BaseEntity {
 
     @Id
-    @Column(name="item_id")
+    @Column(name = "item_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long itemId; // 상품 코드
 
-    @Column (nullable = false, length = 50)
+    @Column(nullable = false, length = 50)
     private String itemName; // 상품명
 
-    @Column (name="price", nullable = false)
+    @Column(name = "price", nullable = false)
     private int itemPrice; // 상품 가격
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private int itemStock; //재고수량
 
     @Enumerated(EnumType.STRING)
@@ -48,24 +49,24 @@ public class ItemEntity extends BaseEntity {
 
 
     @OneToOne
-    @JoinColumn(name ="brandId")
+    @JoinColumn(name = "brandId")
     private BrandEntity brand;
 
     @OneToOne
-    @JoinColumn(name ="colorId")
+    @JoinColumn(name = "colorId")
     private ColorEntity color;
 
     @OneToOne
-    @JoinColumn(name ="sizeId")
+    @JoinColumn(name = "sizeId")
     private SizeEntity size;
 
     @OneToOne
-    @JoinColumn(name ="categoryId")
+    @JoinColumn(name = "categoryId")
     private CategoryEntity category;
 
 
     public void updateItem(ItemFormDTO itemFormDTO) {
-        this.itemName= itemFormDTO.getItemName();
+        this.itemName = itemFormDTO.getItemName();
         this.itemPrice = itemFormDTO.getItemPrice();
         this.itemStock = itemFormDTO.getItemStock();
         this.itemSellStatus = itemFormDTO.getItemSellStatus();
@@ -76,4 +77,12 @@ public class ItemEntity extends BaseEntity {
         this.category = itemFormDTO.getCategory();
     }
 
+    public void decreaseItem(int stockNumber) {     //상품 주문시 상품의 재고를 감소시키는 로직
+        int restStock = this.itemStock - stockNumber;
+        if (restStock < 0)
+            throw new OutOfStockException("상품의 재고가 부족합니다(현재 수량: " + this.itemStock + ")");
+        this.itemStock = restStock;
+    }
 }
+
+

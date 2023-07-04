@@ -38,6 +38,12 @@ public class AddressService {
             addressListDto.addAddressDto(addressDto);
             addressListDtos.add(addressListDto);
         }
+        for (AddressListDto addressListDto : addressListDtos) {
+            System.out.println(addressListDto); // AddressListDto의 toString() 메서드가 정의되어 있다면 해당 메서드가 호출되어 값이 출력됩니다.
+            // 또는 원하는 속성을 개별적으로 출력할 수도 있습니다.
+            // ...
+        }
+
 
         return new PageImpl<>(addressListDtos, pageable, totalCount);
     }
@@ -51,16 +57,14 @@ public class AddressService {
     public void setDefaultAddress(String email, AddressDto addressDto) {
         MemberEntity member = memberRepository.findByMemberEmail(email)
                 .orElseThrow(EntityNotFoundException::new);
-        System.out.println("==="+addressDto.getAddressId());
         List<AddressEntity> addresses = member.getAddresses();
         for (AddressEntity address : addresses) {
             if (address.getId().equals(addressDto.getAddressId())) {
-                System.out.println("반복문안에 들어옴");
+
                 AddressEntity findAddress = AddressEntity.builder()
                         .address(addressDto.getAddress())
                         .build();
                 member.setAddressFromAddressList(findAddress);
-                System.out.println("==============="+findAddress.getAddress()+"=================");
                 break;
             }
         }
