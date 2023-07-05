@@ -20,6 +20,59 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
+<script th:inline="javascript">
+    $(document).ready(function(){
+
+        calculateToalPrice();
+
+        $("#count").change( function(){
+            calculateToalPrice();
+        });
+    });
+
+    function calculateToalPrice(){
+        var count = $("#count").val();
+        var price = $("#price").val();
+        var totalPrice = price*count;
+        $("#totalPrice").html(totalPrice + '원');
+    }
+
+    function order(){
+        console.log("HOHOHOHOHOHOHOHOHO");
+        var url = "/order";
+        var paramData = {
+            itemId : $("#itemId").val(),
+            count : $("#count").val()
+        };
+
+        var param = JSON.stringify(paramData);
+        console.log(param);
+        $.ajax({
+            url      : url,
+            type     : "POST",
+            contentType : "application/json",
+            data     : param,
+            beforeSend : function(xhr){
+            },
+            dataType : "json",
+            cache   : false,
+            success  : function(result, status){
+                alert("주문이 완료 되었습니다.");
+                location.href='/';
+            },
+            error : function(jqXHR, status, error){
+
+                if(jqXHR.status == '401'){
+                    alert('로그인 후 이용해주세요');
+                    location.href='/members/login';
+                } else{
+                    alert(jqXHR.responseText);
+                }
+
+            }
+        });
+    }
+</script>
 <body>
 <section class="delivery-information">
 
