@@ -13,9 +13,5 @@ public class OrderItemDto {
     private int count;
 
 
-
-    public OrderItemDto(OrderItemEntity orderItem) {
-//        this.itemNm = orderItem
-
-    }
+    
 }
