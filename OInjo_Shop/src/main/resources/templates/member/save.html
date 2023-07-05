@@ -1,154 +1,121 @@
-
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" type="text/css" href="/css/save.css">
-    <link rel="stylesheet" href="../../static/css/save.css">
-    <script src="/js/save.js" defer></script>
-    <script src="../../static/js/save.js" defer></script>
-    <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/images/logo.png">
+  <link rel="stylesheet" href="/css/save.css">
+  <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
+  <script src="/js/save.js" defer></script>
+  <title>회원가입</title>
 </head>
 
 <body>
-    <div class="save-form">
-        <form action="/member/save" method="post">
-            <section class="save-first-form" id="first-form">
-                <a href="./">
-                    <h1 class="logo-text">OInJo</h1>
-                </a>
-                <h3>회원가입</h3>
-                <div id="name-form">
-                    <div class="user-form">
-                        <input id="user-name" class="user-input" name="memberName" type="text" placeholder="이름" />
-                        <label for="user-name" class="user-label" data-content="이름">
-                            <span class="hidden--visually">
-                                이름</span></label>
-                    </div>
+  <form class="save-form-wrapper" action="/member/save" method="post">
+    <!-- 이름, 닉네임, 전화번호 -->
+    <article class="save-article first-article">
+      <h3 class="save-title">회원가입</h3>
+      <nav class="save-nav">
+        <div class="step now"></div>
+        <div class="step"></div>
+        <div class="step"></div>
+        <div class="step"></div>
+      </nav>
+      <div class="input-wrapper">
+        <i class="fa-regular fa-user icon name-icon"></i>
+        <input type="text" placeholder="이름" class="input name-input" name="memberName">
+        <p class="wrong-form-message hidden">이름 양식이 잘못되었습니다.</p>
+      </div>
+      <div class="input-wrapper">
+        <i class="fa-regular fa-user icon nickname-icon"></i>
+        <input type="text" placeholder="닉네임" class="input nickname-input" name="memberNickname">
+        <p class="wrong-form-message hidden">닉네임 양식이 잘못되었습니다.</p>
+      </div>
+      <div class="input-wrapper">
+        <i class="fa-solid fa-phone icon tel-icon"></i>
+        <input type="text" placeholder="휴대폰 번호" class="input tel-input" name="memberPhone">
+        <p class="wrong-form-message hidden">휴대폰 양식이 잘못되었습니다.</p>
+      </div>
+      <button type="button" class="next-button first-article-next-button">다음</button>
+      <p class="login-return-button">이미 회원이신가요? <a href="/member/login" class="login-return-tag">로그인으로 돌아가기</a></p>
+    </article>
+    <!-- 주소 -->
+    <article class="save-article second-article hidden">
+      <h3 class="save-title">회원가입</h3>
+      <nav class="save-nav">
+        <div class="step"></div>
+        <div class="step now"></div>
+        <div class="step"></div>
+        <div class="step"></div>
+      </nav>
+      <div class="input-wrapper">
+        <div class="address-input-wrapper">
+          <button type="button" class="zipcode">12345</button> <!-- 우편번호 들어가는 곳-->
+          <button type="button" class="address-search-button">우편번호 검색</button>
+        </div>
+        <input type="text" name="" readonly class="first-address address-input" placeholder="기본주소">
+        <!-- 서울시 노원구 인덕아파트, 우편번호 검색 시 자동으로 입력되므로 readonly-->
+        <input type="text" class="last-address address-input" placeholder="상세주소" name="memberAddress"> <!-- 101동 101호-->
+        <p class="wrong-form-message hidden">주소 양식이 잘못되었습니다.</p>
+      </div>
+      <button type="button" class="next-button second-article-next-button">다음</button>
+      <p class="login-return-button">이미 회원이신가요? <a href="/member/login">로그인으로 돌아가기</a></p>
+    </article>
 
-                    <div class="user-form">
-                        <input id="user-nickname" type="text" class="user-input" name="memberNickname"
-                            placeholder="닉네임" />
-                        <label for="user-nickname" class="user-label" data-content="닉네임"><span
-                                class="hidden--visually">닉네임</span></label>
-                    </div>
-                    <div class="first-page-btn">
-                        <button type="button" class="next-button first-page-move-btn" onclick="js:begin()"><i
-                                class="fa-solid fa-angles-right"></i></button>
-                    </div>
-                </div>
-            </section>
+    <!-- 이메일, 인증번호 -->
+    <article class="save-article third-article hidden">
+      <h3 class="save-title">회원가입</h3>
+      <nav class="save-nav">
+        <div class="step"></div>
+        <div class="step"></div>
+        <div class="step now"></div>
+        <div class="step"></div>
+      </nav>
+      <div class="input-wrapper">
+        <div class="email-input-wrapper">
+          <i class="fa-solid fa-envelope icon email-icon"></i>
+          <input type="email" placeholder="이메일" class="input email-input" name="memberEmail">
+          <button type="button" class="certification-start-button">전송</button>
+        </div>
+        <div class="certification-input-wrapper">
+          <i class="fa-solid fa-question icon certification-icon"></i>
+          <input type="text" name="certification" placeholder="인증번호" class="input certification-number">
+          <button type="button" class="certification-button">인증번호 확인</button>
+          <p class="wrong-form-message hidden">인증번호가 잘못되었습니다.</p>
+        </div>
+      </div>
+      <button type="button" class="next-button third-article-next-button">다음</button>
+      <p class="login-return-button">이미 회원이신가요? <a href="/member/login">로그인으로 돌아가기</a></p>
+    </article>
 
+    <!-- 비밀번호, 비밀번호 확인 -->
+    <article class="save-article fourth-article hidden">
+      <h3 class="save-title">회원가입</h3>
+      <nav class="save-nav">
+        <div class="step"></div>
+        <div class="step"></div>
+        <div class="step"></div>
+        <div class="step now"></div>
+      </nav>
+      <div class="input-wrapper">
+        <div class="password-input-wrapper">
+          <i class="fa-solid fa-key password-icon"></i>
+          <input type="password" name="memberPassword" placeholder="비밀번호" class="password-input">
+          <i class="fa-solid fa-eye password-toggle-button"></i>
+        </div>
 
-            <section id="second-form" class="save-second-form">
-                <a href="./">
-                    <h1 class="logo-text">OInJo</h1>
-                </a>
-                <h3>회원가입</h3>
-                <div id="phone-form">
-                    <div class="user-form">
-                        <input id="user-phone" class="user-input" name="memberPhone" type="text"
-                            onkeypress="return checkNumber(event)" maxlength="11" placeholder="전화번호" />
-                        <label for="user-phone" class="user-label" data-content="전화번호">
-                            <span class="hidden--visually">
-                                전화번호</span></label>
-                    </div>
-
-                    <div class="user-form">
-                        <input id="user-address" type="text" class="user-input" name="memberAddress" placeholder="주소" />
-                        <label for="user-address" class="user-label" data-content="주소"><span
-                                class="hidden--visually">주소</span></label>
-                    </div>
-                    <div class="center-page-btn">
-                    <button type="button" class="next-button" onclick="first_page()"><i
-                        class="fa-solid fa-angles-left"></i></button>
-
-                    <button type="button" class="back-page" onclick="second_third()"><i
-                        class="fa-solid fa-angles-right"></i></button>
-                </div>
-
-                </div>
-            </section>
-
-
-            <section id="third-form" class="save-third-form">
-                <a href="./">
-                    <h1 class="logo-text">OInJo</h1>
-                </a>
-                <h3>회원가입</h3>
-                <div id="email-form">
-                    <div class="user-form">
-                        <input id="user-email" class="user-input" name="memberEmail" type="email" placeholder="이메일" />
-                        <label for="user-email" class="user-label" data-content="이메일">
-
-                            <span class="hidden--visually">
-                                이메일</span></label>
-                        <button type="button" class="search-button certification-start-button"><span>인증</span></button>
-                    </div>
-
-                    <div class="user-form">
-                        <input id="user-certification" class="user-input certification-number" name="certification" type="text"
-                            placeholder="인증번호" />
-                        <label for="user-certification" class="user-label" data-content="인증번호">
-                            <span class="hidden--visually">
-                                인증번호</span></label>
-                        <button type="button" class="search-button certification-button"><span>확인</span></button>
-                    </div>
-                    
-                    <div class="center-page-btn">
-                    <button type="button" class="next-button" onclick="second_page()"><i
-                        class="fa-solid fa-angles-left"></i></button>
-
-                    <button type="button" class="back-page" onclick="third_fourth()"><i
-                        class="fa-solid fa-angles-right"></i></button>
-                </div>
-                </div>
-            </section>
-
-            <section id="fourth-form" class="save-fourth-form">
-                <a href="./">
-                    <h1 class="logo-text">OInJo</h1>
-                </a>
-                <h3>회원가입</h3>
-                <div class="password-form">
-                    <div class="user-form">
-                        <input id="user-password" type="password" class="user-input password-input"
-                            name="memberPassword" onkeyup="send()" placeholder="비밀번호" />
-                        <label for="user-password" class="user-label" data-content="비밀번호"><span
-                                class="hidden--visually">비밀번호</span></label>
-                        <div class="password-clear">X</div>
-                    </div>
-
-                    <div class="user-form">
-                        <input id="user-password2" type="password" class="user-input re-password-input"
-                            name="memberPassword2" onchange="check_password()" onkeyup="send()" placeholder="비밀번호 확인" />
-                        <label for="user-password2" class="user-label" data-content="비밀번호 확인"><span
-                                class="hidden--visually">비밀번호 확인</span></label>
-                        <span id="check"></span>
-                    </div>
-                    <div class="last-page-btn">
-                    <button type="button" class="back-page" onclick="third_page()"><i
-                        class="fa-solid fa-angles-left"></i></button>
-                    <input type="submit" class="save-button" id="savebtn" value="가입" disabled>
-                </div>
-                </div>
-            </section>
-        </form>
-    </div>
-</body>
-
-</html>
+        <div class="repassword-input-wrapper">
+          <i class="fa-solid fa-key repassword-icon"></i>
+          <input type="password" name="" placeholder="비밀번호 재입력" class="repassword-input">
+          <i class="fa-solid fa-eye repassword-toggle-button"></i>
+          <p class="wrong-form-message hidden">전화번호가 잘못되었습니다.</p>
+        </div>
+      </div>
+      <button type="submit" class="next-button submit-button">가입하기</button>
+      <p class="login-return-button">이미 회원이신가요? <a href="/member/login">로그인으로 돌아가기</a></p>
+    </article>
+  </form>
 </body>
 
 </html>

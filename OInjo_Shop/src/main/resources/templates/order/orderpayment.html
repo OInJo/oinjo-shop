@@ -21,47 +21,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <script th:inline="javascript">
-    // var counts = [[${orderDto.count}]];
-    // $(document).ready(function(){
-    //
-    //     calculateToalPrice();
-    //
-    //     counts.change( function(){
-    //         calculateToalPrice();
-    //     });
-    // });
-    //
-    // function calculateToalPrice(){
-    //     var count = counts
-    //     var price = [[${itemDto.itemPrice}]]
-    //     var totalPrice = price*count;
-    //     $("#totalPrice").html(totalPrice + '원');
-    // }
-    //
-    // function pay_order() {
-    //     var url = "/orders/pay";
-    //
-    //     var paramData = {
-    //         itemId: [[${orderDto.itemId}]],
-    //         count: [[${orderDto.count}]]
-    //     };
-    //     console.log(paramData);
-    //     $.ajax({
-    //         url: url,
-    //         type: "POST",
-    //         contentType: "application/json",
-    //         data: JSON.stringify(paramData),
-    //         success: function(result, status) {
-    //             alert("주문이 완료되었습니다");
-    //             location.href="/orders/completion"
-    //         },
-    //         error: function (jqXHR, status, error) {
-    //             // 주소 업데이트 실패 시 동작할 코드 작성
-    //             alert("주소 업데이트에 실패했습니다.");
-    //             // 추가 동작이 필요한 경우 여기에 작성
-    //         }
-    //     });
-    // }
     $(document).ready(function(){
 
         calculateToalPrice();
@@ -72,35 +31,44 @@
     });
 
     function calculateToalPrice(){
-        var count = $("#count").val();          //타임리프로 값을 히든처리하고 이런식으로 받아와도 좋을듯
+        var count = $("#count").val();
         var price = $("#price").val();
         var totalPrice = price*count;
         $("#totalPrice").html(totalPrice + '원');
     }
 
-    function pay_order(){
-        var url = "/orders/pay";
+    function order(){
+        console.log("HOHOHOHOHOHOHOHOHO");
+        var url = "/order";
         var paramData = {
-            itemId : [[${orderDto.itemId}]],
+            itemId : $("#itemId").val(),
             count : $("#count").val()
         };
 
         var param = JSON.stringify(paramData);
-        console.log(paramData);
+        console.log(param);
         $.ajax({
             url      : url,
             type     : "POST",
             contentType : "application/json",
-            data: JSON.stringify(paramData),
+            data     : param,
+            beforeSend : function(xhr){
+            },
+            dataType : "json",
+            cache   : false,
             success  : function(result, status){
                 alert("주문이 완료 되었습니다.");
-                location.href = "/orders/completion"
+                location.href='/';
             },
             error : function(jqXHR, status, error){
+
                 if(jqXHR.status == '401'){
                     alert('로그인 후 이용해주세요');
                     location.href='/members/login';
+                } else{
+                    alert(jqXHR.responseText);
                 }
+
             }
         });
     }
