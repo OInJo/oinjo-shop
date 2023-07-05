@@ -15,23 +15,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Member;
-=======
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
-
-import javax.persistence.EntityNotFoundException;
-import javax.servlet.http.HttpSession;
-import java.security.Principal;
-import java.util.List;
->>>>>>> 6c97e99e067a8464523b74c1fd7195d2f22464f3
 
 @Controller
 @RequiredArgsConstructor
@@ -56,7 +44,7 @@ public class OrderController {
 
         return "order/orderpayment";
     }
-<<<<<<< HEAD
+
 
     @PostMapping("/orders/form")        // /orders/form으로 값을 넘겨주는 역할
     public @ResponseBody ResponseEntity orderSend(@RequestBody OrderDto orderDto, HttpSession session) {
@@ -78,6 +66,7 @@ public class OrderController {
             return ResponseEntity.badRequest().body("오류입니다");
         }
     }
+
     @GetMapping("/orders/completion")
     public String paymentCompleted(Model model, HttpSession session) {
         String email = (String) session.getAttribute("loginEmail");
@@ -86,19 +75,4 @@ public class OrderController {
 
         return "order/paymentcompleted";
     }
-
-=======
-    @PostMapping("/order")
-    public @ResponseBody ResponseEntity order(@RequestBody OrderDto orderDto, BindingResult bindingResult,
-                                              HttpSession session) {
-        String email = (String)session.getAttribute("loginEmail");
-        Long orderId;
-        try {
-            orderId = orderService.order(orderDto, email);  //화면으로부터 넘어오는 주문 정보와 회원의 이메일 정보를 이용하여 주문 로직을 호출
-        } catch (Exception e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<Long>(orderId, HttpStatus.OK);        //결과값으로 생성된 주문 정보와 요청이 성공했다는 HTTP 응답 상태 코드 반환
-    }
->>>>>>> 6c97e99e067a8464523b74c1fd7195d2f22464f3
 }
