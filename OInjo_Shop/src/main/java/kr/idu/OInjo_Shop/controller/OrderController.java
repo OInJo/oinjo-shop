@@ -1,5 +1,6 @@
 package kr.idu.OInjo_Shop.controller;
 
+import com.querydsl.core.types.Order;
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.dto.Order.OrderDto;
@@ -14,13 +15,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Member;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,18 +32,47 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping("/orders/form")
-    public String orderMain(@RequestParam("itemId") Long itemId, Model model, HttpSession session) {
+    public String orderMain(Model model, HttpSession session) {
         String email = (String) session.getAttribute("loginEmail");
+        OrderDto orderDto = (OrderDto) session.getAttribute("orderDto");
         MemberEntity member = memberRepository.findByMemberEmail(email)
                 .orElseThrow(EntityNotFoundException::new);
         MemberDTO memberDto = MemberDTO.toMemberDTO(member);
-//        ItemEntity item = itemRepository.findById(itemId)     //상품의 아이디를 통해 상품 엔티티를 조회함. 존재하지 않은 경우 예외를 발생시킨다.
-//                .orElseThrow(EntityNotFoundException::new);
-//        ItemFormDTO itemFormDto = ItemFormDTO.of(item);
-        ItemFormDTO itemFormDto = itemService.getItemDetail(itemId);
+        ItemFormDTO itemFormDto = itemService.getItemDetail(orderDto.getItemId());
+        model.addAttribute("orderDto", orderDto);
         model.addAttribute("itemDto", itemFormDto);
         model.addAttribute("memberDto", memberDto);
+
         return "order/orderpayment";
+    }
+
+    @PostMapping("/orders/form")        // /orders/form으로 값을 넘겨주는 역할
+    public @ResponseBody ResponseEntity orderSend(@RequestBody OrderDto orderDto, HttpSession session) {
+        try {
+            session.setAttribute("orderDto", orderDto);
+            return ResponseEntity.ok("완료");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("오류입니다.");
+        }
+    }
+
+    @PostMapping("/orders/pay")
+    public @ResponseBody ResponseEntity orderPay(@RequestBody OrderDto orderDto, HttpSession session) {
+        try {
+            String email = (String) session.getAttribute("loginEmail");
+            orderService.order(orderDto, email);
+            return ResponseEntity.ok("완료");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("오류입니다");
+        }
+    }
+    @GetMapping("/orders/completion")
+    public String paymentCompleted(Model model, HttpSession session) {
+        String email = (String) session.getAttribute("loginEmail");
+        MemberEntity member = memberRepository.findByMemberEmail(email)
+                .orElseThrow(EntityNotFoundException::new);
+
+        return "order/paymentcompleted";
     }
 
 }

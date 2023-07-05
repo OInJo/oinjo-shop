@@ -1,7 +1,7 @@
 package kr.idu.OInjo_Shop.config;
 
 
-import kr.idu.OInjo_Shop.Role.Role;
+import kr.idu.OInjo_Shop.role.Role;
 import kr.idu.OInjo_Shop.service.Member.OAuthUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

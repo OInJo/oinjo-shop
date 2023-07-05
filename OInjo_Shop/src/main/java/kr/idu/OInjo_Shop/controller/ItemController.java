@@ -2,6 +2,7 @@ package kr.idu.OInjo_Shop.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import kr.idu.OInjo_Shop.dto.Item.Relation.BrandDTO;
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.CategoryDTO;
@@ -144,28 +145,31 @@ public class ItemController {
     @GetMapping("/item/{itemId}")
     public String itemDetail(@PathVariable("itemId") Long itemId, Model model, HttpServletResponse response) {
 
-        try {
+//        try {
             ItemFormDTO itemFormDTO = itemService.getItemDetail(itemId);
             model.addAttribute("itemFormDTO", itemFormDTO);
 
-            // 상품 정보를 JSON 문자열로 변환
-            ObjectMapper objectMapper = new ObjectMapper();
-            String itemJson = objectMapper.writeValueAsString(itemFormDTO);
-
-            // 상품 정보를 담은 쿠키 생성
-            Cookie cookie = new Cookie("recentItem", itemJson);
-            cookie.setMaxAge(60 * 60 * 24); // 쿠키의 유효 기간 설정 (예: 1일)
-            cookie.setPath("/"); // 쿠키의 유효 경로 설정 (예: 모든 경로에서 사용 가능)
-
-            // 쿠키를 응답 헤더에 추가하여 클라이언트에게 전달
-            response.addCookie(cookie);
-        } catch (EntityNotFoundException e) {
-            model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
-            model.addAttribute("itemFormDTO", new ItemFormDTO());
-            return "item/detail";
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+//            // 상품 정보를 JSON 문자열로 변환
+//            ObjectMapper objectMapper = new ObjectMapper();
+//            objectMapper.registerModule(new JavaTimeModule());//추가
+//            String itemJson = objectMapper.writeValueAsString(itemFormDTO);
+//            itemJson = itemJson.replace("\"", ""); // 큰따옴표 제거
+//            itemJson = itemJson.replace(",", ""); // 쉼표 제거
+//
+//            // 상품 정보를 담은 쿠키 생성
+//            Cookie cookie = new Cookie("recentItem", itemJson);
+//            cookie.setMaxAge(60 * 60 * 24); // 쿠키의 유효 기간 설정 (예: 1일)
+//            cookie.setPath("/"); // 쿠키의 유효 경로 설정 (예: 모든 경로에서 사용 가능)
+//
+//            // 쿠키를 응답 헤더에 추가하여 클라이언트에게 전달
+//            response.addCookie(cookie);
+//        } catch (EntityNotFoundException e) {
+//            model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
+//            model.addAttribute("itemFormDTO", new ItemFormDTO());
+//            return "item/detail";
+//        } catch (JsonProcessingException e) {
+//            throw new RuntimeException(e);
+//        }
 
         return "item/detail";
     }

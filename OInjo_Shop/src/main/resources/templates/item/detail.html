@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org%22%3E/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -11,11 +11,39 @@
   <link rel="stylesheet" href="/css/detail.css">
   <script src="/js/detail.js" defer></script>
   <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js%22%3E"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js%22%3E"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js%22%3E"></script>
   <title>상품 상세</title>
 </head>
+
+<script th:inline="javascript">
+  function orders() {
+    var url = "/orders/form";
+
+    var paramData = {
+      itemId: document.querySelector("#itemId").value,
+      count: document.querySelector("#count").value
+    };
+    console.log(paramData);
+    $.ajax({
+      url: url,
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(paramData),
+      success: function(result, status) {
+        location.href = "/orders/form";
+      },
+      error: function (jqXHR, status, error) {
+        // 주소 업데이트 실패 시 동작할 코드 작성
+        alert("주소 업데이트에 실패했습니다.");
+        // 추가 동작이 필요한 경우 여기에 작성
+      }
+    });
+  }
+</script>
+
+
 <body>
   <main>
     <section>
@@ -29,7 +57,7 @@
           </div>
         </div>
         <div class="detail-right">
-          <h4 class="detail-title">유스풀 벌룬 후드집업 그레이</h4>
+          <h4 class="detail-title" >유스풀 벌룬 후드집업 그레이</h4>
           <div class="detail-content-wrapper">
             <div class="detail-content-left">
               <div>상품명</div>
@@ -39,6 +67,7 @@
               <div>판매가</div>
               <div>색상</div>
               <div>사이즈</div>
+              <div>수량</div>
             </div>
             <div class="detail-content-right">
               <div>페플 유스풀 벌룬 후드집업 그레이</div>
@@ -61,6 +90,9 @@
                   <option value="m">M</option>
                   <option value="l">L</option>
                 </select>
+              </div>
+              <div>
+                <input type="number" name="count" id="count" class="form-control" value="1" min="1">
               </div>
             </div>
           </div>
@@ -91,8 +123,8 @@
           <div class="buy-button-wrapper">
 
             <!-- 여기부터 -->
-            <input type="hidden" name="itemId" id=itemId th:value="${item.id}">
-            <button class="buy-button now-buy-button">바로 구매하기</button>
+            <input type="hidden" name="itemId" id="itemId" th:value="${itemFormDTO.id}">
+            <button class="buy-button now-buy-button" onclick="orders()">바로 구매하기</button>
             <!-- 여기까지 추가했음 주문하기 test 해보고 수정할 것 input type hidden 추가했음-->
 
             <button class="buy-button shopping-bag-button">장바구니 담기</button>

@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "order")
+@Table(name = "orders")         //order는 예약어라 orders로 바꿈
 public class OrderEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class OrderEntity extends BaseEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "id")
     private MemberEntity member;        //한명의 회원의 여러개의 주문을 할 수 있다.
 
     private LocalDateTime orderDate;

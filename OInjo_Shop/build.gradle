@@ -41,6 +41,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
+
+
 	//oauth2.0 Implementation
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
