@@ -5,8 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/images/logo.png">
+  <link rel="stylesheet" href="../../static/css/save.css">
   <link rel="stylesheet" href="/css/save.css">
   <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
+  <script src="../../static/js/save.js" defer></script>
   <script src="/js/save.js" defer></script>
   <title>회원가입</title>
 </head>
@@ -25,19 +27,19 @@
       <div class="input-wrapper">
         <i class="fa-regular fa-user icon name-icon"></i>
         <input type="text" placeholder="이름" class="input name-input" name="memberName">
-        <p class="wrong-form-message hidden">이름 양식이 잘못되었습니다.</p>
+        <p class="wrong-form-message name-wrong hidden">이름은 2자 이상입니다.</p>
       </div>
       <div class="input-wrapper">
         <i class="fa-regular fa-user icon nickname-icon"></i>
         <input type="text" placeholder="닉네임" class="input nickname-input" name="memberNickname">
-        <p class="wrong-form-message hidden">닉네임 양식이 잘못되었습니다.</p>
+        <p class="wrong-form-message nickname-wrong hidden">닉네임은 필수입니다.</p>
       </div>
       <div class="input-wrapper">
-        <i class="fa-solid fa-phone icon tel-icon"></i>
-        <input type="text" placeholder="휴대폰 번호" class="input tel-input" name="memberPhone">
-        <p class="wrong-form-message hidden">휴대폰 양식이 잘못되었습니다.</p>
+        <i class="fa-solid fa-phone icon phone-icon"></i>
+        <input type="text" placeholder="전화번호(-없이)" class="input phone-input" name="memberPhone">
+        <p class="wrong-form-message phone-wrong hidden">전화번호 양식이 잘못되었습니다. ex)01012345678</p>
       </div>
-      <button type="button" class="next-button first-article-next-button">다음</button>
+      <button type="button" class="next-button first-article-next-button" disabled>다음</button>
       <p class="login-return-button">이미 회원이신가요? <a href="/member/login" class="login-return-tag">로그인으로 돌아가기</a></p>
     </article>
     <!-- 주소 -->
@@ -51,15 +53,15 @@
       </nav>
       <div class="input-wrapper">
         <div class="address-input-wrapper">
-          <button type="button" class="zipcode">12345</button> <!-- 우편번호 들어가는 곳-->
+          <button type="button" class="zipcode"></button> <!-- 우편번호 들어가는 곳-->
           <button type="button" class="address-search-button">우편번호 검색</button>
         </div>
         <input type="text" name="" readonly class="first-address address-input" placeholder="기본주소">
         <!-- 서울시 노원구 인덕아파트, 우편번호 검색 시 자동으로 입력되므로 readonly-->
         <input type="text" class="last-address address-input" placeholder="상세주소" name="memberAddress"> <!-- 101동 101호-->
-        <p class="wrong-form-message hidden">주소 양식이 잘못되었습니다.</p>
+        <p class="wrong-form-message address-wrong">주소는 필수입니다.</p>
       </div>
-      <button type="button" class="next-button second-article-next-button">다음</button>
+      <button type="button" class="next-button second-article-next-button" disabled>다음</button>
       <p class="login-return-button">이미 회원이신가요? <a href="/member/login">로그인으로 돌아가기</a></p>
     </article>
 
@@ -102,17 +104,18 @@
         <div class="password-input-wrapper">
           <i class="fa-solid fa-key password-icon"></i>
           <input type="password" name="memberPassword" placeholder="비밀번호" class="password-input">
-          <i class="fa-solid fa-eye password-toggle-button"></i>
+          <i class="fa-solid fa-eye-slash password-toggle-button"></i>
         </div>
 
         <div class="repassword-input-wrapper">
           <i class="fa-solid fa-key repassword-icon"></i>
           <input type="password" name="" placeholder="비밀번호 재입력" class="repassword-input">
-          <i class="fa-solid fa-eye repassword-toggle-button"></i>
-          <p class="wrong-form-message hidden">전화번호가 잘못되었습니다.</p>
+          <i class="fa-solid fa-eye-slash repassword-toggle-button"></i>
+          <p class="wrong-form-message password-wrong hidden ">비밀번호가 영문자, 숫자가 포함된 6자 이상이지 않습니다.</p>
+          <p class="wrong-form-message password-match-wrong hidden">비밀번호가 일치하지 않습니다.</p>
         </div>
       </div>
-      <button type="submit" class="next-button submit-button">가입하기</button>
+      <button type="submit" class="next-button submit-button" disabled>가입하기</button>
       <p class="login-return-button">이미 회원이신가요? <a href="/member/login">로그인으로 돌아가기</a></p>
     </article>
   </form>
