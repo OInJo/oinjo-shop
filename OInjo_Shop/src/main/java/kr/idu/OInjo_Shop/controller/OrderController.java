@@ -61,10 +61,10 @@ public class OrderController {
         try {
             String email = (String) session.getAttribute("loginEmail");
             orderService.order(orderDto, email);
-            return ResponseEntity.ok("완료");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("오류입니다");
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+        return ResponseEntity.ok("완료");
     }
 
     @GetMapping("/orders/completion")

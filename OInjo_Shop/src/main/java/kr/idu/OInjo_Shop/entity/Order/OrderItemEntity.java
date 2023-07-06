@@ -35,7 +35,7 @@ public class OrderItemEntity extends BaseEntity {
         OrderItemEntity orderItem = new OrderItemEntity();
         orderItem.setItem(item);
         orderItem.setCount(count);
-        orderItem.setOrderPrice(item.getItemPrice());
+        orderItem.setOrderPrice(item.getItemPrice()*count);
 
 
         item.decreaseItem(count);
