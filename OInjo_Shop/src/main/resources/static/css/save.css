@@ -191,3 +191,14 @@ a {
   top: 0;
   right: 0;
 }
+
+.wrong {
+  color:#ff3f3f;
+  border-color:#ff3f3f;
+}
+
+.validation-pass {
+  background-color:cornflowerblue;
+}
+
+
