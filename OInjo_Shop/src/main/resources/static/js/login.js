@@ -1,70 +1,45 @@
-const del = document.querySelector(".delete");
-const inputText = document.querySelector("#input-text"); 
-
-function testFunction() {
-  inputText.value = "";
-}
-del.addEventListener("click", testFunction); 
-// delete X
-
-const loginText = document.querySelector(".login-text");
-const idInput = document.querySelector(".id-input");
+const emailInput = document.querySelector(".email-input");
+const emailIcon = document.querySelector(".email-icon")
 const passwordInput = document.querySelector(".password-input");
+const passwordIcon = document.querySelector(".password-icon")
+const loginFailText = document.querySelector(".login-fail-text");
 const loginButton = document.querySelector(".login-button");
-const saveButton = document.querySelector(".save-button");
-const idButton = document.querySelector(".id-button");
-const pwButton = document.querySelector(".pw-button");
-const selectBar = document.querySelector(".select-bar");
-selectBar.addEventListener("change", function (e) {
-  console.log(e.target.value);
-  if (e.target.value == "ko") {
-    loginText.textContent = "로그인";
-    idInput.placeholder = "이메일";
-    passwordInput.placeholder = "비밀번호";
-    loginButton.value = "로그인";
-    saveButton.textContent = "회원가입";
-    idButton.textContent = "아이디 찾기";
-    pwButton.textContent = "비밀번호 찾기";
+
+emailInput.addEventListener("focus", () => {
+  emailIcon.classList.add("input-focus")
+})
+emailInput.addEventListener("blur", () => {
+  emailIcon.classList.remove("input-focus")
+})
+passwordInput.addEventListener("focus", () => {
+  passwordIcon.classList.add("input-focus")
+})
+passwordInput.addEventListener("blur", () => {
+  passwordIcon.classList.remove("input-focus")
+})
+
+emailInput.addEventListener("input", () => {
+  if (emailInput.value.length > 0 && passwordInput.value.length > 0) {
+    loginButton.classList.add("validation-pass");
+  } else {
+    loginButton.classList.remove("validation-pass");
   }
-  if (e.target.value == "en") {
-    loginText.textContent = "Login";
-    idInput.placeholder = "Email";
-    passwordInput.placeholder = "Password";
-    loginButton.value = "Login";
-    saveButton.textContent = "Sign Up";
-    idButton.textContent = "Find ID";
-    pwButton.textContent = "Find Password";
+});
+
+passwordInput.addEventListener("input", () => {
+  if (emailInput.value.length > 0 && passwordInput.value.length > 0) {
+    loginButton.classList.add("validation-pass");
+  } else {
+    loginButton.classList.remove("validation-pass");
+  }
+});
+
+loginButton.addEventListener("click", (event) => {
+  if(emailInput.value.length == 0 || passwordInput.value.length == 0) {
+    loginFailText.classList.remove("hidden");
+    event.preventDefault();
+  }
+  else {
+    loginFailText.classList.add("hidden");
   }
 })
-// 번역
-
-
-// const id= document.querySelector(".id-input");
-// const pw= document.querySelector("#.input-text");
-
-// id.addEventListener("submit", (event) =>{
-//   event.preventDefault();
-// })
-
-const id = document.querySelector(".id-input");
-const pw = document.querySelector(".password-input");
-const btn = document.querySelector(".login-button");
-
-
-id.addEventListener("change", () => { // 한번 disabled 되면 addEventListener 작동 안함
-  if(id.value.length > 0 && pw.value.length > 0){
-    btn.disabled = false;
-  }
-  else {
-    btn.disabled = true;
-  }
-});
-
-pw.addEventListener("change", () => { // 한번 disabled 되면 addEventListener 작동 안함
-  if(pw.value.length > 0 && pw.value.length > 0){
-    btn.disabled = false;
-  }
-  else {
-    btn.disabled = true;
-  }
-});
