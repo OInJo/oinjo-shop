@@ -4,8 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="images/logo.png">
   <link rel="stylesheet" href="../../static/css/findid.css">
+  <link rel="stylesheet" href="/css/findid.css">
+  <link rel="stylesheet" href="/js/font.js" defer>
   <script src="../../static/js/findid.js" defer></script>
+  <script src="/js/findid.js" defer></script>
+  <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
   <title>아이디 찾기</title>
 </head>
 
@@ -13,18 +18,24 @@
   <form action="/member/findid" method="post">
     <h3>아이디 찾기</h3>
     <div class="page-button-wrapper">
-      <a href="#" class="page-button now-page">아이디 찾기</a>
-      <a href="#" class="page-button other-page">비밀번호 찾기</a>
+      <a href="/member/findid" class="page-button now-page">아이디 찾기</a>
+      <a href="/member/findpw" class="page-button other-page">비밀번호 찾기</a>
     </div>
     <div class="input-box-wrapper">
-      <input type="text" name="name" placeholder="이름" class="input-box name-input">
-      <input type="text" name="phone" id="" placeholder="전화번호(-없이)" class="input-box phone-number-input">
-      <p class="phone-number-certification-error-message">전화번호 형식이 잘못되었습니다.</p>
-    </div>
-    <input type="submit" value="아이디 찾기" class="find-button">
-  </form>
-  <p class="result-message">찾은 아이디: <span th:text="${email}"></span></p>
+      <div class="name-input-wrapper">
+        <i class="fa-regular fa-user input-icon name-icon"></i>
+        <input type="text" name="name" placeholder="이름" class="input-box name-input">
+      </div>
+      <div class="phone-input-wrapper">
+        <i class="fa-solid fa-phone input-icon phone-icon"></i>
+        <input type="text" name="phone" id="" placeholder="전화번호(-없이)" class="input-box phone-number-input">
+      </div>
+      <p class="findid-error-message hidden">이름, 전화번호를 입력하세요.</p>
+      <p class="result-message">조회된 아이디는 <span th:text="${email}" class="findid-value"></span></p>
 
+    </div>
+    <button type="submit" class="find-button">아이디 찾기</button>
+  </form>
 </body>
 
 </html>

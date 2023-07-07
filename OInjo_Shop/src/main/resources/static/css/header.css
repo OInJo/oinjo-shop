@@ -8,7 +8,7 @@ a {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 110px;
+  height: 100px;
   padding: 1%;
   box-sizing: border-box;
   background-color: black;
@@ -61,21 +61,21 @@ a {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 10%;
+  gap: 20px;
   font-size: 20px;
-  padding-right:1.5%;
+  padding-right:1%;
   box-sizing: border-box;
 }
 
 .tooltip-container {
   position: relative;
   display: inline-block;
+  padding:15px;
 }
 
 .tooltip-container:hover{
   background-color: #333;
   border-radius:50%;
-  padding:15px;
   box-sizing: border-box;
 }
 
@@ -163,7 +163,7 @@ a {
 
   .header-right {
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-end;
     font-size: 16px;
   }
   .tooltip-icon{
