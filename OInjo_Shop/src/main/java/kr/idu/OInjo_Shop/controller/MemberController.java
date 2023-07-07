@@ -170,7 +170,7 @@ public class MemberController {
         if (memberDTO != null) {
             model.addAttribute("email", memberDTO.getMemberEmail());
         } else {
-            model.addAttribute("email", "아이디가 존재하지 않습니다.");
+            model.addAttribute("email", "없습니다.");
         }
         return "/member/findid";
     }

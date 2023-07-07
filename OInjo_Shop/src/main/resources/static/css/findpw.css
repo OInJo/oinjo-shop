@@ -5,7 +5,7 @@
   width: 340px;
   position: relative;
   margin-top: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   box-sizing: border-box;
 }
@@ -15,7 +15,7 @@
   all: unset;
   width: 340px;
   height: 40px;
-  padding:10px 5px;
+  padding: 10px 5px;
   box-sizing: border-box;
 }
 
@@ -24,6 +24,40 @@
   position: absolute;
   right: 10px;
   top: 10px;
-  color: rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.7);
   font-size: 14px;
+}
+
+.input-submit-buutton:hover {
+  color: black;
+}
+
+.input-box {
+  width: 70%;
+  padding: 0 1%;
+}
+
+
+.find-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.focus-border {
+  border-bottom:1px solid black;
+}
+
+.focus-color {
+  color:black;
+}
+
+.border-red {
+  border-bottom:1px solid red;
+}
+
+.hidden {
+  display:none;
 }
