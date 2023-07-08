@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -23,13 +24,23 @@ public class ItemRelationController {
     private final RelationService relationService; // 카테고리, 브랜드, 컬러, 사이즈
 
     @GetMapping(value = "/admin/brand/new")
-    public String brandForm(Model model) {
-        List<BrandDTO> brandDTOList = relationService.findAllBrand(); // 브랜드 리스트
-        // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
-        model.addAttribute("brandList", brandDTOList);
-        model.addAttribute("brandDTO", new BrandDTO());
-        return "admin/brandupload";
+    public String brandForm(Model model, HttpSession session) {
+        // 특정 이메일을 확인하고자 하는 이메일 주소
+        String allowedEmail = "Admin@naver.com";
+
+        // 현재 로그인한 사용자의 이메일 주소 가져오기
+        String loginEmail = (String) session.getAttribute("loginEmail");
+
+        if (loginEmail != null && loginEmail.equals(allowedEmail)) {
+            List<BrandDTO> brandDTOList = relationService.findAllBrand();
+            model.addAttribute("brandList", brandDTOList);
+            model.addAttribute("brandDTO", new BrandDTO());
+            return "admin/brandupload";
+        } else {
+            return "redirect:/";
+        }
     }
+
 
     @GetMapping("/admin/brand/delete/{id}")
     public String deleteBrandById(@PathVariable Long id)
@@ -39,13 +50,23 @@ public class ItemRelationController {
     }
 
     @GetMapping(value = "/admin/category/new")
-    public String categoryForm(Model model) {
-        List<CategoryDTO> categoryDTOList = relationService.findAllCategory(); // 카테고리 리스트
-        // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
-        model.addAttribute("categoryList", categoryDTOList);
-        model.addAttribute("categoryDTO", new CategoryDTO());
-        return "admin/categoryupload";
+    public String categoryForm(Model model, HttpSession session) {
+        // 특정 이메일을 확인하고자 하는 이메일 주소
+        String allowedEmail = "Admin@naver.com";
+
+        // 현재 로그인한 사용자의 이메일 주소 가져오기
+        String loginEmail = (String) session.getAttribute("loginEmail");
+
+        if (loginEmail != null && loginEmail.equals(allowedEmail)) {
+            List<CategoryDTO> categoryDTOList = relationService.findAllCategory();
+            model.addAttribute("categoryList", categoryDTOList);
+            model.addAttribute("categoryDTO", new CategoryDTO());
+            return "admin/categoryupload";
+        } else {
+            return "redirect:/";
+        }
     }
+
 
     @GetMapping("/admin/category/delete/{id}")
     public String deleteCategoryById(@PathVariable Long id)
@@ -55,13 +76,23 @@ public class ItemRelationController {
     }
 
     @GetMapping(value = "/admin/color/new")
-    public String colorForm(Model model) {
-        List<ColorDTO> colorDTOList = relationService.findAllColor(); // 컬러 리스트
-        // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
-        model.addAttribute("colorList", colorDTOList);
-        model.addAttribute("colorDTO", new ColorDTO());
-        return "admin/colorupload";
+    public String colorForm(Model model, HttpSession session) {
+        // 특정 이메일을 확인하고자 하는 이메일 주소
+        String allowedEmail = "Admin@naver.com";
+
+        // 현재 로그인한 사용자의 이메일 주소 가져오기
+        String loginEmail = (String) session.getAttribute("loginEmail");
+
+        if (loginEmail != null && loginEmail.equals(allowedEmail)) {
+            List<ColorDTO> colorDTOList = relationService.findAllColor();
+            model.addAttribute("colorList", colorDTOList);
+            model.addAttribute("colorDTO", new ColorDTO());
+            return "admin/colorupload";
+        } else {
+            return "redirect:/";
+        }
     }
+
 
     @GetMapping("/admin/color/delete/{id}")
     public String deleteColorById(@PathVariable Long id)
@@ -71,13 +102,23 @@ public class ItemRelationController {
     }
 
     @GetMapping(value = "/admin/size/new")
-    public String sizeForm(Model model) {
-        List<SizeDTO> sizeDTOList = relationService.findAllSize(); // 사이즈 리스트
-        // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
-        model.addAttribute("sizeList", sizeDTOList);
-        model.addAttribute("sizeDTO", new SizeDTO());
-        return "admin/sizeupload";
+    public String sizeForm(Model model, HttpSession session) {
+        // 특정 이메일을 확인하고자 하는 이메일 주소
+        String allowedEmail = "Admin@naver.com";
+
+        // 현재 로그인한 사용자의 이메일 주소 가져오기
+        String loginEmail = (String) session.getAttribute("loginEmail");
+
+        if (loginEmail != null && loginEmail.equals(allowedEmail)) {
+            List<SizeDTO> sizeDTOList = relationService.findAllSize();
+            model.addAttribute("sizeList", sizeDTOList);
+            model.addAttribute("sizeDTO", new SizeDTO());
+            return "admin/sizeupload";
+        } else {
+            return "redirect:/";
+        }
     }
+
 
     @GetMapping("/admin/size/delete/{id}")
     public String deleteSizeById(@PathVariable Long id)

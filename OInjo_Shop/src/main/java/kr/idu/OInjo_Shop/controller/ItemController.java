@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,18 +38,31 @@ public class ItemController {
     private final RelationService relationService; // 카테고리, 브랜드, 컬러, 사이즈
 
     @GetMapping(value = "/admin/item/new")
-    public String itemUploadForm(Model model) {
-        List<BrandDTO> brandDTOList = relationService.findAllBrand(); // 브랜드 리스트
-        List<CategoryDTO> categoryDTOList = relationService.findAllCategory(); // 카테고리 리스트
-        List<ColorDTO> colorDTOList = relationService.findAllColor(); // 컬러 리스트
-        List<SizeDTO> sizeDTOList = relationService.findAllSize(); // 사이즈 리스트
-        model.addAttribute("brandList", brandDTOList); // 브랜드 리스트 받아오기
-        model.addAttribute("categoryList", categoryDTOList); // 카테고리 리스트 받아오기
-        model.addAttribute("colorList", colorDTOList); // 컬러 리스트 받아오기
-        model.addAttribute("sizeList", sizeDTOList); // 사이즈 리스트 받아오기
-        model.addAttribute("itemFormDTO", new ItemFormDTO());
-        return "/admin/itemupload";
+    public String itemUploadForm(Model model, HttpSession session) {
+        // 특정 이메일을 확인하고자 하는 이메일 주소
+        String allowedEmail = "Admin@naver.com";
+
+        // 현재 로그인한 사용자의 이메일 주소 가져오기
+        String loginEmail = (String) session.getAttribute("loginEmail");
+
+        // 로그인한 사용자의 이메일 주소가 특정 이메일과 일치하는지 확인
+        if (loginEmail != null && loginEmail.equals(allowedEmail)) {
+            List<BrandDTO> brandDTOList = relationService.findAllBrand();
+            List<CategoryDTO> categoryDTOList = relationService.findAllCategory();
+            List<ColorDTO> colorDTOList = relationService.findAllColor();
+            List<SizeDTO> sizeDTOList = relationService.findAllSize();
+            model.addAttribute("brandList", brandDTOList);
+            model.addAttribute("categoryList", categoryDTOList);
+            model.addAttribute("colorList", colorDTOList);
+            model.addAttribute("sizeList", sizeDTOList);
+            model.addAttribute("itemFormDTO", new ItemFormDTO());
+            return "/admin/itemupload";
+        } else {
+            // 특정 이메일이 아닌 경우 접근 제한 처리
+            return "redirect:/";
+        }
     }
+
 
 
 
@@ -81,7 +95,7 @@ public class ItemController {
                               @RequestParam(value = "perPagination", required = false, defaultValue = "5") int perPagination,
                               @RequestParam(value = "type", required = false, defaultValue = "n") String type,
                               @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
-                              Model model) {
+                              Model model, HttpSession session) {
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
                 .page(page)
                 .perPage(perPage)
@@ -90,26 +104,46 @@ public class ItemController {
                 .keyword(keyword)
                 .build();
 
-        PageResultDTO<ItemFormDTO, Object[]> itemFormDTOList = itemService.getAllItemList(pageRequestDTO);
-        model.addAttribute("itemList", itemFormDTOList);
-        return "/test/itemList";
+        String allowedEmail = "Admin@naver.com";
+
+        // 현재 로그인한 사용자의 이메일 주소 가져오기
+        String loginEmail = (String) session.getAttribute("loginEmail");
+
+        if (loginEmail != null && loginEmail.equals(allowedEmail)) {
+            PageResultDTO<ItemFormDTO, Object[]> itemFormDTOList = itemService.getAllItemList(pageRequestDTO);
+            model.addAttribute("itemList", itemFormDTOList);
+            return "/test/itemList";
+        }
+        else
+            return "redirect:/";
     }
 
     @GetMapping("/admin/item/{itemId}")
-    public String adminItemDetail(@PathVariable("itemId") Long itemId, Model model) {
+    public String adminItemDetail(@PathVariable("itemId") Long itemId, Model model, HttpSession session) {
 
-        try {
-            ItemFormDTO itemFormDTO = itemService.getItemDetail(itemId);
-            model.addAttribute("itemFormDTO", itemFormDTO);
+        // 특정 이메일을 확인하고자 하는 이메일 주소
+        String allowedEmail = "Admin@naver.com";
 
-        } catch (EntityNotFoundException e) {
-            model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
-            model.addAttribute("itemFormDTO", new ItemFormDTO());
+        // 현재 로그인한 사용자의 이메일 주소 가져오기
+        String loginEmail = (String) session.getAttribute("loginEmail");
+
+        if (loginEmail != null && loginEmail.equals(allowedEmail)) {
+            try {
+                ItemFormDTO itemFormDTO = itemService.getItemDetail(itemId);
+                model.addAttribute("itemFormDTO", itemFormDTO);
+
+            } catch (EntityNotFoundException e) {
+                model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
+                model.addAttribute("itemFormDTO", new ItemFormDTO());
+                return "test/itemView";
+            }
+
             return "test/itemView";
+        } else {
+            return "redirect:/";
         }
-
-        return "test/itemView";
     }
+
 
     @PostMapping("/admin/item/{itemId}")
     public String itemUpdate(ItemFormDTO itemFormDTO, BindingResult bindingResult,
@@ -135,7 +169,7 @@ public class ItemController {
     }
 
     @DeleteMapping("/admin/item/{itemId}/delete")
-    public String deleteItemById(@PathVariable("itemId") Long id)
+    public String deleteItemById(@PathVariable("itemId") Long id, HttpSession session)
     {
         itemService.deleteItemById(id);
         return "redirect:/member/";
