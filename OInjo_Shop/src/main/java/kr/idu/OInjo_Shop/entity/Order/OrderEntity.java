@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "orders")         //order는 예약어라 orders로 바꿈
 public class OrderEntity extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "order_id")
     private Long id;
 

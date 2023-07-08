@@ -52,27 +52,58 @@ form {
   margin-top: 10px;
 }
 
-.input-box {
-  all: unset;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
-  padding: 10px 5px;
+.name-input-wrapper, .phone-input-wrapper {
+  width: 100%;
+  position: relative;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.find-button {
+.input-icon {
+  position: absolute;
+  left:5px;
+  color:rgba(0, 0, 0, 0.5);
+}
+
+.input-box {
+  all: unset;
+  width:100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 10px 25px;
+  box-sizing: border-box;
+}
+
+.find-button, .find-button-copy-design {
   all: unset;
   margin-top: 20px;
   width: 340px;
   height: 30px;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
   padding: 10px 0;
   border-radius: 3px;
 }
 
-.phone-number-certification-error-message {
+.find-button:hover{
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.findid-error-message, .result-message {
   margin: 3px;
-  color:red;
-  display:none;
+  color:#ff3f3f;
+}
+
+.validation-pass {
+  background-color:cornflowerblue;
+}
+
+.focus-design-color {
+  color:black;
+}
+
+.focus-design-border{
+  border-bottom:1px solid black;
 }
