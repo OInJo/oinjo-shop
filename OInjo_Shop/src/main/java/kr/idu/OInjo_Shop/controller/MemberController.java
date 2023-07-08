@@ -100,21 +100,32 @@ public class MemberController {
                           @RequestParam(value = "perPagination", required = false, defaultValue = "5") int perPagination,
                           @RequestParam(value = "type", required = false, defaultValue = "e") String type,
                           @RequestParam(value = "keyword", required = false, defaultValue = "@") String keyword,
-                          Model model) {
-        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
-                .page(page)
-                .perPage(perPage)
-                .perPagination(perPagination)
-                .type(type)
-                .keyword(keyword)
-                .build();
-        // Model 객체 => html로 가져갈 데이터가 있을 경우 사용
-        PageResultDTO<MemberDTO, MemberEntity> resultDTO = memberService.getAllList(pageRequestDTO);
-        // List => DTO 객체가 담겨있음 [여러가지 데이터 가져올 때 List]
-        model.addAttribute("result", resultDTO);
-        // model 객체로 list 담아감감
-        return "/admin/memberlist";
+                          Model model,
+                          HttpSession session) {
+        // 특정 이메일을 확인하고자 하는 이메일 주소
+        String allowedEmail = "Admin@naver.com";
+
+        // 현재 로그인한 사용자의 이메일 주소 가져오기
+        String loginEmail = (String) session.getAttribute("loginEmail");
+
+        if (loginEmail != null && loginEmail.equals(allowedEmail)) {
+            PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                    .page(page)
+                    .perPage(perPage)
+                    .perPagination(perPagination)
+                    .type(type)
+                    .keyword(keyword)
+                    .build();
+
+            PageResultDTO<MemberDTO, MemberEntity> resultDTO = memberService.getAllList(pageRequestDTO);
+            model.addAttribute("result", resultDTO);
+
+            return "/admin/memberlist";
+        } else {
+            return "redirect:/";
+        }
     }
+
 
     @GetMapping("/member/{id}")
     public String findById(@PathVariable("id") Long id, Model model) {
