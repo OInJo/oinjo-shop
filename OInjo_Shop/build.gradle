@@ -60,15 +60,22 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+
+//기본값으로 Qclass를 생성하면 빌드 디렉토리에 들어가는데, gradle build할 때 스캔하는 영역과 ide가 스캔할 때 인텔리제이가 스캔하는 영역이 중복스캔이 일어날 수 있다.
+//그래서 이런 문제를 해결하기 위해 Qclass의 생성 폴더 위치를 강제로 변경
 // Querydsl 설정부
 def generated = 'src/main/generated'
 
+//자바 컴파일할 때 소스 아웃풋 디렉토리를 바꾸는 코드이다.
 // querydsl QClass 파일 생성 위치를 지정
 tasks.withType(JavaCompile) {
 	options.getGeneratedSourceOutputDirectory().set(file(generated))
 }
 
 // java source set 에 querydsl QClass 위치 추가
+//추가한 새로운 디렉토리를 sourceSet에 등록한다.
+//Gradle에서는 하나의 Source 디렉터리만 지원을 하는데, 하나 이상의 Source 디렉터리를 Gradle에서 처리를 하기 위해서
+// SourceSets에 Source 디렉터리를 등록해 주면 된다.
 sourceSets {
 	main.java.srcDirs += [ generated ]
 }

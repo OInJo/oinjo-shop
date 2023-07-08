@@ -50,9 +50,10 @@
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(paramData),
-            success: function (result, status) {
+            success: function (response, status) {
+                var orderId = response;     //response에는 서버 응답의 데이터가 들어있다.
                 alert("주문이 완료 되었습니다.");
-                location.href = '/orders/completion';
+                location.href = '/orders/completion/'+orderId;
             },
             error: function (jqXHR, status, error) {
 

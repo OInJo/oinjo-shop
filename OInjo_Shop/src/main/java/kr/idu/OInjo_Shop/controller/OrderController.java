@@ -4,13 +4,19 @@ import com.querydsl.core.types.Order;
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.dto.Order.OrderDto;
+import kr.idu.OInjo_Shop.dto.Order.OrderHistDto;
 import kr.idu.OInjo_Shop.entity.Item.ItemEntity;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
+import kr.idu.OInjo_Shop.entity.Order.OrderEntity;
 import kr.idu.OInjo_Shop.repository.Item.ItemRepository;
 import kr.idu.OInjo_Shop.repository.Member.MemberRepository;
+import kr.idu.OInjo_Shop.repository.Order.OrderRepository;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
 import kr.idu.OInjo_Shop.service.Order.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -27,7 +34,7 @@ public class OrderController {
     private final MemberRepository memberRepository;
     private final ItemRepository itemRepository;
     private final ItemService itemService;
-
+    private final OrderRepository orderRepository;
     private final OrderService orderService;
 
     @GetMapping("/orders/form")
@@ -58,21 +65,43 @@ public class OrderController {
 
     @PostMapping("/orders/pay")
     public @ResponseBody ResponseEntity orderPay(@RequestBody OrderDto orderDto, HttpSession session) {
+
+        Long orderId;
         try {
             String email = (String) session.getAttribute("loginEmail");
-            orderService.order(orderDto, email);
+            orderId = orderService.order(orderDto, email);
         } catch (Exception e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok("완료");
+        return new ResponseEntity<Long>(orderId,HttpStatus.OK);
     }
 
-    @GetMapping("/orders/completion")
-    public String paymentCompleted(Model model, HttpSession session) {
+    @GetMapping("/orders/completion/{id}")
+    public String paymentCompleted(@PathVariable("id")Long id,Model model, HttpSession session) {
         String email = (String) session.getAttribute("loginEmail");
         MemberEntity member = memberRepository.findByMemberEmail(email)
                 .orElseThrow(EntityNotFoundException::new);
+        OrderEntity order = orderRepository.findById(id)
+                .orElseThrow(EntityNotFoundException::new);
 
+        OrderHistDto orderHistDto = new OrderHistDto(order);
+        model.addAttribute("order", orderHistDto);
+        model.addAttribute("member",MemberDTO.toMemberDTO(member));
         return "order/paymentcompleted";
+    }
+
+    @GetMapping(value = {"/orders/list", "/orders/list/{page}"})
+    public String orderList(@PathVariable("page") Optional<Integer> page,
+                            HttpSession session, Model model) {
+        String email = (String) session.getAttribute("loginEmail");
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
+
+        Page<OrderHistDto> orderHistDtoList =
+                orderService.getOrderList(email, pageable);
+        model.addAttribute("orders", orderHistDtoList);
+        model.addAttribute("page", pageable.getPageNumber());
+        model.addAttribute("maxPage", 5);
+
+        return "order/orderlist";
     }
 }

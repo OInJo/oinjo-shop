@@ -5,6 +5,7 @@ import kr.idu.OInjo_Shop.entity.BaseEntity;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -33,6 +34,8 @@ public class OrderEntity extends BaseEntity {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItemEntity> orderItems = new ArrayList<>();
 
+    private int totalPrice;
+
     //주문 상품 객체를 이용해 주문 객체를 만듦
     public void addOrderItem(OrderItemEntity orderItem) {
         orderItems.add(orderItem);
@@ -47,14 +50,10 @@ public class OrderEntity extends BaseEntity {
         order.setOrderStatus(OrderStatus.ORDER);
         for (OrderItemEntity orderItem : orderItemList) {
             order.addOrderItem(orderItem);
+            order.setTotalPrice(orderItem.getTotalPrice());
         }
+
         return order;
-    }
-    public int getTotalPrice() {
-        int totalPrice = 0;
-        for(OrderItemEntity orderItem : orderItems)
-            totalPrice += orderItem.getTotalPrice();
-        return totalPrice;
     }
 
 }
