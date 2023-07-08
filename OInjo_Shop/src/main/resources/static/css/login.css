@@ -3,10 +3,6 @@ a {
     color: rgba(0, 0, 0, 0.8);
 }
 
-.hidden {
-    display: none;
-}
-
 .login-form {
     height: 100%;
     display: flex;
@@ -22,6 +18,13 @@ a {
     flex-direction: column;
     padding: 3% 5%;
 }
+
+.index-link {
+    font-size: 25px;
+    font-weight: 600;
+    width: 30px;
+}
+
 
 .login-title {
     text-align: center;
@@ -45,6 +48,14 @@ a {
     color: rgba(0, 0, 0, 0.3);
 }
 
+.x-icon {
+    right: 2%;
+}
+
+.x-icon:hover {
+    color: black;
+}
+
 .input {
     all: unset;
     padding-left: 25px;
@@ -61,7 +72,8 @@ a {
 }
 
 
-.login-fail-text {
+.login-fail-text,
+.caps-lock-text {
     color: #ff3f3f;
     font-weight: 600;
     margin: 4px 0 12px 0;
@@ -105,4 +117,8 @@ a {
 .easy-login-image {
     width: 100%;
     height: 100%;
+}
+
+.hidden {
+    display: none;
 }

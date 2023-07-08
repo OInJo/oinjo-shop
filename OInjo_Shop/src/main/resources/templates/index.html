@@ -7,63 +7,77 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="images/logo.png">
-  <link rel="stylesheet" href="../static/css/root.css">
+  <link rel="stylesheet" href="../static/css/header.css">
   <link rel="stylesheet" href="../static/css/index.css">
-  <link rel="stylesheet" href="/css/root.css">
+  <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/index.css">
   <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
-  <script src="../static/js/root.js" defer></script>
+  <script src="../static/js/font.js" defer></script>
+  <script src="../static/js/header.js" defer></script>
   <script src="../static/js/index.js" defer></script>
-  <script src="/js/root.js" defer></script>
+  <script src="/js/font.js" defer></script>
+  <script src="/js/header.js" defer></script>
   <script src="/js/index.js" defer></script>
+
   <title>OInJo</title>
 </head>
 
 <body>
-  <header>
+  <header class="header-wrapper">
+    <p class="login-check" th:text="${session.loginEmail}"></p>
     <div class="header-left">
-      <a href="/"><img src="/images/logo.png" alt="LOGO" class="header-logo"></a>
-      <div class="header-search">
-        <input type="text" placeholder="상품을 검색해보세요" class="header-search-input">
-        <i class="fa-solid fa-magnifying-glass header-search-icon"></i>
+      <!-- <h3 class="header-title">OInJo</h3> -->
+      <div class="search-wrapper">
+        <input type="text" class="search-input">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
       </div>
     </div>
-    <nav class="header-right">
-      <p class="login-check" th:text="${session.loginEmail}"></p>
-      <a href="/member" class="header-link">
-        <i class="fa-solid fa-hammer header-link-icon"></i>
-        회원목록
-      </a>
-      <a href="/admin/item/new" class="header-link">
-        <i class="fa-solid fa-hammer header-link-icon"></i>
-        관리자
-      </a>
-      <a href="/member/update" class="update-link header-link">
-        <i class="fa-solid fa-user-pen header-link-icon"></i>
-        정보수정
-      </a>
-      <a href="/member/logout" class="logout-link header-link">
-        <i class="fa-solid fa-user-minus header-link-icon"></i>
-        로그아웃
-      </a>
-      <a href="/member/login" class="login-link header-link">
-        <i class="fa-solid fa-user-plus header-link-icon"></i>
-        로그인
-      </a>
-      <a href="" class="header-link">
-        <i class="fa-solid fa-tags header-link-icon"></i>
-        최근본상품
-      </a>
-      <a href="" class="header-link shopping-bag">
-        <i class="fa-solid fa-cart-shopping header-link-icon"></i>
-        장바구니
-        <div class="shopping-bag-count">1</div>
-      </a>
-      <a href="" class="header-link">
-        <i class="fa-solid fa-house header-link-icon"></i>
-        마이페이지
-      </a>
-    </nav>
+    <ul class="header-right">
+      <!-- 관리자, 로그아웃, 정보수정, 로그인, 장바구니, 최근본상품, 마이페이지 -->
+      <li class="admin-link">
+        <a href="#" class="tooltip-container">
+          <i class="fa-solid fa-hammer tooltip-icon"></i>
+          <span class="tooltip-text">관리자</span>
+        </a>
+      </li>
+
+      <li class="update-link">
+        <a href="/member/update" class="tooltip-container">
+          <i class="fa-solid fa-user-pen tooltip-icon"></i>
+          <span class="tooltip-text">정보수정</span>
+        </a>
+      </li>
+      <li class="logout-link">
+        <a href="/member/logout" class="tooltip-container">
+          <i class="fa-solid fa-user-minus tooltip-icon"></i>
+          <span class="tooltip-text">로그아웃</span>
+        </a>
+      </li>
+      <li class="login-link">
+        <a href="/member/login" class="tooltip-container">
+          <i class="fa-solid fa-user-plus tooltip-icon"></i>
+          <span class="tooltip-text">로그인</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="tooltip-container">
+          <i class="fa-solid fa-user tooltip-icon"></i>
+          <span class="tooltip-text">마이페이지</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="tooltip-container">
+          <i class="fa-solid fa-cart-shopping tooltip-icon"></i>
+          <span class="tooltip-text">장바구니</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="tooltip-container">
+          <i class="fa-solid fa-gift tooltip-icon"></i>
+          <span class="tooltip-text">최근본상품</span>
+        </a>
+      </li>
+    </ul>
   </header>
   <main>
 
@@ -99,7 +113,8 @@
         </div>
       </div>
       <div class="article-product-wrapper">
-        <a class="article-product" th:each="ItemFormDTO : ${itemFormDTOList.dtoList}" th:href="@{'/item/view/' + ${ItemFormDTO.id}}">
+        <a class="article-product" th:each="ItemFormDTO : ${itemFormDTOList.dtoList}"
+          th:href="@{'/item/view/' + ${ItemFormDTO.id}}">
           <img th:each="ItemImgDTO : ${itemImgDTOList}" th:src="${ItemImgDTO.imgUrl}" alt="상품 이미지"
             class="article-product-image" id="item-img-src"
             th:if="${ItemImgDTO.itemId.itemId == ItemFormDTO.id && ItemImgDTO.repImgYn == 'Y'}">
@@ -113,10 +128,10 @@
             <div class="article-product-price-won" th:text="${ItemFormDTO.itemPrice}"></div>
             원
           </div>
-          <div class="article-product-color">
+          <!-- <div class="article-product-color">
             <i class="fa-solid fa-circle red-color"></i>
             <i class="fa-solid fa-circle blue-color"></i>
-          </div>
+          </div> -->
         </a>
       </div>
     </section>
@@ -127,7 +142,7 @@
 
   </footer>
 
-  <div class="move-btn-wrapper">
+  <div class="move-btn-wrapper">a
     <div class="move-top-btn"><i class="fa-solid fa-arrow-up"></i></div>
     <div class="move-bottom-btn"><i class="fa-solid fa-arrow-down"></i></div>
   </div>
