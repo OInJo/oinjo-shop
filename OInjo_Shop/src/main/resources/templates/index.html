@@ -80,7 +80,7 @@
         </a>
       </li>
       <li>
-        <a href="@{'/member/' + ${session.loginId} + '/cart'}" class="tooltip-container">
+        <a th:href="@{'/member/' + ${session.loginId} + '/cart'}" class="tooltip-container">
           <i class="fa-solid fa-cart-shopping tooltip-icon"></i>
           <span class="tooltip-text">장바구니</span>
         </a>
