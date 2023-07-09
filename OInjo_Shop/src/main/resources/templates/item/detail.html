@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org%22%3E/">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -92,11 +92,11 @@
           <div class="buy-button-wrapper">
 
             <!-- 여기부터 -->
-            <input type="hidden" name="itemId" id=itemId th:value="${item.id}">
+            <input type="hidden" name="itemId" id=itemId th:value="${itemFormDTO.id}">
             <button class="buy-button now-buy-button">바로 구매하기</button>
             <!-- 여기까지 추가했음 주문하기 test 해보고 수정할 것 input type hidden 추가했음-->
 
-            <button class="buy-button shopping-bag-button">장바구니 담기</button>
+            <form th:action="@{'/member/' + ${memberId} + '/cart/' + ${itemId}}" method="post"><button class="buy-button shopping-bag-button">장바구니 담기</button></form>
           </div>
         </div>
       </div>

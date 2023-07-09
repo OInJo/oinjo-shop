@@ -176,13 +176,16 @@ public class ItemController {
     }
 
     @GetMapping("/item/{itemId}")
-    public String itemDetail(@PathVariable("itemId") Long itemId, Model model, HttpServletResponse response) {
+    public String itemDetail(@PathVariable("itemId") Long itemId, Model model, HttpServletResponse response, HttpSession session) {
 
         try {
             ItemFormDTO itemFormDTO = itemService.getItemDetail(itemId);
             model.addAttribute("itemFormDTO", itemFormDTO);
+            // 현재 로그인한 사용자의 이메일 주소 가져오기
+            Long loginId = (Long) session.getAttribute("loginId");
+            model.addAttribute("memberId", loginId);
 
-            // 상품 정보를 JSON 문자열로 변환
+            /*// 상품 정보를 JSON 문자열로 변환
             ObjectMapper objectMapper = new ObjectMapper();
             String itemJson = objectMapper.writeValueAsString(itemFormDTO);
 
@@ -192,14 +195,14 @@ public class ItemController {
             cookie.setPath("/"); // 쿠키의 유효 경로 설정 (예: 모든 경로에서 사용 가능)
 
             // 쿠키를 응답 헤더에 추가하여 클라이언트에게 전달
-            response.addCookie(cookie);
+            response.addCookie(cookie);*/
         } catch (EntityNotFoundException e) {
             model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
             model.addAttribute("itemFormDTO", new ItemFormDTO());
             return "item/detail";
-        } catch (JsonProcessingException e) {
+        } /*catch (JsonProcessingException e) {
             throw new RuntimeException(e);
-        }
+        }*/
 
         return "item/detail";
     }
