@@ -44,6 +44,7 @@ ul {
   position: absolute;
   border: 1px solid white;
   border-radius: 20px;
+  margin-left:0;
 }
 
 .search-select {
@@ -64,7 +65,7 @@ ul {
 .search-icon {
   all: unset;
   position: absolute;
-  top: 38%;
+  top: 32%;
   right: 5%;
   font-size: 20px;
 }
@@ -77,6 +78,7 @@ ul {
   align-items: center;
   gap: 20px;
   font-size: 20px;
+  margin-top:0;
   padding-right: 1%;
   box-sizing: border-box;
 }

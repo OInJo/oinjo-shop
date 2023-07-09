@@ -25,7 +25,7 @@
     <div class="header-left">
       <!-- <h3 class="header-title">OInJo</h3> -->
 
-      <form th:action="@{'/admin/item'}" th:method="get" class="search-wrapper">
+      <form th:action="@{'/'}" th:method="get" class="search-wrapper">
         <select name="type" aria-controls="dataTable" class="search-select">
           <option value="n" class="select-option">상품이름</option>
           <option value="b" class="select-option">브랜드</option>
@@ -77,7 +77,7 @@
         </a>
       </li>
       <li>
-        <a href="#" class="tooltip-container">
+        <a th:href="@{'/member/' + ${session.loginId} + '/cart'}" class="tooltip-container">
           <i class="fa-solid fa-cart-shopping tooltip-icon"></i>
           <span class="tooltip-text">장바구니</span>
         </a>
