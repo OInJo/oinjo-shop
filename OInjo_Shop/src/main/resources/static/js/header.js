@@ -6,7 +6,7 @@ const loginLink = document.querySelector(".login-link");
 const adminLink = document.querySelector(".admin-link");
 loginCheck.style.display = "none";
 window.onload = () => {
-  if(loginCheck.textContent.includes("admin")){
+  if(loginCheck.textContent.includes("Admin@naver.com")){
     adminLink.style.display = "flex";
   }
   else{

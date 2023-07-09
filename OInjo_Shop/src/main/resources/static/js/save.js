@@ -14,6 +14,9 @@ const thirdArticleNextButton = document.querySelector(
 );
 const submitButton = document.querySelector(".submit-button");
 
+const emailCertificationWrong = document.querySelector(
+  ".email-certification-wrong"
+);
 firstArticleNextButton.addEventListener("click", () => {
   firstArticle.classList.add("hidden");
   secondArticle.classList.remove("hidden");
@@ -261,8 +264,12 @@ certificationStartButton.addEventListener("click", () => {
   })
     .then((response) => {
       console.log("response:", response);
+      alert(`인증번호가 전송되었습니다 ${emailInput.value}를 확인하세요.`);
     })
-    .catch((error) => console.log("error:", error));
+    .catch((error) => {
+      console.log("error:", error);
+      alert("인증번호 전송에 실패했습니다.");
+    });
 });
 
 const certificationButton = document.querySelector(".certification-button");
@@ -281,7 +288,20 @@ certificationButton.addEventListener("click", () => {
   })
     .then((response) => {
       console.log("response:", response);
+      if (response.ok) {
+        alert("인증 성공!");
+        thirdArticleNextButton.disabled = false;
+        thirdArticleNextButton.classList.add("validation-pass");
+        emailCertificationWrong.classList.add("hidden");
+      } else {
+        alert("인증번호가 일치하지 않습니다.");
+        thirdArticleNextButton.disabled = true;
+        thirdArticleNextButton.classList.remove("validation-pass");
+        emailCertificationWrong.classList.remove("hidden");
+      }
     })
-    .catch((error) => console.log("error:", error));
+    .catch((error) => {
+      console.log("error:", error);
+      alert("인증을 처리하는 도중 오류가 발생하였습니다.");
+    });
 });
-
