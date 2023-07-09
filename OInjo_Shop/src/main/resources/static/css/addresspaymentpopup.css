@@ -1,0 +1,38 @@
+.new-address-search {
+    position: absolute;
+    margin-top: -30px;
+    right: 50px;
+
+}
+.current-my-address {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 100px;
+    border: 1px solid rgb(190, 188, 188);
+}
+.my-name {
+    margin-top: 5px;
+    margin-left: 10px;
+}
+.address-name, .my-phone, .my-address {
+    margin-left: 10px;
+    margin-top: 2px;
+}
+.new-search-address {
+    margin-top: 30px;
+    width: 90%;
+    height: 80px;
+    border: 1px solid rgb(190, 188, 188);
+}
+.go-delivery {
+    margin-top: 8px;
+    margin-left: 10px;
+}
+#combined-address {
+    margin-top: 5px;
+    border: 1px solid #cbcbcb;
+    border-radius: 4px;
+    width: 350px;
+    height: 25px;
+}
