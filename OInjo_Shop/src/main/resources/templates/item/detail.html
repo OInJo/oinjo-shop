@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+=======
+<html xmlns:th="http://www.thymeleaf.org">
+>>>>>>> d5b55ca2f6b3a2351fd729f5c78033db63998bfc
 
 <head>
   <meta charset="UTF-8">
@@ -128,7 +132,7 @@
             <button class="buy-button now-buy-button" onclick="orders()">바로 구매하기</button>
             <!-- 여기까지 추가했음 주문하기 test 해보고 수정할 것 input type hidden 추가했음-->
 
-            <button class="buy-button shopping-bag-button">장바구니 담기</button>
+            <form th:action="@{'/member/' + ${memberId} + '/cart/' + ${itemId}}" method="post"><button class="buy-button shopping-bag-button">장바구니 담기</button></form>
           </div>
         </div>
       </div>

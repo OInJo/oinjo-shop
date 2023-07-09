@@ -1,9 +1,9 @@
-// const uploadButton = document.querySelector(".upload-button");
-// const uploadForm = document.querySelector(".upload-form");
+const uploadButton = document.querySelector(".upload-button");
+const uploadForm = document.querySelector(".upload-form");
 
-// uploadButton.addEventListener("click", () => {
-//   uploadForm.submit();
-// });
+uploadButton.addEventListener("click", () => {
+  uploadForm.submit();
+});
 
 // const modal = document.querySelector(".modal");
 // const modalInput = document.querySelector(".modal-input");

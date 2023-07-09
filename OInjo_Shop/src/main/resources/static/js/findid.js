@@ -10,7 +10,6 @@ const phoneIcon = document.querySelector(".phone-icon")
 nameInput.addEventListener("focus", () => {
   nameInput.classList.add("focus-design-border");
   nameIcon.classList.add("focus-design-color");
-
 })
 nameInput.addEventListener("blur", () => {
   nameInput.classList.remove("focus-design-border")

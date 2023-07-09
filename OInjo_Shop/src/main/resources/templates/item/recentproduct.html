@@ -9,43 +9,86 @@
   <link rel="stylesheet" href="../../static/css/recentproduct.css">
   <script src="/js/font.js" defer></script>
   <script src="../../static/js/recentproduct.js" defer></script>
-  <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></scrip>
+  <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../../static/css/header.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <script src="/js/header.js" defer></script>
+  <script src="../../static/js/header.js" defer></script>
+  <link rel="stylesheet" href="/css/recentproduct.css">
+  <script src="/js/recentproduct.js" defer></script>
   <title>최근 본 상품</title>
 </head>
 
 <body>
-  <header>
+  <header class="header-wrapper">
+    <p class="login-check" th:text="${session.loginEmail}"></p>
     <div class="header-left">
-      <a href="/"><img src="../static/images/logo.png" alt="LOGO" class="header-logo"></a>
+      <!-- <h3 class="header-title">OInJo</h3> -->
+
+      <form th:action="@{'/'}" th:method="get" class="search-wrapper">
+        <select name="type" aria-controls="dataTable" class="search-select">
+          <option value="n" class="select-option">상품이름</option>
+          <option value="b" class="select-option">브랜드</option>
+          <option value="c" class="select-option">카테고리</option>
+        </select>
+        <input type="text" name="keyword" aria-controls="dataTable" class="search-input">
+        <button type="submit" class="search-button search-icon">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+
+      <!-- <div class="search-wrapper">
+        <input type="text" class="search-input">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      </div> -->
+
     </div>
-    <nav class="header-right">
-      <p class="login-check" th:text="${session.loginEmail}"></p>
-      <a href="member/update" class="update-link header-link">
-        <i class="fa-solid fa-user-pen header-link-icon"></i>
-        정보수정
-      </a>
-      <a href="member/logout" class="logout-link header-link">
-        <i class="fa-solid fa-user-minus header-link-icon"></i>
-        로그아웃
-      </a>
-      <a href="member/login" class="login-link header-link">
-        <i class="fa-solid fa-user-plus header-link-icon"></i>
-        로그인
-      </a>
-      <a href="" class="header-link">
-        <i class="fa-solid fa-tags header-link-icon"></i>
-        최근본상품
-      </a>
-      <a href="" class="header-link shopping-bag">
-        <i class="fa-solid fa-cart-shopping header-link-icon"></i>
-        장바구니
-        <div class="shopping-bag-count">1</div>
-      </a>
-      <a href="" class="header-link">
-        <i class="fa-solid fa-house header-link-icon"></i>
-        마이페이지
-      </a>
-    </nav>
+    <ul class="header-right">
+      <!-- 관리자, 로그아웃, 정보수정, 로그인, 장바구니, 최근본상품, 마이페이지 -->
+      <li class="admin-link">
+        <a href="/admin/item/new" class="tooltip-container">
+          <i class="fa-solid fa-hammer tooltip-icon"></i>
+          <span class="tooltip-text">관리자</span>
+        </a>
+      </li>
+
+      <li class="update-link">
+        <a href="/member/update" class="tooltip-container">
+          <i class="fa-solid fa-user-pen tooltip-icon"></i>
+          <span class="tooltip-text">정보수정</span>
+        </a>
+      </li>
+      <li class="logout-link">
+        <a href="/member/logout" class="tooltip-container">
+          <i class="fa-solid fa-user-minus tooltip-icon"></i>
+          <span class="tooltip-text">로그아웃</span>
+        </a>
+      </li>
+      <li class="login-link">
+        <a href="/member/login" class="tooltip-container">
+          <i class="fa-solid fa-user-plus tooltip-icon"></i>
+          <span class="tooltip-text">로그인</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="tooltip-container">
+          <i class="fa-solid fa-user tooltip-icon"></i>
+          <span class="tooltip-text">마이페이지</span>
+        </a>
+      </li>
+      <li>
+        <a th:href="@{'/member/' + ${session.loginId} + '/cart'}" class="tooltip-container">
+          <i class="fa-solid fa-cart-shopping tooltip-icon"></i>
+          <span class="tooltip-text">장바구니</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="tooltip-container">
+          <i class="fa-solid fa-gift tooltip-icon"></i>
+          <span class="tooltip-text">최근본상품</span>
+        </a>
+      </li>
+    </ul>
   </header>
   <main class="recentproduct-main">
     <h4 class="recentproduct-title">최근 본 상품</h4>
