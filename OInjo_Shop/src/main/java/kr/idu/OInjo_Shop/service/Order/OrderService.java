@@ -49,13 +49,33 @@ public class OrderService {
         return order.getId();
     }
 
-    @Transactional(readOnly = true)
-    public Page<OrderHistDto> getOrderList(String email, Pageable pageable) {
-        List<OrderEntity> orders = orderRepository.findOrders(email, pageable);
-        Long totalCount = orderRepository.totalOrder(email);
+//    @Transactional(readOnly = true)
+//    public Page<OrderHistDto> getOrderList(String email, Pageable pageable) {
+//        List<OrderEntity> orders = orderRepository.findOrders(email, pageable);
+//        Long totalCount = orderRepository.totalOrder(email);
+//
+//        List<OrderHistDto> orderHistDtos = new ArrayList<>();
+//
+//        for (OrderEntity order : orders) {
+//            OrderHistDto orderHistDto = new OrderHistDto(order);
+//            List<OrderItemEntity> orderItems = order.getOrderItems();
+//            for (OrderItemEntity orderItem : orderItems) {
+//                ItemImgEntity itemImg = itemImgRepository.findByItemItemId(orderItem.getItem().getItemId()).stream().findFirst().orElse(null);     //가져온 상품 이미지들 중 첫 번째 이미지를 선택하거나, 이미지가 없는 경우 null을 반환
+//                OrderItemDto orderItemDto=new OrderItemDto(orderItem,itemImg.getImgUrl());
+//                orderHistDto.addOrderItemDto(orderItemDto);
+//            }
+//            orderHistDtos.add(orderHistDto);
+//        }
+//        return new PageImpl<OrderHistDto>(orderHistDtos, pageable, totalCount);
+//    }
+
+        @Transactional(readOnly = true)
+    public Page<OrderHistDto> getOrderList(String email,String searchQuery, Pageable pageable) {
+        List<OrderEntity> orders = orderRepository.findOrdersWithSearch(email, searchQuery,pageable);
+        Long totalCount = orderRepository.totalOrderItem(email,"");
 
         List<OrderHistDto> orderHistDtos = new ArrayList<>();
-
+        System.out.println(totalCount);
         for (OrderEntity order : orders) {
             OrderHistDto orderHistDto = new OrderHistDto(order);
             List<OrderItemEntity> orderItems = order.getOrderItems();
@@ -68,6 +88,5 @@ public class OrderService {
         }
         return new PageImpl<OrderHistDto>(orderHistDtos, pageable, totalCount);
     }
-
 
 }
