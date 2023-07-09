@@ -36,12 +36,10 @@
                     <span th:if="${address.address == memberDto.memberAddress}" class="basic-delivery">(기본배송지)</span>
                     <br>
                     <span th:text="${address.address}" class="name-list">주소</span><br>
-                    <span class="button-container">
-                        <button type="submit" class="btn btn-primary">수정</button>
-                        <form th:action="@{'/address/delete/'+ ${address.addressId}}" th:method="delete">
-                            <button type="submit" class="btn btn-primary">삭제</button>
-                        </form>
-                    </span>
+                    <button type="submit" class="btn-change">수정</button>
+                </form>
+                <form th:action="@{'/address/delete/'+ ${address.addressId}}" th:method="delete">
+                    <button type="submit" class="btn-delete">삭제</button>
                 </form>
             </div>
         </div>

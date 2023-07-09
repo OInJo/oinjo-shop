@@ -92,3 +92,11 @@
 .change-address {
     margin-top: -20px;
 }
+
+.btn {
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 50px;
+    height: 25px;
+}
