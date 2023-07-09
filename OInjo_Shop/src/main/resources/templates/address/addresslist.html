@@ -1,42 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-
-
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/addresslist.css">
+    <title>주소정보</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <script src="/js/font.js" defer></script>
+</head>
 
 <h2 class="mb-4">
     주소 정보
 </h2>
 
 <form action="/address/new" method="get">
-    <button type="submit">새 배송지 등록</button>
+    <button type="submit" class="new-register-button">새 배송지 등록</button>
 </form>
 
 <div th:each="member : ${addresses.getContent()}">
 
-    <div class="card d-flex">
-        <div th:each="address : ${member.addressList}" class="d-flex mb-3">
-            <div class="align-self-center w-75">
+    <div class="address-list">
+        <div th:each="address : ${member.addressList}" class="name-address">
+            <div class="name-address-list">
                 <form th:action="@{'/address/up-form/'+ ${address.addressId}}"method="get">
-                    <span th:if="${address.address == memberDto.memberAddress}" class="n-label delv reserv">기본배송지</span>
-                    <span th:text="${member.name}" class="fs24 font-weight-bold"></span>
+
+                    <span th:text="${member.name}" class="name-list">이름</span>
+                    <span th:if="${address.address == memberDto.memberAddress}" class="basic-delivery">(기본배송지)</span>
                     <br>
-                    <span th:text="${address.address}" class="fs24 font-weight-bold"></span>
-                    <button type="submit" class="btn btn-primary" style="" onclick="">수정</button>
-                </form>
-                <form th:action="@{'/address/delete/'+ ${address.addressId}}" th:method="delete">
-                    <button type="submit" class="btn btn-primary" style="" onclick="">삭제</button>
+                    <span th:text="${address.address}" class="name-list">주소</span><br>
+                    <span class="button-container">
+                        <button type="submit" class="btn btn-primary">수정</button>
+                        <form th:action="@{'/address/delete/'+ ${address.addressId}}" th:method="delete">
+                            <button type="submit" class="btn btn-primary">삭제</button>
+                        </form>
+                    </span>
                 </form>
             </div>
         </div>
     </div>
-
 </div>
 
 <div th:with="start=${(addresses.number/maxPage)*maxPage + 1}, end=(${(addresses.totalPages == 0) ? 1 : (start + (maxPage - 1) < addresses.totalPages ? start + (maxPage - 1) : addresses.totalPages)})">
-    <ul class="pagination justify-content-center">
+    <ul class="pagination">
 
         <li class="page-item" th:classappend="${addresses.number eq 0}?'disabled':''">
             <a th:href="@{'/address/list/' + ${addresses.number-1}}" aria-label='Previous' class="page-link">
@@ -54,9 +67,6 @@
                 <span aria-hidden='true'>Next</span>
             </a>
         </li>
-
     </ul>
 </div>
-
-
 </html>

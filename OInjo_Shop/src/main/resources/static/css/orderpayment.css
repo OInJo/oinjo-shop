@@ -125,42 +125,13 @@
 }
 
 #postcode {
-    border: 1px solid #cbcbcb;
     border-radius: 4px;
     width: 55px;
     height: 25px;
-    margin-left: 90px;
+    margin-left: 80px;
     padding-top: -10px;
 }
-#road-address {
-    border: 1px solid #cbcbcb;
-    border-radius: 4px;
-    width: 250px;
-    height: 25px;
-    margin-left: 5px;
-}
-#jibun-address {
-    border: 1px solid #cbcbcb;
-    border-radius: 4px;
-    width: 250px;
-    height: 25px;
-    margin-left: 5px;
 
-}
-#detail-address {
-    border: 1px solid #cbcbcb;
-    border-radius: 4px;
-    width: 250px;
-    height: 25px;
-    margin-left: 5px;
-}
-#extra-address {
-    border: 1px solid #cbcbcb;
-    border-radius: 4px;
-    width: 250px;
-    height: 25px;
-    margin-left: 5px;
-}
 .requested > select {
     width: 250px;
     height: 30px;

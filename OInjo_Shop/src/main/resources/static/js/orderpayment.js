@@ -13,12 +13,10 @@ window.addEventListener("message", function(event) {
     // 전달된 데이터 사용
     var postcode = receivedData.postcode;
     var roadAddress = receivedData.roadAddress;
-    var jibunAddress = receivedData.jibunAddress;
     var detailAddress = receivedData.detailAddress;
-    var extraAddress = receivedData.extraAddress;
     
     // 주소 정보를 부모 HTML의 특정 요소에 표시
     var deliveryDiv = document.querySelector(".go-delivery");
-    deliveryDiv.innerHTML = postcode + " " + roadAddress + " " + jibunAddress + " " + detailAddress + " " + extraAddress;
+    deliveryDiv.innerHTML = "(" + postcode + ")" + " " + roadAddress + " " + detailAddress;
     deliveryDiv.style.marginLeft = "125px";
 });
