@@ -27,15 +27,29 @@
     <p class="login-check" th:text="${session.loginEmail}"></p>
     <div class="header-left">
       <!-- <h3 class="header-title">OInJo</h3> -->
-      <div class="search-wrapper">
+
+      <form th:action="@{'/'}" th:method="get" class="search-wrapper">
+        <select name="type" aria-controls="dataTable" class="search-select">
+          <option value="n" class="select-option">상품이름</option>
+          <option value="b" class="select-option">브랜드</option>
+          <option value="c" class="select-option">카테고리</option>
+        </select>
+        <input type="text" name="keyword" aria-controls="dataTable" class="search-input">
+        <button type="submit" class="search-button search-icon">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+
+      <!-- <div class="search-wrapper">
         <input type="text" class="search-input">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
-      </div>
+      </div> -->
+
     </div>
     <ul class="header-right">
       <!-- 관리자, 로그아웃, 정보수정, 로그인, 장바구니, 최근본상품, 마이페이지 -->
       <li class="admin-link">
-        <a href="#" class="tooltip-container">
+        <a href="/admin/item/new" class="tooltip-container">
           <i class="fa-solid fa-hammer tooltip-icon"></i>
           <span class="tooltip-text">관리자</span>
         </a>
@@ -66,7 +80,7 @@
         </a>
       </li>
       <li>
-        <a th:href="@{'/member/' + ${session.loginId} + '/cart'}" class="tooltip-container">
+        <a href="@{'/member/' + ${session.loginId} + '/cart'}" class="tooltip-container">
           <i class="fa-solid fa-cart-shopping tooltip-icon"></i>
           <span class="tooltip-text">장바구니</span>
         </a>
@@ -142,7 +156,7 @@
 
   </footer>
 
-  <div class="move-btn-wrapper">a
+  <div class="move-btn-wrapper">
     <div class="move-top-btn"><i class="fa-solid fa-arrow-up"></i></div>
     <div class="move-bottom-btn"><i class="fa-solid fa-arrow-down"></i></div>
   </div>

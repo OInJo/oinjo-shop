@@ -105,7 +105,7 @@ input[id*="category"]:checked+label+ul {
   padding: 10px 20px;
   font-size: 18px;
   font-weight: 600;
-  border-radius:50px;
+  border-radius: 50px;
   margin-right: 10px;
 }
 
@@ -124,7 +124,7 @@ input[id*="category"]:checked+label+ul {
   gap: 20px;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.5);
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .sort-option-button {
@@ -195,7 +195,6 @@ input[id*="category"]:checked+label+ul {
 .article-product-name {
   font-size: 18px;
   font-weight: 600;
-  padding-bottom: 7px;
 }
 
 .article-product-brand {
