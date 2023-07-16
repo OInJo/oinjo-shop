@@ -20,7 +20,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -49,39 +52,19 @@ public class OrderService {
         return order.getId();
     }
 
-//    @Transactional(readOnly = true)
-//    public Page<OrderHistDto> getOrderList(String email, Pageable pageable) {
-//        List<OrderEntity> orders = orderRepository.findOrders(email, pageable);
-//        Long totalCount = orderRepository.totalOrder(email);
-//
-//        List<OrderHistDto> orderHistDtos = new ArrayList<>();
-//
-//        for (OrderEntity order : orders) {
-//            OrderHistDto orderHistDto = new OrderHistDto(order);
-//            List<OrderItemEntity> orderItems = order.getOrderItems();
-//            for (OrderItemEntity orderItem : orderItems) {
-//                ItemImgEntity itemImg = itemImgRepository.findByItemItemId(orderItem.getItem().getItemId()).stream().findFirst().orElse(null);     //가져온 상품 이미지들 중 첫 번째 이미지를 선택하거나, 이미지가 없는 경우 null을 반환
-//                OrderItemDto orderItemDto=new OrderItemDto(orderItem,itemImg.getImgUrl());
-//                orderHistDto.addOrderItemDto(orderItemDto);
-//            }
-//            orderHistDtos.add(orderHistDto);
-//        }
-//        return new PageImpl<OrderHistDto>(orderHistDtos, pageable, totalCount);
-//    }
-
-        @Transactional(readOnly = true)
-    public Page<OrderHistDto> getOrderList(String email,String searchQuery, Pageable pageable) {
-        List<OrderEntity> orders = orderRepository.findOrdersWithSearch(email, searchQuery,pageable);
-        Long totalCount = orderRepository.totalOrderItem(email,"");
+    @Transactional(readOnly = true)
+    public Page<OrderHistDto> getOrderList(String email, String searchQuery,LocalDateTime startDate, LocalDateTime endDate, Pageable pageable) {
+        List<OrderEntity> orders = orderRepository.findOrdersWithSearch(email, searchQuery, startDate, endDate,pageable);
+        Long totalCount = orderRepository.totalOrderItem(email,searchQuery,startDate,endDate);
 
         List<OrderHistDto> orderHistDtos = new ArrayList<>();
-        System.out.println(totalCount);
         for (OrderEntity order : orders) {
+
             OrderHistDto orderHistDto = new OrderHistDto(order);
             List<OrderItemEntity> orderItems = order.getOrderItems();
             for (OrderItemEntity orderItem : orderItems) {
                 ItemImgEntity itemImg = itemImgRepository.findByItemItemId(orderItem.getItem().getItemId()).stream().findFirst().orElse(null);     //가져온 상품 이미지들 중 첫 번째 이미지를 선택하거나, 이미지가 없는 경우 null을 반환
-                OrderItemDto orderItemDto=new OrderItemDto(orderItem,itemImg.getImgUrl());
+                OrderItemDto orderItemDto = new OrderItemDto(orderItem, itemImg.getImgUrl());
                 orderHistDto.addOrderItemDto(orderItemDto);
             }
             orderHistDtos.add(orderHistDto);

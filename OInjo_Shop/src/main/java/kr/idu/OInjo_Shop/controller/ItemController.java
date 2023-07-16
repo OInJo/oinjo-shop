@@ -197,7 +197,7 @@ public class ItemController {
 
             // 쿠키를 응답 헤더에 추가하여 클라이언트에게 전달
             response.addCookie(cookie);*/
-        } catch (EntityNotFoundException e) {
+        /*} catch (EntityNotFoundException e) {
             model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
             model.addAttribute("itemFormDTO", new ItemFormDTO());
             return "item/detail";

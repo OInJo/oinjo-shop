@@ -4,13 +4,19 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 
-
-
 <h2 class="mb-4">
     주문 정보
 </h2>
 
 
+<div>
+    <form action="/orders/list" method="get">
+        <input type="date" id="startDate" name="startDate" th:value="${startDate}">
+        <input type="date" id="endDate" name="endDate" th:value="${endDate}">
+        <input type="text" id="searchQuery" name="searchQuery" placeholder="브랜드/상품명으로 검색" th:value="${searchQuery}">
+        <button type="submit">검색</button>
+    </form>
+</div>
 <div th:each="order : ${orders.getContent()}">
 
     <div class="d-flex mb-3 align-self-center">
@@ -19,7 +25,7 @@
     <div class="card d-flex">
         <div th:each="orderItem : ${order.orderItemDtoList}" class="d-flex mb-3">
             <div class="repImgDiv">
-                <img th:src="${orderItem.imgUrl}" class = "rounded repImg" th:alt="${orderItem.itemNm}">
+                <img th:src="${orderItem.imgUrl}" class="rounded repImg" th:alt="${orderItem.itemNm}">
             </div>
             <div class="align-self-center w-75">
                 <span th:text="${orderItem.itemNm}" class="fs24 font-weight-bold"></span>
@@ -33,26 +39,26 @@
 
 </div>
 
-<div th:with="start=${(orders.number/maxPage)*maxPage + 1}, end=(${(orders.totalPages == 0) ? 1 : (start + (maxPage - 1) < orders.totalPages ? start + (maxPage - 1) : orders.totalPages)})" >
+<div th:with="start=${(orders.number/maxPage)*maxPage + 1}, end=(${(orders.totalPages == 0) ? 1 : (start + (maxPage - 1) < orders.totalPages ? start + (maxPage - 1) : orders.totalPages)})">
     <ul class="pagination justify-content-center">
-
         <li class="page-item" th:classappend="${orders.number eq 0}?'disabled':''">
-            <a th:href="@{'/orders/list/' + ${orders.number-1}}" aria-label='Previous' class="page-link">
+            <a th:href="@{'/orders/list/' + ${orders.number-1} + '?searchQuery=' + ${searchQuery} + '&startDate=' + ${startDate} + '&endDate=' + ${endDate}}" aria-label='Previous' class="page-link">
                 <span aria-hidden='true'>Previous</span>
             </a>
         </li>
 
-        <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${orders.number eq page-1}?'active':''">
-            <a th:href="@{'/orders/list/' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
+        <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}"
+            th:classappend="${orders.number eq page-1}?'active':''">
+            <a th:href="@{'/orders/list/' + ${page-1} + '?searchQuery=' + ${searchQuery} + '&startDate=' + ${startDate} + '&endDate=' + ${endDate}}" th:inline="text" class="page-link">[[${page}]]</a>
         </li>
 
         <li class="page-item" th:classappend="${orders.number+1 ge orders.totalPages}?'disabled':''">
-            <a th:href="@{'/orders/list/' + ${orders.number+1}}" aria-label='Next' class="page-link">
+            <a th:href="@{'/orders/list/' + ${orders.number+1} + '?searchQuery=' + ${searchQuery} + '&startDate=' + ${startDate} + '&endDate=' + ${endDate}}" aria-label='Next' class="page-link">
                 <span aria-hidden='true'>Next</span>
             </a>
         </li>
-
     </ul>
+
 </div>
 
 

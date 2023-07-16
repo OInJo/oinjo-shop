@@ -15,7 +15,7 @@ public class OrderHistDto {         //
     public OrderHistDto(OrderEntity order) {        //생성자로 값 변환
         this.orderId = order.getId();
         this.orderDate =
-                order.getOrderDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
+                order.getOrderDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         this.orderStatus = order.getOrderStatus();
         this.totalPrice = order.getTotalPrice();
     }
@@ -31,6 +31,5 @@ public class OrderHistDto {         //
     public void addOrderItemDto(OrderItemDto orderItemDto) {
         orderItemDtoList.add(orderItemDto);     //orderItemDto 객체를 주문 상품 리스트에 추가
     }
-
 
 }

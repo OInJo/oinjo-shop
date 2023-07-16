@@ -17,15 +17,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Controller
@@ -45,6 +49,7 @@ public class OrderController {
                 .orElseThrow(EntityNotFoundException::new);
         MemberDTO memberDto = MemberDTO.toMemberDTO(member);
         ItemFormDTO itemFormDto = itemService.getItemDetail(orderDto.getItemId());
+        System.out.println(itemFormDto.getRegTime());
         model.addAttribute("orderDto", orderDto);
         model.addAttribute("itemDto", itemFormDto);
         model.addAttribute("memberDto", memberDto);
@@ -92,15 +97,26 @@ public class OrderController {
 
     @GetMapping(value = {"/orders/list", "/orders/list/{page}"})
     public String orderList(@PathVariable("page") Optional<Integer> page,
+                            @RequestParam(value = "searchQuery", required = false,defaultValue = "") String searchQuery,
+                            @RequestParam(value = "startDate", required = false)  @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDateString,
+                            @RequestParam(value = "endDate", required = false)  @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDateString,
                             HttpSession session, Model model) {
         String email = (String) session.getAttribute("loginEmail");
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
+        LocalDate defaultStartDate = LocalDate.now().minusYears(1);
+        LocalDateTime startDate = startDateString != null ? startDateString.atStartOfDay() : defaultStartDate.atStartOfDay();
+        LocalDate defaultEndDate = LocalDate.now();
+        LocalDateTime endDate = endDateString != null ? endDateString.atStartOfDay().plusDays(1).minusNanos(1) : defaultEndDate.atStartOfDay().plusDays(1).minusNanos(1);
 
         Page<OrderHistDto> orderHistDtoList =
-                orderService.getOrderList(email, pageable);
+                orderService.getOrderList(email,searchQuery,startDate,endDate,pageable);
         model.addAttribute("orders", orderHistDtoList);
+        model.addAttribute("searchQuery", searchQuery);
+        model.addAttribute("startDate", startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        model.addAttribute("endDate", endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         model.addAttribute("page", pageable.getPageNumber());
         model.addAttribute("maxPage", 5);
+
 
         return "order/orderlist";
     }
