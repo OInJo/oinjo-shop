@@ -7,7 +7,9 @@ selectName.forEach((element) => {
 
 function selectNameClickEvent(event) {
   const selectedValue = event.target.innerText.trim();
-  const isAlreadySelected = Array.from(document.querySelectorAll(".now-category")).some(category => category.textContent === selectedValue);
+  const isAlreadySelected = Array.from(
+    document.querySelectorAll(".now-category")
+  ).some((category) => category.textContent === selectedValue);
 
   const allCategory = document.querySelector(".now-category");
   if (allCategory && allCategory.textContent === "전체") {
@@ -29,7 +31,9 @@ function selectNameClickEvent(event) {
         const allCategory = document.createElement("div");
         allCategory.classList.add("now-category");
         allCategory.textContent = "전체";
-        document.querySelector(".brand-category-choose").appendChild(allCategory);
+        document
+          .querySelector(".brand-category-choose")
+          .appendChild(allCategory);
       }
     });
 
@@ -55,3 +59,45 @@ for (let i = 0; i < redColor.length; i++) {
   });
 }
 
+// 최근본상품 로직 구현, 상품 클릭 시 해당 상품 정보를 localStorage에 저장
+// 모든 "article-product" 요소에 이벤트 리스너 추가
+const articleProducts = document.querySelectorAll('.article-product');
+
+// 이벤트 리스너 함수
+function handleClick(event) {
+  const clickedArticle = event.currentTarget;
+  
+  // article-product 내에서 요소들 찾기
+  const id = clickedArticle.querySelector(".article-product-id").textContent;
+  const image = clickedArticle.querySelector('.article-product-image').getAttribute('src');
+  const name = clickedArticle.querySelector('.article-product-name').textContent;
+  const brand = clickedArticle.querySelector('.article-product-brand').textContent;
+  const price = clickedArticle.querySelector('.article-product-price-won').textContent;
+  // localStorage에서 recent 배열 가져오기
+  const recentItems = JSON.parse(localStorage.getItem('recent')) || [];
+
+  // 새로운 아이템 객체 생성
+  const newItem = {
+    id,
+    image,
+    name,
+    brand,
+    price,
+  };
+
+  // recent 배열에 새로운 아이템 추가
+  recentItems.push(newItem);
+
+  // 최대 10개의 최근 아이템 유지
+  if (recentItems.length > 10) {
+    recentItems.shift();
+  }
+
+  // 변경된 recent 배열을 localStorage에 저장
+  localStorage.setItem('recent', JSON.stringify(recentItems));
+}
+
+// 각 "article-product" 요소에 클릭 이벤트 리스너 할당
+articleProducts.forEach(function(articleProduct) {
+  articleProduct.addEventListener('click', handleClick);
+});
