@@ -10,6 +10,7 @@
   <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/js/font.js" defer>
   <script src="../../static/js/save.js" defer></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script src="/js/save.js" defer></script>
   <title>회원가입</title>
 </head>
@@ -54,15 +55,16 @@
       </nav>
       <div class="input-wrapper">
         <div class="address-input-wrapper">
-          <button type="button" class="zipcode"></button> <!-- 우편번호 들어가는 곳-->
-          <button type="button" class="address-search-button">우편번호 검색</button>
+          <input type="text" class="zipcode" id="postcode"> <!-- 우편번호 들어가는 곳-->
+          <button type="button" class="address-search-button" onclick="DaumPostcode()">우편번호 검색</button>
         </div>
-        <input type="text" name="" readonly class="first-address address-input" placeholder="기본주소">
+        <input type="text" name="" readonly class="first-address address-input" id="address" placeholder="기본주소">
         <!-- 서울시 노원구 인덕아파트, 우편번호 검색 시 자동으로 입력되므로 readonly-->
-        <input type="text" class="last-address address-input" placeholder="상세주소" name="memberAddress"> <!-- 101동 101호-->
+        <input type="text" class="last-address address-input" id="detailAddress" placeholder="상세주소"> <!-- 101동 101호-->
         <p class="wrong-form-message address-wrong">주소는 필수입니다.</p>
+        <input type="hidden" name="memberAddress" id="memberAddressHidden">
       </div>
-      <button type="button" class="next-button second-article-next-button" disabled>다음</button>
+      <button type="button" class="next-button second-article-next-button" onclick="checkInputs()" disabled>다음</button>
       <p class="login-return-button">이미 회원이신가요? <a href="/member/login">로그인으로 돌아가기</a></p>
     </article>
 

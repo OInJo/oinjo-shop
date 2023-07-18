@@ -121,9 +121,12 @@ const zipcode = document.querySelector(".zipcode");
 const firstAddress = document.querySelector(".first-address");
 const lastAddress = document.querySelector(".last-address");
 const addressWrong = document.querySelector(".address-wrong");
-lastAddress.addEventListener("input", () => {
-  if (lastAddress.value.length != 0) {
-    //뭐든 입력됐다는 의미
+function checkInputs() {
+  const zipcodeValue = zipcode.value.trim();
+  const firstAddressValue = firstAddress.value.trim();
+  const lastAddressValue = lastAddress.value.trim();
+
+  if (zipcodeValue !== '' && firstAddressValue !== '' && lastAddressValue !== '') {
     addressWrong.classList.add("hidden");
     secondArticleNextButton.classList.add("validation-pass");
     secondArticleNextButton.disabled = false;
@@ -134,7 +137,25 @@ lastAddress.addEventListener("input", () => {
     secondArticleNextButton.disabled = true;
     lastAddress.classList.add("wrong");
   }
-});
+}
+
+zipcode.addEventListener("input", checkInputs);
+firstAddress.addEventListener("input", checkInputs);
+lastAddress.addEventListener("input", checkInputs);
+// lastAddress.addEventListener("input", () => {
+//   if (lastAddress.value.length != 0) {
+//     //뭐든 입력됐다는 의미
+//     addressWrong.classList.add("hidden");
+//     secondArticleNextButton.classList.add("validation-pass");
+//     secondArticleNextButton.disabled = false;
+//     lastAddress.classList.remove("wrong");
+//   } else {
+//     addressWrong.classList.remove("hidden");
+//     secondArticleNextButton.classList.remove("validation-pass");
+//     secondArticleNextButton.disabled = true;
+//     lastAddress.classList.add("wrong");
+//   }
+// });
 
 // 이메일, 인증번호 유효성 검사 나중에 구현하기
 
@@ -304,4 +325,28 @@ certificationButton.addEventListener("click", () => {
       console.log("error:", error);
       alert("인증을 처리하는 도중 오류가 발생하였습니다.");
     });
+});
+
+// 주소 api 부분
+function DaumPostcode() {
+  new daum.Postcode({
+    oncomplete: function(data) {
+      var postcode = data.zonecode; // 우편번호
+      var address = data.address; // 기본주소
+
+      document.getElementById('postcode').value = postcode; // 우편번호 입력란에 값 설정
+      document.getElementById('address').value = address; // 기본주소 입력란에 값 설정
+    }
+  }).open();
+}
+
+// 상세주소 입력란이 변경될 때마다 memberAddress에 저장
+document.getElementById('detailAddress').addEventListener('input', function() {
+  var detailAddress = document.getElementById('detailAddress').value; // 상세주소
+  var address = document.getElementById('address').value; // 기본주소
+  var postcode = document.getElementById('postcode').value; // 우편주소
+
+  var memberAddress = ' (' + postcode + ') ' + address + ' ' + detailAddress; // 주소를 합침
+
+  document.getElementById('memberAddressHidden').value = memberAddress; // memberAddress에 주소를 함께 저장
 });
