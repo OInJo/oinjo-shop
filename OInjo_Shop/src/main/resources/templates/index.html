@@ -86,7 +86,7 @@
         </a>
       </li>
       <li>
-        <a href="#" class="tooltip-container">
+        <a href="/recentproduct" class="tooltip-container">
           <i class="fa-solid fa-gift tooltip-icon"></i>
           <span class="tooltip-text">최근본상품</span>
         </a>
@@ -129,6 +129,7 @@
       <div class="article-product-wrapper">
         <a class="article-product" th:each="ItemFormDTO : ${itemFormDTOList.dtoList}"
           th:href="@{'/item/' + ${ItemFormDTO.id}}">
+          <p class="hidden article-product-id" th:text="${ItemFormDto.id}"></p>
           <img th:each="ItemImgDTO : ${itemImgDTOList}" th:src="${ItemImgDTO.imgUrl}" alt="상품 이미지"
             class="article-product-image" id="item-img-src"
             th:if="${ItemImgDTO.itemId.itemId == ItemFormDTO.id && ItemImgDTO.repImgYn == 'Y'}">
