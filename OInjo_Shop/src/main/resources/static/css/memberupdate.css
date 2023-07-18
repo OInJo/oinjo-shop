@@ -35,6 +35,10 @@ form {
   padding: 1% 3%;
 }
 
+.address-update-input {
+  width: 430px;
+}
+
 .update-bottom-button {
   margin-top: 3%;
   display: flex;
