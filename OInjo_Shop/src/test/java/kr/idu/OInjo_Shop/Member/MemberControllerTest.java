@@ -4,8 +4,8 @@ import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.repository.Member.MemberRepository;
 import kr.idu.OInjo_Shop.service.Member.MemberService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

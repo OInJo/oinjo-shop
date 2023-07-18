@@ -2,7 +2,7 @@ package kr.idu.OInjo_Shop.entity.Member;
 
 
 
-import kr.idu.OInjo_Shop.Role.Role;
+import kr.idu.OInjo_Shop.role.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

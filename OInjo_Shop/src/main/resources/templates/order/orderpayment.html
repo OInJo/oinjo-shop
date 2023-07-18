@@ -23,6 +23,53 @@
     <script src="/js/header.js" defer></script>
     <script src="/js/font.js" defer></script>
 </head>
+<script th:inline="javascript">
+    $(document).ready(function () {
+
+        calculateToalPrice();
+
+        $("#count").change(function () {
+            calculateToalPrice();
+        });
+    });
+
+    function calculateToalPrice() {
+        var count = $("#count").val();
+        var price = $("#price").val();
+        var totalPrice = price * count;
+        $("#totalPrice").html(totalPrice + '원');
+    }
+
+    function pay_order() {
+        var url = "/orders/pay";
+        var paramData = {
+            itemId: [[${orderDto.itemId}]],
+            count: $("#count").val()
+        };
+
+        var param = JSON.stringify(paramData);
+        $.ajax({
+            url: url,
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(paramData),
+            success: function (response, status) {
+                var orderId = response;     //response에는 서버 응답의 데이터가 들어있다.
+                alert("주문이 완료 되었습니다.");
+                location.href = '/orders/completion/'+orderId;
+            },
+            error: function (jqXHR, status, error) {
+
+                if (jqXHR.status == '401') {
+                    alert('로그인 후 이용해주세요');
+                    location.href = '/members/login';
+                } else{
+                    alert(jqXHR.responseText);      //재고가 부족할 경우 여기에 걸리게됨.
+                }
+            }
+        });
+    }
+</script>
 <body>
 <header class="header-wrapper">
     <p class="login-check" th:text="${session.loginEmail}"></p>
@@ -91,12 +138,10 @@
                 <button type="button" class="new-address" onclick="address_popup()">배송지 변경</button>
             </div>
 
-
             <div class="name-number">이름/연락처
                 <span>[[${memberDto.memberName}]]</span>/
                 <span>[[${memberDto.memberPhone}]]</span>
             </div>
-
 
             <div class="juso">주소
                 <div class="go-delivery">
@@ -130,10 +175,11 @@
                 <span class="won">원</span>
                 <span class="items-option">색깔: </span>
                 <span class="items-option1">white</span>
+                <input type="hidden" th:value="${orderDto.count}" id="count" name="count">
                 <span class="items-option">사이즈: </span>
                 <span class="items-option1">s</span>
                 <span class="items-option-num">수량:</span>
-                <span class="items-option2">2</span>
+                <span th:text="${orderDto.count}"></span>
                 <span class="won">개</span>
                 <span class="delivery-price">배송비:</span>
                 <span class="free">무료</span>
@@ -161,7 +207,7 @@
     </div>
     </div>
 
-    <input type="submit" class="go-payment" onclick="order()" value="결제하기">
+    <input type="submit" class="go-payment" value="결제하기" onclick="pay_order()">
 
 
 </section>

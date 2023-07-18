@@ -26,6 +26,8 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+#querydsl
+/src/main/generated
 
 ### NetBeans ###
 /nbproject/private/
@@ -38,3 +40,5 @@ out/
 .vscode/
 
 *.yml
+
+### querydsl ###

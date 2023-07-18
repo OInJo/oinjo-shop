@@ -2,6 +2,7 @@ package kr.idu.OInjo_Shop.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import kr.idu.OInjo_Shop.dto.Item.Relation.BrandDTO;
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.CategoryDTO;
@@ -178,7 +179,7 @@ public class ItemController {
     @GetMapping("/item/{itemId}")
     public String itemDetail(@PathVariable("itemId") Long itemId, Model model, HttpServletResponse response, HttpSession session) {
 
-        try {
+//        try {
             ItemFormDTO itemFormDTO = itemService.getItemDetail(itemId);
             model.addAttribute("itemFormDTO", itemFormDTO);
             // 현재 로그인한 사용자의 이메일 주소 가져오기
@@ -196,7 +197,7 @@ public class ItemController {
 
             // 쿠키를 응답 헤더에 추가하여 클라이언트에게 전달
             response.addCookie(cookie);*/
-        } catch (EntityNotFoundException e) {
+        /*} catch (EntityNotFoundException e) {
             model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
             model.addAttribute("itemFormDTO", new ItemFormDTO());
             return "item/detail";

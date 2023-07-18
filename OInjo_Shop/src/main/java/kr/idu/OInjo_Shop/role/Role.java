@@ -1,4 +1,4 @@
-package kr.idu.OInjo_Shop.Role;
+package kr.idu.OInjo_Shop.role;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
