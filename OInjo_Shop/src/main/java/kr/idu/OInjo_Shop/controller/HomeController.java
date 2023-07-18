@@ -64,4 +64,8 @@ public class HomeController {
         return "email"; // templates/email.html
     }
 
+    @GetMapping("/item/recentproduct")
+    public String recentproduct() {
+        return "/item/recentproduct";
+    }
 }

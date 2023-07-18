@@ -1,43 +1,82 @@
-const uploadButton = document.querySelector(".upload-button");
+document.addEventListener('DOMContentLoaded', function() {
+const brandNames = document.querySelectorAll(".brand-name");
+brandNames.forEach(function (brand) {
+  brand.addEventListener("click", function () {
+    brandNames.forEach(function (item) {
+      item.classList.remove("click-accent");
+    });
+    this.classList.add("click-accent");
+  });
+});
+
+const categoryNames = document.querySelectorAll(".category-name");
+categoryNames.forEach(function (category) {
+  category.addEventListener("click", function () {
+    categoryNames.forEach(function (item) {
+      item.classList.remove("click-accent");
+    });
+    this.classList.add("click-accent");
+  });
+});
+
+const colorNames = document.querySelectorAll(".color-name");
+colorNames.forEach(function (color) {
+  color.addEventListener("click", function () {
+    colorNames.forEach(function (item) {
+      item.classList.remove("click-accent");
+    });
+    this.classList.add("click-accent");
+  });
+});
+
+const sizeNames = document.querySelectorAll(".size-name");
+sizeNames.forEach(function (size) {
+  size.addEventListener("click", function () {
+    sizeNames.forEach(function (item) {
+      item.classList.remove("click-accent");
+    });
+    this.classList.add("click-accent");
+  });
+});
+
+const uploadButton = document.querySelector(".item-upload-button");
 const uploadForm = document.querySelector(".upload-form");
 
 uploadButton.addEventListener("click", () => {
-  uploadForm.submit();
+    uploadForm.submit();
 });
 
-// const modal = document.querySelector(".modal");
-// const modalInput = document.querySelector(".modal-input");
+// // const modal = document.querySelector(".modal");
+// // const modalInput = document.querySelector(".modal-input");
 
-// const openModal = () => {
-//   modal.classList.remove("hidden");
-//   modalInput.focus();
-// };
+// // const openModal = () => {
+// //   modal.classList.remove("hidden");
+// //   modalInput.focus();
+// // };
 
-// const closeModal = () => {
-//   modal.classList.add("hidden");
-// };
+// // const closeModal = () => {
+// //   modal.classList.add("hidden");
+// // };
 
-// const modalSaveButton = document.querySelector(".modal-save-button");
-// modalSaveButton.addEventListener("click", closeModal);
+// // const modalSaveButton = document.querySelector(".modal-save-button");
+// // modalSaveButton.addEventListener("click", closeModal);
 
-// const detailButton = document.querySelector(".detail-button");
-// detailButton.addEventListener("click", openModal);
+// // const detailButton = document.querySelector(".detail-button");
+// // detailButton.addEventListener("click", openModal);
 
-// const modalResetButton = document.querySelector(".modal-reset-button");
-// modalResetButton.addEventListener("click", () => {
-//   modalInput.value = "";
-//   detailLimit.textContent = `${modalInput.value.length}/300`;
-// });
+// // const modalResetButton = document.querySelector(".modal-reset-button");
+// // modalResetButton.addEventListener("click", () => {
+// //   modalInput.value = "";
+// //   detailLimit.textContent = `${modalInput.value.length}/300`;
+// // });
 
-// const detailLimit = document.querySelector(".detail-limit");
-// modalInput.addEventListener("input", () => {
-//   detailLimit.textContent = `${modalInput.value.length}/300`;
-// });
+// // const detailLimit = document.querySelector(".detail-limit");
+// // modalInput.addEventListener("input", () => {
+// //   detailLimit.textContent = `${modalInput.value.length}/300`;
+// // });
 
 
 
-// brand-name 클릭하면 brand-id 값을 가져옴
-// brand-id-input의 value를 brand-id로 바꿔줌
 
 const brandName = document.querySelectorAll(".brand-name");
 const brandId = document.querySelectorAll(".brand-id");
@@ -45,7 +84,7 @@ const brandIdInput = document.querySelector(".brand-id-input");
 
 for(let i=0; i<brandName.length; i++) {
     brandName[i].addEventListener("click", () => {
-        brandIdInput.value = brandId[i].textContent
+        brandIdInput.value = brandId[i].textContent;
     });
 }
 
@@ -79,3 +118,6 @@ for(let i=0; i<sizeName.length; i++) {
         sizeIdInput.value = sizeId[i].textContent
     });
 }
+
+
+});

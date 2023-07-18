@@ -299,3 +299,7 @@ input[id*="category"]:checked+label+ul {
   color: #000000;
   background: #72716d;
 }
+
+.hidden {
+  display:none;
+}
