@@ -9,8 +9,6 @@
   <script src="/js/upload.js" defer></script>
   <link rel="stylesheet" href="../../static/css/upload.css">
   <script src="../../static/js/upload.js" defer></script>
-  <script src="../../static/js/itemupload.js" defer></script>
-  <script src="/js/itemupload.js" defer></script>
   <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
   <script src="../../static/js/font.js" defer></script>
   <script src="/font.js" defer></script>
@@ -20,8 +18,10 @@
     <script th:inline="javascript">
       $(document).ready(function () {
         var errorMessage = [[${ errorMessage }]];
+        var errorType = [[${ errorType }]];
         if (errorMessage != null) {
           alert(errorMessage);
+          alert(errorType)
         }
 
         bindDomEvent();
@@ -54,10 +54,10 @@
     <div th:replace="~{/fragments/uploadnav :: nav}"></div>
     <form action="/admin/item/new" method="post" enctype="multipart/form-data" th:object="${itemFormDTO}"
       class="upload-form">
-      <input type="hidden" class="id-input brand-id-input" name="brand">
-      <input type="hidden" class="id-input category-id-input" name="category">
-      <input type="hidden" class="id-input color-id-input" name="color">
-      <input type="hidden" class="id-input size-id-input" name="size">
+      <input type="text" class="id-input brand-id-input" name="brand">
+      <input type="text" class="id-input category-id-input" name="category">
+      <input type="text" class="id-input color-id-input" name="color">
+      <input type="text" class="id-input size-id-input" name="size">
       <section class="connection-table-ul-wrapper">
         <!-- <input type="hidden" name=""> -->
         <ul class="connection-table-ul">
