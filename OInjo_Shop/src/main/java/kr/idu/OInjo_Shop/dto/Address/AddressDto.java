@@ -15,15 +15,15 @@ public class AddressDto {
 
     public AddressDto() {
     }
-    public AddressDto(AddressEntity addressEntity) {
+    public AddressDto(AddressEntity addressEntity) {        //생성자 사용
 
-        this.address= addressEntity.getAddress();
         this.addressId = addressEntity.getId();
+        this.address= addressEntity.getAddress();
 
     }
 
 
-    public static AddressDto of(AddressEntity address) {
+    public static AddressDto of(AddressEntity address) {        //정적 팩토리 메서드 사용
         AddressDto addressDto = new AddressDto();
         addressDto.setAddressId(address.getId());
         addressDto.setAddress(address.getAddress());

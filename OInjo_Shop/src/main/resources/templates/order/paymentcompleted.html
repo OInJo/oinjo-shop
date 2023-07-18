@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -87,22 +87,22 @@
         <h1>고객님 상품 주문이 완료되었습니다.</h1>
         <div class="order-information">
             <div class="user-name">고객이름 :
-                <span>김영성</span>
+                <span th:text="${member.getMemberName()}"></span>
             </div>
             <div class="phone-number">전화번호 :
-                <span>010-1111-2222</span>
+                <span th:text="${member.getMemberPhone()}"></span>
             </div>
             <div class="user-address">고객주소 :
-                <span>서울 동대문구 </span>
+                <span th:text="${member.getMemberAddress()}"></span>
             </div>
             <div class="order-day">주문날짜 :
-                <span>2023년 06월 01일</span>
+                <span th:text="${order.getOrderDate()}"></span>
             </div>
             <div class="payment-price">결제금액 :
-                <span>30,000원</span>
+                <span th:text="${order.getTotalPrice()}"></span>
             </div>
             <div class="order-number">주문번호 :
-                <span>000000000000</span>
+                <span th:text="${order.getOrderId()}"></span>
             </div>
         </div>
         <div class="button-form">

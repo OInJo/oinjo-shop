@@ -66,34 +66,34 @@ sizeSelect.addEventListener("change", (e) => {
 // // 여기까지 구매하기 소스
 
 // 동민 소스 바닐라 JS 버전
-function order() {
-  var url = "/order";
-  var paramData = {
-    itemId: document.querySelector("#itemId").value,
-    // count: document.querySelector("#count").value, 일단 count 없으니까 삭제
-  };
-
-  fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(paramData),
-  })
-    .then(function (response) {
-      if (response.ok) {
-        alert("주문이 완료되었습니다.");
-        location.href = "/";
-      } else if (response.status === 401) {
-        alert("로그인 후 이용해주세요");
-        location.href = "/member/login";
-      } else {
-        throw new Error(response.statusText);
-      }
-    })
-    .catch(function (error) {
-      alert(error);
-    });
-}
-
-document.querySelector(".now-buy-button").addEventListener("click", order);
+// function order() {
+//   var url = "/order";
+//   var paramData = {
+//     itemId: document.querySelector("#itemId").value,
+//     // count: document.querySelector("#count").value, 일단 count 없으니까 삭제
+//   };
+//
+//   fetch(url, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(paramData),
+//   })
+//     .then(function (response) {
+//       if (response.ok) {
+//         alert("주문이 완료되었습니다.");
+//         location.href = "/";
+//       } else if (response.status === 401) {
+//         alert("로그인 후 이용해주세요");
+//         location.href = "/member/login";
+//       } else {
+//         throw new Error(response.statusText);
+//       }
+//     })
+//     .catch(function (error) {
+//       alert(error);
+//     });
+// }
+//
+// document.querySelector(".now-buy-button").addEventListener("click", order);

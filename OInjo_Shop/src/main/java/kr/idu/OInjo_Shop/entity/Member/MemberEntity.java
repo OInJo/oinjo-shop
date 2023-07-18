@@ -46,6 +46,7 @@ public class MemberEntity {
     //orphanRemoval: 부모 엔티티와 연관 관계가 끊어진 자식 엔티티를 자동으로 삭제
     //CascadeType.REMOVE vs orphanRemoval => 부모 엔티티가 삭제될 때 자식도 삭제(member를 삭제하면 매핑된 address가 삭제), 연관 관계가 끊어지면 고아 객체가 되는데 이를 삭제
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Builder.Default
     private List<AddressEntity> addresses = new ArrayList<>();      //주소의 모음이기에 복수형으로 선언
 
 

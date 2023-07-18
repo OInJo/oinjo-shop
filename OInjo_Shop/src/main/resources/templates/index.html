@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{layouts/layout1}">
+      layout:decorate="~{layouts/layout1}">
 
 <head>
   <meta charset="UTF-8">
@@ -23,28 +23,30 @@
 </head>
 
 <body>
-  <header class="header-wrapper">
-    <p class="login-check" th:text="${session.loginEmail}"></p>
-    <div class="header-left">
-      <!-- <h3 class="header-title">OInJo</h3> -->
+<header class="header-wrapper">
+  <p class="login-check" th:text="${session.loginEmail}"></p>
+  <div class="header-left">
+    <!-- <h3 class="header-title">OInJo</h3> -->
 
-      <form th:action="@{'/'}" th:method="get" class="search-wrapper">
-        <select name="type" aria-controls="dataTable" class="search-select">
-          <option value="n" class="select-option">상품이름</option>
-          <option value="b" class="select-option">브랜드</option>
-          <option value="c" class="select-option">카테고리</option>
-        </select>
-        <input type="text" name="keyword" aria-controls="dataTable" class="search-input">
-        <button type="submit" class="search-button search-icon">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-      </form>
+    <form th:action="@{'/'}" th:method="get" class="search-wrapper">
+      <select name="type" aria-controls="dataTable" class="search-select">
+        <option value="n" class="select-option">상품이름</option>
+        <option value="b" class="select-option">브랜드</option>
+        <option value="c" class="select-option">카테고리</option>
+      </select>
+      <input type="text" name="keyword" aria-controls="dataTable" class="search-input">
+      <button type="submit" class="search-button search-icon">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
 
-      <!-- <div class="search-wrapper">
-        <input type="text" class="search-input">
-        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-      </div> -->
+    <!-- <div class="search-wrapper">
+      <input type="text" class="search-input">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+    </div> -->
 
+<<<<<<< HEAD
+=======
     </div>
     <ul class="header-right">
       <!-- 관리자, 로그아웃, 정보수정, 로그인, 장바구니, 최근본상품, 마이페이지 -->
@@ -160,7 +162,122 @@
   <div class="move-btn-wrapper">
     <div class="move-top-btn"><i class="fa-solid fa-arrow-up"></i></div>
     <div class="move-bottom-btn"><i class="fa-solid fa-arrow-down"></i></div>
+>>>>>>> 34f0d0a2a4985575715a25fa555a33f949624eb2
   </div>
+  <ul class="header-right">
+    <!-- 관리자, 로그아웃, 정보수정, 로그인, 장바구니, 최근본상품, 마이페이지 -->
+    <li class="admin-link">
+      <a href="/admin/item/new" class="tooltip-container">
+        <i class="fa-solid fa-hammer tooltip-icon"></i>
+        <span class="tooltip-text">관리자</span>
+      </a>
+    </li>
+    <li class="update-link">
+      <a href="/member/update" class="tooltip-container">
+        <i class="fa-solid fa-user-pen tooltip-icon"></i>
+        <span class="tooltip-text">정보수정</span>
+      </a>
+    </li>
+    <li class="logout-link">
+      <a href="/member/logout" class="tooltip-container">
+        <i class="fa-solid fa-user-minus tooltip-icon"></i>
+        <span class="tooltip-text">로그아웃</span>
+      </a>
+    </li>
+    <li class="login-link">
+      <a href="/member/login" class="tooltip-container">
+        <i class="fa-solid fa-user-plus tooltip-icon"></i>
+        <span class="tooltip-text">로그인</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="tooltip-container">
+        <i class="fa-solid fa-user tooltip-icon"></i>
+        <span class="tooltip-text">마이페이지</span>
+      </a>
+    </li>
+
+    <li>
+      <a th:href="@{'/member/' + ${session.loginId} + '/cart'}" class="tooltip-container">
+        <i class="fa-solid fa-cart-shopping tooltip-icon"></i>
+        <span class="tooltip-text">장바구니</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="tooltip-container">
+        <i class="fa-solid fa-gift tooltip-icon"></i>
+        <span class="tooltip-text">최근본상품</span>
+      </a>
+    </li>
+  </ul>
+</header>
+<main>
+
+  <aside class="aside-category-wrapper">
+    <div class="aside-category">
+      <input type="radio" name="brand" id="category01">
+      <label for="category01">브랜드<span></span></label>
+      <ul>
+        <li th:each="brandDto : ${brandList}">
+          <span th:text="${brandDto.brandName}" class="select-name"></span>
+        </li>
+      </ul>
+      <input type="radio" name="category" id="category02">
+      <label for="category02">카테고리<span></span></label>
+      <ul>
+        <li th:each="categoryDto : ${categoryList}">
+          <span th:text="${categoryDto.categoryName}" class="select-name"></span>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <section>
+    <div class="article-product-top">
+      <div class="brand-category-choose">
+        <p class="now-category">전체</p>
+      </div>
+      <div class="sort-option">
+        <button type="button" class="sort-option-button">최신순</button>
+        <button type="button" class="sort-option-button">인기순</button>
+        <button type="button" class="sort-option-button">가격 높은 순</button>
+        <button type="button" class="sort-option-button">가격 낮은 순</button>
+      </div>
+    </div>
+    <div class="article-product-wrapper">
+      <a class="article-product" th:each="ItemFormDTO : ${itemFormDTOList.dtoList}"
+         th:href="@{'/item/' + ${ItemFormDTO.id}}">
+        <img th:each="ItemImgDTO : ${itemImgDTOList}" th:src="${ItemImgDTO.imgUrl}" alt="상품 이미지"
+             class="article-product-image" id="item-img-src"
+             th:if="${ItemImgDTO.itemId.itemId == ItemFormDTO.id && ItemImgDTO.repImgYn == 'Y'}">
+        <ul class="article-product-size">
+          <li th:each="size : ${sizeList}" th:text="${size.sizeName}" class="article-product-size-list"></li>
+        </ul>
+        <div class="article-product-name" th:text="${ItemFormDTO.itemName}"></div>
+        <div class="article-product-brand" th:each="brand : ${brandList}"
+             th:if="${ItemFormDTO.brand.brandId == brand.brandId}" th:text="${brand.brandName}"></div>
+        <div class="article-product-price">
+          <div class="article-product-price-won" th:text="${ItemFormDTO.itemPrice}"></div>
+          원
+        </div>
+        <!-- <div class="article-product-color">
+          <i class="fa-solid fa-circle red-color"></i>
+          <i class="fa-solid fa-circle blue-color"></i>
+        </div> -->
+      </a>
+    </div>
+  </section>
+
+
+</main>
+<footer>
+
+</footer>
+
+<div class="move-btn-wrapper">
+  <div class="move-top-btn"><i class="fa-solid fa-arrow-up"></i></div>
+  <div class="move-bottom-btn"><i class="fa-solid fa-arrow-down"></i></div>
+</div>
 
 
 
