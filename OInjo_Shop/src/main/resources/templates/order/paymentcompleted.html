@@ -18,42 +18,67 @@
     <link rel="manifest" href="/favicon/site.webmanifest">
     <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <title>결제 완료</title>
+    <script src="/js/header.js" defer></script>
+    <script src="/js/font.js" defer></script>
 </head>
 
 <body>
-    <header>
-        <div class="header-left">
-            <a href="/"><img src="/images/logo.png" alt="LOGO" class="header-logo"></a>
+<header class="header-wrapper">
+    <p class="login-check" th:text="${session.loginEmail}"></p>
+    <div class="header-left">
+        <!-- <h3 class="header-title">OInJo</h3> -->
+        <div class="search-wrapper">
+            <input type="text" class="search-input">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
         </div>
-        <nav class="header-right">
-            <p class="login-check" th:text="${session.loginEmail}"></p>
-            <a href="member/update" class="update-link header-link">
-                <i class="fa-solid fa-user-pen header-link-icon"></i>
-                정보수정
+    </div>
+    <ul class="header-right">
+        <!-- 관리자, 로그아웃, 정보수정, 로그인, 장바구니, 최근본상품, 마이페이지 -->
+        <li class="admin-link">
+            <a href="#" class="tooltip-container">
+                <i class="fa-solid fa-hammer tooltip-icon"></i>
+                <span class="tooltip-text">관리자</span>
             </a>
-            <a href="member/logout" class="logout-link header-link">
-                <i class="fa-solid fa-user-minus header-link-icon"></i>
-                로그아웃
+        </li>
+
+        <li class="update-link">
+            <a href="/member/update" class="tooltip-container">
+                <i class="fa-solid fa-user-pen tooltip-icon"></i>
+                <span class="tooltip-text">정보수정</span>
             </a>
-            <a href="member/login" class="login-link header-link">
-                <i class="fa-solid fa-user-plus header-link-icon"></i>
-                로그인
+        </li>
+        <li class="logout-link">
+            <a href="/member/logout" class="tooltip-container">
+                <i class="fa-solid fa-user-minus tooltip-icon"></i>
+                <span class="tooltip-text">로그아웃</span>
             </a>
-            <a href="" class="header-link">
-                <i class="fa-solid fa-tags header-link-icon"></i>
-                최근본상품
+        </li>
+        <li class="login-link">
+            <a href="/member/login" class="tooltip-container">
+                <i class="fa-solid fa-user-plus tooltip-icon"></i>
+                <span class="tooltip-text">로그인</span>
             </a>
-            <a href="" class="header-link shopping-bag">
-                <i class="fa-solid fa-cart-shopping header-link-icon"></i>
-                장바구니
-                <div class="shopping-bag-count">1</div>
+        </li>
+        <li>
+            <a href="#" class="tooltip-container">
+                <i class="fa-solid fa-user tooltip-icon"></i>
+                <span class="tooltip-text">마이페이지</span>
             </a>
-            <a href="" class="header-link">
-                <i class="fa-solid fa-house header-link-icon"></i>
-                마이페이지
+        </li>
+        <li>
+            <a href="#" class="tooltip-container">
+                <i class="fa-solid fa-cart-shopping tooltip-icon"></i>
+                <span class="tooltip-text">장바구니</span>
             </a>
-        </nav>
-    </header>
+        </li>
+        <li>
+            <a href="#" class="tooltip-container">
+                <i class="fa-solid fa-gift tooltip-icon"></i>
+                <span class="tooltip-text">최근본상품</span>
+            </a>
+        </li>
+    </ul>
+</header>
     <section class="order-complete-form">
         <div class="button">
             <a href=""><button class="payment-receipt">결제 영수증</button></a>
