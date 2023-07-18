@@ -29,7 +29,7 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
             "join o.orderItems oi " +
             "join oi.item i " +
             "where o.member.memberEmail = :email " +
-            "and ((:searchQuery = '' or :searchQuery = '') or i.brand.brandName LIKE %:searchQuery% or i.itemName LIKE %:searchQuery%) " +
+            "and ((:searchQuery = '' or :searchQuery is null) or i.brand.brandName LIKE %:searchQuery% or i.itemName LIKE %:searchQuery%) " +
             "and (:startDate is null or o.orderDate >= :startDate) and (:endDate is null or o.orderDate <= :endDate) " +
             "order by o.orderDate desc")
     List<OrderEntity> findOrdersWithSearch(@Param("email") String email,
@@ -45,12 +45,6 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
             "and (:startDate is null or o.orderDate >= :startDate) and (:endDate is null or o.orderDate <= :endDate) " +
             "and (:searchQuery = '' or i.brand.brandName LIKE %:searchQuery% or i.itemName LIKE %:searchQuery%) "
     )
-//    @Query("select count(o) from OrderEntity o " +
-//            "join o.orderItems oi " +
-//            "join oi.item i " +
-//            "where o.member.memberEmail = :email " +
-//            "and ((:searchQuery is null or :searchQuery = '') or i.brand.brandName LIKE %:searchQuery% or i.itemName LIKE %:searchQuery%) "
-//    )
     Long totalOrderItem(@Param("email") String email,
                         @Param("searchQuery") String searchQuery,
                         @Param("startDate") LocalDateTime startDate,

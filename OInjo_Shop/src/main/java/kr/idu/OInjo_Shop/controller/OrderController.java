@@ -43,18 +43,26 @@ public class OrderController {
 
     @GetMapping("/orders/form")
     public String orderMain(Model model, HttpSession session) {
-        String email = (String) session.getAttribute("loginEmail");
-        OrderDto orderDto = (OrderDto) session.getAttribute("orderDto");
-        MemberEntity member = memberRepository.findByMemberEmail(email)
-                .orElseThrow(EntityNotFoundException::new);
-        MemberDTO memberDto = MemberDTO.toMemberDTO(member);
-        ItemFormDTO itemFormDto = itemService.getItemDetail(orderDto.getItemId());
-        System.out.println(itemFormDto.getRegTime());
-        model.addAttribute("orderDto", orderDto);
-        model.addAttribute("itemDto", itemFormDto);
-        model.addAttribute("memberDto", memberDto);
+        try {
+            String email = (String) session.getAttribute("loginEmail");
+            OrderDto orderDto = (OrderDto) session.getAttribute("orderDto");
+            if (email == null || orderDto == null) {
+                throw new NullPointerException("Session value is empty.");
+            }
+            MemberEntity member = memberRepository.findByMemberEmail(email)
+                    .orElseThrow(EntityNotFoundException::new);
+            MemberDTO memberDto = MemberDTO.toMemberDTO(member);
+            ItemFormDTO itemFormDto = itemService.getItemDetail(orderDto.getItemId());
+            System.out.println(itemFormDto.getRegTime());
+            model.addAttribute("orderDto", orderDto);
+            model.addAttribute("itemDto", itemFormDto);
+            model.addAttribute("memberDto", memberDto);
 
-        return "order/orderpayment";
+            return "order/orderpayment";
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            return "index";
+        }
     }
 
 
@@ -120,4 +128,5 @@ public class OrderController {
 
         return "order/orderlist";
     }
+
 }
