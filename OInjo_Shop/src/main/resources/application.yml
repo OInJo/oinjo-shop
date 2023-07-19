@@ -9,7 +9,7 @@ spring:
     url: jdbc:mysql://localhost:3306/db_OInjo?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     #    mysql에 생성한 사용자 계정 정보를 사용
     username: root
-    password: 1234
+    password: als435125
   thymeleaf:
     cache: false
   devtools:
@@ -25,10 +25,14 @@ spring:
     hibernate:
       ddl-auto: update
 
+  # file
+  itemImgLocation: /Users/minwook/Documents/GitHub/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg
+  uploadPath: /Users/minwook/Documents/GitHub/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg
+
 
   # file
-   itemImgLocation: D:/Project/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg
-   uploadPath: file:///D:/Project/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg
+  # itemImgLocation: D:/Project/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg
+  # uploadPath: file:///D:/Project/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg
 
 
 
