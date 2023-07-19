@@ -1,6 +1,7 @@
 package kr.idu.OInjo_Shop.entity.Cart;
 
 import kr.idu.OInjo_Shop.dto.Cart.CartItemDTO;
+import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.entity.Item.ItemEntity;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,7 +30,7 @@ public class CartItemEntity {
     @JoinColumn(name="itemId")
     private ItemEntity product;
 
-    private int count; // 카트에 담긴 상품 개수
+    private Integer count; // 카트에 담긴 상품 개수
 
 
     @DateTimeFormat(pattern = "yyyy-mm-dd")
@@ -40,6 +41,17 @@ public class CartItemEntity {
         this.createDate = LocalDate.now();
     }
 
+    public static CartItemEntity createCartItem(CartEntity cart, ItemEntity item, int count){
+        System.out.println(cart);
+        System.out.println(item);
+        System.out.println(count);
+        CartItemEntity cartItem = new CartItemEntity();
+        cartItem.setCart(cart);
+        cartItem.setProduct(item);
+        cartItem.setCount(count);
+
+        return cartItem;
+    }
     public void addCount(int count){
         this.count += count;
     }

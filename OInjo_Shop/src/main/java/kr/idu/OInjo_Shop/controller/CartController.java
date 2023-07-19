@@ -5,6 +5,7 @@ import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.entity.Cart.CartEntity;
 import kr.idu.OInjo_Shop.entity.Cart.CartItemEntity;
+import kr.idu.OInjo_Shop.entity.Item.ItemEntity;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.repository.Cart.CartItemRepository;
 import kr.idu.OInjo_Shop.repository.Cart.CartRepository;
@@ -13,6 +14,7 @@ import kr.idu.OInjo_Shop.service.Cart.CartService;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
 import kr.idu.OInjo_Shop.service.Member.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,7 +56,7 @@ public class CartController {
             CartEntity cart = cartRepository.findByMember(member.getId());
 
             // 장바구니의 아이템을 가져온다.
-            List<CartItemEntity> cartItems = cartService.memberCartView(cart);
+            List<CartItemEntity> cartItems= cartService.memberCartView(cart);
 
             int totalPrice = 0;
             for(CartItemEntity cartItem : cartItems){
@@ -63,7 +65,7 @@ public class CartController {
 
             model.addAttribute("cartItemList",cartItems);
             model.addAttribute("totalPrice",totalPrice);
-            model.addAttribute("member", member);
+            model.addAttribute("member", memberService.findByMember(id));
 
             return "/cart/cart";
         } else {
@@ -75,17 +77,19 @@ public class CartController {
 
     //장바구니에 상품 추가
     @PostMapping("/member/{id}/cart/{itemId}")
-    public String myCartAdd(@PathVariable("id") Long id, @PathVariable("itemId") Long itemId, int count){
-        ItemFormDTO item = ItemFormDTO.of(itemService.findItemId(itemId));
+    public String myCartAdd(@PathVariable("id") Long id, @PathVariable("itemId") Long itemId, Integer count){
+        MemberEntity member = memberService.findByMember(id);
+        ItemEntity item = itemService.findItemId(itemId);
 
-        cartService.addCart(id, item, count);
+        cartService.addCart(member, item, count);
 
-        return "redirect:/item/view/{itemId}";
+        return "redirect:/item/{itemId}";
     }
 
     //장바구니에서 특정 상품 삭제
     @GetMapping("/member/{id}/cart/{cartItemId}/delete")
     public String myCartDelete(@PathVariable("id") Long id, @PathVariable("cartItemId") Long cartItemId){
+        MemberEntity member = MemberEntity.toMemberEntity(memberService.findById(id));
         CartEntity cart = cartRepository.findByMember(id);
         cart.setCount(cart.getCount() - 1);
         cartService.cartItemDelete(cartItemId);
@@ -94,14 +98,14 @@ public class CartController {
     }
 
     //결제 페이지
-    @PostMapping("/member/{id}/cart/checkout")
-    public String myCartPayment(@PathVariable("id") Long id, Model model){
-        MemberEntity member = MemberEntity.toMemberEntity(memberService.findById(id));
-        //cartService.cartPayment(id); // 결제처리
-        cartService.cartDelete(id); // 장바구니 비우기
-
-        return "redirect:/";
-    }
+//    @PostMapping("/member/{id}/cart/checkout")
+//    public String myCartPayment(@PathVariable("id") Long id, Model model){
+//        MemberEntity member = MemberEntity.toMemberEntity(memberService.findById(id));
+//        //cartService.cartPayment(id); // 결제처리
+//        cartService.cartDelete(id); // 장바구니 비우기
+//
+//        return "redirect:/";
+//    }
 
 
 
