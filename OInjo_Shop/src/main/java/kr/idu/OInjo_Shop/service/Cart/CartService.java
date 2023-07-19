@@ -6,10 +6,13 @@ import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.entity.Cart.CartEntity;
 import kr.idu.OInjo_Shop.entity.Cart.CartItemEntity;
+import kr.idu.OInjo_Shop.entity.Item.ItemEntity;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.repository.Cart.CartItemRepository;
 import kr.idu.OInjo_Shop.repository.Cart.CartRepository;
+import kr.idu.OInjo_Shop.service.Item.ItemService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -23,6 +26,7 @@ import java.util.Objects;
 public class CartService {
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
+    private final ItemService itemService;
 
     //장바구니 생성
     public void createCart(MemberEntity member) {
@@ -31,21 +35,20 @@ public class CartService {
     }
 
     //장바구니에 상품 추가
-    @Transactional
-    public void addCart(Long id, ItemFormDTO item, int count) {
-        CartEntity cart = cartRepository.findByMember(id);
+    public void addCart(MemberEntity member, ItemEntity item, Integer count) {
+        CartEntity cart = cartRepository.findByMember(member);
 
         if(cart == null) {  //카트가 비어있다면 생성
-            cart = CartDTO.toCartEntity(CartDTO.toCartDTO(null));
+            cart = CartEntity.creatCart(member);
             cartRepository.save(cart);
         }
 
         // CartItem 생성
-        CartItemEntity cartItem = cartItemRepository.findByCartAndProduct(cart, item.createItem());
+        CartItemEntity cartItem = cartItemRepository.findByCartAndProduct(cart, item);
 
         //CartItem이 비워져 있다면 새로 생성
         if(cartItem == null) {
-            cartItem = CartItemDTO.toCartItemEntity(CartDTO.toCartDTO(cart), item, count);
+            cartItem = CartItemEntity.createCartItem(cart, item ,count);
             cartItemRepository.save(cartItem);
             cart.setCount(cart.getCount() + 1);
         } else {    //비어 있지 않다면 상품 갯수 그만큼 추가

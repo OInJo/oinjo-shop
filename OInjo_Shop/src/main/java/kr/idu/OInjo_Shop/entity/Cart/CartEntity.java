@@ -31,7 +31,7 @@ public class CartEntity {
     @JoinColumn(name = "member_id")
     private MemberEntity member;  //장바구니 사용자
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cart")
     private final List<CartItemEntity> cartItems = new ArrayList<>();    //상품들
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
