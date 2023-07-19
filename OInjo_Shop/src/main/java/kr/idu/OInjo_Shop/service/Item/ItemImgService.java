@@ -20,7 +20,8 @@ import java.util.List;
 @Transactional
 public class ItemImgService {
 
-    @Value("/Users/lgh/Desktop/Code-Crew/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg")
+    @Value("/Users/minwook/Documents/GitHub/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg")
+
     private String itemImgLocation;
 
     private final ItemImgRepository itemImgRepository;
