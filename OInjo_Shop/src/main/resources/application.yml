@@ -25,12 +25,9 @@ spring:
     hibernate:
       ddl-auto: update
 
-
   # file
-   itemImgLocation: D:/Project/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg
-   uploadPath: file:///D:/Project/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg
-
-
+    itemImgLocation: D:/Project/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg
+    uploadPath: file:///D:/Project/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg
 
 
   #OAuth2.0 설정

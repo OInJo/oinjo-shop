@@ -53,9 +53,9 @@ public class OrderService {
     }
 
     @Transactional(readOnly = true)
-    public Page<OrderHistDto> getOrderList(String email, String searchQuery,LocalDateTime startDate, LocalDateTime endDate, Pageable pageable) {
-        List<OrderEntity> orders = orderRepository.findOrdersWithSearch(email, searchQuery, startDate, endDate,pageable);
-        Long totalCount = orderRepository.totalOrderItem(email,searchQuery,startDate,endDate);
+    public Page<OrderHistDto> getOrderList(String email, String searchQuery, LocalDateTime startDate, LocalDateTime endDate, Pageable pageable) {
+        List<OrderEntity> orders = orderRepository.findOrdersWithSearch(email, searchQuery, startDate, endDate, pageable);
+        Long totalCount = orderRepository.totalOrderItem(email, searchQuery, startDate, endDate);
 
         List<OrderHistDto> orderHistDtos = new ArrayList<>();
         for (OrderEntity order : orders) {
@@ -72,4 +72,15 @@ public class OrderService {
         return new PageImpl<OrderHistDto>(orderHistDtos, pageable, totalCount);
     }
 
+//    @Transactional(readOnly = true)
+//    public void cancelOrder(Long orderId) {
+//        OrderEntity order = orderRepository.findById(orderId).
+//                orElseThrow(EntityNotFoundException::new);
+//
+//        order.cancelOrder();
+//    }
+    @Transactional(readOnly = true)
+    public void cancelOrder(Long orderId) {
+        orderRepository.deleteById(orderId);
+    }
 }

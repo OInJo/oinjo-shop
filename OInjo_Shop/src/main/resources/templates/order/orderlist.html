@@ -3,7 +3,6 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-
 <h2 class="mb-4">
     주문 정보
 </h2>
@@ -21,6 +20,9 @@
 
     <div class="d-flex mb-3 align-self-center">
         <h4 th:text="${order.orderDate} + ' 주문'"></h4>
+        <form th:action="@{'/orders/cancel/'+ ${order.orderId}}" th:method="delete">
+            <button type="submit" class="btn-delete">삭제</button>
+        </form>
     </div>
     <div class="card d-flex">
         <div th:each="orderItem : ${order.orderItemDtoList}" class="d-flex mb-3">
