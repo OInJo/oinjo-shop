@@ -66,7 +66,7 @@
             class="article-product-image" id="item-img-src"
             th:if="${ItemImgDTO.itemId.itemId == ItemFormDTO.id && ItemImgDTO.repImgYn == 'Y'}">
           <ul class="article-product-size">
-            <li th:each="size : ${sizeList}" th:text="${size.sizeName}" class="article-product-size-list"></li>
+            <li th:each="size : ${sizeList}" th:if="${ItemFormDTO.size.sizeId == size.sizeId}"th:text="${size.sizeName}" class="article-product-size-list"></li>
           </ul>
           <div class="article-product-name" th:text="${ItemFormDTO.itemName}"></div>
           <div class="article-product-brand" th:each="brand : ${brandList}"
