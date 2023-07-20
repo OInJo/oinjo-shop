@@ -16,14 +16,14 @@ const selectProductTotalPriceWrapper = document.querySelector(
 let sizeSelectValue = "";
 let colorSelectValue = "";
 colorSelect.addEventListener("change", (e) => {
-  sizeSelectValue = e.target.value;
+  colorSelectValue = e.target.value;
   if (sizeSelectValue != "" && colorSelectValue != "") {
     selectProductWrapper.style.display = "flex";
     selectProductTotalPriceWrapper.style.display = "flex";
   }
 });
 sizeSelect.addEventListener("change", (e) => {
-  colorSelectValue = e.target.value;
+  sizeSelectValue = e.target.value;
   if (sizeSelectValue != "" && colorSelectValue != "") {
     selectProductWrapper.style.display = "flex";
     selectProductTotalPriceWrapper.style.display = "flex";
@@ -97,3 +97,20 @@ sizeSelect.addEventListener("change", (e) => {
 // }
 //
 // document.querySelector(".now-buy-button").addEventListener("click", order);
+
+// 수량을 변경하면 장바구니 수량이 변경되는 소스
+const itemCountValue = document.querySelector(".item-count-value");
+const selectProductCountInput = document.querySelector(".select-product-count-input");
+const selectProductCountInputInForm = document.querySelector(".select-product-count-input-in-form")
+const detailPrice = document.querySelector(".detail-price")
+const selectProductTotalPrice = document.querySelector(".select-product-total-price");
+itemCountValue.addEventListener("input", (e) => {
+  selectProductCountInput.value = e.target.value
+  selectProductCountInputInForm.value = e.target.value
+  selectProductTotalPrice.textContent = detailPrice.textContent * e.target.value
+})
+selectProductCountInput.addEventListener("input", (e) => {
+  itemCountValue.value = e.target.value
+  selectProductCountInputInForm.value = e.target.value
+})
+
