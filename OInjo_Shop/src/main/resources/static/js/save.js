@@ -286,6 +286,7 @@ certificationStartButton.addEventListener("click", () => {
     .then((response) => {
       console.log("response:", response);
       alert(`인증번호가 전송되었습니다 ${emailInput.value}를 확인하세요.`);
+      certificationStartButton.textContent = "전송완료"
     })
     .catch((error) => {
       console.log("error:", error);
@@ -314,6 +315,7 @@ certificationButton.addEventListener("click", () => {
         thirdArticleNextButton.disabled = false;
         thirdArticleNextButton.classList.add("validation-pass");
         emailCertificationWrong.classList.add("hidden");
+        certificationButton.textContent = "인증 성공"
       } else {
         alert("인증번호가 일치하지 않습니다.");
         thirdArticleNextButton.disabled = true;
