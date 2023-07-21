@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -208,5 +209,20 @@ public class ItemController {
 
         return "item/detail";
     }
+/*
+    @PostMapping("/{itemId}/like")
+    public String itemLike(@PathVariable("itemId") Long itemId, HttpServletRequest request, HttpSession session) {
+        session = request.getSession();
+        MemberDTO member = (MemberDTO) session.getAttribute("id");
+        if (member == null){
+            return "redirect:/member/login";
+        }
+        int result = itemService.increaseLikesCount(itemId, member.getId());
+        if (result == 1) {
+            return "redirect:/";
+        }
+        else
+            return "/";
+    }*/
 
 }
