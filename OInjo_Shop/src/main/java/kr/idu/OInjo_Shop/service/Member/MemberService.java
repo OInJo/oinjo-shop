@@ -11,6 +11,7 @@ import kr.idu.OInjo_Shop.entity.Member.QMemberEntity;
 import kr.idu.OInjo_Shop.repository.Member.MailRepository;
 import kr.idu.OInjo_Shop.repository.Member.MemberRepository;
 import kr.idu.OInjo_Shop.repository.Member.RegisterMailRepository;
+import kr.idu.OInjo_Shop.service.Mail.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
