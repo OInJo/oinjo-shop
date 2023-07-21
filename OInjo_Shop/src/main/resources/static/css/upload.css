@@ -1,14 +1,4 @@
-body {
-  background-color: rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center;
-}
 
-.upload-section {
-  background-color: white;
-  height: 100%;
-  padding: 3% 5%;
-}
 
 .upload-nav {
   display: flex;
@@ -158,4 +148,56 @@ body {
 .click-accent {
   color:#ff3f33;
   font-weight: 600;
+}
+
+/* custom-select 디자인(브랜드, 카테고리 데이터 받아오는 것) */
+.option-select-box-wrapper {
+  display:flex;
+  flex-direction: column;
+  gap:10px;
+  margin-bottom:30px;
+}
+.custom-select {
+  position: relative;
+  display: inline-block;
+}
+
+#my-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 200px;
+  padding: 10px 40px 10px 20px;
+  /* 오른쪽 여백을 줘서 아래 화살표가 오른쪽에 보이도록 설정 */
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+  border: 2px solid #ccc;
+  background-color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#my-select:focus {
+  outline: none;
+  border-color: #6ca0f7;
+  box-shadow: 0 0 5px #6ca0f7;
+}
+
+#my-select option {
+  font-weight: normal;
+}
+
+.custom-select i {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  /* 아이콘과 오른쪽 간격 조정 */
+  transform: translateY(-50%);
+  color: #555;
+}
+
+.custom-select select::-ms-expand {
+  display: none;
 }
