@@ -25,15 +25,16 @@ if (recentItems.length === 0) {
     image.classList.add("recentproduct-image");
     link.appendChild(image);
 
-    const brand = document.createElement("div");
-    brand.textContent = item.brand;
-    brand.classList.add("recentproduct-brand");
-    article.appendChild(brand);
 
     const name = document.createElement("div");
     name.textContent = item.name;
     name.classList.add("recentproduct-name");
     article.appendChild(name);
+
+    const brand = document.createElement("div");
+    brand.textContent = item.brand;
+    brand.classList.add("recentproduct-brand");
+    article.appendChild(brand);
 
     const price = document.createElement("div");
     price.classList.add("recentproduct-price");
