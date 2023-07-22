@@ -16,7 +16,7 @@ ul {
 }
 
 body {
-  background-color: black;
+  /* background-color: black; */
 }
 
 .hidden {
@@ -56,6 +56,7 @@ body {
 
 .admin-section {
   display: flex;
+  height: 100%;
 }
 
 .admin-nav {
@@ -103,5 +104,6 @@ body {
   flex-basis: 85%;
   height: 100vh;
   background-color: white;
-  padding: 1%;
+ padding: 1%;
+ box-sizing: border-box;
 }
