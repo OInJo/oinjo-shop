@@ -122,3 +122,25 @@ a {
     font-size: 14px;
   }
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px 0;
+}
+
+.paging-number,
+.paging-previous-icon,
+.paging-next-icon {
+  padding: 5px 10px;
+  font-size: 22px;
+  border: 1px solid black;
+}
+
+.paging-number:hover,
+.paging-previous-icon:hover,
+.paging-next-icon:hover {
+  background-color: black;
+  color: white;
+}

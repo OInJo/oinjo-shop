@@ -19,7 +19,7 @@
   <div th:replace="~{/fragments/adminheader}"></div>
     <main class="admin-main">
       <section>
-        <h3 class="section-title">회원조회</h3>
+<!--        <h3 class="section-title">회원조회</h3>-->
         <form th:action="@{'/member'}" th:method="get" class="member-search-form">
           <div class="search-wrapper">
             <select name="type" aria-controls="dataTable" class="search-select">
@@ -44,6 +44,26 @@
           </div>
         </article>
       </section>
+
+      <div class="row">
+<!--        <div class="col-sm-12 col-md-5">-->
+<!--          <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">-->
+<!--            <span th:text="${result.curPage}"></span> [[${result.totalPage}]] of [[${result.totalRows}]] entries-->
+<!--          </div>-->
+<!--        </div>-->
+        <div class="col-sm-12 col-md-7">
+          <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+            <ul class="pagination">
+              <li th:if="${result.prev}" th:class="'paginate_button page-item previous ' + ${result.prev?'':'disabled'}" id="dataTable_previous">
+                <a href="#" th:href="@{/member(page=${result.startNum - 1}, perPage=${result.perPage})}" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link"><i class="fa-solid fa-caret-left paging-previous-icon"></i></a></li>
+              <li th:class="'paginate_button page-item ' + ${result.curPage == page?'active':''}" th:each="page : ${result.pageList}">
+                <a href="#" th:href="@{/member(page=${page}, perPage=${result.perPage})}" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link paging-number">[[${page}]]</a></li>
+              <li th:if="${result.next}" th:class="'paginate_button page-item next ' + ${result.next?'':'disabled'} " id="dataTable_next">
+                <a href="#" th:href="@{/member(page=${result.endNum + 1}, perPage=${result.perPage})}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link"><i class="fa-solid fa-caret-right  paging-next-icon"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </main>
   </section>
 </body>
