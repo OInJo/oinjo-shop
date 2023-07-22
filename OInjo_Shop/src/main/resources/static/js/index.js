@@ -16,26 +16,24 @@ function selectNameClickEvent(event) {
     allCategory.remove();
   }
 
-    const newCategory = document.createElement("p");
-    newCategory.classList.add("now-category");
-    newCategory.textContent = selectedValue;
+  const newCategory = document.createElement("p");
+  newCategory.classList.add("now-category");
+  newCategory.textContent = selectedValue;
 
-    const closeButton = document.createElement("span");
-    closeButton.classList.add("close-button");
-    closeButton.textContent = "X";
-    closeButton.addEventListener("click", () => {
-      newCategory.remove();
+  const closeButton = document.createElement("span");
+  closeButton.classList.add("close-button");
+  closeButton.textContent = "X";
+  closeButton.addEventListener("click", () => {
+    newCategory.remove();
 
-      if (!document.querySelector(".now-category")) {
-        const allCategory = document.createElement("div");
-        allCategory.classList.add("now-category");
-        allCategory.textContent = "전체";
-        document
-          .querySelector(".brand-category-choose")
-          .appendChild(allCategory);
-      }
+    if (!document.querySelector(".now-category")) {
+      const allCategory = document.createElement("div");
+      allCategory.classList.add("now-category");
+      allCategory.textContent = "전체";
+      document.querySelector(".brand-category-choose").appendChild(allCategory);
+    }
 
-      // 클릭했던 것도 삭제하면 다시 클릭 가능
+    // 클릭했던 것도 삭제하면 다시 클릭 가능
     const clickedItems = document.querySelectorAll(".select-name");
     clickedItems.forEach((item) => {
       if (item.textContent === selectedValue) {
@@ -45,10 +43,10 @@ function selectNameClickEvent(event) {
     });
   });
 
-    newCategory.appendChild(closeButton);
-    document.querySelector(".brand-category-choose").appendChild(newCategory);
+  newCategory.appendChild(closeButton);
+  document.querySelector(".brand-category-choose").appendChild(newCategory);
 
-    // 이미 선택한 브랜드, 카테고리 비활성화
+  // 이미 선택한 브랜드, 카테고리 비활성화
   const clickedItems = document.querySelectorAll(".select-name");
   clickedItems.forEach((item) => {
     if (item.textContent === selectedValue) {
@@ -77,20 +75,28 @@ for (let i = 0; i < redColor.length; i++) {
 
 // 최근본상품 로직 구현, 상품 클릭 시 해당 상품 정보를 localStorage에 저장
 // 모든 "article-product" 요소에 이벤트 리스너 추가
-const articleProducts = document.querySelectorAll('.article-product');
+const articleProducts = document.querySelectorAll(".article-product");
 
 // 이벤트 리스너 함수
 function handleClick(event) {
   const clickedArticle = event.currentTarget;
-  
+
   // article-product 내에서 요소들 찾기
   const id = clickedArticle.querySelector(".article-product-id").textContent;
-  const image = clickedArticle.querySelector('.article-product-image').getAttribute('src');
-  const name = clickedArticle.querySelector('.article-product-name').textContent;
-  const brand = clickedArticle.querySelector('.article-product-brand').textContent;
-  const price = clickedArticle.querySelector('.article-product-price-won').textContent;
+  const image = clickedArticle
+    .querySelector(".article-product-image")
+    .getAttribute("src");
+  const name = clickedArticle.querySelector(
+    ".article-product-name"
+  ).textContent;
+  const brand = clickedArticle.querySelector(
+    ".article-product-brand"
+  ).textContent;
+  const price = clickedArticle.querySelector(
+    ".article-product-price-won"
+  ).textContent;
   // localStorage에서 recent 배열 가져오기
-  const recentItems = JSON.parse(localStorage.getItem('recent')) || [];
+  const recentItems = JSON.parse(localStorage.getItem("recent")) || [];
 
   // 새로운 아이템 객체 생성
   const newItem = {
@@ -110,10 +116,74 @@ function handleClick(event) {
   }
 
   // 변경된 recent 배열을 localStorage에 저장
-  localStorage.setItem('recent', JSON.stringify(recentItems));
+  localStorage.setItem("recent", JSON.stringify(recentItems));
 }
 
 // 각 "article-product" 요소에 클릭 이벤트 리스너 할당
-articleProducts.forEach(function(articleProduct) {
-  articleProduct.addEventListener('click', handleClick);
+articleProducts.forEach(function (articleProduct) {
+  articleProduct.addEventListener("click", handleClick);
 });
+
+const sortByPriceAscending = () => {
+  //오름차순 정렬, 가격 낮은 순
+  // 모든 상품 요소들을 가져옵니다.
+  const productElements = document.querySelectorAll(".article-product");
+  // NodeList를 배열로 변환하여 조작하기 쉽도록 합니다.
+  const products = Array.from(productElements);
+  // 가격을 기준으로 상품들을 오름차순으로 정렬합니다.
+  products.sort((a, b) => {
+    const priceA = parseInt(
+      a.querySelector(".article-product-price-won").textContent
+    );
+    const priceB = parseInt(
+      b.querySelector(".article-product-price-won").textContent
+    );
+    return priceA - priceB;
+  });
+
+  // 기존의 상품 리스트를 초기화합니다.
+  const articleProductWrapper = document.querySelector(
+    ".article-product-wrapper"
+  );
+  articleProductWrapper.innerHTML = "";
+
+  // 정렬된 상품들을 다시 articleProductWrapper에 추가합니다.
+  products.forEach((product) => {
+    articleProductWrapper.appendChild(product);
+  });
+};
+
+const sortByPriceDescending = () => {
+  //내림차순 정렬, 가격 높은 순
+  // 모든 상품 요소들을 가져옵니다.
+  const productElements = document.querySelectorAll(".article-product");
+  // NodeList를 배열로 변환하여 조작하기 쉽도록 합니다.
+  const products = Array.from(productElements);
+  // 가격을 기준으로 상품들을 내림차순으로 정렬합니다.
+  products.sort((a, b) => {
+    const priceA = parseInt(
+      a.querySelector(".article-product-price-won").textContent
+    );
+    const priceB = parseInt(
+      b.querySelector(".article-product-price-won").textContent
+    );
+    return priceB - priceA;
+  });
+
+  // 기존의 상품 리스트를 초기화합니다.
+  const articleProductWrapper = document.querySelector(
+    ".article-product-wrapper"
+  );
+  articleProductWrapper.innerHTML = "";
+
+  // 정렬된 상품들을 다시 articleProductWrapper에 추가합니다.
+  products.forEach((product) => {
+    articleProductWrapper.appendChild(product);
+  });
+};
+// 가격 높은 순 정렬
+const priceHighSort = document.querySelector("#price-high-sort");
+priceHighSort.addEventListener("click", sortByPriceDescending);
+//가격 낮은 순 정렬
+const priceLowSort = document.querySelector("#price-low-sort");
+priceLowSort.addEventListener("click", sortByPriceAscending);
