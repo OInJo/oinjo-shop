@@ -52,7 +52,7 @@ img {
 
 .cart-header-check,
 .cart-content-check {
-  width: 1%;
+  /* width: 1%; */
   margin: 0;
   padding: 0;
 }
@@ -65,7 +65,7 @@ img {
 
 .cart-header-product-option,
 .cart-content-product-option {
-  width: 35%;
+  width: 25%;
 }
 
 .cart-content-product,
@@ -85,6 +85,21 @@ img {
 .cart-header-count,
 .cart-content-count {
   width: 9%;
+}
+
+.cart-header-delete{
+  width: 5%;
+}
+
+.cart-delete-button {
+  background-color: rgba(0, 0, 0, 0.9);
+  color:white;
+  text-align: center;
+  padding:1%;
+}
+
+.cart-delete-button:hover {
+  background-color: black;
 }
 
 .cart-content-count {
