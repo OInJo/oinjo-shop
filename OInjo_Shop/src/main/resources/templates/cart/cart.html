@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
   <script src="/js/font.js" defer></script>
-  <link rel="icon" href="images/logo.png">
+  <link rel="icon" href="/images/logo.png">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/cart.css">
   <link rel="stylesheet" href="../../static/css/header.css">
@@ -33,6 +33,7 @@
         <div class="cart-header-count">수량</div>
         <div class="cart-header-price">상품금액</div>
         <div class="cart-header-total-price">합계금액</div>
+        <div class="cart-header-delete"></div>
       </header>
       <article class="cart-content" th:each="cartItem : ${cartItemList}">
 <!--        <input type="checkbox" name="" id="" class="cart-content-check">-->
@@ -55,6 +56,7 @@
           <span class="cart-content-total-price-won" th:text="${cartItem.product.itemPrice} * ${cartItem.count}"></span>
           <span>원</span>
         </div>
+          <a th:href="'/member/' + ${id} + '/cart/' + ${cartItem.id} + '/delete'" class="cart-delete-button">삭제하기</a>
       </article>
 
       <a href="javascript:history.back()" class="before-page-button">이전 페이지로</a>

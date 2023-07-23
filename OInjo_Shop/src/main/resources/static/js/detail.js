@@ -100,17 +100,29 @@ sizeSelect.addEventListener("change", (e) => {
 
 // 수량을 변경하면 장바구니 수량이 변경되는 소스
 const itemCountValue = document.querySelector(".item-count-value");
-const selectProductCountInput = document.querySelector(".select-product-count-input");
-const selectProductCountInputInForm = document.querySelector(".select-product-count-input-in-form")
-const detailPrice = document.querySelector(".detail-price")
-const selectProductTotalPrice = document.querySelector(".select-product-total-price");
+const selectProductCountInput = document.querySelector(
+  ".select-product-count-input"
+);
+const selectProductCountInputInForm = document.querySelector(
+  ".select-product-count-input-in-form"
+);
+const detailPrice = document.querySelector(".detail-price");
+const selectProductTotalPrice = document.querySelector(
+  ".select-product-total-price"
+);
 itemCountValue.addEventListener("input", (e) => {
-  selectProductCountInput.value = e.target.value
-  selectProductCountInputInForm.value = e.target.value
-  selectProductTotalPrice.textContent = detailPrice.textContent * e.target.value
-})
+  selectProductCountInput.value = e.target.value;
+  selectProductCountInputInForm.value = e.target.value;
+  selectProductTotalPrice.textContent =
+    detailPrice.textContent * e.target.value;
+});
 selectProductCountInput.addEventListener("input", (e) => {
-  itemCountValue.value = e.target.value
-  selectProductCountInputInForm.value = e.target.value
-})
+  itemCountValue.value = e.target.value;
+  selectProductCountInputInForm.value = e.target.value;
+});
 
+document.querySelector(".shopping-bag-button").addEventListener("click", () => {
+  const itemName = document.querySelector(".item-name").textContent;
+  const itemCount = document.querySelector(".item-count").value;
+  alert(`장바구니에 ${itemName} 상품이 ${itemCount}개 추가되었습니다.`);
+});

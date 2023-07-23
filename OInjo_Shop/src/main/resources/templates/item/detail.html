@@ -35,7 +35,7 @@
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify(paramData),
-      success: function(result, status) {
+      success: function (result, status) {
         location.href = "/orders/form";
       },
       error: function (jqXHR, status, error) {
@@ -50,7 +50,7 @@
 
 <body>
 
-<div th:replace="~{/fragments/header}"></div>
+  <div th:replace="~{/fragments/header}"></div>
   <main>
     <section>
       <div class="detail-wrapper">
@@ -76,7 +76,7 @@
               <div>수량</div>
             </div>
             <div class="detail-content-right">
-              <div th:text="${itemFormDTO.itemName}"></div>
+              <div th:text="${itemFormDTO.itemName}" class="item-name"></div>
               <div th:text="${itemFormDTO.brand.brandName}"></div>
               <div th:text="${itemFormDTO.id}"></div>
               <div>1234</div>
@@ -105,7 +105,8 @@
           <div class="select-product-wrapper">
             <div class="select-product-title-content">
               <div class="select-product-title" th:text="${itemFormDTO.itemName}"></div>
-              <div class="select-product-option" th:text="${itemFormDTO.color.colorName}+${itemFormDTO.size.sizeName}"></div>
+              <div class="select-product-option"
+                th:text="${itemFormDTO.color.colorName}+ ' ' + ${itemFormDTO.size.sizeName}"></div>
             </div>
             <div class="select-product-count">
               <input type="number" value="1" class="select-product-count-input" disabled>
@@ -132,7 +133,7 @@
             <!-- 여기까지 추가했음 주문하기 test 해보고 수정할 것 input type hidden 추가했음-->
 
             <form th:action="@{'/member/' + ${memberId} + '/cart/' + ${itemId}}" method="post">
-               <input type="hidden" name="count" value="1" class="select-product-count-input-in-form">
+              <input type="hidden" name="count" value="1" class="select-product-count-input-in-form item-count">
               <button class="buy-button shopping-bag-button">장바구니 담기</button>
             </form>
           </div>
@@ -141,14 +142,14 @@
     </section>
 
   </main>
-<!--  <footer>-->
+  <!--  <footer>-->
 
-<!--  </footer>-->
+  <!--  </footer>-->
 
- <div class="move-btn-wrapper">
-   <div class="move-top-btn"><i class="fa-solid fa-arrow-up"></i></div>
-   <div class="move-bottom-btn"><i class="fa-solid fa-arrow-down"></i></div>
- </div>
+  <div class="move-btn-wrapper">
+    <div class="move-top-btn"><i class="fa-solid fa-arrow-up"></i></div>
+    <div class="move-bottom-btn"><i class="fa-solid fa-arrow-down"></i></div>
+  </div>
 </body>
 
 </html>
