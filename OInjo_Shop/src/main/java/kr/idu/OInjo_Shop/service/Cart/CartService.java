@@ -4,6 +4,8 @@ import kr.idu.OInjo_Shop.dto.Cart.CartDTO;
 import kr.idu.OInjo_Shop.dto.Cart.CartItemDTO;
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
+import kr.idu.OInjo_Shop.dto.Order.OrderDto;
+import kr.idu.OInjo_Shop.dto.Order.OrdersDto;
 import kr.idu.OInjo_Shop.entity.Cart.CartEntity;
 import kr.idu.OInjo_Shop.entity.Cart.CartItemEntity;
 import kr.idu.OInjo_Shop.entity.Item.ItemEntity;
@@ -11,10 +13,12 @@ import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.repository.Cart.CartItemRepository;
 import kr.idu.OInjo_Shop.repository.Cart.CartRepository;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
+import kr.idu.OInjo_Shop.service.Order.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,7 @@ public class CartService {
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
     private final ItemService itemService;
+    private final OrderService orderService;
 
     //장바구니 생성
     public void createCart(MemberEntity member) {
@@ -60,7 +65,7 @@ public class CartService {
     public List<CartItemEntity> memberCartView(CartEntity cart) {
         List<CartItemEntity> cartItems = cartItemRepository.findAll();
         List<CartItemEntity> memberItems = new ArrayList<>();
-
+        System.out.println("cart: " +  cart.getCount());
         for(CartItemEntity cartItem : cartItems ) {
             if (cartItem.getCart() != null && cart != null && cartItem.getCart().getId().equals(cart.getId())) {
                 memberItems.add(cartItem);
@@ -117,4 +122,17 @@ public class CartService {
 //        }
 
 
+    public Long cartOrders(List<OrdersDto> ordersDtoList, String email) {
+        List<OrderDto> orderDtoList = new ArrayList<>();
+        for (OrdersDto ordersDto : ordersDtoList) {
+            CartItemEntity cartItem=cartItemRepository.findById(ordersDto.getCartItemId())
+                    .orElseThrow(EntityNotFoundException::new);
+            OrderDto orderDto = new OrderDto();
+            orderDto.setItemId(cartItem.getProduct().getItemId());
+            orderDto.setCount(cartItem.getCount());
+            orderDtoList.add(orderDto);
+        }
+        Long orderId = orderService.orders(orderDtoList, email);
+        return orderId;
+    }
 }

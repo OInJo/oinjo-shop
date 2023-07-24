@@ -1,21 +1,37 @@
-// 카테고리에서 후드 티셔츠를 클릭 시 상품 부분 맨 위에 후드 티셔츠로 표시되도록 하는 소스
 const selectName = document.querySelectorAll(".select-name");
 
 selectName.forEach((element) => {
   element.addEventListener("click", selectNameClickEvent);
 });
 
+let selectedBrand = null; // 현재 선택된 브랜드를 저장하는 변수
+const selectedCategories = new Set(); // 선택된 카테고리를 저장하는 Set
+
 function selectNameClickEvent(event) {
   const selectedValue = event.target.innerText.trim();
-  const isAlreadySelected = Array.from(
-    document.querySelectorAll(".now-category")
-  ).some((category) => category.textContent === selectedValue);
 
-  const allCategory = document.querySelector(".now-category");
-  if (allCategory && allCategory.textContent === "전체") {
-    allCategory.remove();
+  // 이미 선택한 브랜드를 클릭하면 선택 해제
+  if (selectedBrand === selectedValue) {
+    selectedBrand = null;
+    document.querySelector(".now-category").remove();
+    enableAllBrands();
+    showAllProducts();
+    return;
   }
 
+  // 이전에 선택한 브랜드를 삭제
+  const previousBrandSelected = document.querySelector(".now-category");
+  if (previousBrandSelected) {
+    previousBrandSelected.remove();
+  }
+
+  // 선택된 브랜드 업데이트 및 스타일 변경
+  selectedBrand = selectedValue;
+  displaySelectedBrand(selectedValue);
+  showSelectedProducts(selectedValue);
+}
+
+function displaySelectedBrand(selectedValue) {
   const newCategory = document.createElement("p");
   newCategory.classList.add("now-category");
   newCategory.textContent = selectedValue;
@@ -25,36 +41,144 @@ function selectNameClickEvent(event) {
   closeButton.textContent = "X";
   closeButton.addEventListener("click", () => {
     newCategory.remove();
-
-    if (!document.querySelector(".now-category")) {
-      const allCategory = document.createElement("div");
-      allCategory.classList.add("now-category");
-      allCategory.textContent = "전체";
-      document.querySelector(".brand-category-choose").appendChild(allCategory);
-    }
-
-    // 클릭했던 것도 삭제하면 다시 클릭 가능
-    const clickedItems = document.querySelectorAll(".select-name");
-    clickedItems.forEach((item) => {
-      if (item.textContent === selectedValue) {
-        item.addEventListener("click", selectNameClickEvent);
-        item.classList.remove("disabled");
-      }
-    });
+    selectedBrand = null; // 선택된 브랜드 초기화하여 다시 선택할 수 있게 함
+    enableAllBrands();
+    showAllProducts();
   });
 
   newCategory.appendChild(closeButton);
   document.querySelector(".brand-category-choose").appendChild(newCategory);
 
-  // 이미 선택한 브랜드, 카테고리 비활성화
+  // 모든 브랜드 아이템을 순회하며 선택되지 않은 브랜드는 비활성화
   const clickedItems = document.querySelectorAll(".select-name");
   clickedItems.forEach((item) => {
     if (item.textContent === selectedValue) {
       item.removeEventListener("click", selectNameClickEvent);
       item.classList.add("disabled");
+    } else {
+      item.addEventListener("click", selectNameClickEvent);
+      item.classList.remove("disabled");
     }
   });
 }
+
+function enableAllBrands() {
+  // 모든 브랜드 아이템을 활성화
+  const clickedItems = document.querySelectorAll(".select-name");
+  clickedItems.forEach((item) => {
+    item.addEventListener("click", selectNameClickEvent);
+    item.classList.remove("disabled");
+  });
+}
+
+function showAllProducts() {
+  const productItems = document.querySelectorAll(".article-product");
+  productItems.forEach(function (productItem) {
+    productItem.style.display = "block";
+  });
+
+  const newCategory = document.createElement("p");
+  newCategory.classList.add("now-category");
+  newCategory.textContent = "전체"; // "전체"라는 텍스트를 표시
+
+  const closeButton = document.createElement("span");
+  closeButton.classList.add("close-button");
+  closeButton.textContent = "X";
+  closeButton.addEventListener("click", () => {
+    newCategory.remove();
+    selectedBrand = null; // 선택된 브랜드 초기화하여 다시 선택할 수 있게 함
+    enableAllBrands();
+    showAllProducts();
+  });
+
+  newCategory.appendChild(closeButton);
+  document.querySelector(".brand-category-choose").appendChild(newCategory);
+}
+
+function showSelectedProducts(selectedBrandName) {
+  const productItems = document.querySelectorAll(".article-product");
+  productItems.forEach(function (productItem) {
+    const brandName = productItem.querySelector(".article-product-brand").textContent.trim();
+    const categoryName = productItem.querySelector(".article-product-category").textContent.trim();
+
+    if ((selectedBrandName === brandName || selectedBrandName === "전체") && (selectedCategories.size === 0 || selectedCategories.has(categoryName) || selectedCategories.has("전체"))) {
+      productItem.style.display = "block";
+    } else {
+      productItem.style.display = "none";
+    }
+  });
+}
+
+// 카테고리 및 브랜드 선택 이벤트 처리
+document.addEventListener("DOMContentLoaded", function () {
+  const brandItems = document.querySelectorAll(".select-brand");
+  const categoryItems = document.querySelectorAll(".select-category");
+
+  brandItems.forEach(function (brandItem) {
+    brandItem.addEventListener("click", function () {
+      const selectedBrandName = brandItem.textContent.trim();
+
+      // 이전에 선택한 브랜드를 삭제
+      const previousBrandSelected = document.querySelector(".now-category");
+      if (previousBrandSelected) {
+        previousBrandSelected.remove();
+      }
+
+      // 선택된 브랜드 업데이트 및 스타일 변경
+      selectedBrand = selectedBrandName;
+      displaySelectedBrand(selectedBrandName);
+      showSelectedProducts(selectedBrandName);
+    });
+  });
+
+  categoryItems.forEach(function (categoryItem) {
+    categoryItem.addEventListener("click", function () {
+      const selectedCategoryName = categoryItem.textContent.trim();
+
+      // 선택된 카테고리가 이미 있으면 제거, 없으면 추가
+      if (selectedCategories.has(selectedCategoryName)) {
+        selectedCategories.delete(selectedCategoryName);
+      } else {
+        selectedCategories.add(selectedCategoryName);
+      }
+
+      // 이전에 선택한 브랜드를 삭제
+      const previousBrandSelected = document.querySelector(".now-category");
+      if (previousBrandSelected) {
+        previousBrandSelected.remove();
+      }
+
+      // 선택된 브랜드 업데이트 및 스타일 변경
+      selectedBrand = null;
+
+      const newCategory = document.createElement("p");
+      newCategory.classList.add("now-category");
+      newCategory.textContent = selectedCategoryName;
+
+      const closeButton = document.createElement("span");
+      closeButton.classList.add("close-button");
+      closeButton.textContent = "X";
+      closeButton.addEventListener("click", () => {
+        newCategory.remove();
+        selectedCategories.delete(selectedCategoryName); // 선택한 카테고리 제거
+        selectedBrand = null; // 선택된 브랜드 초기화하여 다시 선택할 수 있게 함
+        enableAllBrands();
+        showAllProducts();
+      });
+
+      newCategory.appendChild(closeButton);
+      document.querySelector(".brand-category-choose").appendChild(newCategory);
+
+      showSelectedProducts(selectedBrand);
+    });
+  });
+});
+
+
+
+
+
+
 
 const $topBtn = document.querySelector(".move-top-btn");
 $topBtn.onclick = () => {

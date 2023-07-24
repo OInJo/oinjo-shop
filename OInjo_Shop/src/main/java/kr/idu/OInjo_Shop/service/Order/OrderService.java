@@ -1,5 +1,6 @@
 package kr.idu.OInjo_Shop.service.Order;
 
+import com.querydsl.core.types.Order;
 import kr.idu.OInjo_Shop.dto.Order.OrderDto;
 import kr.idu.OInjo_Shop.dto.Order.OrderHistDto;
 import kr.idu.OInjo_Shop.dto.Order.OrderItemDto;
@@ -36,6 +37,33 @@ public class OrderService {
     private final ItemImgRepository itemImgRepository;
     private final OrderRepository orderRepository;
 
+    @Transactional(readOnly = true)
+    public Page<OrderHistDto> getOrderList(String email, String searchQuery, LocalDateTime startDate, LocalDateTime endDate, Pageable pageable) {
+        List<OrderEntity> orders = orderRepository.findOrdersWithSearch(email, searchQuery, startDate, endDate, pageable);
+        Long totalCount = orderRepository.totalOrderItem(email, searchQuery, startDate, endDate);
+
+        List<OrderHistDto> orderHistDtos = new ArrayList<>();
+        for (OrderEntity order : orders) {
+
+            OrderHistDto orderHistDto = new OrderHistDto(order);
+            List<OrderItemEntity> orderItems = order.getOrderItems();
+            for (OrderItemEntity orderItem : orderItems) {
+                ItemImgEntity itemImg = itemImgRepository.findByItemItemId(orderItem.getItem().getItemId()).stream().findFirst().orElse(null);     //가져온 상품 이미지들 중 첫 번째 이미지를 선택하거나, 이미지가 없는 경우 null을 반환
+                OrderItemDto orderItemDto = new OrderItemDto(orderItem, itemImg.getImgUrl());
+                orderHistDto.addOrderItemDto(orderItemDto);
+            }
+            orderHistDtos.add(orderHistDto);
+        }
+        return new PageImpl<OrderHistDto>(orderHistDtos, pageable, totalCount);
+    }
+
+    //    @Transactional(readOnly = true)
+//    public void cancelOrder(Long orderId) {
+//        OrderEntity order = orderRepository.findById(orderId).
+//                orElseThrow(EntityNotFoundException::new);
+//
+//        order.cancelOrder();
+//    }
     public Long order(OrderDto orderDto, String email) {
         ItemEntity item = itemRepository.findById(orderDto.getItemId())
                 .orElseThrow(EntityNotFoundException::new);
@@ -53,23 +81,23 @@ public class OrderService {
     }
 
     @Transactional(readOnly = true)
-    public Page<OrderHistDto> getOrderList(String email, String searchQuery,LocalDateTime startDate, LocalDateTime endDate, Pageable pageable) {
-        List<OrderEntity> orders = orderRepository.findOrdersWithSearch(email, searchQuery, startDate, endDate,pageable);
-        Long totalCount = orderRepository.totalOrderItem(email,searchQuery,startDate,endDate);
-
-        List<OrderHistDto> orderHistDtos = new ArrayList<>();
-        for (OrderEntity order : orders) {
-
-            OrderHistDto orderHistDto = new OrderHistDto(order);
-            List<OrderItemEntity> orderItems = order.getOrderItems();
-            for (OrderItemEntity orderItem : orderItems) {
-                ItemImgEntity itemImg = itemImgRepository.findByItemItemId(orderItem.getItem().getItemId()).stream().findFirst().orElse(null);     //가져온 상품 이미지들 중 첫 번째 이미지를 선택하거나, 이미지가 없는 경우 null을 반환
-                OrderItemDto orderItemDto = new OrderItemDto(orderItem, itemImg.getImgUrl());
-                orderHistDto.addOrderItemDto(orderItemDto);
-            }
-            orderHistDtos.add(orderHistDto);
-        }
-        return new PageImpl<OrderHistDto>(orderHistDtos, pageable, totalCount);
+    public void cancelOrder(Long orderId) {
+        orderRepository.deleteById(orderId);
     }
 
+    public Long orders(List<OrderDto> orderDtoList, String email) {
+        MemberEntity member = memberRepository.findByMemberEmail(email)
+                .orElseThrow(EntityNotFoundException::new);
+        List<OrderItemEntity> orderItemList = new ArrayList<>();
+
+        for (OrderDto orderDto : orderDtoList) {
+            ItemEntity item = itemRepository.findById(orderDto.getItemId())
+                    .orElseThrow(EntityNotFoundException::new);
+            OrderItemEntity orderItem = OrderItemEntity.createOrderItem(item, orderDto.getCount());
+            orderItemList.add(orderItem);
+        }
+        OrderEntity order = OrderEntity.createOrder(member, orderItemList);
+        orderRepository.save(order);
+        return order.getId();
+    }
 }

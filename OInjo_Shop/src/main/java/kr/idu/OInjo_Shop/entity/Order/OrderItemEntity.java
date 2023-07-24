@@ -45,4 +45,8 @@ public class OrderItemEntity extends BaseEntity {
     public int getTotalPrice() {
         return orderPrice*count;
     }
+
+    public void cancel() {    
+        this.getItem().increaseItem(count);
+    }
 }

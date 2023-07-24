@@ -1,0 +1,139 @@
+.order-detail {
+    margin-top: 50px;
+}
+
+.order-info, .calendar, order-detail-form {
+    margin-left: 500px;
+}
+
+.calendar {
+    margin-top: 10px;
+}
+
+#startDate, #endDate {
+    width: 100px;
+    height: 20px;
+}
+
+#searchQuery {
+    width: 200px;
+    height: 20px;
+    margin-left: 5px;
+}
+
+.search-btn {
+    width: 45px;
+    height: 25px;
+    margin-left: 5px;
+    background-color: #FFFFFF;
+    border-color: #d2d1d1;
+}
+
+.order-detail-form {
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    margin-left: 500px;
+}
+
+.order-date {
+    margin-left: 5px;
+    width: 100%;
+}
+
+.order-card {
+    margin-left: 5px;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid #ccc;
+}
+
+.repImgDiv, .item-Img {
+    width: 120px;
+    height: 120px;
+}
+
+.item-name, .price-count {
+    display: flex;
+    flex-direction: column;
+    margin-left: 170px;
+    margin-top: -100px;
+}
+
+.order-item {
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.price-count {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.item-price, .order-count {
+    margin-right: 15px;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.page-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: darkblue;
+}
+
+.disabled .page-link {
+    pointer-events: none;
+    color: gray;
+}
+
+.active .page-link {
+    font-weight: bold;
+    color: red;
+}
+
+@media screen and (max-width: 1200px) {
+    .order-info,
+    .calendar,
+    .order-detail-form {
+        margin-left: 200px;
+    }
+
+    .order-detail-form {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .order-info,
+    .calendar,
+    .order-detail-form {
+        margin-left: 100px;
+    }
+
+    .order-detail-form {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .order-info,
+    .calendar,
+    .order-detail-form {
+        margin-left: 20px;
+    }
+
+    .order-detail-form {
+        width: 95%;
+    }
+}

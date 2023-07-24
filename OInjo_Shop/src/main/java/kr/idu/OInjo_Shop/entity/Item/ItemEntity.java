@@ -83,6 +83,10 @@ public class ItemEntity extends BaseEntity {
             throw new OutOfStockException("상품의 재고가 부족합니다(현재 수량: " + this.itemStock + ")");
         this.itemStock = restStock;
     }
+
+    public void increaseItem(int stockNumber) {     //주문 취소 수량만큼 다시 가격을 증가시키는 로직
+        this.itemStock += stockNumber;
+    }
 }
 
 

@@ -55,5 +55,11 @@ public class OrderEntity extends BaseEntity {
 
         return order;
     }
+    public void cancelOrder() {
+        this.orderStatus = OrderStatus.CANCEL;
 
+        for (OrderItemEntity orderItem : orderItems) {
+            orderItem.cancel();
+        }
+    }
 }
