@@ -143,3 +143,7 @@ body {
   background-color: #545151;
   border: 0px;
 }
+
+.hidden {
+  display:none;
+}

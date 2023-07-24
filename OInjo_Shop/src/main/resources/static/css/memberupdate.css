@@ -35,6 +35,10 @@ form {
   padding: 1% 3%;
 }
 
+.update-button:hover{
+  color:#f33333;
+}
+
 .address-update-input {
   width: 430px;
 }
@@ -51,13 +55,29 @@ form {
   /* color: rgba(0, 0, 0, 0.4); */
 }
 
+.update-button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.left-update-button {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.passwordupdate-button:hover,
+.withdrawal-button:hover,
+.update-submit-button:hover {
+  color: #f33333;
+}
+
 .update-submit-button {
   all: unset;
-  width:100%;
-  text-align: right;
-  margin-top:15px;
   font-size: 20px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .password-update-modal {
@@ -92,7 +112,9 @@ form {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
-.current-password, .new-password, .renew-password {
+.current-password,
+.new-password,
+.renew-password {
   font-family: 'GangwonEdu_OTFBoldA';
   /* border: 0 solid black; */
   width: 150px;
@@ -103,7 +125,7 @@ form {
   /* margin-left: -20px; */
 }
 
-.change-password > input:focus {
+.change-password>input:focus {
   outline: 0 solid black;
 }
 

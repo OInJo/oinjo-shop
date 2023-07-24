@@ -51,15 +51,15 @@
     <section>
       <div class="detail-wrapper">
         <div class="detail-left">
-          <img src="/images/product.png" alt="상품 이미지" class="main-image">
+          <img th:src="${itemFormDTO.itemImgDTOList[0].imgUrl}" alt="상품 이미지" class="main-image">
           <div class="sub-image-wrapper">
-            <img src="/images/product.png" alt="상품 서브 이미지" class="sub-image">
-            <img src="/images/product.png" alt="상품 서브 이미지" class="sub-image">
-            <img src="/images/product.png" alt="상품 서브 이미지" class="sub-image">
+            <img th:src="${itemFormDTO.itemImgDTOList[1].imgUrl}" alt="상품 서브 이미지" class="sub-image">
+            <img th:src="${itemFormDTO.itemImgDTOList[2].imgUrl}" alt="상품 서브 이미지" class="sub-image">
+            <img th:src="${itemFormDTO.itemImgDTOList[3].imgUrl}" alt="상품 서브 이미지" class="sub-image">
           </div>
         </div>
         <div class="detail-right">
-          <h4 class="detail-title" >유스풀 벌룬 후드집업 그레이</h4>
+          <h4 class="detail-title" th:text="${itemFormDTO.itemName}"></h4>
           <div class="detail-content-wrapper">
             <div class="detail-content-left">
               <div>상품명</div>
@@ -72,29 +72,27 @@
               <div>수량</div>
             </div>
             <div class="detail-content-right">
-              <div>페플 유스풀 벌룬 후드집업 그레이</div>
-              <div>페플</div>
-              <div>FG3149</div>
-              <div>397</div>
-              <div class="detail-price">39,400</div>
+              <div th:text="${itemFormDTO.itemName}"></div>
+              <div th:text="${itemFormDTO.brand.brandName}"></div>
+              <div th:text="${itemFormDTO.id}"></div>
+              <div>1234</div>
+              <div class="detail-price" th:text="${itemFormDTO.itemPrice}"></div>
               <div>
                 <select name="" id="" class="color-select">
+                  <!--색상 값 넘기는거 구현 필요-->
                   <option value="">색상 선택</option>
-                  <option value="black">Black</option>
-                  <option value="white">White</option>
-                  <option value="ivory">Ivory</option>
+                  <option th:value="${itemFormDTO.color.colorName}" th:text="${itemFormDTO.color.colorName}"></option>
                 </select>
               </div>
               <div>
                 <select name="" id="" class="size-select">
+                  <!--사이즈 값 넘기는거 구현 필요-->
                   <option value="">사이즈 선택</option>
-                  <option value="s">S</option>
-                  <option value="m">M</option>
-                  <option value="l">L</option>
+                  <option th:value="${itemFormDTO.size.sizeName}" th:text="${itemFormDTO.size.sizeName}"></option>
                 </select>
               </div>
               <div>
-                <input type="number" name="count" id="count" class="form-control" value="1" min="1">
+                <input type="number" name="count" id="count" class="form-control item-count-value" value="1" min="1">
               </div>
             </div>
           </div>
@@ -102,24 +100,24 @@
             사이즈를 선택하시면 아래에 상품이 추가됩니다.</div>
           <div class="select-product-wrapper">
             <div class="select-product-title-content">
-              <div class="select-product-title">페플 유스풀 벌룬 후드집업</div>
-              <div class="select-product-option">Black M</div>
+              <div class="select-product-title" th:text="${itemFormDTO.itemName}"></div>
+              <div class="select-product-option" th:text="${itemFormDTO.color.colorName}+${itemFormDTO.size.sizeName}"></div>
             </div>
             <div class="select-product-count">
-              <input type="number" value="1" class="select-product-count-input">
+              <input type="number" value="1" class="select-product-count-input" disabled>
             </div>
             <div class="select-product-delete-button-wrapper">
               <button class="select-product-delete-button"><i
                   class="fa-solid fa-x select-product-delete-icon"></i></button>
             </div>
             <div class="select-product-price-wrapper">
-              <span class="select-product-price">36,000</span>원
+              <span class="select-product-price" th:text="${itemFormDTO.itemPrice}"></span>원
             </div>
           </div>
           <div class="select-product-total-price-wrapper">
             <div class="select-product-total-price-title">총 상품 금액</div>
             <div class="select-product-total-price-content">
-              <span class="select-product-total-price">72,000</span>원
+              <span class="select-product-total-price" th:text="${itemFormDTO.itemPrice}"></span>원
             </div>
           </div>
           <div class="buy-button-wrapper">
@@ -129,7 +127,10 @@
             <button class="buy-button now-buy-button" onclick="orders()">바로 구매하기</button>
             <!-- 여기까지 추가했음 주문하기 test 해보고 수정할 것 input type hidden 추가했음-->
 
-            <form th:action="@{'/member/' + ${memberId} + '/cart/' + ${itemId}}" method="post"><button class="buy-button shopping-bag-button">장바구니 담기</button></form>
+            <form th:action="@{'/member/' + ${memberId} + '/cart/' + ${itemId}}" method="post">
+               <input type="hidden" name="count" value="1" class="select-product-count-input-in-form">
+              <button class="buy-button shopping-bag-button">장바구니 담기</button>
+            </form>
           </div>
         </div>
       </div>

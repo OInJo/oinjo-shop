@@ -26,8 +26,15 @@ spring:
       ddl-auto: update
 
   # file
+#  itemImgLocation: /Users/minwook/Documents/GitHub/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg
+#  uploadPath: /Users/minwook/Documents/GitHub/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg
+
+
+  # file
     itemImgLocation: D:/Project/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg
     uploadPath: file:///D:/Project/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg
+
+
 
 
   #OAuth2.0 설정

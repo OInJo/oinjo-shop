@@ -1,5 +1,6 @@
 package kr.idu.OInjo_Shop.service.Order;
 
+import com.querydsl.core.types.Order;
 import kr.idu.OInjo_Shop.dto.Order.OrderDto;
 import kr.idu.OInjo_Shop.dto.Order.OrderHistDto;
 import kr.idu.OInjo_Shop.dto.Order.OrderItemDto;
@@ -36,22 +37,6 @@ public class OrderService {
     private final ItemImgRepository itemImgRepository;
     private final OrderRepository orderRepository;
 
-    public Long order(OrderDto orderDto, String email) {
-        ItemEntity item = itemRepository.findById(orderDto.getItemId())
-                .orElseThrow(EntityNotFoundException::new);
-        MemberEntity member = memberRepository.findByMemberEmail(email)
-                .orElseThrow(EntityNotFoundException::new);
-
-        List<OrderItemEntity> orderItemList = new ArrayList<>();
-        OrderItemEntity orderItem =
-                OrderItemEntity.createOrderItem(item, orderDto.getCount());
-        orderItemList.add(orderItem);       //나중에 장바구니가 만들어졌을때에는 상품을 한번에 결제해야함.
-
-        OrderEntity order = OrderEntity.createOrder(member, orderItemList);
-        orderRepository.save(order);
-        return order.getId();
-    }
-
     @Transactional(readOnly = true)
     public Page<OrderHistDto> getOrderList(String email, String searchQuery, LocalDateTime startDate, LocalDateTime endDate, Pageable pageable) {
         List<OrderEntity> orders = orderRepository.findOrdersWithSearch(email, searchQuery, startDate, endDate, pageable);
@@ -72,15 +57,47 @@ public class OrderService {
         return new PageImpl<OrderHistDto>(orderHistDtos, pageable, totalCount);
     }
 
-//    @Transactional(readOnly = true)
+    //    @Transactional(readOnly = true)
 //    public void cancelOrder(Long orderId) {
 //        OrderEntity order = orderRepository.findById(orderId).
 //                orElseThrow(EntityNotFoundException::new);
 //
 //        order.cancelOrder();
 //    }
+    public Long order(OrderDto orderDto, String email) {
+        ItemEntity item = itemRepository.findById(orderDto.getItemId())
+                .orElseThrow(EntityNotFoundException::new);
+        MemberEntity member = memberRepository.findByMemberEmail(email)
+                .orElseThrow(EntityNotFoundException::new);
+
+        List<OrderItemEntity> orderItemList = new ArrayList<>();
+        OrderItemEntity orderItem =
+                OrderItemEntity.createOrderItem(item, orderDto.getCount());
+        orderItemList.add(orderItem);       //나중에 장바구니가 만들어졌을때에는 상품을 한번에 결제해야함.
+
+        OrderEntity order = OrderEntity.createOrder(member, orderItemList);
+        orderRepository.save(order);
+        return order.getId();
+    }
+
     @Transactional(readOnly = true)
     public void cancelOrder(Long orderId) {
         orderRepository.deleteById(orderId);
+    }
+
+    public Long orders(List<OrderDto> orderDtoList, String email) {
+        MemberEntity member = memberRepository.findByMemberEmail(email)
+                .orElseThrow(EntityNotFoundException::new);
+        List<OrderItemEntity> orderItemList = new ArrayList<>();
+
+        for (OrderDto orderDto : orderDtoList) {
+            ItemEntity item = itemRepository.findById(orderDto.getItemId())
+                    .orElseThrow(EntityNotFoundException::new);
+            OrderItemEntity orderItem = OrderItemEntity.createOrderItem(item, orderDto.getCount());
+            orderItemList.add(orderItem);
+        }
+        OrderEntity order = OrderEntity.createOrder(member, orderItemList);
+        orderRepository.save(order);
+        return order.getId();
     }
 }

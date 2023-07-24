@@ -68,4 +68,9 @@ public class HomeController {
     public String recentproduct() {
         return "/item/recentproduct";
     }
+
+    @GetMapping("/member/withdrawal")
+    public String withdrawal() {
+        return "/member/withdrawal";
+    }
 }
