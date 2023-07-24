@@ -61,7 +61,7 @@ public class OrderController {
             return "order/orderpayment";
         } catch (NullPointerException e) {
             e.printStackTrace();
-            return "index";
+            return "member/login";
         }
     }
 
@@ -86,11 +86,11 @@ public class OrderController {
         } catch (Exception e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<Long>(orderId,HttpStatus.OK);
+        return new ResponseEntity<Long>(orderId, HttpStatus.OK);
     }
 
     @GetMapping("/orders/completion/{id}")
-    public String paymentCompleted(@PathVariable("id")Long id,Model model, HttpSession session) {
+    public String paymentCompleted(@PathVariable("id") Long id, Model model, HttpSession session) {
         String email = (String) session.getAttribute("loginEmail");
         MemberEntity member = memberRepository.findByMemberEmail(email)
                 .orElseThrow(EntityNotFoundException::new);
@@ -99,15 +99,15 @@ public class OrderController {
 
         OrderHistDto orderHistDto = new OrderHistDto(order);
         model.addAttribute("order", orderHistDto);
-        model.addAttribute("member",MemberDTO.toMemberDTO(member));
+        model.addAttribute("member", MemberDTO.toMemberDTO(member));
         return "order/paymentcompleted";
     }
 
     @GetMapping(value = {"/orders/list", "/orders/list/{page}"})
     public String orderList(@PathVariable("page") Optional<Integer> page,
-                            @RequestParam(value = "searchQuery", required = false,defaultValue = "") String searchQuery,
-                            @RequestParam(value = "startDate", required = false)  @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDateString,
-                            @RequestParam(value = "endDate", required = false)  @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDateString,
+                            @RequestParam(value = "searchQuery", required = false, defaultValue = "") String searchQuery,
+                            @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDateString,
+                            @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDateString,
                             HttpSession session, Model model) {
         String email = (String) session.getAttribute("loginEmail");
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
@@ -117,7 +117,7 @@ public class OrderController {
         LocalDateTime endDate = endDateString != null ? endDateString.atStartOfDay().plusDays(1).minusNanos(1) : defaultEndDate.atStartOfDay().plusDays(1).minusNanos(1);
 
         Page<OrderHistDto> orderHistDtoList =
-                orderService.getOrderList(email,searchQuery,startDate,endDate,pageable);
+                orderService.getOrderList(email, searchQuery, startDate, endDate, pageable);
         model.addAttribute("orders", orderHistDtoList);
         model.addAttribute("searchQuery", searchQuery);
         model.addAttribute("startDate", startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
@@ -127,6 +127,14 @@ public class OrderController {
 
 
         return "order/orderlist";
+    }
+
+    @DeleteMapping("orders/cancel/{orderId}")
+    public String orderCancel(@PathVariable("orderId") Long orderId) {
+
+        orderRepository.deleteById(orderId);
+        return "redirect:/";
+
     }
 
 }
