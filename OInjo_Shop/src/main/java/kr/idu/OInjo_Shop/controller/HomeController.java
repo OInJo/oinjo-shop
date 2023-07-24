@@ -73,4 +73,9 @@ public class HomeController {
     public String withdrawal() {
         return "/member/withdrawal";
     }
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "/admin/adminindex";
+    }
 }

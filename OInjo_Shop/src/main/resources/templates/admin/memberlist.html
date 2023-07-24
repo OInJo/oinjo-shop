@@ -4,38 +4,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
+  <script src="/js/font.js" defer></script>
+  <link rel="icon" href="/images/logo.png">
+  <link rel="stylesheet" href="/css/adminindex.css">
+  <link rel="stylesheet" href="../../static/css/adminindex.css">
   <link rel="stylesheet" href="../../static/css/memberlist.css">
   <link rel="stylesheet" href="/css/memberlist.css">
+  <script src="/js/upload.js" defer></script>
+  <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
   <title>회원조회</title>
 </head>
 
 <body>
-  <section>
-    <h3 class="section-title">회원조회</h3>
-    <form th:action="@{'/member'}" th:method="get" class="member-search-form">
-      <div class="search-wrapper">
-        <select name="type" aria-controls="dataTable" class="search-select">
-          <option value="e" class="select-option">이메일</option>
-          <option value="n" class="select-option">이름</option>
-        </select>
-        <input type="text" name="keyword" aria-controls="dataTable" class="search-input">
-        <button type="submit" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+  <div th:replace="~{/fragments/adminheader}"></div>
+    <main class="admin-main">
+      <section>
+<!--        <h3 class="section-title">회원조회</h3>-->
+        <form th:action="@{'/member'}" th:method="get" class="member-search-form">
+          <div class="search-wrapper">
+            <select name="type" aria-controls="dataTable" class="search-select">
+              <option value="e" class="select-option">이메일</option>
+              <option value="n" class="select-option">이름</option>
+            </select>
+            <input type="text" name="keyword" aria-controls="dataTable" class="search-input">
+            <button type="submit" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+        </form>
+        <article class="member-list-wrapper">
+          <div class="member-list-title">
+            <p class="member-list-title-email">이메일</p>
+            <p class="member-list-title-name">이름</p>
+            <p class="member-list-title-nickname">닉네임</p>
+          </div>
+          <div class="member-list-row" th:each="member: ${result.dtoList}">
+            <a th:href="@{|/member/${member.id}|}" th:text="${member.memberEmail}" class="member-email"></a>
+            <a th:href="@{|/member/${member.id}|}" th:text="${member.memberName}" class="member-name"></a>
+            <a th:href="@{|/member/${member.id}|}" class="member-nickname" th:text="${member.memberNickname}"></a>
+            <a th:href="@{|/member/delete/${member.id}|}" class="member-delete">삭제</a>
+          </div>
+        </article>
+      </section>
+
+      <div class="row">
+<!--        <div class="col-sm-12 col-md-5">-->
+<!--          <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">-->
+<!--            <span th:text="${result.curPage}"></span> [[${result.totalPage}]] of [[${result.totalRows}]] entries-->
+<!--          </div>-->
+<!--        </div>-->
+        <div class="col-sm-12 col-md-7">
+          <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+            <ul class="pagination">
+              <li th:if="${result.prev}" th:class="'paginate_button page-item previous ' + ${result.prev?'':'disabled'}" id="dataTable_previous">
+                <a href="#" th:href="@{/member(page=${result.startNum - 1}, perPage=${result.perPage})}" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link"><i class="fa-solid fa-caret-left paging-previous-icon"></i></a></li>
+              <li th:class="'paginate_button page-item ' + ${result.curPage == page?'active':''}" th:each="page : ${result.pageList}">
+                <a href="#" th:href="@{/member(page=${page}, perPage=${result.perPage})}" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link paging-number">[[${page}]]</a></li>
+              <li th:if="${result.next}" th:class="'paginate_button page-item next ' + ${result.next?'':'disabled'} " id="dataTable_next">
+                <a href="#" th:href="@{/member(page=${result.endNum + 1}, perPage=${result.perPage})}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link"><i class="fa-solid fa-caret-right  paging-next-icon"></i></a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </form>
-    <article class="member-list-wrapper">
-      <div class="member-list-title">
-        <p class="member-list-title-email">이메일</p>
-        <p class="member-list-title-name">이름</p>
-        <p class="member-list-title-nickname">닉네임</p>
-      </div>
-      <div class="member-list-row" th:each="member: ${result.dtoList}">
-        <a th:href="@{|/member/${member.id}|}" th:text="${member.memberEmail}" class="member-email"></a>
-        <a th:href="@{|/member/${member.id}|}" th:text="${member.memberName}" class="member-name"></a>
-        <a th:href="@{|/member/${member.id}|}" class="member-nickname" th:text="${member.memberNickname}"></a>
-        <a th:href="@{|/member/delete/${member.id}|}" class="member-delete">삭제</a>
-      </div>
-    </article>
+    </main>
   </section>
 </body>
 

@@ -1,67 +1,87 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/logo.png">
+    <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/root.css">
+    <link rel="stylesheet" href="/css/orderlist.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <script src="/js/orderlist.js" defer></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="icon" href="/images/logo.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <title>주문 정보</title>
+    <script src="/js/header.js" defer></script>
+    <script src="/js/font.js" defer></script>
+</head>
+<body>
 
-<h2 class="mb-4">
-    주문 정보
-</h2>
+<div th:replace="~{/fragments/header}"></div>
 
+<section class="order-detail">
 
-<div>
-    <form action="/orders/list" method="get">
-        <input type="date" id="startDate" name="startDate" th:value="${startDate}">
-        <input type="date" id="endDate" name="endDate" th:value="${endDate}">
-        <input type="text" id="searchQuery" name="searchQuery" placeholder="브랜드/상품명으로 검색" th:value="${searchQuery}">
-        <button type="submit">검색</button>
-    </form>
-</div>
-<div th:each="order : ${orders.getContent()}">
+    <h2 class="order-info">주문 정보</h2>
 
-    <div class="d-flex mb-3 align-self-center">
-        <h4 th:text="${order.orderDate} + ' 주문'"></h4>
-        <form th:action="@{'/orders/cancel/'+ ${order.orderId}}" th:method="delete">
-            <button type="submit" class="btn-delete">삭제</button>
+    <div class="calendar">
+        <form action="/orders/list" method="get">
+            <input type="date" id="startDate" name="startDate" th:value="${startDate}"> -
+            <input type="date" id="endDate" name="endDate" th:value="${endDate}">
+            <input type="text" id="searchQuery" name="searchQuery" placeholder="브랜드/상품명으로 검색" th:value="${searchQuery}">
+            <button type="submit" class="search-btn">검색</button>
         </form>
     </div>
-    <div class="card d-flex">
-        <div th:each="orderItem : ${order.orderItemDtoList}" class="d-flex mb-3">
-            <div class="repImgDiv">
-                <img th:src="${orderItem.imgUrl}" class="rounded repImg" th:alt="${orderItem.itemNm}">
+
+    <div class="order-detail-form">
+        <div th:each="order : ${orders.getContent()}">
+            <div class="order-date">
+                <h4 th:text="${order.orderDate} + ' 주문'"></h4>
             </div>
-            <div class="align-self-center w-75">
-                <span th:text="${orderItem.itemNm}" class="fs24 font-weight-bold"></span>
-                <div class="fs18 font-weight-light">
-                    <span th:text="${orderItem.orderPrice} +'원'"></span>
-                    <span th:text="${orderItem.count} +'개'"></span>
+            <div class="order-card">
+                <div th:each="orderItem : ${order.orderItemDtoList}" class="order-item">
+                    <div class="repImgDiv">
+                        <img th:src="${orderItem.imgUrl}" class="item-Img">
+                    </div>
+                    <div class="order-item-info">
+                        <span th:text="'상품명: ' + ${orderItem.itemNm}" class="item-name"></span>
+                        <div class="price-count">
+                            <span th:text="'상품 가격: ' + ${orderItem.orderPrice} +'원'" class="item-price"></span>
+                            <span th:text="'주문 수량: ' + ${orderItem.count} +'개'" class="order-count"></span>
+                            <span th:text="'결제 금액: ' + ${order.getTotalPrice()} + ' 원'" class="payment-price"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-</div>
+    <div th:with="start=${(orders.number/maxPage)*maxPage + 1}, end=(${(orders.totalPages == 0) ? 1 : (start + (maxPage - 1) < orders.totalPages ? start + (maxPage - 1) : orders.totalPages)})">
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${orders.number eq 0}?'disabled':''">
+                <a th:href="@{'/orders/list/' + ${orders.number-1} + '?searchQuery=' + ${searchQuery} + '&startDate=' + ${startDate} + '&endDate=' + ${endDate}}" aria-label='Previous' class="page-link">
+                    <span aria-hidden='true'>Previous</span>
+                </a>
+            </li>
 
-<div th:with="start=${(orders.number/maxPage)*maxPage + 1}, end=(${(orders.totalPages == 0) ? 1 : (start + (maxPage - 1) < orders.totalPages ? start + (maxPage - 1) : orders.totalPages)})">
-    <ul class="pagination justify-content-center">
-        <li class="page-item" th:classappend="${orders.number eq 0}?'disabled':''">
-            <a th:href="@{'/orders/list/' + ${orders.number-1} + '?searchQuery=' + ${searchQuery} + '&startDate=' + ${startDate} + '&endDate=' + ${endDate}}" aria-label='Previous' class="page-link">
-                <span aria-hidden='true'>Previous</span>
-            </a>
-        </li>
+            <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}"
+                th:classappend="${orders.number eq page-1}?'active':''">
+                <a th:href="@{'/orders/list/' + ${page-1} + '?searchQuery=' + ${searchQuery} + '&startDate=' + ${startDate} + '&endDate=' + ${endDate}}" th:inline="text" class="page-link">[[${page}]]</a>
+            </li>
 
-        <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}"
-            th:classappend="${orders.number eq page-1}?'active':''">
-            <a th:href="@{'/orders/list/' + ${page-1} + '?searchQuery=' + ${searchQuery} + '&startDate=' + ${startDate} + '&endDate=' + ${endDate}}" th:inline="text" class="page-link">[[${page}]]</a>
-        </li>
-
-        <li class="page-item" th:classappend="${orders.number+1 ge orders.totalPages}?'disabled':''">
-            <a th:href="@{'/orders/list/' + ${orders.number+1} + '?searchQuery=' + ${searchQuery} + '&startDate=' + ${startDate} + '&endDate=' + ${endDate}}" aria-label='Next' class="page-link">
-                <span aria-hidden='true'>Next</span>
-            </a>
-        </li>
-    </ul>
-
-</div>
-
+            <li class="page-item" th:classappend="${orders.number+1 ge orders.totalPages}?'disabled':''">
+                <a th:href="@{'/orders/list/' + ${orders.number+1} + '?searchQuery=' + ${searchQuery} + '&startDate=' + ${startDate} + '&endDate=' + ${endDate}}" aria-label='Next' class="page-link">
+                    <span aria-hidden='true'>Next</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+</body>
 
 </html>

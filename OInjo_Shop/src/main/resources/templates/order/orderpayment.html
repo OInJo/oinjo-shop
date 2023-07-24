@@ -41,6 +41,23 @@
     }
 
     function pay_order() {
+        const checkboxes = document.querySelectorAll(".order-item-checkbox input[type='checkbox']");
+        let allChecked = true;
+
+        // 모든 체크박스를 순회하며 하나라도 체크되지 않은 경우 allChecked를 false로 설정
+        checkboxes.forEach((checkbox) => {
+            if (!checkbox.checked) {
+                allChecked = false;
+                return; // 하나라도 체크되지 않은 경우
+            }
+        });
+
+        // 모든 동의 확인해 팝업창
+        if (!allChecked) {
+            alert("모든 동의 사항에 동의하셔야 결제가 가능합니다.");
+            return;
+        }
+
         var url = "/orders/pay";
         var paramData = {
             itemId: [[${orderDto.itemId}]],
@@ -70,63 +87,11 @@
         });
     }
 </script>
-<body>
-<header class="header-wrapper">
-    <p class="login-check" th:text="${session.loginEmail}"></p>
-    <div class="header-left">
-        <!-- <h3 class="header-title">OInJo</h3> -->
-        <div class="search-wrapper">
-            <input type="text" class="search-input">
-            <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        </div>
-    </div>
-    <ul class="header-right">
-        <!-- 관리자, 로그아웃, 정보수정, 로그인, 장바구니, 최근본상품, 마이페이지 -->
-        <li class="admin-link">
-            <a href="#" class="tooltip-container">
-                <i class="fa-solid fa-hammer tooltip-icon"></i>
-                <span class="tooltip-text">관리자</span>
-            </a>
-        </li>
 
-        <li class="update-link">
-            <a href="/member/update" class="tooltip-container">
-                <i class="fa-solid fa-user-pen tooltip-icon"></i>
-                <span class="tooltip-text">정보수정</span>
-            </a>
-        </li>
-        <li class="logout-link">
-            <a href="/member/logout" class="tooltip-container">
-                <i class="fa-solid fa-user-minus tooltip-icon"></i>
-                <span class="tooltip-text">로그아웃</span>
-            </a>
-        </li>
-        <li class="login-link">
-            <a href="/member/login" class="tooltip-container">
-                <i class="fa-solid fa-user-plus tooltip-icon"></i>
-                <span class="tooltip-text">로그인</span>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="tooltip-container">
-                <i class="fa-solid fa-user tooltip-icon"></i>
-                <span class="tooltip-text">마이페이지</span>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="tooltip-container">
-                <i class="fa-solid fa-cart-shopping tooltip-icon"></i>
-                <span class="tooltip-text">장바구니</span>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="tooltip-container">
-                <i class="fa-solid fa-gift tooltip-icon"></i>
-                <span class="tooltip-text">최근본상품</span>
-            </a>
-        </li>
-    </ul>
-</header>
+<body>
+
+<div th:replace="~{/fragments/header}"></div>
+
 <section class="delivery-information">
 
     <div class="location-info">
@@ -171,40 +136,79 @@
                 <span>이름: </span>
                 <span class="items-name" th:text="${itemDto.itemName}"></span>
                 <span class="items-one-price">가격: </span>
-                <span th:text="${itemDto.itemPrice}"></span>
-                <span class="won">원</span>
+                <span th:text="${itemDto.itemPrice} + ' 원'"></span>
                 <span class="items-option">색깔: </span>
                 <span class="items-option1">white</span>
                 <input type="hidden" th:value="${orderDto.count}" id="count" name="count">
-                <span class="items-option">사이즈: </span>
+                <span class="items-option2">사이즈: </span>
                 <span class="items-option1">s</span>
                 <span class="items-option-num">수량:</span>
-                <span th:text="${orderDto.count}"></span>
-                <span class="won">개</span>
+                <span th:text="${orderDto.count} + ' 개'"></span>
                 <span class="delivery-price">배송비:</span>
                 <span class="free">무료</span>
+                <div class="total-price">총 주문금액:
+                    <span class="total-order-price" th:text="${itemDto.itemPrice * orderDto.count} + ' 원'"></span>
+                </div>
             </div>
-            <div class="total-price">총 주문금액:
-                <span class="total-order-price">40000</span>
-                <span class="won">원</span>
 
-            </div>
         </div>
     </div>
 
     <div class="payment-info-box">
         <h3 class="payment-info">결제 정보</h3>
         <div class="payment-method">
-            <button class="payment-button">카드</button>
-            <button class="payment-button">휴대폰결제</button>
-            <button class="payment-button">가상계좌</button>
-            <button class="payment-button">계좌이체</button>
-            <button class="payment-button">카카오페이</button>
-            <button class="payment-button">네이버페이</button>
-            <button class="payment-button">삼성페이</button>
-            <button class="payment-button">다른 방식</button>
+            <button class="payment-button" onclick="CardSelection(this)">카드</button>
+            <button class="payment-button" onclick="PaymentMessage(this, 1)">휴대폰결제</button>
+            <button class="payment-button" onclick="PaymentMessage(this, 2)">가상계좌</button>
+            <button class="payment-button" onclick="PaymentMessage(this, 1)">계좌이체</button>
+            <button class="payment-button" onclick="PaymentMessage(this, 2)">카카오페이</button>
+            <button class="payment-button" onclick="PaymentMessage(this, 1)">네이버페이</button>
+            <button class="payment-button" onclick="PaymentMessage(this, 2)">삼성페이</button>
+            <button class="payment-button" onclick="PaymentMessage(this, 1)">다른 방식</button>
         </div>
+        <div class="card-check">
+            <select class="check-selected">
+                <option value="" selected="selected">카드 선택</option>
+                <option value="KB카드">KB카드</option>
+                <option value="롯데카드">롯데카드</option>
+                <option value="우리카드">우리카드</option>
+                <option value="현대카드">현대카드</option>
+                <option value="카카오뱅크">카카오뱅크</option>
+                <option value="신한카드">신한카드</option>
+            </select>
+        </div>
+        <p id="paymentMessage1">결제가 되었습니다. 결제 버튼을 눌러주세요</p>
+        <p id="paymentMessage2">결제를 완료했습니다. 결제 버튼을 눌러주세요.</p>
     </div>
+
+    <div class="agree">
+        <h3 class="user-agree">주문자 동의</h3>
+        <div class="order-agree">
+            <div class="order-agree-title">
+                <div class="order-item-checkbox">
+                    <input type="checkbox" id="allCheckAgree" onclick="checkAllAgree();">
+                    <label for="allCheckAgree">전체 동의하기</label>
+                </div>
+            </div>
+            <div class="order-agree-option">
+                <div class="order-item-checkbox">
+                    <input type="checkbox" id="CheckAgree1">
+                    <label for="CheckAgree1">[필수]개인정보 수집 및 이용 동의</label>
+                </div>
+            </div>
+            <div class="order-agree-option">
+                <div class="order-item-checkbox">
+                    <input type="checkbox" id="CheckAgree2">
+                    <label for="CheckAgree2">[필수]개인정보 제 3자 제공 동의</label>
+                </div>
+            </div>
+            <div class="order-agree-option">
+                <div class="order-item-checkbox">
+                    <input type="checkbox" id="CheckAgree3">
+                    <label for="CheckAgree3">[필수]전자결제대행 이용 동의</label>
+                </div>
+            </div>
+        </div>
     </div>
 
     <input type="submit" class="go-payment" value="결제하기" onclick="pay_order()">

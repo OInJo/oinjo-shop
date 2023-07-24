@@ -67,9 +67,10 @@ public class CartService {
         List<CartItemEntity> memberItems = new ArrayList<>();
         System.out.println("cart: " +  cart.getCount());
         for(CartItemEntity cartItem : cartItems ) {
-            if(cartItem.getCart().getId() == cart.getId()) {
+            if (cartItem.getCart() != null && cart != null && cartItem.getCart().getId().equals(cart.getId())) {
                 memberItems.add(cartItem);
             }
+
         }
         return memberItems;
     }

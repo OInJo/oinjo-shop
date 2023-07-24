@@ -7,137 +7,75 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
   <script src="/js/font.js" defer></script>
-  <link rel="icon" href="images/logo.png">
+  <link rel="icon" href="/images/logo.png">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/cart.css">
   <link rel="stylesheet" href="../../static/css/header.css">
   <link rel="stylesheet" href="../../static/css/cart.css">
   <script src="/js/header.js" defer></script>
   <script src="../../static/js/header.js" defer></script>
+    <script src="../../static/js/cart.js" defer></script>
+    <script src="/js/cart.js" defer></script>
   <title>장바구니</title>
 </head>
 
 <body>
-  <header class="header-wrapper">
-    <p class="login-check" th:text="${session.loginEmail}"></p>
-    <div class="header-left">
-      <!-- <h3 class="header-title">OInJo</h3> -->
 
-      <form th:action="@{'/'}" th:method="get" class="search-wrapper">
-        <select name="type" aria-controls="dataTable" class="search-select">
-          <option value="n" class="select-option">상품이름</option>
-          <option value="b" class="select-option">브랜드</option>
-          <option value="c" class="select-option">카테고리</option>
-        </select>
-        <input type="text" name="keyword" aria-controls="dataTable" class="search-input">
-        <button type="submit" class="search-button search-icon">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-      </form>
-
-      <!-- <div class="search-wrapper">
-        <input type="text" class="search-input">
-        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-      </div> -->
-
-    </div>
-    <ul class="header-right">
-      <!-- 관리자, 로그아웃, 정보수정, 로그인, 장바구니, 최근본상품, 마이페이지 -->
-      <li class="admin-link">
-        <a href="/admin/item/new" class="tooltip-container">
-          <i class="fa-solid fa-hammer tooltip-icon"></i>
-          <span class="tooltip-text">관리자</span>
-        </a>
-      </li>
-
-      <li class="update-link">
-        <a href="/member/update" class="tooltip-container">
-          <i class="fa-solid fa-user-pen tooltip-icon"></i>
-          <span class="tooltip-text">정보수정</span>
-        </a>
-      </li>
-      <li class="logout-link">
-        <a href="/member/logout" class="tooltip-container">
-          <i class="fa-solid fa-user-minus tooltip-icon"></i>
-          <span class="tooltip-text">로그아웃</span>
-        </a>
-      </li>
-      <li class="login-link">
-        <a href="/member/login" class="tooltip-container">
-          <i class="fa-solid fa-user-plus tooltip-icon"></i>
-          <span class="tooltip-text">로그인</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="tooltip-container">
-          <i class="fa-solid fa-user tooltip-icon"></i>
-          <span class="tooltip-text">마이페이지</span>
-        </a>
-      </li>
-      <li>
-        <a th:href="@{'/member/' + ${session.loginId} + '/cart'}" class="tooltip-container">
-          <i class="fa-solid fa-cart-shopping tooltip-icon"></i>
-          <span class="tooltip-text">장바구니</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="tooltip-container">
-          <i class="fa-solid fa-gift tooltip-icon"></i>
-          <span class="tooltip-text">최근본상품</span>
-        </a>
-      </li>
-    </ul>
-  </header>
+  <div th:replace="~{/fragments/header}"></div>
   <main class="cart-main">
     <h4 class="cart-title">장바구니</h4>
-    <!-- <p class="no-cart">장바구니에 상품이 없습니다.</p> -->
-    <section class="cart-wrapper">
+      <a href="/"><p class="no-cart hidden">장바구니에 상품이 없습니다. 지금 바로 상품을 추가하세요!</p></a>
+    <section class="cart-wrapper hidden">
       <header class="cart-header">
-        <input type="checkbox" name="" id="" class="cart-header-check">
+<!--        <input type="checkbox" name="" id="" class="cart-header-check">-->
         <div class="cart-header-image"></div>
         <div class="cart-header-product-option">상품/옵션</div>
         <div class="cart-header-count">수량</div>
         <div class="cart-header-price">상품금액</div>
         <div class="cart-header-total-price">합계금액</div>
+        <div class="cart-header-delete"></div>
       </header>
-      <article class="cart-content">
-        <input type="checkbox" name="" id="" class="cart-content-check">
+      <article class="cart-content" th:each="cartItem : ${cartItemList}">
+<!--        <input type="checkbox" name="" id="" class="cart-content-check">-->
         <img src="/images/product.png" alt="장바구니 상품 사진" class="cart-content-image">
         <div class="cart-content-product-option">
-          <p class="cart-content-product">안녕하세요 바지이름</p>
-          <p class="cart-content-size">S Size</p>
+          <p class="cart-content-product" th:text="${cartItem.product.itemName}"></p>
+            <p class="cart-content-size" th:text="${cartItem.product.brand.brandName}"></p>
+          <p class="cart-content-size" th:text="${cartItem.product.color.colorName}+' '+${cartItem.product.size.sizeName}"></p>
         </div>
         <div class="cart-content-count">
-          <i class="fa-solid fa-minus count-icon"></i>
-          <span class="cart-content-counting">1</span>
-          <i class="fa-solid fa-plus count-icon"></i>
+<!--          <i class="fa-solid fa-minus count-icon"></i>-->
+          <span class="cart-content-counting" th:text="${cartItem.count}"></span>
+<!--          <i class="fa-solid fa-plus count-icon"></i>-->
         </div>
         <div class="cart-content-price">
-          <span class="cart-content-price-won">30,000</span>
+          <span class="cart-content-price-won" th:text="${cartItem.product.itemPrice}"></span>
           <span>원</span>
         </div>
         <div class="cart-content-total-price">
-          <span class="cart-content-total-price-won">60,000</span>
+          <span class="cart-content-total-price-won" th:text="${cartItem.product.itemPrice} * ${cartItem.count}"></span>
           <span>원</span>
         </div>
+          <a th:href="'/member/' + ${id} + '/cart/' + ${cartItem.id} + '/delete'" class="cart-delete-button">삭제하기</a>
       </article>
-      <a href="" class="before-page-button">쇼핑 계속하기</a>
+
+      <a href="javascript:history.back()" class="before-page-button">이전 페이지로</a>
       <div class="total-price-content">
-        <span class="price-count">5</span>
+        <span class="price-count" th:text="${#lists.size(cartItemList)}"></span>
         <span class="price-content-section">개의 상품 금액</span>
-        <span class="product-price">1,000,000</span>
+        <span class="product-price" th:text="${totalPrice}"></span>
         <span class="price-content-section">원</span>
         <i class="fa-solid fa-plus price-content-section total-price-content-icon plus-icon"></i>
         <span class="price-content-section">배송비</span>
-        <span class="delivery-price">2,500</span>
+        <span class="delivery-price">0</span>
         <span class="price-content-section">원</span>
         <i class="fa-solid fa-equals price-content-section total-price-content-icon equal-icon"></i>
         <span class="price-content-section">합계</span>
-        <span class="total-price">[[${totalPrice}]]</span>
+        <span class="total-price" th:text="${totalPrice}"></span>
         <span class="price-content-section last-price-content-section">원</span>
       </div>
       <div class="cart-bottom-button">
-        <button type="button" class="select-price-delete-button">선택상품삭제</button>
+<!--        <button type="button" class="select-price-delete-button">선택상품삭제</button>-->
         <input type="submit" value="주문하기" class="order-button">
       </div>
     </section>

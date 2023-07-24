@@ -1,0 +1,109 @@
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+}
+
+body {
+  /* background-color: black; */
+}
+
+.hidden {
+  display: none;
+}
+
+.admin-header {
+  height: 70px;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1%;
+  box-sizing: border-box;
+}
+
+.admin-title {
+  margin: 0;
+}
+
+.header-right-link {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+}
+
+.header-right-link-icon {
+  font-size: 20px;
+}
+
+.header-right-link:hover {
+  color: #CCCCCC;
+}
+
+.admin-section {
+  display: flex;
+  height: 100%;
+}
+
+.admin-nav {
+  flex-basis: 15%;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+}
+
+.nav-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 50%;
+  width: 50%;
+  min-width: 60px;
+  margin: 5px auto;
+  padding: 5px 0;
+}
+
+.admin-ul {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-left: 20px;
+  justify-content: center;
+}
+
+.admin-ul i {
+  width: 30px;
+}
+
+.admin-link {
+  color: white;
+  display: flex;
+}
+
+/* 여기부터 페이지마다 차별화된 디자인 */
+.admin-main {
+  flex-basis: 85%;
+  height: 100vh;
+  background-color: white;
+ padding: 1%;
+ box-sizing: border-box;
+}

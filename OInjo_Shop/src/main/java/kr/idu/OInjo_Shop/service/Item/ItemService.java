@@ -8,11 +8,14 @@ import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageRequestDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageResultDTO;
 import kr.idu.OInjo_Shop.entity.Item.*;
+import kr.idu.OInjo_Shop.entity.Item.Like.ItemLikeEntity;
 import kr.idu.OInjo_Shop.entity.Item.Relation.BrandEntity;
 import kr.idu.OInjo_Shop.entity.Item.Relation.CategoryEntity;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.entity.Member.QMemberEntity;
 import kr.idu.OInjo_Shop.repository.Item.*;
+import kr.idu.OInjo_Shop.repository.Item.Like.ItemLikeRepository;
+import kr.idu.OInjo_Shop.repository.Member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,6 +41,10 @@ public class ItemService {
     private final ItemImgService itemImgService;
 
     private final ItemImgRepository itemImgRepository;
+    
+    private final ItemLikeRepository itemLikeRepository;
+
+    private final MemberRepository memberRepository;
 
     public Long saveItem(ItemFormDTO itemFormDto, List<MultipartFile> itemImgFileList) throws Exception{
 
@@ -124,4 +131,30 @@ public class ItemService {
         return new PageResultDTO<>(result, fn, 5);
     }
 
+    /*public int increaseLikesCount(Long itemId, Long id) {
+        ItemEntity itemEntity = itemRepository.findById(itemId).orElse(null);
+        MemberEntity memberEntity = memberRepository.findById(id).orElse(null);
+
+        if (itemEntity != null && memberEntity != null) {
+            ItemLikeEntity likeEntity = itemLikeRepository.findBySeqAndBno(memberEntity, itemEntity);
+
+            if (likeEntity != null) {
+                //itemEntity.setitemLike(itemEntity.getitemLike() - 1L); // 좋아요 개수 감소
+                itemRepository.save(itemEntity); // 게시물 엔티티 저장
+                itemLikeRepository.delete(likeEntity); // 좋아요 엔티티 삭제
+            } else {
+                likeEntity = itemLikeEntity.builder()
+                        .id(memberEntity)
+                        .itemId(itemEntity)
+                        .build();
+                itemEntity.setitemLike(itemEntity.getitemLike() + 1L); // 좋아요 개수 증가
+                itemRepository.save(itemEntity); // 게시물 엔티티 저장
+                itemLikeRepository.save(likeEntity); // 좋아요 엔티티 저장
+            }
+
+            return 1; // 좋아요 증가 또는 감소 성공
+        } else {
+            return 0; // 게시물이나 회원을 찾을 수 없음
+        }
+    }*/
 }

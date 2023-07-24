@@ -12,8 +12,8 @@ section {
 }
 
 .main-image {
-  width:100%;
-  height: 600px;
+  width:80%;
+  height: 500px;
 }
 
 .sub-image-wrapper {
@@ -137,4 +137,13 @@ section {
   font-size: 20px;
   border: 1px solid black;
   padding: 10px 20px;
+}
+
+.move-btn-wrapper {
+  display:flex;
+  flex-direction: column;
+  gap:10px;
+  position: fixed;
+  bottom:10px;
+  right:10px;
 }

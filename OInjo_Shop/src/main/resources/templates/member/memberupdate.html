@@ -19,76 +19,8 @@
 </head>
 
 <body>
-  <header class="header-wrapper">
-    <p class="login-check" th:text="${session.loginEmail}"></p>
-    <div class="header-left">
-      <!-- <h3 class="header-title">OInJo</h3> -->
-
-      <form th:action="@{'/'}" th:method="get" class="search-wrapper">
-        <select name="type" aria-controls="dataTable" class="search-select">
-          <option value="n" class="select-option">상품이름</option>
-          <option value="b" class="select-option">브랜드</option>
-          <option value="c" class="select-option">카테고리</option>
-        </select>
-        <input type="text" name="keyword" aria-controls="dataTable" class="search-input">
-        <button type="submit" class="search-button search-icon">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-      </form>
-
-      <!-- <div class="search-wrapper">
-        <input type="text" class="search-input">
-        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-      </div> -->
-
-    </div>
-    <ul class="header-right">
-      <!-- 관리자, 로그아웃, 정보수정, 로그인, 장바구니, 최근본상품, 마이페이지 -->
-      <li class="admin-link">
-        <a href="/admin/item/new" class="tooltip-container">
-          <i class="fa-solid fa-hammer tooltip-icon"></i>
-          <span class="tooltip-text">관리자</span>
-        </a>
-      </li>
-
-      <li class="update-link">
-        <a href="/member/update" class="tooltip-container">
-          <i class="fa-solid fa-user-pen tooltip-icon"></i>
-          <span class="tooltip-text">정보수정</span>
-        </a>
-      </li>
-      <li class="logout-link">
-        <a href="/member/logout" class="tooltip-container">
-          <i class="fa-solid fa-user-minus tooltip-icon"></i>
-          <span class="tooltip-text">로그아웃</span>
-        </a>
-      </li>
-      <li class="login-link">
-        <a href="/member/login" class="tooltip-container">
-          <i class="fa-solid fa-user-plus tooltip-icon"></i>
-          <span class="tooltip-text">로그인</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="tooltip-container">
-          <i class="fa-solid fa-user tooltip-icon"></i>
-          <span class="tooltip-text">마이페이지</span>
-        </a>
-      </li>
-      <li>
-        <a th:href="@{'/member/' + ${session.loginId} + '/cart'}" class="tooltip-container">
-          <i class="fa-solid fa-cart-shopping tooltip-icon"></i>
-          <span class="tooltip-text">장바구니</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="tooltip-container">
-          <i class="fa-solid fa-gift tooltip-icon"></i>
-          <span class="tooltip-text">최근본상품</span>
-        </a>
-      </li>
-    </ul>
-  </header>
+  
+  <div th:replace="~{/fragments/header}"></div>
   <form action="/member/update" method="post">
     <h4 class="update-title">회원정보 수정</h4>
     <input type="hidden" th:value="${updateMember.id}" name="id">

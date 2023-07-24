@@ -54,10 +54,8 @@ public class CartController {
         if(Objects.equals(id, memberId)) {
             System.out.println("여기로는 들어와 질거고");
             // Member의 장바구니를 가져온다.
-//            MemberEntity member = MemberEntity.toMemberEntity(memberService.findById(id));
-            MemberEntity member = memberRepository.findById(id)
-                    .orElseThrow(EntityNotFoundException::new);
-            CartEntity cart = cartRepository.findByMember(member);
+            MemberDTO member = memberService.findById(id);
+            CartEntity cart = cartRepository.findByMemberId(member.getId());
 
             // 장바구니의 아이템을 가져온다.
             List<CartItemEntity> cartItems= cartService.memberCartView(cart);
@@ -94,7 +92,7 @@ public class CartController {
     @GetMapping("/member/{id}/cart/{cartItemId}/delete")
     public String myCartDelete(@PathVariable("id") Long id, @PathVariable("cartItemId") Long cartItemId){
         MemberEntity member = MemberEntity.toMemberEntity(memberService.findById(id));
-        CartEntity cart = cartRepository.findByMember(id);
+        CartEntity cart = cartRepository.findByMemberId(id);
         cart.setCount(cart.getCount() - 1);
         cartService.cartItemDelete(cartItemId);
 
