@@ -1,7 +1,7 @@
 .button{
     display: flex;
     margin-top: 30px;
-    margin-left: 400px;    
+    margin-left: 530px;
 }
 .payment-receipt{
     width: 100px;
@@ -26,13 +26,14 @@ h1{
     display: flex;
     flex-direction: column;    
     align-items: center;
-    width: 650px;
+    width: 780px;
     border-top: 1px solid black;
     padding-top: 25px;
     margin-top: 13px;
 }
 
 .order-complete-form{
+    margin-top: 100px;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -45,17 +46,16 @@ h1{
     display: flex;
     flex-wrap: wrap;
     border: 2px solid #d9d9d9;
-
-    width: 500px;
-    height: 120px;
+    width: 650px;
+    height: 150px;
     padding-left: 40px;
-    padding-right: 20px;
+    padding-right: 40px;
     padding-top: 30px;
     padding-bottom: 20px;
     margin-top: 60px;
     background-color: #f9f9ff;
-    
 }
+
 .order-information div {
     width: 50%;
 }
@@ -79,4 +79,40 @@ h1{
     color: white;
     border: none;
     border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .button {
+        margin-left: 30%;
+    }
+
+    .order-complete-form, .order-information {
+        width: 90%;
+    }
+
+    .order-information div {
+        width: 100%;
+    }
+
+    .button-form {
+        margin-left: 30%;
+    }
+}
+
+@media (max-width: 480px) {
+    .button {
+        margin-left: 10%;
+    }
+
+    .order-complete-form, .order-information {
+        width: 95%;
+    }
+
+    .order-information div {
+        width: 100%;
+    }
+
+    .button-form {
+        margin-left: 10%;
+    }
 }
