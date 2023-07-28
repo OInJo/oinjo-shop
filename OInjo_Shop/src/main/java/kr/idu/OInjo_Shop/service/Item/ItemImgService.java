@@ -20,7 +20,7 @@ import java.util.List;
 @Transactional
 public class ItemImgService {
 
-    @Value("D:/Project/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg")
+    @Value("/Users/minwook/Documents/GitHub/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg")
 
     private String itemImgLocation;
 
@@ -63,6 +63,15 @@ public class ItemImgService {
 
     public List<ItemImgDTO> findAllItemImg() {
         List<ItemImgEntity> itemImgEntityList = itemImgRepository.findAll();
+        List<ItemImgDTO> itemImgDTOList = new ArrayList<>();
+        for (ItemImgEntity itemImgEntity: itemImgEntityList) {
+            itemImgDTOList.add(ItemImgDTO.of(itemImgEntity));
+        }
+        return itemImgDTOList;
+    }
+
+    public List<ItemImgDTO> findItemImgByItemId(Long itemId) {
+        List<ItemImgEntity> itemImgEntityList = itemImgRepository.findByItemItemId(itemId);
         List<ItemImgDTO> itemImgDTOList = new ArrayList<>();
         for (ItemImgEntity itemImgEntity: itemImgEntityList) {
             itemImgDTOList.add(ItemImgDTO.of(itemImgEntity));
