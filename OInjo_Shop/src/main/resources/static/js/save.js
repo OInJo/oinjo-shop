@@ -283,16 +283,26 @@ certificationStartButton.addEventListener("click", () => {
       "Content-Type": "application/json",
     },
   })
-    .then((response) => {
-      console.log("response:", response);
-      alert(`인증번호가 전송되었습니다 ${emailInput.value}를 확인하세요.`);
-      certificationStartButton.textContent = "전송완료"
-    })
-    .catch((error) => {
-      console.log("error:", error);
-      alert("인증번호 전송에 실패했습니다.");
-    });
+      .then((response) => {
+        if (response.ok) {
+          return response.text(); // Convert response body to text
+        } else if (response.status === 409) {
+          throw new Error("중복된 이메일입니다."); // Handle the conflict error
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      })
+      .then((data) => {
+        console.log("response:", data);
+        alert(`인증번호가 전송되었습니다. ${emailInput.value}를 확인하세요.`);
+        certificationStartButton.textContent = "전송완료";
+      })
+      .catch((error) => {
+        console.log("error:", error);
+        alert(error.message); // Display the error message
+      });
 });
+
 
 const certificationButton = document.querySelector(".certification-button");
 const certificationNumber = document.querySelector(".certification-number");

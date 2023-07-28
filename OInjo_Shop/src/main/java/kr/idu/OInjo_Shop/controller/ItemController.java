@@ -3,6 +3,7 @@ package kr.idu.OInjo_Shop.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import kr.idu.OInjo_Shop.dto.Item.ItemImgDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.BrandDTO;
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.CategoryDTO;
@@ -11,6 +12,7 @@ import kr.idu.OInjo_Shop.dto.Item.Relation.SizeDTO;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageRequestDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageResultDTO;
+import kr.idu.OInjo_Shop.service.Item.ItemImgService;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
 import kr.idu.OInjo_Shop.service.Item.RelationService;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +39,7 @@ import java.util.List;
 public class ItemController {
 
     private final ItemService itemService; // 아이템 및 아이템 이미지
+    private final ItemImgService itemImgService;
     private final RelationService relationService; // 카테고리, 브랜드, 컬러, 사이즈
 
     @GetMapping(value = "/admin/item/new")
@@ -181,9 +184,10 @@ public class ItemController {
     @GetMapping("/item/{itemId}")
     public String itemDetail(@PathVariable("itemId") Long itemId, Model model, HttpServletResponse response, HttpSession session) {
 
-//        try {
             ItemFormDTO itemFormDTO = itemService.getItemDetail(itemId);
             model.addAttribute("itemFormDTO", itemFormDTO);
+            List<ItemImgDTO> itemImgDTO = itemImgService.findItemImgByItemId(itemId);
+            model.addAttribute("itemImgDTO", itemImgDTO);
             // 현재 로그인한 사용자의 이메일 주소 가져오기
             Long loginId = (Long) session.getAttribute("loginId");
             model.addAttribute("memberId", loginId);

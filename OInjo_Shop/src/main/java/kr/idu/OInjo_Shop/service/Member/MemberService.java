@@ -192,6 +192,15 @@ public class MemberService {
         }
     }
 
+    public boolean findByMemberEmail(String email) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(email);
+        if (optionalMemberEntity.isPresent()) {
+            return true;
+        }
+        else
+            return false;
+    }
+
 
     public String temporaryPassword(String email) throws Exception {
         String ePw;

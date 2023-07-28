@@ -9,6 +9,7 @@ import kr.idu.OInjo_Shop.service.Mail.MailService;
 import kr.idu.OInjo_Shop.service.Mail.RegisterMailService;
 import kr.idu.OInjo_Shop.service.Member.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,10 +40,14 @@ public class MemberController {
 
     @ResponseBody
     @PostMapping("/login/mailAuthentication")
-    public String mailConfirm(@RequestParam("email") String email) throws Exception {
-        String code = registerMailService.sendSimpleMessage(email);
-        System.out.println("인증코드 : " + code);
-        return code;
+    public ResponseEntity<String> mailConfirm(@RequestParam("email") String email) throws Exception {
+        if(!memberService.findByMemberEmail(email)){
+            String code = registerMailService.sendSimpleMessage(email);
+            System.out.println("인증코드 : " + code);
+            return ResponseEntity.ok(code); // 200 OK with the code
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("중복된 이메일입니다."); // 409 Conflict
+        }
     }
 
     @ResponseBody
