@@ -46,7 +46,8 @@ public class ItemRelationController {
     public String deleteBrandById(@PathVariable Long id)
     {
         relationService.deleteBrandById(id);
-        return "redirect:/brandupload";
+        // return "redirect:/brandupload";
+        return "redirect:/admin/brand/new";
     }
 
     @GetMapping(value = "/admin/category/new")
@@ -72,7 +73,8 @@ public class ItemRelationController {
     public String deleteCategoryById(@PathVariable Long id)
     {
         relationService.deleteCategoryById(id);
-        return "redirect:/admin/categoryupload";
+        // return "redirect:/admin/categoryupload";
+        return "redirect:/admin/category/new";
     }
 
     @GetMapping(value = "/admin/color/new")
@@ -98,7 +100,8 @@ public class ItemRelationController {
     public String deleteColorById(@PathVariable Long id)
     {
         relationService.deleteColorById(id);
-        return "redirect:/admin/colorupload";
+        // return "redirect:/admin/colorupload";
+        return "redirect:/admin/color/new";
     }
 
     @GetMapping(value = "/admin/size/new")
@@ -124,7 +127,8 @@ public class ItemRelationController {
     public String deleteSizeById(@PathVariable Long id)
     {
         relationService.deleteSizeById(id);
-        return "redirect:/sizeupload/";
+        // return "redirect:/sizeupload/";
+        return "redirect:/admin/size/new";
     }
 
     @PostMapping(value = "/admin/brand/new")
