@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/css/adminindex.css">
   <link rel="stylesheet" href="../../static/css/upload.css">
   <link rel="stylesheet" href="/css/upload.css">
+  <script src="../../static/js/upload.js" defer></script>
   <script src="/js/upload.js" defer></script>
   <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
   <title>브랜드 등록</title>
@@ -29,7 +30,7 @@
         <li th:each="brandDto : ${brandList}" class="database-list">
           <span th:text="${brandDto.brandId}" class="id brand-id"></span>
           <span th:text="${brandDto.brandName}" class="name brand-name"></span>
-          <i class="fa-solid fa-trash delete-button"></i>
+          <a th:href="@{'/admin/brand/delete/'+${brandDto.brandId}}"><i class="fa-solid fa-trash delete-button"></i></a>
         </li>
       </ul>
     </main>

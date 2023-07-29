@@ -29,7 +29,7 @@
         <li th:each="sizeDto : ${sizeList}" class="database-list">
             <span th:text="${sizeDto.sizeId}" class="id size-id"></span>
             <span th:text="${sizeDto.sizeName}" class="name size-name"></span>
-            <i class="fa-solid fa-trash delete-button"></i>
+            <a th:href="@{'/admin/size/delete/'+${sizeDto.sizeId}}"><i class="fa-solid fa-trash delete-button"></i></a>
         </li>
     </ul>
   

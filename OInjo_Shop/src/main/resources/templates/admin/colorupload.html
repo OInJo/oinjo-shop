@@ -29,7 +29,7 @@
         <li th:each="colorDto : ${colorList}" class="database-list">
             <span th:text="${colorDto.colorId}" class="id color-id"></span>
             <span th:text="${colorDto.colorName}" class="name color-name"></span>
-            <i class="fa-solid fa-trash delete-button"></i>
+            <a th:href="@{'/admin/color/delete/'+${colorDto.colorId}}"><i class="fa-solid fa-trash delete-button"></i></a>
         </li>
     </ul>
   

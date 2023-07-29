@@ -29,7 +29,7 @@
         <li th:each="categoryDto : ${categoryList}" class="database-list">
             <span th:text="${categoryDto.categoryId}" class="id category-id"></span>
             <span th:text="${categoryDto.categoryName}" class="name category-name"></span>
-            <i class="fa-solid fa-trash delete-button"></i>
+          <a th:href="@{'/admin/category/delete/'+${categoryDto.categoryId}}"><i class="fa-solid fa-trash delete-button"></i></a>
         </li>
     </ul>
     </main>
