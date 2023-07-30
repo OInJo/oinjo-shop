@@ -65,7 +65,6 @@ public class CartService {
     public List<CartItemEntity> memberCartView(CartEntity cart) {
         List<CartItemEntity> cartItems = cartItemRepository.findAll();
         List<CartItemEntity> memberItems = new ArrayList<>();
-        System.out.println("cart: " +  cart.getCount());
         for(CartItemEntity cartItem : cartItems ) {
             if (cartItem.getCart() != null && cart != null && cartItem.getCart().getId().equals(cart.getId())) {
                 memberItems.add(cartItem);
