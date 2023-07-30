@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/js/font.js" defer></script>
+  <link rel="icon" href="/images/logo.png">
+  <link rel="stylesheet" href="/css/adminindex.css">
+  <link rel="stylesheet" href="../../static/css/adminindex.css">
+  <link rel="stylesheet" href="../../static/css/memberdetail.css">
+  <link rel="stylesheet" href="/css/memberdetail.css">
+  <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
+  <title>회원상세조회</title>
+</head>
+
+<body>
+  <div th:replace="~{/fragments/adminheader}"></div>
+  <main class="admin-main">
+    <section class="memberdetail-section">
+      <h3 class="memberdetail-title" th:text="${member.memberName}+'의 회원정보'"></h3>
+      <div class="memberdetail-row">
+        <span class="memberdetail-label">회원번호</span>
+        <span class="memberdetail-value" th:text="${member.id}"></span>
+        <span class="memberdetail-label">닉네임</span>
+        <span class="memberdetail-value" th:text="${member.memberNickname}"></span>
+      </div>
+      <div class="memberdetail-row">
+        <span class="memberdetail-label">아이디</span>
+        <span class="memberdetail-value" th:text="${member.memberEmail}"></span>
+      </div>
+      <div class="memberdetail-row">
+        <span class="memberdetail-label">비밀번호</span>
+        <span class="memberdetail-value" th:text="${member.memberPassword}"></span>
+      </div>
+      <div class="memberdetail-row">
+        <span class="memberdetail-label">휴대폰번호</span>
+        <span class="memberdetail-value" th:text="${member.memberPhone}"></span>
+      </div>
+      <div class="memberdetail-row">
+        <span class="memberdetail-label">주소</span>
+        <span class="memberdetail-value" th:text="${member.memberAddress}"></span>
+      </div>
+      <i class="fa-solid fa-rotate-left back-button" onclick="goBack()"></i>
+    </section>
+  </main>
+  </section>
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+
+</html>
