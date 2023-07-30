@@ -37,7 +37,7 @@
       </header>
       <article class="cart-content" th:each="cartItem : ${cartItemList}">
 <!--        <input type="checkbox" name="" id="" class="cart-content-check">-->
-        <img src="/images/product.png" alt="장바구니 상품 사진" class="cart-content-image">
+        <img th:src="${cartItem.product.}" alt="장바구니 상품 사진" class="cart-content-image">
         <div class="cart-content-product-option">
           <p class="cart-content-product" th:text="${cartItem.product.itemName}"></p>
             <p class="cart-content-size" th:text="${cartItem.product.brand.brandName}"></p>

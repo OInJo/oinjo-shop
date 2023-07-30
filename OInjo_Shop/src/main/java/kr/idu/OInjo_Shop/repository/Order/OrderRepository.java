@@ -1,5 +1,6 @@
 package kr.idu.OInjo_Shop.repository.Order;
 
+import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.entity.Order.OrderEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
+    List<OrderEntity> findByMember(MemberEntity member);
 
     @Query("select  o from OrderEntity o " +
             "where o.member.memberEmail = :email " +
