@@ -12,7 +12,7 @@
         <div class="col-lg-6">
             <!-- Blog post-->
             <div class="card mb-4" th:each="item : ${itemList.dtoList}">
-                <a th:href="@{'/admin/item/' + ${item.id}}"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                <a th:href="@{'/admin/item/' + ${item.id}}"><img th:each="ItemImgDTO : ${itemImgDTO}" th:src="${ItemImgDTO.imgUrl}" class="article-product-image"/></a>
                 <div class="card-body">
                     <div class="small text-muted"><span th:text="${item.itemName}" ></span></div>
                 </div>

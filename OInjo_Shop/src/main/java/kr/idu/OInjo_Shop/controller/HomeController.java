@@ -78,4 +78,9 @@ public class HomeController {
     public String admin() {
         return "/admin/adminindex";
     }
+
+    @GetMapping("/member/passwordupdate")
+    public String passwordupdate() {
+        return "/member/passwordupdate";
+    }
 }

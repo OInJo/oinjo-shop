@@ -1,0 +1,44 @@
+.memberdetail-section {
+  /* width: 40%; */
+  padding: 1%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+  padding-bottom: 30px;
+  box-sizing: border-box;
+}
+
+.memberdetail-title {
+  margin: 5px 0;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.memberdetail-row {
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.memberdetail-label {
+  width: 90px;
+  background-color: black;
+  color: white;
+  padding: 5px;
+  box-sizing: border-box;
+  margin-right: 5px;
+}
+
+.memberdetail-value {
+  margin-right: 30px;
+}
+
+.back-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 25px;
+}

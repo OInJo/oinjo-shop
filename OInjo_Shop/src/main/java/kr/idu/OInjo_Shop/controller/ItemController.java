@@ -118,6 +118,8 @@ public class ItemController {
         if (loginEmail != null && loginEmail.equals(allowedEmail)) {
             PageResultDTO<ItemFormDTO, Object[]> itemFormDTOList = itemService.getAllItemList(pageRequestDTO);
             model.addAttribute("itemList", itemFormDTOList);
+            List<ItemImgDTO> itemImgDTO = itemImgService.findAllItemImg();
+            model.addAttribute("itemImgDTO", itemImgDTO);
             return "/test/itemList";
         }
         else
@@ -132,6 +134,9 @@ public class ItemController {
 
         // 현재 로그인한 사용자의 이메일 주소 가져오기
         String loginEmail = (String) session.getAttribute("loginEmail");
+
+        List<ItemImgDTO> itemImgDTO = itemImgService.findItemImgByItemId(itemId);
+        model.addAttribute("itemImgDTO", itemImgDTO);
 
         if (loginEmail != null && loginEmail.equals(allowedEmail)) {
             try {
@@ -191,25 +196,6 @@ public class ItemController {
             // 현재 로그인한 사용자의 이메일 주소 가져오기
             Long loginId = (Long) session.getAttribute("loginId");
             model.addAttribute("memberId", loginId);
-
-            /*// 상품 정보를 JSON 문자열로 변환
-            ObjectMapper objectMapper = new ObjectMapper();
-            String itemJson = objectMapper.writeValueAsString(itemFormDTO);
-
-            // 상품 정보를 담은 쿠키 생성
-            Cookie cookie = new Cookie("recentItem", itemJson);
-            cookie.setMaxAge(60 * 60 * 24); // 쿠키의 유효 기간 설정 (예: 1일)
-            cookie.setPath("/"); // 쿠키의 유효 경로 설정 (예: 모든 경로에서 사용 가능)
-
-            // 쿠키를 응답 헤더에 추가하여 클라이언트에게 전달
-            response.addCookie(cookie);*/
-        /*} catch (EntityNotFoundException e) {
-            model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
-            model.addAttribute("itemFormDTO", new ItemFormDTO());
-            return "item/detail";
-        } /*catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }*/
 
         return "item/detail";
     }
