@@ -120,7 +120,7 @@ public class ItemController {
             model.addAttribute("itemList", itemFormDTOList);
             List<ItemImgDTO> itemImgDTO = itemImgService.findAllItemImg();
             model.addAttribute("itemImgDTO", itemImgDTO);
-            return "/test/itemList";
+            return "/admin/itemList";
         }
         else
             return "redirect:/";
@@ -146,10 +146,10 @@ public class ItemController {
             } catch (EntityNotFoundException e) {
                 model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
                 model.addAttribute("itemFormDTO", new ItemFormDTO());
-                return "test/itemView";
+                return "admin/itemView";
             }
 
-            return "test/itemView";
+            return "admin/itemView";
         } else {
             return "redirect:/";
         }
@@ -161,19 +161,19 @@ public class ItemController {
                              @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Model model) {
 
         if(bindingResult.hasErrors()) {
-            return "test/itemView";
+            return "admin/itemView";
         }
 
         if(itemImgFileList.get(0).isEmpty() && itemFormDTO.getId() == null) {
             model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입니다.");
-            return "test/itemView";
+            return "admin/itemView";
         }
 
         try {
             itemService.updateItem(itemFormDTO, itemImgFileList);
         } catch (IOException e) {
             model.addAttribute("errorMessage", "상품 수정 중에 오류가 발생했습니다.");
-            return "test/itemView";
+            return "admin/itemView";
         }
 
         return "redirect:/";

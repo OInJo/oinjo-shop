@@ -311,3 +311,6 @@ priceHighSort.addEventListener("click", sortByPriceDescending);
 //가격 낮은 순 정렬
 const priceLowSort = document.querySelector("#price-low-sort");
 priceLowSort.addEventListener("click", sortByPriceAscending);
+
+
+document.querySelector(".article-product-price-won").textContent = document.querySelector(".item-price").textContent.toLocaleString()

@@ -35,8 +35,8 @@ form {
   padding: 1% 3%;
 }
 
-.update-button:hover{
-  color:#f33333;
+.update-button:hover {
+  color: #f33333;
 }
 
 .address-update-input {
@@ -58,13 +58,19 @@ form {
 .update-button-wrapper {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  /* margin-top: 15px; */
 }
 
 .left-update-button {
   display: flex;
   flex-direction: column;
   gap: 9px;
+}
+
+.withdrawal-button {
+  background-color: rgba(0, 0, 0, 0.01);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px;
 }
 
 .passwordupdate-button:hover,
@@ -138,12 +144,75 @@ form {
   border-radius: none;
 }
 
-.hidden {
-  display: none;
-}
-
 #check {
   float: right;
   margin-right: -35px;
   margin-top: -45px;
+}
+
+.passwordupdate-button {
+  all: unset;
+  background-color: rgba(0, 0, 0, 0.01);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.passwordupdate-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: black;
+}
+
+.passwordupdate-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.passwordupdate-row {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 10px;
+}
+
+.passwordupdate-label {
+  width: 140px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.01);
+  padding: 10px;
+  box-sizing: border-box;
+  margin-right: 10px;
+}
+
+.passwordupdate-value {
+  width: 200px;
+  height: 30px;
+}
+
+.passwordupdate-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.passwordupdate-submit-button,
+.passwordupdate-cancel-button {
+  all: unset;
+  background-color: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px;
+}
+
+.passwordupdate-submit-button:hover,
+.passwordupdate-cancel-button:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+
+.hidden {
+  display: none;
 }

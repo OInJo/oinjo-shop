@@ -9,6 +9,7 @@
   <link rel="icon" href="/images/logo.png">
   <link rel="stylesheet" href="/css/memberupdate.css">
   <link rel="stylesheet" href="/js/font.js" defer>
+  <script src="../../static/js/memberupdate.js" defer></script>
   <script src="/js/memberupdate.js" defer></script>
   <link rel="stylesheet" href="../../static/css/memberupdate.css">
   <link rel="stylesheet" href="../../static/css/header.css">
@@ -19,7 +20,7 @@
 </head>
 
 <body>
-  
+
   <div th:replace="~{/fragments/header}"></div>
   <form action="/member/update" method="post">
     <h4 class="update-title">회원정보 수정</h4>
@@ -29,12 +30,6 @@
       <input type="text" th:value="${updateMember.memberEmail}" name="memberEmail"
         class="update-input email-update-input" readonly>
       <button type="button" class="update-button email-update-button">변경</button>
-    </div>
-    <div class="update-wrapper">
-      <p class="update-content">비밀번호</p>
-      <input type="password" th:value="${updateMember.memberPassword}" name="memberPassword"
-        class="update-input password-update-input" readonly>
-      <!-- <button type="button" class="update-button  password-update-button">변경</button> -->
     </div>
     <div class="update-wrapper">
       <p class="update-content">이름</p>
@@ -60,6 +55,27 @@
         class="update-input address-update-input" readonly>
       <button type="button" class="update-button address-update-button">변경</button>
     </div>
+    <input type="hidden" th:value="${updateMember.memberPassword}" class="old-password">
+    <button type="button" class="passwordupdate-button">비밀번호 변경하기</button>
+    <div class="passwordupdate-wrapper hidden">
+      <div class="passwordupdate-row">
+        <span class="passwordupdate-label">현재 비밀번호</span>
+        <input type="text" class="passwordupdate-value" th:value="${updateMember.memberPassword}" readonly>
+      </div>
+      <div class="passwordupdate-row">
+        <span class="passwordupdate-label">새 비밀번호</span>
+        <input type="text" class="passwordupdate-value" name="memberPassword" th:value="${updateMember.memberPassword}"
+          id="new-password">
+      </div>
+      <div class="passwordupdate-row">
+        <span class="passwordupdate-label">새 비밀번호 확인</span>
+        <input type="text" class="passwordupdate-value" id="re-new-password">
+      </div>
+      <div class="passwordupdate-button-wrapper">
+        <button type="button" class="passwordupdate-submit-button">비밀번호 변경</button>
+        <button type="button" class="passwordupdate-cancel-button">다음에 변경하기</button>
+      </div>
+    </div>
 
     <!-- <div class="update-bottom-button">
       <input type="button" class="password-update-button" id="open-password" value="비밀번호 변경">
@@ -82,7 +98,6 @@
     </div> -->
     <div class="update-button-wrapper">
       <div class="left-update-button">
-        <a href="/member/passwordupdate" class="passwordupdate-button">비밀번호 변경</a>
         <a href="/member/withdrawal" class="withdrawal-button">회원탈퇴</a>
       </div>
       <input type="submit" value="정보수정" class="update-submit-button">
