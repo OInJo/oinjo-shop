@@ -3,6 +3,7 @@ package kr.idu.OInjo_Shop.entity.Cart;
 import kr.idu.OInjo_Shop.dto.Cart.CartItemDTO;
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.entity.Item.ItemEntity;
+import kr.idu.OInjo_Shop.entity.Item.ItemImgEntity;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -31,6 +32,10 @@ public class CartItemEntity {
     private ItemEntity product;
 
     private Integer count; // 카트에 담긴 상품 개수
+
+    @ManyToOne
+    @JoinColumn(name = "image_id") // 이미지 정보를 담는 외래키
+    private ItemImgEntity image;
 
 
     @DateTimeFormat(pattern = "yyyy-mm-dd")
