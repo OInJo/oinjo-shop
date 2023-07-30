@@ -1,5 +1,5 @@
-const loginCheck = document.querySelector(".login-check");
-loginCheck.style.display = "none";
+// const loginCheck = document.querySelector(".login-check");
+// loginCheck.style.display = "none";
 const emailUpdateInput = document.querySelector(".email-update-input");
 const emailUpdateButton = document.querySelector(".email-update-button");
 emailUpdateButton.addEventListener("click", () => {
@@ -9,18 +9,6 @@ emailUpdateButton.addEventListener("click", () => {
   } else {
     emailUpdateInput.readOnly = true;
     emailUpdateButton.textContent = "변경";
-  }
-});
-
-const passwordUpdateInput = document.querySelector(".password-update-input");
-const passwordUpdateButton = document.querySelector(".password-update-button");
-passwordUpdateButton.addEventListener("click", () => {
-  if (passwordUpdateInput.readOnly) {
-    passwordUpdateInput.readOnly = false;
-    passwordUpdateButton.textContent = "변경완료";
-  } else {
-    passwordUpdateInput.readOnly = true;
-    passwordUpdateButton.textContent = "변경";
   }
 });
 
@@ -72,61 +60,34 @@ addressUpdateButton.addEventListener("click", () => {
   }
 });
 
-// 모달창 없애기
-const openButton = document.getElementById("open-password");
-const modal = document.querySelector(".password-update-modal");
-const overlay = modal.querySelector(".modal__overlay");
-const closeBtn = modal.querySelector(".save-password");
-const openModal = () => {
-  modal.classList.remove("hidden");
-};
-const closeModal = () => {
-  modal.classList.add("hidden");
-};
-overlay.addEventListener("click", closeModal);
-closeBtn.addEventListener("click", closeModal);
-openButton.addEventListener("click", openModal);
+// 비밀번호 변경 소스
+const passwordupdateButton = document.querySelector(".passwordupdate-button");
+const passwordupdateWrapper = document.querySelector(".passwordupdate-wrapper");
+const oldPassword = document.querySelector(".old-password");
+const newPassword = document.querySelector("#new-password");
+const reNewPassword = document.querySelector("#re-new-password")
+passwordupdateButton.addEventListener("click", () => {
+  passwordupdateWrapper.classList.toggle("hidden");
+  passwordupdateButton.disabled = true;
+  newPassword.value = ""
+  reNewPassword.value = ""
+});
 
-// 비밀번호 일치 불일치
-function check_password() {
-  if (
-    document.getElementById("new-password").value != "" &&
-    document.getElementById("renew-password").value != ""
-  ) {
-    if (
-      document.getElementById("new-password").value ==
-      document.getElementById("renew-password").value
-    ) {
-      document.getElementById("check").innerHTML = "일치";
-      document.getElementById("check").style.color = "blue";
-    } else {
-      document.getElementById("check").innerHTML = "불일치";
-      document.getElementById("check").style.color = "red";
-    }
-  }
-  if (
-    document.getElementById("new-password").value == "" ||
-    document.getElementById("renew-password").value == ""
-  ) {
-    document.getElementById("check").innerHTML = "";
-  }
-}
-//
-
-// 비밀번호 불일치 시 저장 안눌리게
-function save() {
-  const userPassword = document.querySelector("#user-password");
-  const currentpassword = document.querySelector("#current-password");
-  const newpassword = document.querySelector("#new-password");
-  const renewpassword = document.querySelector("#renew-password");
-  const savebtn = document.querySelector("#savebtn");
-  if(!(userPassword.value == currentpassword.value)){
-    alert("입력한 비밀번호가 회원의 비밀번호가 아닙니다.")
-  }
-  else if(!(newpassword.value == renewpassword.value)) {
-    alert("새 비밀번호가 일치하지 않습니다.")
-  }
-  else {
-    savebtn.disabled = false;
-  }
-}
+// 비밀번호 변경 버튼을 누르면 새 비밀번호 값을 유지하고, 다음에 변경하기를 누르면 새 비밀번호 값에 예전 비밀번호를 넣어줌.
+// 사용자가 새 비밀번호 란에 무언가를 입력 후, 다음에 변경하기를 눌렀을 때도 변경되는 상황 방지
+// 현재 문제점은 새 비밀번호 란에 무언가를 입력 후, 비밀번호 변경창을 닫지 않고 아무것도 누르지 않고 그냥 정보수정을 누르면 변경됨.
+const passwordupdateSubmitButton = document.querySelector(
+  ".passwordupdate-submit-button"
+);
+const passwordupdateCancelButton = document.querySelector(
+  ".passwordupdate-cancel-button"
+);
+passwordupdateSubmitButton.addEventListener("click", () => {
+  passwordupdateButton.disabled = false;
+  passwordupdateWrapper.classList.add("hidden");
+});
+passwordupdateCancelButton.addEventListener("click", () => {
+  newPassword.value = oldPassword.value;
+  passwordupdateButton.disabled = false;
+  passwordupdateWrapper.classList.add("hidden");
+});
