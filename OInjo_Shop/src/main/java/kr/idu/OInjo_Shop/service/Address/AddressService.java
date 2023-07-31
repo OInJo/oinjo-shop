@@ -70,5 +70,15 @@ public class AddressService {
         }
     }
 
+    public List<AddressDto> chooseAddress(String email) {
+        List<AddressEntity> addresses = addressRepository.findAddressList(email);
+        List<AddressDto> addressDtoList = new ArrayList<>();
+        for (AddressEntity address : addresses) {
+            AddressDto addressDto = new AddressDto(address);
+            addressDtoList.add(addressDto);
+        }
+        return addressDtoList;
+    }
+
 
 }

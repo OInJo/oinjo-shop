@@ -19,4 +19,9 @@ public interface AddressRepository extends JpaRepository<AddressEntity, Long> {
             "where a.member.memberEmail =:email"
     )
     Long countAddress(@Param("email") String email);        //memberEmail이 주어진 email 값과 일치하는 레코드의 개수를 반환
+
+    @Query("select a from AddressEntity a " +
+            "where a.member.memberEmail = :email"
+    )
+    List<AddressEntity> findAddressList(@Param("email") String email);
 }

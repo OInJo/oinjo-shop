@@ -19,6 +19,8 @@ public class OrderHistDto {         //
         this.orderStatus = order.getOrderStatus();
         this.totalPrice = order.getTotalPrice();
     }
+
+
     private Long orderId;
 
     private String orderDate;   //주문 날짜
