@@ -1,10 +1,10 @@
-.delivery-informaion {
+.delivery-information {
     display: flex;
     flex-direction: column;
 }
 
 .user-info {
-    margin-top: 100px;
+    margin-top: 30px;
 }
 
 .user-info, .info-box {
@@ -44,38 +44,44 @@
 }
 
 .items-img {
-    margin-top: 10px;
+    margin-top: 5px;
     margin-left: 10px;
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
 }
 
 .info-box2 {
     display: flex;
     width: 80%;
-    height: 40%;
+    height: 20%;
     border: 1px solid rgb(190, 188, 188);
     border-radius: 3px;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     margin-left: 10%;
 }
 
-.items-option-info {
-    padding-left: 50px;
-    margin-top: 80px;
+.items-container {
+    display: table;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 80%;
+    margin-left: 70px;
+    margin-top: 5px;
 }
 
-.total-price {
-    margin-top: 30px;
+.info-row  {
+    display: table-row;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
-.items-name, .won, .items-option1, .free{
-    margin-right: 50px;
-}
-
-.items-option, .delivery-price {
-    margin-left: 50px;
+.items-option {
+    display: table-cell;
+    border: 1px solid #e5e5e5;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .go-payment {
@@ -83,8 +89,10 @@
     width: 200px;
     height: 50px;
     background-color: rgb(255, 255, 255);
-    margin-top: 50px;
-    margin-left: 750px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 50%;
+    transform: translateX(-50%);
     border-radius: 5px;
     cursor: pointer;
 }
@@ -132,6 +140,7 @@
 
 .payment-method {
     display: flex;
+    justify-content: space-between;
     width: 80%;
     height: 50%;
     border: 1px solid rgb(190, 188, 188);
@@ -153,8 +162,11 @@
     background-color: #ffffff;
 }
 
+.payment-button:last-child {
+    margin-right: 50px;
+}
+
 .card-check {
-    /*display: block;*/
     margin-top: 20px;
     margin-left: 180px;
 }
@@ -169,14 +181,9 @@
     border-radius: 4px;
 }
 
-#paymentMessage1 {
+#paymentMessage1, #paymentMessage2 {
     display: none;
-    margin-left: 200px;
-}
-
-#paymentMessage2 {
-    display: none;
-    margin-left: 200px;
+    margin-left: 180px;
 }
 
 .user-agree {
@@ -204,7 +211,7 @@
 }
 
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 768px) {
     .info-box,
     .info-box2,
     .payment-method {
