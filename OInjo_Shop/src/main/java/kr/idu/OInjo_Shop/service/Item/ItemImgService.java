@@ -20,11 +20,8 @@ import java.util.List;
 @Transactional
 public class ItemImgService {
 
-<<<<<<< HEAD
+
     @Value("D:/Project/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg")
-=======
-    @Value("/Users/lgh/Desktop/Code-Crew/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg")
->>>>>>> e0358ae263dcef8a40a1de7175b0d2e1344aebad
 
     private String itemImgLocation;
 
