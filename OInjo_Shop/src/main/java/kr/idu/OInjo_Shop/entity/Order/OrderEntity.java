@@ -5,6 +5,8 @@ import kr.idu.OInjo_Shop.entity.BaseEntity;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -22,7 +24,7 @@ public class OrderEntity extends BaseEntity {
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "id")
     private MemberEntity member;        //한명의 회원의 여러개의 주문을 할 수 있다.
 
@@ -45,12 +47,14 @@ public class OrderEntity extends BaseEntity {
     public static OrderEntity createOrder(MemberEntity member, List<OrderItemEntity> orderItemList) {
         OrderEntity order = new OrderEntity();
 
+        int totalPrice = 0;
         order.setMember(member);
         order.setOrderDate(LocalDateTime.now());
         order.setOrderStatus(OrderStatus.ORDER);
         for (OrderItemEntity orderItem : orderItemList) {
             order.addOrderItem(orderItem);
-            order.setTotalPrice(orderItem.getTotalPrice());
+            totalPrice += orderItem.getTotalPrice();
+            order.setTotalPrice(totalPrice);
         }
 
         return order;

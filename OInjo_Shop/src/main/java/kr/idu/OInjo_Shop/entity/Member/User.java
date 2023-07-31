@@ -25,28 +25,28 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column
     private String nickname;
 
-    @Column(nullable = false)
+    @Column
     private String email;
-
-    @Column(name = "profile_picture")
-    private String picture;
-
-    @Column(nullable = false)
-    private String gender;
-
-    @Column(nullable = false)
-    private String age; // 연령대
+//
+//    @Column(name = "profile_picture")
+//    private String picture;
+//
+//    @Column
+//    private String gender;
+//
+//    @Column
+//    private String age; // 연령대
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column
     private Role role;
 
-    public User update(String nickname, String picture) {       //수정
+    public User update(String nickname) {       //수정
         this.nickname = nickname;
-        this.picture = picture;
+//        this.picture = picture;
 
         return this;
     }

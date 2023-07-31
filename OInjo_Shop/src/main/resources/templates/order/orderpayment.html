@@ -24,22 +24,6 @@
     <script src="/js/font.js" defer></script>
 </head>
 <script th:inline="javascript">
-    $(document).ready(function () {
-
-        calculateToalPrice();
-
-        $("#count").change(function () {
-            calculateToalPrice();
-        });
-    });
-
-    function calculateToalPrice() {
-        var count = $("#count").val();
-        var price = $("#price").val();
-        var totalPrice = price * count;
-        $("#totalPrice").html(totalPrice + '원');
-    }
-
     function pay_order() {
         const checkboxes = document.querySelectorAll(".order-item-checkbox input[type='checkbox']");
         let allChecked = true;
@@ -59,33 +43,64 @@
         }
 
         var url = "/orders/pay";
-        var paramData = {
-            itemId: [[${orderDto.itemId}]],
-            count: $("#count").val()
-        };
 
-        var param = JSON.stringify(paramData);
+        // var param = JSON.stringify(paramData);
+        // $.ajax({
+        //     url: url,
+        //     type: "POST",
+        //     contentType: "application/json",
+        //     data: JSON.stringify(paramData),
+        //     success: function (response, status) {
+        //         var orderId = response;     //response에는 서버 응답의 데이터가 들어있다.
+        //         alert("주문이 완료 되었습니다.");
+        //         location.href = '/orders/completion/' + orderId;
+        //     },
+        //     error: function (jqXHR, status, error) {
+        //
+        //         if (jqXHR.status == '401') {
+        //             alert('로그인 후 이용해주세요');
+        //             location.href = '/members/login';
+        //         } else {
+        //             alert(jqXHR.responseText);      //재고가 부족할 경우 여기에 걸리게됨.
+        //         }
+        //     }
+
+
+        var orderData = []; // 주문 데이터 배열을 생성합니다.
+
+        // 각 주문 항목의 정보를 가져와서 orderData 배열에 추가합니다.
+        var itemCount = document.querySelectorAll("#count");
+        var itemIds = document.querySelectorAll("#itemId");
+        for (var i = 0; i < itemCount.length; i++) {
+            var count = itemCount[i].value;
+            var itemId = itemIds[i].value;
+            console.log(count);
+            orderData.push({itemId: itemId, count: count});
+        }
+        console.log(orderData);
         $.ajax({
             url: url,
             type: "POST",
             contentType: "application/json",
-            data: JSON.stringify(paramData),
+            data: JSON.stringify(orderData),
             success: function (response, status) {
                 var orderId = response;     //response에는 서버 응답의 데이터가 들어있다.
                 alert("주문이 완료 되었습니다.");
-                location.href = '/orders/completion/'+orderId;
+                location.href = '/orders/completion/' + orderId;
             },
             error: function (jqXHR, status, error) {
-
-                if (jqXHR.status == '401') {
-                    alert('로그인 후 이용해주세요');
-                    location.href = '/members/login';
-                } else{
-                    alert(jqXHR.responseText);      //재고가 부족할 경우 여기에 걸리게됨.
-                }
+                // 주문 실패 시 동작할 코드 작성
+                alert("주문에 실패했습니다.");
+                // 추가 동작이 필요한 경우 여기에 작성
             }
         });
     }
+
+    function updateAddress(address) {
+        const postcodeSpan = document.getElementById('postcode');
+        postcodeSpan.textContent = address;
+    }
+
 </script>
 
 <body>
@@ -99,7 +114,9 @@
         <div class="info-box">
             <div class="address">
                 <span>배송지</span>
-                <input type="radio" class="current-address">기존 배송지
+                <div th:each="address:${addressDtoList}">
+                        <input type="radio" class="current-address" name="addressRadio" th:checked="${address.address == memberDto.memberAddress}" th:value="${address.address}" onchange="updateAddress(this.value)">[[${address.address}]]
+                </div>
                 <button type="button" class="new-address" onclick="address_popup()">배송지 변경</button>
             </div>
 
@@ -110,7 +127,7 @@
 
             <div class="juso">주소
                 <div class="go-delivery">
-                    <span th:text="${memberDto.memberAddress}" id="postcode"></span>
+                    <span id="postcode" th:text="${memberDto.memberAddress}"></span>
                 </div>
             </div>
 
@@ -132,6 +149,30 @@
 
     <div class="items-info-box">
         <h3 class="items-info">상품 정보</h3>
+<<<<<<< HEAD
+        <div class="info-box2" th:each="orderAndItemFormDto: ${orderAndItemFormDTOList}">
+
+            <img th:src="${orderAndItemFormDto.itemFormDTO.itemImgDTOList[0].imgUrl}" class="items-img"> <!--상품이미지-->
+            <div class="items-option-info">
+                <span>이름: </span>
+                <span class="items-name" th:text="${orderAndItemFormDto.itemFormDTO.itemName}"></span>
+                <span class="items-one-price">가격: </span>
+                <span th:text="${orderAndItemFormDto.itemFormDTO.itemPrice} + ' 원'"></span>
+                <span class="items-option">색깔: </span>
+                <span class="items-option1">white</span>
+                <input type="hidden" th:value="${orderAndItemFormDto.orderDto.count}" id="count" name="count">
+                <input type="hidden" th:value="${orderAndItemFormDto.orderDto.itemId}" id="itemId" name="itemId"/>
+                <span class="items-option2">사이즈: </span>
+                <span class="items-option1">s</span>
+                <span class="items-option-num">수량:</span>
+                <span th:text="${orderAndItemFormDto.orderDto.count} + ' 개'"></span>
+                <span class="delivery-price">배송비:</span>
+                <span class="free">무료</span>
+                <div class="total-price">총 주문금액:
+                    <span class="total-order-price"
+                          th:text="${orderAndItemFormDto.itemFormDTO.itemPrice * orderAndItemFormDto.orderDto.count} + ' 원'"></span>
+                </div>
+=======
         </div>
     <div class="info-box2">
         <img th:src="${itemDto.itemImgDTOList[0].imgUrl}" class="items-img"> <!--상품이미지-->
@@ -153,6 +194,7 @@
                 <div class="items-option" th:text="${orderDto.count} + ' 개'"></div>
                 <div class="items-option">무료</div>
                 <div class="items-option" th:text="${itemDto.itemPrice * orderDto.count} + ' 원'"></div>
+>>>>>>> e0358ae263dcef8a40a1de7175b0d2e1344aebad
             </div>
         </div>
     </div>

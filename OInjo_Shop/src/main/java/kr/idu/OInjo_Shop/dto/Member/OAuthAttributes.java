@@ -49,9 +49,6 @@ public class OAuthAttributes {
         return OAuthAttributes.builder()
                 .nickname((String) response.get("nickname"))
                 .email((String) response.get("email"))
-                .picture((String) response.get("profile_image"))
-                .gender((String) response.get("gender"))
-                .age((String) response.get("age"))
                 .attributes(response)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
@@ -66,9 +63,6 @@ public class OAuthAttributes {
         return User.builder()
                 .nickname(nickname)
                 .email(email)
-                .picture(picture)
-                .gender(gender)
-                .age(age)
                 .role(Role.GUEST)
                 .build();
     }

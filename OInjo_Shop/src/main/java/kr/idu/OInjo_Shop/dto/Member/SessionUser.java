@@ -18,17 +18,17 @@ public class SessionUser implements Serializable {  //Serializable 직력화 기
     public SessionUser(User user) {
         this.nickname = user.getNickname();
         this.email = user.getEmail();
-        this.picture = user.getPicture();
+//        this.picture = user.getPicture();
     }
 
     private String nickname;
 
     private String email;
 
-    private String picture;
-
-    private String gender;
-
-    private String age;
+//    private String picture;
+//
+//    private String gender;
+//
+//    private String age;
 
 }

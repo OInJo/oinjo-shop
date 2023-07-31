@@ -8,6 +8,7 @@ import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.service.Mail.MailService;
 import kr.idu.OInjo_Shop.service.Mail.RegisterMailService;
 import kr.idu.OInjo_Shop.service.Member.MemberService;
+import kr.idu.OInjo_Shop.service.Order.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,8 @@ public class MemberController {
     private final MemberService memberService;
     private final RegisterMailService registerMailService;
     private final MailService mailService;
+
+    private final OrderService orderService;
 
     // 회원가입
     @GetMapping("/member/save")
@@ -164,6 +167,7 @@ public class MemberController {
     @GetMapping("/member/delete/{id}")
     public String deleteById(@PathVariable Long id)
     {
+        orderService.deleteMemberById(id);
         memberService.deleteById(id);
         return "redirect:/member/";
     }
