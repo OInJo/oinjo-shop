@@ -3,15 +3,18 @@ package kr.idu.OInjo_Shop.service.Cart;
 import kr.idu.OInjo_Shop.dto.Cart.CartDTO;
 import kr.idu.OInjo_Shop.dto.Cart.CartItemDTO;
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
+import kr.idu.OInjo_Shop.dto.Item.ItemImgDTO;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.dto.Order.OrderDto;
 import kr.idu.OInjo_Shop.dto.Order.OrdersDto;
 import kr.idu.OInjo_Shop.entity.Cart.CartEntity;
 import kr.idu.OInjo_Shop.entity.Cart.CartItemEntity;
 import kr.idu.OInjo_Shop.entity.Item.ItemEntity;
+import kr.idu.OInjo_Shop.entity.Item.ItemImgEntity;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.repository.Cart.CartItemRepository;
 import kr.idu.OInjo_Shop.repository.Cart.CartRepository;
+import kr.idu.OInjo_Shop.service.Item.ItemImgService;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
 import kr.idu.OInjo_Shop.service.Order.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +33,7 @@ import java.util.Objects;
 public class CartService {
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
-    private final ItemService itemService;
+    private final ItemImgService itemImgService;
     private final OrderService orderService;
 
     //장바구니 생성
@@ -42,6 +45,7 @@ public class CartService {
     //장바구니에 상품 추가
     public void addCart(MemberEntity member, ItemEntity item, Integer count) {
         CartEntity cart = cartRepository.findByMember(member);
+        ItemImgEntity itemImg = itemImgService.findFirstItemImgByItemId(item.getItemId());
 
         if(cart == null) {  //카트가 비어있다면 생성
             cart = CartEntity.creatCart(member);
@@ -53,7 +57,7 @@ public class CartService {
 
         //CartItem이 비워져 있다면 새로 생성
         if(cartItem == null) {
-            cartItem = CartItemEntity.createCartItem(cart, item ,count);
+            cartItem = CartItemEntity.createCartItem(cart, item ,count, itemImg);
             cartItemRepository.save(cartItem);
             cart.setCount(cart.getCount() + 1);
         } else {    //비어 있지 않다면 상품 갯수 그만큼 추가

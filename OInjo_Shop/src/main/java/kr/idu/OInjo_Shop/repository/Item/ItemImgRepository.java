@@ -13,6 +13,8 @@ public interface ItemImgRepository extends JpaRepository<ItemImgEntity, Long> {
 
     List<ItemImgEntity> findByItemItemId(Long itemId);
 
+    ItemImgEntity findFirstByItemItemId(Long itemId);
+
     @Modifying
     @Query("delete from ItemImgEntity i where i.item.itemId = :itemId")
     void deleteByItem(@Param("itemId") Long itemId);
