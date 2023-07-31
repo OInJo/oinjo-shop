@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:input="http://www.w3.org/1999/html" layout:decorate="~{layouts/layout1}">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/js/font.js" defer></script>
+  <link rel="icon" href="/images/logo.png">
+  <link rel="stylesheet" href="/css/adminindex.css">
+  <link rel="stylesheet" href="../../static/css/adminindex.css">
+  <link rel="stylesheet" href="../../static/css/memberlist.css">
+  <link rel="stylesheet" href="/css/memberlist.css">
+  <link rel="stylesheet" href="../../static/css/itemlist.css">
+  <link rel="stylesheet" href="/css/itemlist.css">
+  <script src="/js/upload.js" defer></script>
+  <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
+  <title>상품조회</title>
+</head>
+
+<body>
+  <div th:replace="~{/fragments/adminheader}"></div>
+  <main class="admin-main">
+    <section>
+      <form th:action="@{'/admin/item'}" th:method="get" class="member-search-form" id="search-form">
+        <div class="search-wrapper">
+          <select name="type" aria-controls="dataTable" class="search-select">
+            <option value="n" class="select-option">상품명</option>
+            <option value="b" class="select-option">브랜드명</option>
+            <option value="c" class="select-option">카테고리명</option>
+          </select>
+          <input type="text" name="keyword" aria-controls="dataTable" class="search-input" th:value="${param.keyword}">
+          <button type="submit" class="search-button" onclick="document.getElementById('search-form').submit();"><i
+              class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+      </form>
+      <article th:each="item : ${itemList.dtoList}" class="itemlist-article">
+        <div class="itemlist-left">
+          <a th:href="@{'/admin/item/' + ${item.id}}">
+            <!--           <img th:each="ItemImgDTO : ${itemImgDTO}" th:src="${ItemImgDTO.imgUrl}" class="itemlist-img"-->
+            <!--                th:if="${item.itemImgIds == ItemImgDTO.itemImgId && ItemImgDTO.repImgYn == 'Y'}"/>-->
+            <img class="itemlist-img" src="/images/product.png" />
+          </a>
+          <div class="itemlist-option">
+            <p th:text="${item.itemName}" class="itemname-option"></p>
+            <p th:text="${item.brand.brandName}" class="brand-category-option"></p>
+            <p th:text="${item.category.categoryName}" class="brand-category-option"></p>
+          </div>
+        </div>
+        <div class="itemlist-right">
+          <span th:text="${item.itemPrice}+'원'"></span>
+        </div>
+      </article>
+
+    </section>
+
+    <nav aria-label="Pagination">
+      <!-- <hr class="my-0" /> -->
+      <div class="row">
+        <!-- <div class="col-sm-12 col-md-5">
+          <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
+            <span th:text="${itemList.curPage}"></span> [[${itemList.perPage}]] of [[${itemList.totalRows}]] entries
+          </div>
+        </div> -->
+        <div class="col-sm-12 col-md-7">
+          <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+            <ul class="pagination justify-content-center my-4">
+              <li th:if="${itemList.prev}"
+                th:class="'paginate_button page-item previous ' + ${itemList.prev?'':'disabled'}"
+                id="dataTable_previous">
+                <a href="#" th:href="@{/boards(page=${itemList.startNum - 1}, perPage=${itemList.perPage})}"
+                  aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link"><i class="fa-solid fa-caret-left paging-previous-icon"></i></a>
+              </li>
+              <li th:class="'paginate_button page-item ' + ${itemList.curPage == page?'active':''}"
+                th:each="page : ${itemList.pageList}">
+                <a href="#" th:href="@{/boards(page=${page}, perPage=${itemList.perPage})}" aria-controls="dataTable"
+                  data-dt-idx="1" tabindex="0" class="page-link paging-number">[[${page}]]</a>
+              </li>
+              <li th:if="${itemList.next}"
+                th:class="'paginate_button page-item next ' + ${itemList.next?'':'disabled'} " id="dataTable_next">
+                <a href="#" th:href="@{/boards(page=${itemList.endNum + 1}, perPage=${itemList.perPage})}"
+                  aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link"><i class="fa-solid fa-caret-right  paging-next-icon"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </main>
+  </section>
+</body>
+
+</html>

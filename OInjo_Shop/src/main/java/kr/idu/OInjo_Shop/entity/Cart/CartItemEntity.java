@@ -46,15 +46,12 @@ public class CartItemEntity {
         this.createDate = LocalDate.now();
     }
 
-    public static CartItemEntity createCartItem(CartEntity cart, ItemEntity item, int count){
-        System.out.println(cart);
-        System.out.println(item);
-        System.out.println(count);
+    public static CartItemEntity createCartItem(CartEntity cart, ItemEntity item, int count, ItemImgEntity itemImg){
         CartItemEntity cartItem = new CartItemEntity();
         cartItem.setCart(cart);
         cartItem.setProduct(item);
         cartItem.setCount(count);
-
+        cartItem.setImage(itemImg);
         return cartItem;
     }
     public void addCount(int count){

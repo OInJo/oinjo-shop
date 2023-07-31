@@ -3,61 +3,52 @@
     margin-top: 30px;
     margin-left: 530px;
 }
-.payment-receipt{
-    width: 100px;
-    height: 40px;
-    margin-right: 10px;
-    background-color: white;
-    color:  rgb(252, 68, 99);
-    border: 2px solid rgb(252, 68, 99);
-    border-radius: 5px;
-    font-size: 15px;
-}
-.Statement-transactions{
-    width: 100px;
-    height: 40px;
-    background-color: #ffffff;
-    color: rgb(252, 68, 99);
-    border: 2px solid rgb(252, 68, 99);
-    border-radius: 5px;
-    font-size: 15px;
-}
+
 h1{
     display: flex;
     flex-direction: column;    
     align-items: center;
     width: 780px;
-    border-top: 1px solid black;
-    padding-top: 25px;
-    margin-top: 13px;
 }
 
 .order-complete-form{
-    margin-top: 100px;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
+    /*flex-wrap: nowrap;*/
     align-items: center;
     background-color: #FFFFFF;
     position: relative;
 }
 
 .order-information{
-    display: flex;
-    flex-wrap: wrap;
+    display: grid; /* Grid 레이아웃을 사용하여 2개씩 3줄로 표시 */
+    grid-template-columns: repeat(2, 1fr); /* 2개 열로 나눔 */
+    gap: 15px; /* 항목 사이의 간격 */
     border: 2px solid #d9d9d9;
-    width: 650px;
-    height: 150px;
+    width: 700px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     padding-left: 40px;
     padding-right: 40px;
-    padding-top: 30px;
-    padding-bottom: 20px;
-    margin-top: 60px;
+    margin-top: 30px;
     background-color: #f9f9ff;
+    /*display: flex;*/
+    /*flex-wrap: wrap;*/
+    /*border: 2px solid #d9d9d9;*/
+    /*width: 650px;*/
+    /*height: 150px;*/
+    /*padding-left: 40px;*/
+    /*padding-right: 40px;*/
+    /*padding-top: 30px;*/
+    /*padding-bottom: 20px;*/
+    /*margin-top: 30px;*/
+    /*background-color: #f9f9ff;*/
 }
 
 .order-information div {
-    width: 50%;
+    width: 100%;
+    /*width: 50%;*/
 }
 
 .button-form{

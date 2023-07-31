@@ -20,7 +20,11 @@ import java.util.List;
 @Transactional
 public class ItemImgService {
 
+<<<<<<< HEAD
     @Value("D:/Project/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg")
+=======
+    @Value("/Users/lgh/Desktop/Code-Crew/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg")
+>>>>>>> e0358ae263dcef8a40a1de7175b0d2e1344aebad
 
     private String itemImgLocation;
 
@@ -78,5 +82,17 @@ public class ItemImgService {
         }
         return itemImgDTOList;
     }
+
+    public ItemImgEntity findFirstItemImgByItemId(Long itemId) {
+        ItemImgEntity itemImgEntity = itemImgRepository.findFirstByItemItemId(itemId);
+        if (itemImgEntity != null) {
+            return itemImgEntity;
+        } else {
+            // 첫 번째 이미지가 없는 경우에 대한 처리를 원하는 경우 추가합니다.
+            // 예를 들어, null을 반환하거나 기본 이미지를 반환할 수 있습니다.
+            return null;
+        }
+    }
+
 
 }

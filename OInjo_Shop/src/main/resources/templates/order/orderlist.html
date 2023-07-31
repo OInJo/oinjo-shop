@@ -65,7 +65,7 @@
         <ul class="pagination">
             <li class="page-item" th:classappend="${orders.number eq 0}?'disabled':''">
                 <a th:href="@{'/orders/list/' + ${orders.number-1} + '?searchQuery=' + ${searchQuery} + '&startDate=' + ${startDate} + '&endDate=' + ${endDate}}" aria-label='Previous' class="page-link">
-                    <span aria-hidden='true'>Previous</span>
+                    <span aria-hidden='true'><i class="fa-solid fa-arrow-left"></i></span>
                 </a>
             </li>
 
@@ -76,7 +76,7 @@
 
             <li class="page-item" th:classappend="${orders.number+1 ge orders.totalPages}?'disabled':''">
                 <a th:href="@{'/orders/list/' + ${orders.number+1} + '?searchQuery=' + ${searchQuery} + '&startDate=' + ${startDate} + '&endDate=' + ${endDate}}" aria-label='Next' class="page-link">
-                    <span aria-hidden='true'>Next</span>
+                    <span aria-hidden='true'><i class="fa-solid fa-arrow-right"></i></span>
                 </a>
             </li>
         </ul>

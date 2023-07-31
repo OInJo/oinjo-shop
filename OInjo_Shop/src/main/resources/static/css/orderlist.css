@@ -1,9 +1,14 @@
 .order-detail {
-    margin-top: 50px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .order-info, .calendar, order-detail-form {
-    margin-left: 500px;
+    justify-content: center;
+    align-items: center;
 }
 
 .calendar {
@@ -33,7 +38,8 @@
     display: flex;
     flex-direction: column;
     width: 700px;
-    margin-left: 500px;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .order-date {
@@ -49,15 +55,15 @@
 }
 
 .repImgDiv, .item-Img {
-    width: 120px;
-    height: 120px;
+    width: 90px;
+    height: 90px;
 }
 
 .item-name, .price-count {
     display: flex;
     flex-direction: column;
     margin-left: 170px;
-    margin-top: -100px;
+    margin-top: -90px;
 }
 
 .order-item {
@@ -68,7 +74,7 @@
 
 .price-count {
     margin-top: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .item-price, .order-count {
@@ -102,38 +108,46 @@
     color: red;
 }
 
-@media screen and (max-width: 1200px) {
-    .order-info,
-    .calendar,
-    .order-detail-form {
-        margin-left: 200px;
-    }
-
-    .order-detail-form {
-        width: 90%;
-    }
-}
-
-@media screen and (max-width: 992px) {
-    .order-info,
-    .calendar,
-    .order-detail-form {
-        margin-left: 100px;
-    }
-
-    .order-detail-form {
-        width: 85%;
-    }
-}
-
 @media screen and (max-width: 768px) {
-    .order-info,
-    .calendar,
-    .order-detail-form {
-        margin-left: 20px;
+    .order-info, .calendar, .order-detail-form {
+        margin-left: 30px;
     }
 
-    .order-detail-form {
-        width: 95%;
+    #startDate, #endDate, #searchQuery, .search-btn {
+        width: auto;
+        height: auto;
+        margin-left: 0;
+    }
+
+    .item-name, .price-count {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    .item-Img {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .order-info, .calendar, .order-detail-form {
+        margin-left: 30px;
+    }
+
+    #startDate, #endDate, #searchQuery, .search-btn {
+        width: auto;
+        height: auto;
+        margin-left: 0;
+    }
+
+    .item-name, .price-count {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    .item-Img {
+        margin-left: 0;
+        margin-bottom: 10px;
     }
 }
