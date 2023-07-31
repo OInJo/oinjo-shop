@@ -81,30 +81,22 @@ function showAllProducts() {
   newCategory.classList.add("now-category");
   newCategory.textContent = "전체"; // "전체"라는 텍스트를 표시
 
-  const closeButton = document.createElement("span");
-  closeButton.classList.add("close-button");
-  closeButton.textContent = "X";
-  closeButton.addEventListener("click", () => {
-    newCategory.remove();
-    selectedBrand = null; // 선택된 브랜드 초기화하여 다시 선택할 수 있게 함
-    enableAllBrands();
-    showAllProducts();
-  });
-
-  newCategory.appendChild(closeButton);
   document.querySelector(".brand-category-choose").appendChild(newCategory);
 }
 
-function showSelectedProducts(selectedBrandName) {
+function showSelectedProducts() {
   const productItems = document.querySelectorAll(".article-product");
   productItems.forEach(function (productItem) {
     const brandName = productItem.querySelector(".article-product-brand").textContent.trim();
     const categoryName = productItem.querySelector(".article-product-category").textContent.trim();
 
-    if ((selectedBrandName === brandName || selectedBrandName === "전체") && (selectedCategories.size === 0 || selectedCategories.has(categoryName) || selectedCategories.has("전체"))) {
+    const isBrandMatched = selectedBrand === null || selectedBrand === brandName || selectedBrand === "전체";
+    const isCategoryMatched = selectedCategories.size === 0 || selectedCategories.has(categoryName) || selectedCategories.has("전체");
+
+    if (isBrandMatched && isCategoryMatched) {
       productItem.style.display = "block";
     } else {
-      productItem.style.display = "none";
+      productItem.style.display = "none"; // 선택된 카테고리에 해당하지 않는 제품 숨기기
     }
   });
 }
@@ -160,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
       closeButton.textContent = "X";
       closeButton.addEventListener("click", () => {
         newCategory.remove();
-        selectedCategories.delete(selectedCategoryName); // 선택한 카테고리 제거
+        selectedCategories.delete(selectedCategoryName);
         selectedBrand = null; // 선택된 브랜드 초기화하여 다시 선택할 수 있게 함
         enableAllBrands();
         showAllProducts();
@@ -173,11 +165,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
-
-
-
-
-
 
 
 const $topBtn = document.querySelector(".move-top-btn");

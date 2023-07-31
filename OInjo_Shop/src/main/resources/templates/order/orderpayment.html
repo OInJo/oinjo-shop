@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/orderpayment.css">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
-    <title>주문내역</title>
+    <title>주문하기</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
@@ -128,29 +128,32 @@
         </div>
     </div>
 
+
+
     <div class="items-info-box">
         <h3 class="items-info">상품 정보</h3>
-        <div class="info-box2">
-            <img th:src="${itemDto.itemImgDTOList[0].imgUrl}" class="items-img"> <!--상품이미지-->
-            <div class="items-option-info">
-                <span>이름: </span>
-                <span class="items-name" th:text="${itemDto.itemName}"></span>
-                <span class="items-one-price">가격: </span>
-                <span th:text="${itemDto.itemPrice} + ' 원'"></span>
-                <span class="items-option">색깔: </span>
-                <span class="items-option1">white</span>
-                <input type="hidden" th:value="${orderDto.count}" id="count" name="count">
-                <span class="items-option2">사이즈: </span>
-                <span class="items-option1">s</span>
-                <span class="items-option-num">수량:</span>
-                <span th:text="${orderDto.count} + ' 개'"></span>
-                <span class="delivery-price">배송비:</span>
-                <span class="free">무료</span>
-                <div class="total-price">총 주문금액:
-                    <span class="total-order-price" th:text="${itemDto.itemPrice * orderDto.count} + ' 원'"></span>
-                </div>
+        </div>
+    <div class="info-box2">
+        <img th:src="${itemDto.itemImgDTOList[0].imgUrl}" class="items-img"> <!--상품이미지-->
+        <div class="items-container">
+            <div class="info-row">
+                <div class="items-option">이름</div>
+                <div class="items-option">가격</div>
+                <div class="items-option">색깔</div>
+                <div class="items-option">사이즈</div>
+                <div class="items-option">수량</div>
+                <div class="items-option">배송비</div>
+                <div class="items-option">주문금액</div>
             </div>
-
+            <div class="info-row">
+                <div class="items-option" th:text="${itemDto.itemName}"></div>
+                <div class="items-option" th:text="${itemDto.itemPrice} + ' 원'"></div>
+                <div class="items-option">red</div>
+                <div class="items-option">s</div>
+                <div class="items-option" th:text="${orderDto.count} + ' 개'"></div>
+                <div class="items-option">무료</div>
+                <div class="items-option" th:text="${itemDto.itemPrice * orderDto.count} + ' 원'"></div>
+            </div>
         </div>
     </div>
 
