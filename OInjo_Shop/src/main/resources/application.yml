@@ -44,7 +44,8 @@ spring:
         registration:
           naver:
             #가져올 정보
-            scope: 'nickname,email,gender,age,profile_image'
+#            scope: 'nickname,email,gender,age,profile_image'
+            scope: 'nickname,email'
             client-id: bZVmEKcz6PsWA2nH0jot
             client-name: Naver
             redirect-uri: http://localhost:8081/login/oauth2/code/naver

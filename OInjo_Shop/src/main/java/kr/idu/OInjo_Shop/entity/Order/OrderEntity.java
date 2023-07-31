@@ -47,12 +47,14 @@ public class OrderEntity extends BaseEntity {
     public static OrderEntity createOrder(MemberEntity member, List<OrderItemEntity> orderItemList) {
         OrderEntity order = new OrderEntity();
 
+        int totalPrice = 0;
         order.setMember(member);
         order.setOrderDate(LocalDateTime.now());
         order.setOrderStatus(OrderStatus.ORDER);
         for (OrderItemEntity orderItem : orderItemList) {
             order.addOrderItem(orderItem);
-            order.setTotalPrice(orderItem.getTotalPrice());
+            totalPrice += orderItem.getTotalPrice();
+            order.setTotalPrice(totalPrice);
         }
 
         return order;

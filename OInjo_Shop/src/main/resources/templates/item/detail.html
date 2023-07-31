@@ -21,26 +21,59 @@
   <title>상품 상세</title>
 </head>
 
+<!--<script th:inline="javascript">-->
+<!--  function orders() {-->
+<!--    var url = "/orders/form";-->
+
+<!--    var paramData = {-->
+<!--      itemId: document.querySelector("#itemId").value,-->
+<!--      count: document.querySelector("#count").value-->
+<!--    };-->
+<!--    console.log(paramData);-->
+<!--    $.ajax({-->
+<!--      url: url,-->
+<!--      type: "POST",-->
+<!--      contentType: "application/json",-->
+<!--      data: JSON.stringify(paramData),-->
+<!--      success: function (result, status) {-->
+<!--        location.href = "/orders/form";-->
+<!--      },-->
+<!--      error: function (jqXHR, status, error) {-->
+<!--        // 주소 업데이트 실패 시 동작할 코드 작성-->
+<!--        alert("주소 업데이트에 실패했습니다.");-->
+<!--        // 추가 동작이 필요한 경우 여기에 작성-->
+<!--      }-->
+<!--    });-->
+<!--  }-->
+<!--</script>-->
 <script th:inline="javascript">
   function orders() {
     var url = "/orders/form";
 
-    var paramData = {
-      itemId: document.querySelector("#itemId").value,
-      count: document.querySelector("#count").value
-    };
-    console.log(paramData);
+    var orderData = []; // 주문 데이터 배열을 생성합니다.
+
+    // 각 주문 항목의 정보를 가져와서 orderData 배열에 추가합니다.
+    var itemCount = document.querySelectorAll("#count");
+    var itemIds = document.querySelectorAll("#itemId");
+    for (var i = 0; i < itemCount.length; i++) {
+      var count = itemCount[i].value;
+      var itemId = itemIds[i].value;
+      console.log(count);
+      orderData.push({ itemId: itemId, count: count });
+    }
+    console.log(orderData);
     $.ajax({
       url: url,
       type: "POST",
       contentType: "application/json",
-      data: JSON.stringify(paramData),
+      data: JSON.stringify(orderData),
       success: function (result, status) {
+        alert("주문 페이지로 이동.");
         location.href = "/orders/form";
       },
       error: function (jqXHR, status, error) {
-        // 주소 업데이트 실패 시 동작할 코드 작성
-        alert("주소 업데이트에 실패했습니다.");
+        // 주문 실패 시 동작할 코드 작성
+        alert("주문에 실패했습니다.");
         // 추가 동작이 필요한 경우 여기에 작성
       }
     });

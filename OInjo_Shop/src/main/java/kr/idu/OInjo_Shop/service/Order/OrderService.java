@@ -64,21 +64,21 @@ public class OrderService {
 //
 //        order.cancelOrder();
 //    }
-    public Long order(OrderDto orderDto, String email) {
-        ItemEntity item = itemRepository.findById(orderDto.getItemId())
-                .orElseThrow(EntityNotFoundException::new);
-        MemberEntity member = memberRepository.findByMemberEmail(email)
-                .orElseThrow(EntityNotFoundException::new);
-
-        List<OrderItemEntity> orderItemList = new ArrayList<>();
-        OrderItemEntity orderItem =
-                OrderItemEntity.createOrderItem(item, orderDto.getCount());
-        orderItemList.add(orderItem);       //나중에 장바구니가 만들어졌을때에는 상품을 한번에 결제해야함.
-
-        OrderEntity order = OrderEntity.createOrder(member, orderItemList);
-        orderRepository.save(order);
-        return order.getId();
-    }
+//    public Long order(OrderDto orderDto, String email) {
+//        ItemEntity item = itemRepository.findById(orderDto.getItemId())
+//                .orElseThrow(EntityNotFoundException::new);
+//        MemberEntity member = memberRepository.findByMemberEmail(email)
+//                .orElseThrow(EntityNotFoundException::new);
+//
+//        List<OrderItemEntity> orderItemList = new ArrayList<>();
+//        OrderItemEntity orderItem =
+//                OrderItemEntity.createOrderItem(item, orderDto.getCount());
+//        orderItemList.add(orderItem);       //나중에 장바구니가 만들어졌을때에는 상품을 한번에 결제해야함.
+//
+//        OrderEntity order = OrderEntity.createOrder(member, orderItemList);
+//        orderRepository.save(order);
+//        return order.getId();
+//    }
 
 
     public Long orders(List<OrderDto> orderDtoList, String email) {

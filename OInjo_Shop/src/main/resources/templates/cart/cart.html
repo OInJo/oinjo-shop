@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
   <script src="/js/font.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <link rel="icon" href="/images/logo.png">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/cart.css">
@@ -19,6 +20,39 @@
   <title>장바구니</title>
 </head>
 
+<script th:inline="javascript">
+    function orders() {
+        var url = "/orders/form";
+
+        var orderData = []; // 주문 데이터 배열을 생성합니다.
+
+        // 각 주문 항목의 정보를 가져와서 orderData 배열에 추가합니다.
+        var itemCount = document.querySelectorAll("#count");
+        var itemIds = document.querySelectorAll("#itemId");
+        for (var i = 0; i < itemCount.length; i++) {
+            var count = itemCount[i].value;
+            var itemId = itemIds[i].value;
+            console.log(count);
+            orderData.push({ itemId: itemId, count: count });
+        }
+        console.log(orderData);
+        $.ajax({
+            url: url,
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(orderData),
+            success: function (result, status) {
+                alert("주문페이지로 이동.");
+                location.href = "/orders/form";
+            },
+            error: function (jqXHR, status, error) {
+                // 주문 실패 시 동작할 코드 작성
+                alert("주문에 실패했습니다.");
+                // 추가 동작이 필요한 경우 여기에 작성
+            }
+        });
+    }
+</script>
 <body>
 
   <div th:replace="~{/fragments/header}"></div>
@@ -37,7 +71,7 @@
       </header>
       <article class="cart-content" th:each="cartItem : ${cartItemList}">
 <!--        <input type="checkbox" name="" id="" class="cart-content-check">-->
-        <img th:src="${cartItem.product.}" alt="장바구니 상품 사진" class="cart-content-image">
+<!--        <img th:src="${cartItem.product.}" alt="장바구니 상품 사진" class="cart-content-image">-->
         <div class="cart-content-product-option">
           <p class="cart-content-product" th:text="${cartItem.product.itemName}"></p>
             <p class="cart-content-size" th:text="${cartItem.product.brand.brandName}"></p>
@@ -56,6 +90,13 @@
           <span class="cart-content-total-price-won" th:text="${cartItem.product.itemPrice} * ${cartItem.count}"></span>
           <span>원</span>
         </div>
+
+
+          <input type="hidden" id="itemId" name="itemId" th:value="${cartItem.product.itemId}">
+          <input type="hidden" id="count" name="count" th:value="${cartItem.count}">
+
+
+
           <a th:href="'/member/' + ${id} + '/cart/' + ${cartItem.id} + '/delete'" class="cart-delete-button">삭제하기</a>
       </article>
 
@@ -76,7 +117,7 @@
       </div>
       <div class="cart-bottom-button">
 <!--        <button type="button" class="select-price-delete-button">선택상품삭제</button>-->
-        <input type="submit" value="주문하기" class="order-button">
+        <input type="submit" onclick="orders()" value="주문하기" class="order-button">
       </div>
     </section>
   </main>

@@ -57,7 +57,7 @@ public class OAuthUserService implements OAuth2UserService<OAuth2UserRequest, OA
     //사용자 정보 업데이트시 User엔티티에도 반영된다.
     private User saveOrUpdate(OAuthAttributes attributes) {
         User user = userRepository.findByEmail(attributes.getEmail())
-                .map(entity -> entity.update(attributes.getNickname(), attributes.getPicture()))
+                .map(entity -> entity.update(attributes.getNickname()))
                 .orElse(attributes.toEntity());
 
         return userRepository.save(user);
