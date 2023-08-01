@@ -2,7 +2,6 @@ package kr.idu.OInjo_Shop.controller;
 
 
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
-import kr.idu.OInjo_Shop.dto.Item.ItemImgDTO;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.dto.Order.OrdersDto;
 import kr.idu.OInjo_Shop.entity.Cart.CartEntity;
@@ -13,7 +12,6 @@ import kr.idu.OInjo_Shop.repository.Cart.CartItemRepository;
 import kr.idu.OInjo_Shop.repository.Cart.CartRepository;
 import kr.idu.OInjo_Shop.repository.Member.MemberRepository;
 import kr.idu.OInjo_Shop.service.Cart.CartService;
-import kr.idu.OInjo_Shop.service.Item.ItemImgService;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
 import kr.idu.OInjo_Shop.service.Member.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +43,6 @@ public class CartController {
     private final MemberService memberService;
     private final ItemService itemService;
     private final MemberRepository memberRepository;
-
 
     // 내 장바구니 조회
     @GetMapping("/member/{id}/cart")
@@ -125,19 +122,6 @@ public class CartController {
 
         return "redirect:/";
     }
-
-
-
-    //결제 페이지
-//    @PostMapping("/member/{id}/cart/checkout")
-//    public String myCartPayment(@PathVariable("id") Long id, Model model){
-//        MemberEntity member = MemberEntity.toMemberEntity(memberService.findById(id));
-//        //cartService.cartPayment(id); // 결제처리
-//        cartService.cartDelete(id); // 장바구니 비우기
-//
-//        return "redirect:/";
-//    }
-
 
 
 
