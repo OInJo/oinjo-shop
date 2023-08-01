@@ -93,19 +93,34 @@ public class CartService {
     }
 
     //장바구니 상품 전체삭제
+//    public boolean allCartItemDelete(Long id) {
+//        List<CartItemEntity> cartItems = cartItemRepository.findAll();
+//
+//        //반복문으로 접속 member의 상품만 찾아서 삭제
+//        for(CartItemEntity cartItem : cartItems) {
+//            if(Objects.equals(cartItem.getCart().getMember().getId(), id)) {
+//                cartItem.getCart().setCount(cartItem.getCart().getCount() - 1);
+//                cartItemRepository.deleteById(cartItem.getId());
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
     public boolean allCartItemDelete(Long id) {
         List<CartItemEntity> cartItems = cartItemRepository.findAll();
 
-        //반복문으로 접속 member의 상품만 찾아서 삭제
-        for(CartItemEntity cartItem : cartItems) {
-            if(Objects.equals(cartItem.getCart().getMember().getId(), id)) {
-                cartItem.getCart().setCount(cartItem.getCart().getCount() - 1);
+        boolean deleted = false;
+        for (CartItemEntity cartItem : cartItems) {
+            if (Objects.equals(cartItem.getCart().getMember().getId(), id)) {
                 cartItemRepository.deleteById(cartItem.getId());
-                return true;
+                deleted = true;
             }
         }
-        return false;
+
+        return deleted;
     }
+
 
     //장바구니 삭제
     public void cartDelete(Long id) {
