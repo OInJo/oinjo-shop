@@ -116,34 +116,6 @@ public class CartService {
         cartRepository.deleteById(id);
     }
 
-//    //장바구니 결제     //Entitiy에 없는 필드가 있어서 일단은 주석 처리 나중에 구현시 참고용도
-//    @Transactional
-//    public void cartPayment(long id) {
-//        List<CartItemEntity> cartItems = cartItemRepository.findAll();
-//        List<CartItemEntity> memberCartItems = new ArrayList<>();
-//        MemberEntity buyer = memberRepository.findById(id).get();
-//
-//        //반복문으로 접속 member의 상품만 찾아서 저장
-//        for(CartItemEntity cartItem : cartItems) {
-//            if(cartItem.getCart().getMember().getId() == buyer.getId()) {
-//                memberCartItems.add(cartItem);
-//            }
-//        }
-//
-//        //반복문으로 접속 member의 상품만 찾아서 삭제
-//        for(CartItemEntity cartItem : memberCartItems) {
-//            //재고 변경
-//            int stock = cartItem.getProduct().getProductStock();  //현재 재고를 변수에 저장
-//            stock = stock - cartItem.getCount();    //저장된 변수에 결제한 변수만큼 빼서 재고에 반영
-//            cartItem.getProduct().setProductStock(stock); //재고 갯수 변경
-//
-//            //금액 처리
-//            MemberEntity seller = cartItem.getProduct().getMember();
-//            int cash = cartItem.getProduct().getProductPrice();   //아이템 가격을 변수에 저장
-//            buyer.setMoney(cash * -1);    //이 기능은 Member 생성 시 금액을 지정하고 상품 만큼 가격을 빼는 기능이라
-//            seller.setMoney(cash);        //일단은 주석처리로 결제 기능을 주석처리
-//        }
-
 
     public Long cartOrders(List<OrdersDto> ordersDtoList, String email) {
         List<OrderDto> orderDtoList = new ArrayList<>();

@@ -71,7 +71,7 @@
       </header>
       <article class="cart-content" th:each="cartItem : ${cartItemList}">
 <!--        <input type="checkbox" name="" id="" class="cart-content-check">-->
-<!--        <img th:src="${cartItem.product.}" alt="장바구니 상품 사진" class="cart-content-image">-->
+          <img th:src="${cartItem.image.imgUrl}" alt="장바구니 상품 사진" class="cart-content-image"/>
         <div class="cart-content-product-option">
           <p class="cart-content-product" th:text="${cartItem.product.itemName}"></p>
             <p class="cart-content-size" th:text="${cartItem.product.brand.brandName}"></p>
@@ -90,17 +90,11 @@
           <span class="cart-content-total-price-won" th:text="${cartItem.product.itemPrice} * ${cartItem.count}"></span>
           <span>원</span>
         </div>
-
-
           <input type="hidden" id="itemId" name="itemId" th:value="${cartItem.product.itemId}">
           <input type="hidden" id="count" name="count" th:value="${cartItem.count}">
-
-
-
           <a th:href="'/member/' + ${id} + '/cart/' + ${cartItem.id} + '/delete'" class="cart-delete-button">삭제하기</a>
       </article>
-
-      <a href="javascript:history.back()" class="before-page-button">이전 페이지로</a>
+        <a th:href="'/member/'+${id}+'/cart/itemDelete'"><button type="button" class="select-price-delete-button">전체상품삭제</button></a>
       <div class="total-price-content">
         <span class="price-count" th:text="${#lists.size(cartItemList)}"></span>
         <span class="price-content-section">개의 상품 금액</span>
@@ -116,7 +110,8 @@
         <span class="price-content-section last-price-content-section">원</span>
       </div>
       <div class="cart-bottom-button">
-<!--        <button type="button" class="select-price-delete-button">선택상품삭제</button>-->
+
+          <a href="javascript:history.back()" class="before-page-button">이전 페이지로</a>
         <input type="submit" onclick="orders()" value="주문하기" class="order-button">
       </div>
     </section>

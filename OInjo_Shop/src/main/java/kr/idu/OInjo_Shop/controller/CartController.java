@@ -125,19 +125,6 @@ public class CartController {
 
 
 
-    //결제 페이지
-//    @PostMapping("/member/{id}/cart/checkout")
-//    public String myCartPayment(@PathVariable("id") Long id, Model model){
-//        MemberEntity member = MemberEntity.toMemberEntity(memberService.findById(id));
-//        //cartService.cartPayment(id); // 결제처리
-//        cartService.cartDelete(id); // 장바구니 비우기
-//
-//        return "redirect:/";
-//    }
-
-
-
-
     @PostMapping("/cart/orders")
     public @ResponseBody ResponseEntity orders(@RequestBody OrdersDto ordersDto, HttpSession session) {
         String email = (String) session.getAttribute("loginEmail");

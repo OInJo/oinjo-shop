@@ -37,9 +37,7 @@
       <article th:each="item : ${itemList.dtoList}" class="itemlist-article">
         <div class="itemlist-left">
           <a th:href="@{'/admin/item/' + ${item.id}}">
-            <!--           <img th:each="ItemImgDTO : ${itemImgDTO}" th:src="${ItemImgDTO.imgUrl}" class="itemlist-img"-->
-            <!--                th:if="${item.itemImgIds == ItemImgDTO.itemImgId && ItemImgDTO.repImgYn == 'Y'}"/>-->
-            <img class="itemlist-img" src="/images/product.png" />
+            <img class="itemlist-img" th:each="ItemImgDTO : ${itemImgDTO}" th:src="${ItemImgDTO.imgUrl}" th:if="${ItemImgDTO.itemId.itemId == item.id && ItemImgDTO.repImgYn == 'Y'}"/>
           </a>
           <div class="itemlist-option">
             <p th:text="${item.itemName}" class="itemname-option"></p>
