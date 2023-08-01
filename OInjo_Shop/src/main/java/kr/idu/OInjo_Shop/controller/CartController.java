@@ -88,16 +88,42 @@ public class CartController {
         return "redirect:/item/{itemId}";
     }
 
+    //장바구니에 있는 특정 상품의 갯수 수정
+    @PutMapping("/member/{id}/cart/{cartItemId}/update")
+    public String updateItemQuantity(@PathVariable("id") Long id, @PathVariable("cartItemId") Long itemId, Integer count) {
+        cartService.updateItemCount(id, itemId, count);
+
+        return "redirect:/member/{id}/cart";
+    }
+
     //장바구니에서 특정 상품 삭제
     @GetMapping("/member/{id}/cart/{cartItemId}/delete")
-    public String myCartDelete(@PathVariable("id") Long id, @PathVariable("cartItemId") Long cartItemId){
-        MemberEntity member = MemberEntity.toMemberEntity(memberService.findById(id));
+    public String myCartItemDelete(@PathVariable("id") Long id, @PathVariable("cartItemId") Long cartItemId){
         CartEntity cart = cartRepository.findByMemberId(id);
         cart.setCount(cart.getCount() - 1);
         cartService.cartItemDelete(cartItemId);
 
         return "redirect:/member/{id}/cart";
     }
+
+    //장바구니 전체 삭제
+    @GetMapping("/member/{id}/cart/itemDelete")
+    public String myCartItemAllDelete(@PathVariable("id") Long id) {
+        cartService.allCartItemDelete(id);
+
+        return "redirect:/member/{id}/cart";
+    }
+
+
+    //장바구니 삭제
+    @DeleteMapping("/member/{id}/cart/delete")
+    public String myCartDelete(@PathVariable("id") Long id) {
+        cartService.cartDelete(id);
+
+        return "redirect:/";
+    }
+
+
 
     //결제 페이지
 //    @PostMapping("/member/{id}/cart/checkout")
