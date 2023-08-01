@@ -1,10 +1,5 @@
 package kr.idu.OInjo_Shop.service.Cart;
 
-import kr.idu.OInjo_Shop.dto.Cart.CartDTO;
-import kr.idu.OInjo_Shop.dto.Cart.CartItemDTO;
-import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
-import kr.idu.OInjo_Shop.dto.Item.ItemImgDTO;
-import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.dto.Order.OrderDto;
 import kr.idu.OInjo_Shop.dto.Order.OrdersDto;
 import kr.idu.OInjo_Shop.entity.Cart.CartEntity;
@@ -15,10 +10,8 @@ import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.repository.Cart.CartItemRepository;
 import kr.idu.OInjo_Shop.repository.Cart.CartRepository;
 import kr.idu.OInjo_Shop.service.Item.ItemImgService;
-import kr.idu.OInjo_Shop.service.Item.ItemService;
 import kr.idu.OInjo_Shop.service.Order.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -26,6 +19,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -78,13 +72,28 @@ public class CartService {
         return memberItems;
     }
 
+    // 장바구니 특정 상품 갯수 수정하기
+    public boolean updateItemCount(Long id, Long itemId, Integer count) {
+        Optional<CartItemEntity> cartItemCnt = cartItemRepository.findById(itemId);
+        if(cartItemCnt.isPresent()) {
+            CartItemEntity cartItem = cartItemCnt.get();
+
+            if(cartItem.getCart().getMember().getId().equals(id)) {
+                cartItem.setCount(count);
+                cartItemRepository.save(cartItem);
+                return true;
+            }
+        }
+        return false;
+    }
+
     //장바구니 상품 삭제하기
     public void cartItemDelete(Long id) {
         cartItemRepository.deleteById(id);
     }
 
     //장바구니 상품 전체삭제
-    public void cartDelete(Long id) {
+    public boolean allCartItemDelete(Long id) {
         List<CartItemEntity> cartItems = cartItemRepository.findAll();
 
         //반복문으로 접속 member의 상품만 찾아서 삭제
@@ -92,8 +101,16 @@ public class CartService {
             if(Objects.equals(cartItem.getCart().getMember().getId(), id)) {
                 cartItem.getCart().setCount(cartItem.getCart().getCount() - 1);
                 cartItemRepository.deleteById(cartItem.getId());
+                return true;
             }
         }
+        return false;
+    }
+
+    //장바구니 삭제
+    public void cartDelete(Long id) {
+        allCartItemDelete(id);
+        cartRepository.deleteById(id);
     }
 
 //    //장바구니 결제     //Entitiy에 없는 필드가 있어서 일단은 주석 처리 나중에 구현시 참고용도
