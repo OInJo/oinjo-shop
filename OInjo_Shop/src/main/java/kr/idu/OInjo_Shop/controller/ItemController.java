@@ -12,6 +12,7 @@ import kr.idu.OInjo_Shop.dto.Item.Relation.SizeDTO;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageRequestDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageResultDTO;
+import kr.idu.OInjo_Shop.service.Admin.AdminAuthenticator;
 import kr.idu.OInjo_Shop.service.Item.ItemImgService;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
 import kr.idu.OInjo_Shop.service.Item.RelationService;
@@ -41,17 +42,15 @@ public class ItemController {
     private final ItemService itemService; // 아이템 및 아이템 이미지
     private final ItemImgService itemImgService;
     private final RelationService relationService; // 카테고리, 브랜드, 컬러, 사이즈
+    private final AdminAuthenticator adminAuthenticator; // 어드민 확인 인터페이스
 
     @GetMapping(value = "/admin/item/new")
     public String itemUploadForm(Model model, HttpSession session) {
-        // 특정 이메일을 확인하고자 하는 이메일 주소
-        String allowedEmail = "Admin@naver.com";
-
         // 현재 로그인한 사용자의 이메일 주소 가져오기
         String loginEmail = (String) session.getAttribute("loginEmail");
 
         // 로그인한 사용자의 이메일 주소가 특정 이메일과 일치하는지 확인
-        if (loginEmail != null && loginEmail.equals(allowedEmail)) {
+        if (loginEmail != null && adminAuthenticator.isAdmin(loginEmail)) {
             List<BrandDTO> brandDTOList = relationService.findAllBrand();
             List<CategoryDTO> categoryDTOList = relationService.findAllCategory();
             List<ColorDTO> colorDTOList = relationService.findAllColor();
@@ -110,12 +109,11 @@ public class ItemController {
                 .keyword(keyword)
                 .build();
 
-        String allowedEmail = "Admin@naver.com";
 
         // 현재 로그인한 사용자의 이메일 주소 가져오기
         String loginEmail = (String) session.getAttribute("loginEmail");
 
-        if (loginEmail != null && loginEmail.equals(allowedEmail)) {
+        if (loginEmail != null && adminAuthenticator.isAdmin(loginEmail)) {
             PageResultDTO<ItemFormDTO, Object[]> itemFormDTOList = itemService.getAllItemList(pageRequestDTO);
             model.addAttribute("itemList", itemFormDTOList);
             List<ItemImgDTO> itemImgDTO = itemImgService.findAllItemImg();
@@ -129,16 +127,13 @@ public class ItemController {
     @GetMapping("/admin/item/{itemId}")
     public String adminItemDetail(@PathVariable("itemId") Long itemId, Model model, HttpSession session) {
 
-        // 특정 이메일을 확인하고자 하는 이메일 주소
-        String allowedEmail = "Admin@naver.com";
-
         // 현재 로그인한 사용자의 이메일 주소 가져오기
         String loginEmail = (String) session.getAttribute("loginEmail");
 
         List<ItemImgDTO> itemImgDTO = itemImgService.findItemImgByItemId(itemId);
         model.addAttribute("itemImgDTO", itemImgDTO);
 
-        if (loginEmail != null && loginEmail.equals(allowedEmail)) {
+        if (loginEmail != null && adminAuthenticator.isAdmin(loginEmail)) {
             try {
                 ItemFormDTO itemFormDTO = itemService.getItemDetail(itemId);
                 model.addAttribute("itemFormDTO", itemFormDTO);
@@ -179,7 +174,8 @@ public class ItemController {
         return "redirect:/";
     }
 
-    @DeleteMapping("/admin/item/{itemId}/delete")
+
+        @DeleteMapping("/admin/item/{itemId}/delete")
     public String deleteItemById(@PathVariable("itemId") Long id, HttpSession session)
     {
         itemService.deleteItemById(id);
