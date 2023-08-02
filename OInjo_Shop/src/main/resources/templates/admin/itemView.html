@@ -21,23 +21,24 @@
     <main class="admin-main">
         <div th:each="ItemFormDTO : ${itemFormDTO}">
             <form id="itemForm" action="" method="POST" enctype="multipart/form-data">
+                <!-- <input type="file" name="itemImgFile"/> -->
                 <input type="hidden" name="id" th:value="${ItemFormDTO.id}" id="id">
                 <h3 th:text="${ItemFormDTO.itemName}+' 상품 상세조회'" class="itemview-title"></h3>
                 <div class="item-form-row">
                     <label for="itemName" class="item-form-label">상품명</label>
-                    <input type="text" th:value="${ItemFormDTO.itemName}" id="itemName" class="item-form-value" />
+                    <input type="text" th:value="${ItemFormDTO.itemName}" id="itemName" class="item-form-value" name="itemName" />
                 </div>
                 <div class="item-form-row">
                     <label for="itemPrice" class="item-form-label">상품가격</label>
-                    <input type="text" th:value="${ItemFormDTO.itemPrice}" id="itemPrice" class="item-form-value" />
+                    <input type="text" th:value="${ItemFormDTO.itemPrice}" id="itemPrice" class="item-form-value" name="itemPrice"/>
                 </div>
                 <div class="item-form-row">
                     <label for="itemStock" class="item-form-label">상품재고</label>
-                    <input type="text" th:value="${ItemFormDTO.itemStock}" id="itemStock" class="item-form-value" />
+                    <input type="text" th:value="${ItemFormDTO.itemStock}" id="itemStock" class="item-form-value" name="itemStock"/>
                 </div>
                 <div class="item-form-row">
                     <label for="itemDetail" class="item-form-label">상품설명</label>
-                    <input type="text" th:value="${ItemFormDTO.itemDetail}" id="itemDetail" class="item-form-value" />
+                    <input type="text" th:value="${ItemFormDTO.itemDetail}" id="itemDetail" class="item-form-value" name="itemDetail"/>
                 </div>
                 <div class="itemview-update-button-wrapper">
                     <input type="submit" value="상품 수정" id="update-btn">
