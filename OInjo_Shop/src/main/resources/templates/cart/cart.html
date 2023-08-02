@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
   <script src="/js/font.js" defer></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <link rel="icon" href="/images/logo.png">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/cart.css">
@@ -15,53 +15,56 @@
   <link rel="stylesheet" href="../../static/css/cart.css">
   <script src="/js/header.js" defer></script>
   <script src="../../static/js/header.js" defer></script>
-    <script src="../../static/js/cart.js" defer></script>
-    <script src="/js/cart.js" defer></script>
+  <script src="../../static/js/cart.js" defer></script>
+  <script src="/js/cart.js" defer></script>
   <title>장바구니</title>
 </head>
 
 <script th:inline="javascript">
-    function orders() {
-        var url = "/orders/form";
+  function orders() {
+    var url = "/orders/form";
 
-        var orderData = []; // 주문 데이터 배열을 생성합니다.
+    var orderData = []; // 주문 데이터 배열을 생성합니다.
 
-        // 각 주문 항목의 정보를 가져와서 orderData 배열에 추가합니다.
-        var itemCount = document.querySelectorAll("#count");
-        var itemIds = document.querySelectorAll("#itemId");
-        for (var i = 0; i < itemCount.length; i++) {
-            var count = itemCount[i].value;
-            var itemId = itemIds[i].value;
-            console.log(count);
-            orderData.push({ itemId: itemId, count: count });
-        }
-        console.log(orderData);
-        $.ajax({
-            url: url,
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(orderData),
-            success: function (result, status) {
-                alert("주문페이지로 이동.");
-                location.href = "/orders/form";
-            },
-            error: function (jqXHR, status, error) {
-                // 주문 실패 시 동작할 코드 작성
-                alert("주문에 실패했습니다.");
-                // 추가 동작이 필요한 경우 여기에 작성
-            }
-        });
+    // 각 주문 항목의 정보를 가져와서 orderData 배열에 추가합니다.
+    var itemCount = document.querySelectorAll("#count");
+    var itemIds = document.querySelectorAll("#itemId");
+    for (var i = 0; i < itemCount.length; i++) {
+      var count = itemCount[i].value;
+      var itemId = itemIds[i].value;
+      console.log(count);
+      orderData.push({ itemId: itemId, count: count });
     }
+    console.log(orderData);
+    $.ajax({
+      url: url,
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(orderData),
+      success: function (result, status) {
+        alert("주문페이지로 이동.");
+        location.href = "/orders/form";
+      },
+      error: function (jqXHR, status, error) {
+        // 주문 실패 시 동작할 코드 작성
+        alert("주문에 실패했습니다.");
+        // 추가 동작이 필요한 경우 여기에 작성
+      }
+    });
+  }
 </script>
+
 <body>
 
   <div th:replace="~{/fragments/header}"></div>
   <main class="cart-main">
     <h4 class="cart-title">장바구니</h4>
-      <a href="/"><p class="no-cart hidden">장바구니에 상품이 없습니다. 지금 바로 상품을 추가하세요!</p></a>
+    <a href="/">
+      <p class="no-cart hidden">장바구니에 상품이 없습니다. 지금 바로 상품을 추가하세요!</p>
+    </a>
     <section class="cart-wrapper hidden">
       <header class="cart-header">
-<!--        <input type="checkbox" name="" id="" class="cart-header-check">-->
+        <!--        <input type="checkbox" name="" id="" class="cart-header-check">-->
         <div class="cart-header-image"></div>
         <div class="cart-header-product-option">상품/옵션</div>
         <div class="cart-header-count">수량</div>
@@ -70,17 +73,20 @@
         <div class="cart-header-delete"></div>
       </header>
       <article class="cart-content" th:each="cartItem : ${cartItemList}">
-<!--        <input type="checkbox" name="" id="" class="cart-content-check">-->
-          <img th:src="${cartItem.image.imgUrl}" alt="장바구니 상품 사진" class="cart-content-image"/>
+        <!--        <input type="checkbox" name="" id="" class="cart-content-check">-->
+        <input type="hidden" th:value="${member.id}" class="member-id">
+        <input type="hidden" th:value="${cartItem.id}" class="cart-item-id">
+        <img th:src="${cartItem.image.imgUrl}" alt="장바구니 상품 사진" class="cart-content-image" />
         <div class="cart-content-product-option">
           <p class="cart-content-product" th:text="${cartItem.product.itemName}"></p>
-            <p class="cart-content-size" th:text="${cartItem.product.brand.brandName}"></p>
-          <p class="cart-content-size" th:text="${cartItem.product.color.colorName}+' '+${cartItem.product.size.sizeName}"></p>
+          <p class="cart-content-size" th:text="${cartItem.product.brand.brandName}"></p>
+          <p class="cart-content-size"
+            th:text="${cartItem.product.color.colorName}+' '+${cartItem.product.size.sizeName}"></p>
         </div>
         <div class="cart-content-count">
-<!--          <i class="fa-solid fa-minus count-icon"></i>-->
+          <i class="fa-solid fa-minus count-icon"></i>
           <span class="cart-content-counting" th:text="${cartItem.count}"></span>
-<!--          <i class="fa-solid fa-plus count-icon"></i>-->
+          <i class="fa-solid fa-plus count-icon"></i>
         </div>
         <div class="cart-content-price">
           <span class="cart-content-price-won" th:text="${cartItem.product.itemPrice}"></span>
@@ -90,11 +96,12 @@
           <span class="cart-content-total-price-won" th:text="${cartItem.product.itemPrice} * ${cartItem.count}"></span>
           <span>원</span>
         </div>
-          <input type="hidden" id="itemId" name="itemId" th:value="${cartItem.product.itemId}">
-          <input type="hidden" id="count" name="count" th:value="${cartItem.count}">
-          <a th:href="'/member/' + ${id} + '/cart/' + ${cartItem.id} + '/delete'" class="cart-delete-button">삭제하기</a>
+        <input type="hidden" id="itemId" name="itemId" th:value="${cartItem.product.itemId}">
+        <input type="hidden" id="count" name="count" th:value="${cartItem.count}">
+        <a th:href="'/member/' + ${id} + '/cart/' + ${cartItem.id} + '/delete'" class="cart-delete-button">삭제하기</a>
       </article>
-        <a th:href="'/member/'+${id}+'/cart/itemDelete'"><button type="button" class="select-price-delete-button">전체상품삭제</button></a>
+      <a th:href="'/member/'+${id}+'/cart/itemDelete'"><button type="button"
+          class="select-price-delete-button">전체상품삭제</button></a>
       <div class="total-price-content">
         <span class="price-count" th:text="${#lists.size(cartItemList)}"></span>
         <span class="price-content-section">개의 상품 금액</span>
@@ -111,7 +118,7 @@
       </div>
       <div class="cart-bottom-button">
 
-          <a href="javascript:history.back()" class="before-page-button">이전 페이지로</a>
+        <a href="javascript:history.back()" class="before-page-button">이전 페이지로</a>
         <input type="submit" onclick="orders()" value="주문하기" class="order-button">
       </div>
     </section>

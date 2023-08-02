@@ -20,7 +20,7 @@
     <div th:replace="~{/fragments/adminheader}"></div>
     <main class="admin-main">
         <div th:each="ItemFormDTO : ${itemFormDTO}">
-            <form id="itemForm" action="" method="post" enctype="multipart/form-data">
+            <form id="itemForm" action="" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id" th:value="${ItemFormDTO.id}" id="id">
                 <h3 th:text="${ItemFormDTO.itemName}+' 상품 상세조회'" class="itemview-title"></h3>
                 <div class="item-form-row">
@@ -57,14 +57,74 @@
         updateBtn.addEventListener("click", function (event) {
             event.preventDefault();
             itemForm.action = "/admin/item/" + id;
+            // itemForm.method = "POST"
             itemForm.submit();
         });
 
         deleteBtn.addEventListener("click", function (event) {
             event.preventDefault();
             itemForm.action = "/admin/item/" + id + "/delete";
+            // itemForm.method = "DELETE"
             itemForm.submit();
         });
+
+        // const itemForm = document.querySelector("#itemForm");
+        // const id = document.querySelector("#id").value;
+        // const updateBtn = document.querySelector("#update-btn");
+        // const deleteBtn = document.querySelector("#delete-btn");
+
+        // updateBtn.addEventListener("click", function (event) {
+        //     event.preventDefault();
+        //     const itemName = document.querySelector("#itemName").value;
+        //     const itemPrice = document.querySelector("#itemPrice").value;
+        //     const itemStock = document.querySelector("#itemStock").value;
+        //     const itemDetail = document.querySelector("#itemDetail").value;
+
+        //     const formData = new FormData();
+        //     formData.append("id", id);
+        //     formData.append("itemName", itemName);
+        //     formData.append("itemPrice", itemPrice);
+        //     formData.append("itemStock", itemStock);
+        //     formData.append("itemDetail", itemDetail);
+
+        //     fetch(`/admin/item/${id}`, {
+        //         method: "POST",
+        //         body: formData,
+        //     })
+        //         .then(response => {
+        //             if (response.ok) {
+        //                 alert("상품이 성공적으로 수정되었습니다.");
+        //                 location.href = "/admin/item";
+        //             } else {
+        //                 alert("상품 수정 중 오류가 발생하였습니다.");
+        //             }
+        //         })
+        //         .catch(error => {
+        //             console.error("상품 수정 중 오류가 발생하였습니다.", error);
+        //         });
+        // });
+
+        // deleteBtn.addEventListener("click", function (event) {
+        //     event.preventDefault();
+        //     const confirmDelete = confirm("정말로 상품을 삭제하시겠습니까?");
+        //     if (confirmDelete) {
+        //         fetch(`/admin/item/${id}/delete`, {
+        //             method: "DELETE",
+        //         })
+        //             .then(response => {
+        //                 if (response.ok) {
+        //                     alert("상품이 성공적으로 삭제되었습니다.");
+        //                     location.href = "/admin/item";
+        //                 } else {
+        //                     alert("상품 삭제 중 오류가 발생하였습니다.");
+        //                 }
+        //             })
+        //             .catch(error => {
+        //                 console.error("상품 삭제 중 오류가 발생하였습니다.", error);
+        //             });
+        //     }
+        // });
+
     </script>
 </body>
 
