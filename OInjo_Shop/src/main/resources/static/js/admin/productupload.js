@@ -1,7 +1,7 @@
 
 // brand-name 클릭하면 brand-id 값을 가져옴
 // brand-id-input의 value를 brand-id로 바꿔줌
-
+// 함수 변경 리팩토링 필요
 const brandName = document.querySelectorAll(".brand-name");
 const brandId = document.querySelectorAll(".brand-id");
 const brandIdInput = document.querySelector(".brand-id-input");

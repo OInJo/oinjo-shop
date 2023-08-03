@@ -1,3 +1,4 @@
+//uploadButton을 클릭했을 때 uploadForm의 submit가 진행되도록 구현
 const uploadButton = document.querySelector(".upload-button");
 const uploadForm = document.querySelector(".upload-form");
 const uploadInputs = document.querySelectorAll(".upload-input");
@@ -46,6 +47,7 @@ uploadInputs.forEach((input) => {
 });
 
 
+//브랜드의 name을 클릭 시 hidden 되어있는 input에 클릭한 브랜드의 id값을 넣어주는 로직, 함수 변경 리팩토링 필요
 const brandIdInput = document.querySelector(".brand-id-input");
 const categoryIdInput = document.querySelector(".category-id-input");
 const sizeIdInput = document.querySelector(".size-id-input");
