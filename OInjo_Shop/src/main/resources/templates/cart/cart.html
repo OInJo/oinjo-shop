@@ -72,9 +72,8 @@
         <div class="cart-header-total-price">합계금액</div>
         <div class="cart-header-delete"></div>
       </header>
+      <input type="hidden" th:value="${member.id}" class="member-id">
       <article class="cart-content" th:each="cartItem : ${cartItemList}">
-        <!--        <input type="checkbox" name="" id="" class="cart-content-check">-->
-        <input type="hidden" th:value="${member.id}" class="member-id">
         <input type="hidden" th:value="${cartItem.id}" class="cart-item-id">
         <img th:src="${cartItem.image.imgUrl}" alt="장바구니 상품 사진" class="cart-content-image" />
         <div class="cart-content-product-option">
