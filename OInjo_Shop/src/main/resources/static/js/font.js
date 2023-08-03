@@ -1,3 +1,4 @@
+//font를 적용하기 위한 로직.
 const fontImport = new FontFace(
   "FontName",
   "url(https://cdn.rawgit.com/moonspam/NanumSquare/master/NanumSquareL.ttf)"

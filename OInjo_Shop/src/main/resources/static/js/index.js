@@ -1,3 +1,4 @@
+//index sidebar에 있는 카테고리와, 브랜드를 클릭 시 사용자에게 클릭한 카테고리, 브랜드를 안내
 const selectName = document.querySelectorAll(".select-name");
 
 selectName.forEach((element) => {
@@ -166,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
+//위, 아래로 이동하는 버튼 클릭 시, 스크롤이 맨 아래, 맨 위로 이동하는 로직
 const $topBtn = document.querySelector(".move-top-btn");
 $topBtn.onclick = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });

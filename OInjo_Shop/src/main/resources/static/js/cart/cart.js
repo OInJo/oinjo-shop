@@ -11,7 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// 장바구니의 상품 수량개수를 수정
+// 장바구니의 상품 수량개수를 수정하는 소스인데 현재 작동X
+// +버튼 클릭 시 이전 수량에서 1을 더하고, -버튼 클릭 시 이전 수량에서 1을 뺌. 수량의 최소값은 1
+// 서버에 requestUrl에 PUT 메소드로 id, itemId, count 3개의 값을 보내줌
 const memberId = parseInt(document.querySelector(".member-id").value);
 const cartItemId = parseInt(document.querySelector(".cart-item-id").value);
 const faMinus = document.querySelector(".fa-minus");
@@ -85,6 +87,7 @@ faPlus.addEventListener("click", () => {
     });
 });
 
+//사용자 화면에 변경된 수량을 보여주도록 구현
 function updateCartContentCount() {
   const cartContentCountingElement = document.querySelector(
     ".cart-content-counting"

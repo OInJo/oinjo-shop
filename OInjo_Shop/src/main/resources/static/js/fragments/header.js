@@ -1,4 +1,4 @@
-// login 여부에 따라 nav바 변경
+//관리자가 아닌 일반 사용자 페이지 header부분 로그인 여부에 따라 각기 다른 nav바를 출력하도록 하는 로직
 const loginCheck = document.querySelector(".login-check");
 const updateLink = document.querySelector(".update-link");
 const logoutLink = document.querySelector(".logout-link");
