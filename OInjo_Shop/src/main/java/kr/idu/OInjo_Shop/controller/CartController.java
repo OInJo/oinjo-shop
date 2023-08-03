@@ -1,7 +1,6 @@
 package kr.idu.OInjo_Shop.controller;
 
 
-import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.dto.Order.OrdersDto;
 import kr.idu.OInjo_Shop.entity.Cart.CartEntity;
@@ -13,23 +12,18 @@ import kr.idu.OInjo_Shop.repository.Cart.CartRepository;
 import kr.idu.OInjo_Shop.repository.Member.MemberRepository;
 import kr.idu.OInjo_Shop.service.Cart.CartService;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
-import kr.idu.OInjo_Shop.service.Member.MemberService;
+import kr.idu.OInjo_Shop.service.Member.MemberServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller
@@ -40,7 +34,7 @@ public class CartController {
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
     private final CartService cartService;
-    private final MemberService memberService;
+    private final MemberServiceImpl memberServiceImpl;
     private final ItemService itemService;
     private final MemberRepository memberRepository;
 
@@ -54,7 +48,7 @@ public class CartController {
         if(Objects.equals(id, memberId)) {
             System.out.println("여기로는 들어와 질거고");
             // Member의 장바구니를 가져온다.
-            MemberDTO member = memberService.findById(id);
+            MemberDTO member = memberServiceImpl.findById(id);
             CartEntity cart = cartRepository.findByMemberId(member.getId());
 
             // 장바구니의 아이템을 가져온다.
@@ -67,7 +61,7 @@ public class CartController {
 
             model.addAttribute("cartItemList",cartItems);
             model.addAttribute("totalPrice",totalPrice);
-            model.addAttribute("member", memberService.findByMember(id));
+            model.addAttribute("member", memberServiceImpl.findByMember(id));
 
             return "/cart/cart";
         } else {
@@ -80,7 +74,7 @@ public class CartController {
     //장바구니에 상품 추가
     @PostMapping("/member/{id}/cart/{itemId}")
     public String myCartAdd(@PathVariable("id") Long id, @PathVariable("itemId") Long itemId, Integer count){
-        MemberEntity member = memberService.findByMember(id);
+        MemberEntity member = memberServiceImpl.findByMember(id);
         ItemEntity item = itemService.findItemId(itemId);
 
         cartService.addCart(member, item, count);
