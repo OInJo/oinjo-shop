@@ -3,6 +3,7 @@ package kr.idu.OInjo_Shop.service.Item;
 import kr.idu.OInjo_Shop.dto.Item.ItemImgDTO;
 import kr.idu.OInjo_Shop.entity.Item.ItemImgEntity;
 import kr.idu.OInjo_Shop.repository.Item.ItemImgRepository;
+import kr.idu.OInjo_Shop.service.File.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,10 @@ import java.util.List;
 public class ItemImgService {
 
 
-    @Value("D:/Project/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg")
+    @Value("/Users/minwook/Documents/GitHub/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg")
 
     private String itemImgLocation;
-
     private final ItemImgRepository itemImgRepository;
-
     private final FileService fileService;
 
     public void saveItemImg(ItemImgEntity itemImg, MultipartFile multipartFile) throws IOException {

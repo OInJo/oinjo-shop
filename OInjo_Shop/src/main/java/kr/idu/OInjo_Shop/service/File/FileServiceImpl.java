@@ -1,4 +1,4 @@
-package kr.idu.OInjo_Shop.service.Item;
+package kr.idu.OInjo_Shop.service.File;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,9 @@ import java.util.UUID;
 
 @Service
 @Slf4j
-public class FileService {
+public class FileServiceImpl implements FileService{
+
+    @Override
     public String uploadFile(String uploadPath, String oriFileName, byte[] fileData) throws IOException {
 
         UUID uuid = UUID.randomUUID(); // UUID 고유한 식별자
@@ -23,6 +25,7 @@ public class FileService {
         return savedFileName;
     }
 
+    @Override
     public void deleteFile(String filePath) {
         File deleteFile = new File(filePath);
 
