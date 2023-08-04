@@ -116,6 +116,7 @@ public class ItemService {
     }
 
     public void deleteItemById(Long id) {
+        System.out.println(id);
         itemImgRepository.deleteByItem(id);
         itemRepository.deleteById(id);
     }
