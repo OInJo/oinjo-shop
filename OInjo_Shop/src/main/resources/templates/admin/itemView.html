@@ -20,7 +20,8 @@
     <div th:replace="~{/fragments/adminheader}"></div>
     <main class="admin-main">
         <div th:each="ItemFormDTO : ${itemFormDTO}">
-            <form id="itemForm" action="" method="POST" enctype="multipart/form-data">
+            <!-- <form id="itemForm" action="" method="POST" enctype="multipart/form-data"> -->
+                <div id="itemForm">
                 <!-- <input type="file" name="itemImgFile"/> -->
                 <input type="hidden" name="id" th:value="${ItemFormDTO.id}" id="id">
                 <h3 th:text="${ItemFormDTO.itemName}+' 상품 상세조회'" class="itemview-title"></h3>
@@ -41,92 +42,36 @@
                     <input type="text" th:value="${ItemFormDTO.itemDetail}" id="itemDetail" class="item-form-value" name="itemDetail"/>
                 </div>
                 <div class="itemview-update-button-wrapper">
-                    <input type="submit" value="상품 수정" id="update-btn">
-                    <input type="submit" value="상품 삭제" id="delete-btn">
+                    <button type="button"id="update-btn">상품 수정</button>
+                    <button type="button"id="delete-btn">상품 삭제</button>
                 </div>
-            </form>
+            </div>
         </div>
 
     </main>
     </section>
-    <script>
-        const itemForm = document.querySelector("#itemForm");
-        const id = document.querySelector("#id").value;
-        const updateBtn = document.querySelector("#update-btn");
-        const deleteBtn = document.querySelector("#delete-btn");
 
-        updateBtn.addEventListener("click", function (event) {
-            event.preventDefault();
-            itemForm.action = "/admin/item/" + id;
-            // itemForm.method = "POST"
-            itemForm.submit();
+<script>
+    const id = parseInt(document.querySelector("#id").value);
+    const deleteBtn = document.querySelector("#delete-btn");
+
+    //상품 삭제 버튼 클릭 시 삭제되는 로직, 외래키 제약 조건에 의거하여 삭제하려는 상품이 장바구니에도 없어야하고, 주문내역에도 없어야만 동작
+    deleteBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        fetch(`/admin/item/${id}/delete`, {
+            method: "DELETE"
+        })
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            // 오류 발생 시 원하는 동작 수행
+            console.error("Error:", error);
         });
+    });
 
-        deleteBtn.addEventListener("click", function (event) {
-            event.preventDefault();
-            itemForm.action = "/admin/item/" + id + "/delete";
-            // itemForm.method = "DELETE"
-            itemForm.submit();
-        });
+</script>
 
-        // const itemForm = document.querySelector("#itemForm");
-        // const id = document.querySelector("#id").value;
-        // const updateBtn = document.querySelector("#update-btn");
-        // const deleteBtn = document.querySelector("#delete-btn");
-
-        // updateBtn.addEventListener("click", function (event) {
-        //     event.preventDefault();
-        //     const itemName = document.querySelector("#itemName").value;
-        //     const itemPrice = document.querySelector("#itemPrice").value;
-        //     const itemStock = document.querySelector("#itemStock").value;
-        //     const itemDetail = document.querySelector("#itemDetail").value;
-
-        //     const formData = new FormData();
-        //     formData.append("id", id);
-        //     formData.append("itemName", itemName);
-        //     formData.append("itemPrice", itemPrice);
-        //     formData.append("itemStock", itemStock);
-        //     formData.append("itemDetail", itemDetail);
-
-        //     fetch(`/admin/item/${id}`, {
-        //         method: "POST",
-        //         body: formData,
-        //     })
-        //         .then(response => {
-        //             if (response.ok) {
-        //                 alert("상품이 성공적으로 수정되었습니다.");
-        //                 location.href = "/admin/item";
-        //             } else {
-        //                 alert("상품 수정 중 오류가 발생하였습니다.");
-        //             }
-        //         })
-        //         .catch(error => {
-        //             console.error("상품 수정 중 오류가 발생하였습니다.", error);
-        //         });
-        // });
-
-        // deleteBtn.addEventListener("click", function (event) {
-        //     event.preventDefault();
-        //     const confirmDelete = confirm("정말로 상품을 삭제하시겠습니까?");
-        //     if (confirmDelete) {
-        //         fetch(`/admin/item/${id}/delete`, {
-        //             method: "DELETE",
-        //         })
-        //             .then(response => {
-        //                 if (response.ok) {
-        //                     alert("상품이 성공적으로 삭제되었습니다.");
-        //                     location.href = "/admin/item";
-        //                 } else {
-        //                     alert("상품 삭제 중 오류가 발생하였습니다.");
-        //                 }
-        //             })
-        //             .catch(error => {
-        //                 console.error("상품 삭제 중 오류가 발생하였습니다.", error);
-        //             });
-        //     }
-        // });
-
-    </script>
 </body>
 
 </html>
