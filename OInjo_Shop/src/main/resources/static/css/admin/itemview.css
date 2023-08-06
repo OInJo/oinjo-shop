@@ -49,3 +49,18 @@
   font-size:20px;
   box-sizing: border-box;
 }
+
+.item-update-title{
+  margin-bottom:10px;
+}
+
+.item-update {
+  display:flex;
+  flex-direction: column;
+  gap:5px;
+  margin-bottom:10px;
+}
+
+.item-status-update {
+  margin-bottom:10px;
+}
