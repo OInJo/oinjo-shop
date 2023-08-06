@@ -13,10 +13,35 @@
             상품설명<input type="text" th:value="${ItemFormDTO.itemDetail}" />
             상품재고<input type="text" th:value="${ItemFormDTO.itemStock}" />
             <input type="hidden" name="id" th:value="${ItemFormDTO.id}" id="id">
+            <p>상품이미지</p>
+            <div th:if="${#lists.isEmpty(itemFormDTO.itemImgDTOList)}">
+                <div th:each="num: ${#numbers.sequence(1,5)}" class="img-form-group">
+                    <div class="custom-file img-div">
+                        <input type="file" class="custom-file-input" name="itemImgFile">
+                        <label class="custom-file-label" th:text="상품이미지 + ${num}"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${not #lists.isEmpty(itemFormDTO.itemImgDTOList)}">
+                <div th:each="itemImgDTO, status: ${itemFormDTO.itemImgDTOList}" class="img-form-group">
+                    <div>
+                        <input type="file" class="custom-file-input" name="itemImgFile">
+                        <input type="hidden" name="itemImgId" th:value="${itemImgDTO.itemImgId}">
+                        <label
+                                th:text="${not #strings.isEmpty(itemImgDTO.oriName)} ? ${itemImgDTO.oriName} : '상품이미지' + ${status.index+1}"></label>
+                    </div>
+                </div>
+            </div>
             <input type="submit" value="수정" id="update-btn">
+        </form>
+        <form id="itemDelete" method="delete">
+            <input type="hidden" name="id" th:value="${ItemFormDTO.id}" id="id">
             <input type="submit" value="삭제" id="delete-btn">
         </form>
     </div>
+
+
     <script>
         const itemForm = document.querySelector("#itemForm");
         const id = document.querySelector("#id").value;

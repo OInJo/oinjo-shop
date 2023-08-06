@@ -5,9 +5,11 @@ import kr.idu.OInjo_Shop.dto.Page.PageResultDTO;
 import kr.idu.OInjo_Shop.entity.Mail.MailEntity;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
+import kr.idu.OInjo_Shop.service.Admin.AdminAuthenticator;
 import kr.idu.OInjo_Shop.service.Mail.MailService;
 import kr.idu.OInjo_Shop.service.Mail.RegisterMailService;
 import kr.idu.OInjo_Shop.service.Member.MemberService;
+import kr.idu.OInjo_Shop.service.Member.MemberServiceImpl;
 import kr.idu.OInjo_Shop.service.Order.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,8 +27,8 @@ public class MemberController {
     private final MemberService memberService;
     private final RegisterMailService registerMailService;
     private final MailService mailService;
-
     private final OrderService orderService;
+    private final AdminAuthenticator adminAuthenticator;
 
     // 회원가입
     @GetMapping("/member/save")
@@ -110,13 +112,11 @@ public class MemberController {
                           @RequestParam(value = "keyword", required = false, defaultValue = "@") String keyword,
                           Model model,
                           HttpSession session) {
-        // 특정 이메일을 확인하고자 하는 이메일 주소
-        String allowedEmail = "Admin@naver.com";
 
         // 현재 로그인한 사용자의 이메일 주소 가져오기
         String loginEmail = (String) session.getAttribute("loginEmail");
 
-        if (loginEmail != null && loginEmail.equals(allowedEmail)) {
+        if (loginEmail != null && adminAuthenticator.isAdmin(loginEmail)) {
             PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
                     .page(page)
                     .perPage(perPage)
@@ -149,7 +149,7 @@ public class MemberController {
     public String updateForm(HttpSession session, Model model) {
         // 정보 수정 -> 세션에 있는 로그인 값으로 전체 정보를 DB로부터 가져와서 model에 담음
         String myEmail = (String) session.getAttribute("loginEmail"); // 캐스팅 - 강제 형변환(Object -> String)
-        MemberDTO memberDTO = memberService.updateForm(myEmail);
+        MemberDTO memberDTO = memberService.findEmail(myEmail);
         model.addAttribute("updateMember", memberDTO);
         return "member/memberupdate";
     }

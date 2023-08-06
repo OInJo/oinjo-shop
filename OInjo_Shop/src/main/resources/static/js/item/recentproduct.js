@@ -7,12 +7,14 @@ if (recentItems.length === 0) {
   noRecentProduct.classList.remove("hidden");
 } else {
   noRecentProduct.classList.add("hidden");
+  //new Set을 이용하여 최근본상품에는 중복된 상품이 오지못하도록 구현
   const uniqueItems = Array.from(
     new Set(recentItems.map((item) => item.id))
   ).map((id) => {
     return recentItems.find((item) => item.id === id);
   });
 
+  //최근본상품의 갯수만큼 article element를 추가하여 페이지를 구성하는 로직
   uniqueItems.forEach((item) => {
     const article = document.createElement("article");
     article.classList.add("recentproduct");

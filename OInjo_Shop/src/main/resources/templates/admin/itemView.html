@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/js/font.js" defer></script>
     <link rel="icon" href="/images/logo.png">
-    <link rel="stylesheet" href="/css/adminindex.css">
-    <link rel="stylesheet" href="../../static/css/adminindex.css">
-    <link rel="stylesheet" href="../../static/css/itemview.css">
-    <link rel="stylesheet" href="/css/itemview.css">
+    <link rel="stylesheet" href="/css/admin/adminindex.css">
+    <link rel="stylesheet" href="../../static/css/admin/adminindex.css">
+    <link rel="stylesheet" href="../../static/css/admin/itemview.css">
+    <link rel="stylesheet" href="/css/admin/itemview.css">
     <script src="https://kit.fontawesome.com/08edd7b20e.js" crossorigin="anonymous"></script>
     <title>상품 수정</title>
 </head>
@@ -20,52 +20,58 @@
     <div th:replace="~{/fragments/adminheader}"></div>
     <main class="admin-main">
         <div th:each="ItemFormDTO : ${itemFormDTO}">
-            <form id="itemForm" action="" method="post" enctype="multipart/form-data">
+            <!-- <form id="itemForm" action="" method="POST" enctype="multipart/form-data"> -->
+                <div id="itemForm">
+                <!-- <input type="file" name="itemImgFile"/> -->
                 <input type="hidden" name="id" th:value="${ItemFormDTO.id}" id="id">
                 <h3 th:text="${ItemFormDTO.itemName}+' 상품 상세조회'" class="itemview-title"></h3>
                 <div class="item-form-row">
                     <label for="itemName" class="item-form-label">상품명</label>
-                    <input type="text" th:value="${ItemFormDTO.itemName}" id="itemName" class="item-form-value" />
+                    <input type="text" th:value="${ItemFormDTO.itemName}" id="itemName" class="item-form-value" name="itemName" />
                 </div>
                 <div class="item-form-row">
                     <label for="itemPrice" class="item-form-label">상품가격</label>
-                    <input type="text" th:value="${ItemFormDTO.itemPrice}" id="itemPrice" class="item-form-value" />
+                    <input type="text" th:value="${ItemFormDTO.itemPrice}" id="itemPrice" class="item-form-value" name="itemPrice"/>
                 </div>
                 <div class="item-form-row">
                     <label for="itemStock" class="item-form-label">상품재고</label>
-                    <input type="text" th:value="${ItemFormDTO.itemStock}" id="itemStock" class="item-form-value" />
+                    <input type="text" th:value="${ItemFormDTO.itemStock}" id="itemStock" class="item-form-value" name="itemStock"/>
                 </div>
                 <div class="item-form-row">
                     <label for="itemDetail" class="item-form-label">상품설명</label>
-                    <input type="text" th:value="${ItemFormDTO.itemDetail}" id="itemDetail" class="item-form-value" />
+                    <input type="text" th:value="${ItemFormDTO.itemDetail}" id="itemDetail" class="item-form-value" name="itemDetail"/>
                 </div>
                 <div class="itemview-update-button-wrapper">
-                    <input type="submit" value="상품 수정" id="update-btn">
-                    <input type="submit" value="상품 삭제" id="delete-btn">
+                    <button type="button"id="update-btn">상품 수정</button>
+                    <button type="button"id="delete-btn">상품 삭제</button>
                 </div>
-            </form>
+            </div>
         </div>
 
     </main>
     </section>
-    <script>
-        const itemForm = document.querySelector("#itemForm");
-        const id = document.querySelector("#id").value;
-        const updateBtn = document.querySelector("#update-btn");
-        const deleteBtn = document.querySelector("#delete-btn");
 
-        updateBtn.addEventListener("click", function (event) {
-            event.preventDefault();
-            itemForm.action = "/admin/item/" + id;
-            itemForm.submit();
-        });
+<script>
+    const id = parseInt(document.querySelector("#id").value);
+    const deleteBtn = document.querySelector("#delete-btn");
 
-        deleteBtn.addEventListener("click", function (event) {
-            event.preventDefault();
-            itemForm.action = "/admin/item/" + id + "/delete";
-            itemForm.submit();
+    //상품 삭제 버튼 클릭 시 삭제되는 로직, 외래키 제약 조건에 의거하여 삭제하려는 상품이 장바구니에도 없어야하고, 주문내역에도 없어야만 동작
+    deleteBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        fetch(`/admin/item/${id}/delete`, {
+            method: "DELETE"
+        })
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            // 오류 발생 시 원하는 동작 수행
+            console.error("Error:", error);
         });
-    </script>
+    });
+
+</script>
+
 </body>
 
 </html>

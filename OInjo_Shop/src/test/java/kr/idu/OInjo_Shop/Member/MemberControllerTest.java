@@ -3,32 +3,27 @@ package kr.idu.OInjo_Shop.Member;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.repository.Member.MemberRepository;
-import kr.idu.OInjo_Shop.service.Member.MemberService;
+import kr.idu.OInjo_Shop.service.Member.MemberServiceImpl;
 
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.IntStream;
-
-
-import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class MemberControllerTest {
 
     @Autowired
-    MemberService memberService;
+    MemberServiceImpl memberServiceImpl;
 
     @Autowired
     MemberRepository memberRepository;
 
     @Test
     void memberListTest() {
-        List<MemberDTO> result = memberService.findAll();
+        List<MemberDTO> result = memberServiceImpl.findAll();
         for(MemberDTO m : result)
             System.out.println(m.getMemberEmail());
     }

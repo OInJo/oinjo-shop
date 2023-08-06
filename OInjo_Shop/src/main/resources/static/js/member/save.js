@@ -1,3 +1,6 @@
+//firstArticle에서 NextButton을 클륵 시, secondArticle을 사용자에게 보여주고,
+//해당 로직을 fourthArticle까지 반복
+
 const firstArticle = document.querySelector(".first-article");
 const secondArticle = document.querySelector(".second-article");
 const thirdArticle = document.querySelector(".third-article");
@@ -32,7 +35,8 @@ thirdArticleNextButton.addEventListener("click", () => {
   fourthArticle.classList.remove("hidden");
 });
 
-// 유효성 검사 로직
+// 유효성 검사 로직 시작, 유효성 검사에 통과할 시 다음으로 가는 버튼을 활성화시키고 색상도 변경하여 사용자에게 다음페이지로 이동할 조건이 충족되었음을 알림
+
 // 이름 유효성 검사
 const nameInput = document.querySelector(".name-input");
 const nameWrong = document.querySelector(".name-wrong");
@@ -61,13 +65,13 @@ nameInput.addEventListener("input", () => {
 });
 
 // 닉네임 유효성 검사
-
 const nicknameInput = document.querySelector(".nickname-input");
 const nicknameWrong = document.querySelector(".nickname-wrong");
 const nicknameIcon = document.querySelector(".nickname-icon");
 let nicknameValidation = false;
 nicknameInput.addEventListener("input", () => {
   if (nicknameInput.value.length != 0 && nameInput.value.length >= 1) {
+    //닉네임에 입력된 값이 0이 아니고(무엇이든 입력되면 통과), 네임에 입력된 값이 1을 초과할 떄(무엇이든 입력되면 통과)
     nicknameInput.classList.remove("wrong");
     nicknameIcon.classList.remove("wrong");
     nicknameWrong.classList.add("hidden");
@@ -96,6 +100,8 @@ phoneInput.addEventListener("input", () => {
   if (
     phoneInput.value.length != 0 &&
     /^(010|011|016|017|018|019)\d{3,4}\d{4}$/.test(phoneInput.value)
+      //시작은 010, 011, 016 ... 등으로 시작하고, 그 다음에 오는 숫자는 3~4글자, 그 다음에 오는 숫자는 4글자일 경우에 통과.
+      //숫자 이외에 - 등 특수문자가 있으면 통과하지않음
   ) {
     phoneInput.classList.remove("wrong");
     phoneIcon.classList.remove("wrong");
@@ -116,7 +122,7 @@ phoneInput.addEventListener("input", () => {
   }
 });
 
-// 주소 유효성 검사, 현재 상세주소만 유효성 검사 되있음, 주소 API 구현되면 zipcode, firstAddress에도 값이 있는지 검사해야 함
+// 주소 유효성 검사
 const zipcode = document.querySelector(".zipcode");
 const firstAddress = document.querySelector(".first-address");
 const lastAddress = document.querySelector(".last-address");
@@ -169,6 +175,7 @@ const passwordMatchWrong = document.querySelector(".password-match-wrong");
 passwordInput.addEventListener("input", () => {
   if (
     /^(?=.*[a-zA-Z])(?=.*\d).{6,}$/.test(passwordInput.value) &&
+      //영, 문자, 6글자 이상인지 테스트하고, 비밀번호 입력과 새 비밀번호 입력의 값이 동일한지 검사.
     passwordInput.value === repasswordInput.value
   ) {
     passwordWrong.classList.add("hidden");
@@ -240,6 +247,8 @@ repasswordInput.addEventListener("input", () => {
   }
 });
 
+// 패스워드를 입력할 때 사용자가 무슨 값을 입력했는지 type이 password여서 값이 가려져있어서 알 수 없음.
+// 이럴 때 눈 버튼을 클릭하면 type이 text, password로 toggle되어 나타나면서 사용자가 무슨 값을 비밀번호로 입력했는 지 알 수 있게됨.
 const passwordToggleButton = document.querySelector(".password-toggle-button");
 const repasswordToggleButton = document.querySelector(
   ".repassword-toggle-button"
@@ -273,6 +282,7 @@ const certificationStartButton = document.querySelector(
   ".certification-start-button"
 );
 const emailInput = document.querySelector(".email-input");
+//인증번호 전송 버튼 클릭 시 email이라는 이름으로 사용자가 입력한 email값을 보내줌
 certificationStartButton.addEventListener("click", () => {
   fetch("/login/mailAuthentication?email=" + emailInput.value, {
     method: "POST",
@@ -283,6 +293,7 @@ certificationStartButton.addEventListener("click", () => {
       "Content-Type": "application/json",
     },
   })
+      //보낸 이메일이 올바르게 작동할 시 response.ok를 반환함
       .then((response) => {
         if (response.ok) {
           return response.text(); // Convert response body to text
@@ -292,6 +303,7 @@ certificationStartButton.addEventListener("click", () => {
           throw new Error("Network response was not ok");
         }
       })
+      //인증번호가 전송되고, 사용자가 입력한 이메일을 확인하라고 안내, 인증번호 전송 버튼을 전송완료로 변경
       .then((data) => {
         console.log("response:", data);
         alert(`인증번호가 전송되었습니다. ${emailInput.value}를 확인하세요.`);
@@ -304,6 +316,7 @@ certificationStartButton.addEventListener("click", () => {
 });
 
 
+//인증번호 확인 버튼 클릭 시, 사용자가 입력한 이메일값과, 인증번호값을 서버에 보내줌
 const certificationButton = document.querySelector(".certification-button");
 const certificationNumber = document.querySelector(".certification-number");
 certificationButton.addEventListener("click", () => {
@@ -320,6 +333,7 @@ certificationButton.addEventListener("click", () => {
   })
     .then((response) => {
       console.log("response:", response);
+      //이메일값과 인증번호값이 올바를 시 인증 성공 메시지를 출력하고, 다음 페이지로 이동하는 버튼을 활성화함
       if (response.ok) {
         alert("인증 성공!");
         thirdArticleNextButton.disabled = false;
