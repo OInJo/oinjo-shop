@@ -4,7 +4,7 @@ import kr.idu.OInjo_Shop.dto.Item.Relation.BrandDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.CategoryDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.ColorDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.SizeDTO;
-import kr.idu.OInjo_Shop.service.Item.RelationService;
+import kr.idu.OInjo_Shop.service.Item.Relation.RelationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

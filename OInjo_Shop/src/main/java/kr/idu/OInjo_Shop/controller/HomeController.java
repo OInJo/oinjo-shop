@@ -10,7 +10,7 @@ import kr.idu.OInjo_Shop.dto.Page.PageRequestDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageResultDTO;
 import kr.idu.OInjo_Shop.service.Item.ItemImgService;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
-import kr.idu.OInjo_Shop.service.Item.RelationService;
+import kr.idu.OInjo_Shop.service.Item.Relation.RelationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

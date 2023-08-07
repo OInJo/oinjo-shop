@@ -7,7 +7,6 @@ import kr.idu.OInjo_Shop.entity.Item.Relation.BrandEntity;
 import kr.idu.OInjo_Shop.entity.Item.Relation.CategoryEntity;
 import kr.idu.OInjo_Shop.entity.Item.Relation.ColorEntity;
 import kr.idu.OInjo_Shop.entity.Item.Relation.SizeEntity;
-import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.repository.Item.ItemImgRepository;
 import kr.idu.OInjo_Shop.repository.Item.ItemRepository;
 import kr.idu.OInjo_Shop.repository.Item.Relation.BrandRepository;
@@ -16,13 +15,10 @@ import kr.idu.OInjo_Shop.repository.Item.Relation.ColorRepository;
 import kr.idu.OInjo_Shop.repository.Item.Relation.SizeRepository;
 import kr.idu.OInjo_Shop.service.Item.ItemImgService;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
-import kr.idu.OInjo_Shop.service.Item.RelationService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import kr.idu.OInjo_Shop.service.Item.Relation.RelationServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Controller;
 
 import java.util.stream.IntStream;
 
@@ -36,7 +32,7 @@ public class ItemControllerTest {
     ItemImgService itemImgService;
 
     @Autowired
-    RelationService relationService; // 카테고리, 브랜드, 컬러, 사이즈
+    RelationServiceImpl relationService; // 카테고리, 브랜드, 컬러, 사이즈
 
     @Autowired
     ItemRepository itemRepository;
