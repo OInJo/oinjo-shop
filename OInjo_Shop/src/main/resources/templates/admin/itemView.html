@@ -19,58 +19,117 @@
 
     <div th:replace="~{/fragments/adminheader}"></div>
     <main class="admin-main">
-        <div th:each="ItemFormDTO : ${itemFormDTO}">
-            <!-- <form id="itemForm" action="" method="POST" enctype="multipart/form-data"> -->
-                <div id="itemForm">
-                <!-- <input type="file" name="itemImgFile"/> -->
-                <input type="hidden" name="id" th:value="${ItemFormDTO.id}" id="id">
-                <h3 th:text="${ItemFormDTO.itemName}+' 상품 상세조회'" class="itemview-title"></h3>
+        <!--        <div th:each="ItemFormDTO : ${itemFormDTO}">-->
+        <div>
+            <form id="itemForm" th:action="@{'/admin/item/' + ${itemFormDTO.id}}" method="POST"
+                enctype="multipart/form-data">
+                <!-- <form id="itemForm"> -->
+                <input type="hidden" th:value="${itemFormDTO.brand.brandId}" name="brand"></p>
+                <input type="hidden" th:value="${itemFormDTO.category.categoryId}" name="category"></p>
+                <input type="hidden" th:value="${itemFormDTO.color.colorId}" name="color"></p>
+                <input type="hidden" th:value="${itemFormDTO.size.sizeId}" name="size">
+                <input type="hidden" name="id" th:value="${itemFormDTO?.id}" id="id" />
+                <h3 th:text="${itemFormDTO.itemName}+' 상품 상세조회'" class="itemview-title"></h3>
                 <div class="item-form-row">
                     <label for="itemName" class="item-form-label">상품명</label>
-                    <input type="text" th:value="${ItemFormDTO.itemName}" id="itemName" class="item-form-value" name="itemName" />
+                    <input type="text" th:value="${itemFormDTO.itemName}" id="itemName" class="item-form-value"
+                        name="itemName" />
                 </div>
                 <div class="item-form-row">
                     <label for="itemPrice" class="item-form-label">상품가격</label>
-                    <input type="text" th:value="${ItemFormDTO.itemPrice}" id="itemPrice" class="item-form-value" name="itemPrice"/>
+                    <input type="text" th:value="${itemFormDTO.itemPrice}" id="itemPrice" class="item-form-value"
+                        name="itemPrice" />
                 </div>
                 <div class="item-form-row">
                     <label for="itemStock" class="item-form-label">상품재고</label>
-                    <input type="text" th:value="${ItemFormDTO.itemStock}" id="itemStock" class="item-form-value" name="itemStock"/>
+                    <input type="text" th:value="${itemFormDTO.itemStock}" id="itemStock" class="item-form-value"
+                        name="itemStock" />
                 </div>
                 <div class="item-form-row">
                     <label for="itemDetail" class="item-form-label">상품설명</label>
-                    <input type="text" th:value="${ItemFormDTO.itemDetail}" id="itemDetail" class="item-form-value" name="itemDetail"/>
+                    <input type="text" th:value="${itemFormDTO.itemDetail}" id="itemDetail" class="item-form-value"
+                        name="itemDetail" />
                 </div>
+
+                <p class="item-update-title">상품상태</p>
+                <div class="status-form-group item-status-update">
+                    <select th:field="*{itemFormDTO.itemSellStatus}" class="custom-select">
+                        <option value="SELL">판매중</option>
+                        <option value="SOLD_OUT">품절</option>
+                    </select>
+                </div>
+
+                <p class="item-update-title">상품이미지</p>
+                <!--                 <div th:if="${#lists.isEmpty(itemFormDTO.itemImgDTOList)}">-->
+                <div th:each="num: ${#numbers.sequence(1,5)}" class="img-form-group item-update">
+                    <div class="custom-file img-div">
+                        <input type="file" class="custom-file-input" name="itemImgFile" id="itemImgFile">
+                        <label class="custom-file-label" th:text="상품이미지 + ${num}"></label>
+                    </div>
+                </div>
+                <!--                 </div>-->
+
                 <div class="itemview-update-button-wrapper">
-                    <button type="button"id="update-btn">상품 수정</button>
-                    <button type="button"id="delete-btn">상품 삭제</button>
+                    <button type="submit" id="update-btn">상품 수정</button>
+                    <button type="button" id="delete-btn">상품 삭제</button>
                 </div>
-            </div>
+            </form>
         </div>
 
     </main>
     </section>
 
-<script>
-    const id = parseInt(document.querySelector("#id").value);
-    const deleteBtn = document.querySelector("#delete-btn");
+    <script>
+        const id = parseInt(document.querySelector("#id").value);
+        const deleteBtn = document.querySelector("#delete-btn");
 
-    //상품 삭제 버튼 클릭 시 삭제되는 로직, 외래키 제약 조건에 의거하여 삭제하려는 상품이 장바구니에도 없어야하고, 주문내역에도 없어야만 동작
-    deleteBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-        fetch(`/admin/item/${id}/delete`, {
-            method: "DELETE"
-        })
-        .then(response => {
-            console.log(response)
-        })
-        .catch(error => {
-            // 오류 발생 시 원하는 동작 수행
-            console.error("Error:", error);
+        //상품 삭제 버튼 클릭 시 삭제되는 로직, 외래키 제약 조건에 의거하여 삭제하려는 상품이 장바구니에도 없어야하고, 주문내역에도 없어야만 동작
+        deleteBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            fetch(`/admin/item/${id}/delete`, {
+                method: "DELETE"
+            })
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(error => {
+                    // 오류 발생 시 원하는 동작 수행
+                    console.error("Error:", error);
+                });
         });
-    });
 
-</script>
+        // 상품 수정 로직이였는데 img multipart 관련 문제가 발생하여 일단 주석처리하고 수정은 form submit로 처리. 위에 써있는 삭제는 fetch로 처리
+        // const updateBtn = document.querySelector("#update-btn");
+        // updateBtn.addEventListener("click", function (event) {
+        //     const itemName = encodeURIComponent(document.querySelector("#itemName").value);
+        //     const itemPrice = encodeURIComponent(document.querySelector("#itemPrice").value);
+        //     const itemStock = encodeURIComponent(document.querySelector("#itemStock").value);
+        //     const itemDetail = encodeURIComponent(document.querySelector("#itemDetail").value);
+        //     const itemImgFile = document.querySelector("#itemImgFile").files;
+        //     const formData = new FormData();
+        //     formData.append('id', id);
+        //     formData.append('itemName', itemName);
+        //     formData.append('itemPrice', itemPrice);
+        //     formData.append('itemStock', itemStock);
+        //     formData.append('itemDetail', itemDetail);
+        //     for (let i = 0; i < itemImgFile.length; i++) {
+        //         formData.append('itemImgFile', itemImgFile[i]);
+        //     }
+
+        //     event.preventDefault();
+        //     fetch(`/admin/item/${id}`, {
+        //         method: "POST",
+        //         body: formData
+        //     })
+        //         .then(response => {
+        //             console.log(response)
+        //         })
+        //         .catch(error => {
+        //             // 오류 발생 시 원하는 동작 수행
+        //             console.error("Error:", error);
+        //         });
+        // });
+    </script>
 
 </body>
 

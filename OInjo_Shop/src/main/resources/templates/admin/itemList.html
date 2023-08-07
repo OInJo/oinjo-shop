@@ -66,17 +66,17 @@
               <li th:if="${itemList.prev}"
                 th:class="'paginate_button page-item previous ' + ${itemList.prev?'':'disabled'}"
                 id="dataTable_previous">
-                <a href="#" th:href="@{/boards(page=${itemList.startNum - 1}, perPage=${itemList.perPage})}"
+                <a href="#" th:href="@{/admin/item(page=${itemList.startNum - 1}, perPage=${itemList.perPage})}"
                   aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link"><i class="fa-solid fa-caret-left paging-previous-icon"></i></a>
               </li>
               <li th:class="'paginate_button page-item ' + ${itemList.curPage == page?'active':''}"
                 th:each="page : ${itemList.pageList}">
-                <a href="#" th:href="@{/boards(page=${page}, perPage=${itemList.perPage})}" aria-controls="dataTable"
+                <a href="#" th:href="@{/admin/item(page=${page}, perPage=${itemList.perPage})}" aria-controls="dataTable"
                   data-dt-idx="1" tabindex="0" class="page-link paging-number">[[${page}]]</a>
               </li>
               <li th:if="${itemList.next}"
                 th:class="'paginate_button page-item next ' + ${itemList.next?'':'disabled'} " id="dataTable_next">
-                <a href="#" th:href="@{/boards(page=${itemList.endNum + 1}, perPage=${itemList.perPage})}"
+                <a href="#" th:href="@{/admin/item(page=${itemList.endNum + 1}, perPage=${itemList.perPage})}"
                   aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link"><i class="fa-solid fa-caret-right  paging-next-icon"></i></a>
               </li>
             </ul>
