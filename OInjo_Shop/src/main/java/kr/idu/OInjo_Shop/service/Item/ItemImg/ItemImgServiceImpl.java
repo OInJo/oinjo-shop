@@ -1,4 +1,4 @@
-package kr.idu.OInjo_Shop.service.Item;
+package kr.idu.OInjo_Shop.service.Item.ItemImg;
 
 import kr.idu.OInjo_Shop.dto.Item.ItemImgDTO;
 import kr.idu.OInjo_Shop.entity.Item.ItemImgEntity;
@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class ItemImgService {
+public class ItemImgServiceImpl implements ItemImgService {
 
 
     @Value("/Users/minwook/Documents/GitHub/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg")
@@ -28,6 +28,7 @@ public class ItemImgService {
     private final ItemImgRepository itemImgRepository;
     private final FileService fileService;
 
+    @Override
     public void saveItemImg(ItemImgEntity itemImg, MultipartFile multipartFile) throws IOException {
         String oriImgName = multipartFile.getOriginalFilename();
         String imgName = "";
@@ -43,24 +44,30 @@ public class ItemImgService {
 
     }
 
+    @Override
     public void updateItemImg(Long itemImgId, MultipartFile itemImgFile) throws IOException {
 
         if(!itemImgFile.isEmpty()) {
             ItemImgEntity itemImg = itemImgRepository.findById(itemImgId).orElseThrow(EntityNotFoundException::new);
-
+            System.out.println("ItemImgServiceImpl.updateItemImg");
             // 기존 파일 삭제
             if(!StringUtils.isEmpty(itemImg.getImgName())) {
+                System.out.println("ItemImgServiceImpl.deleteFileBefore");
                 fileService.deleteFile(itemImgLocation + "/" + itemImg.getImgName());
+                System.out.println("ItemImgServiceImpl.deleteFileAfter");
             }
 
             String oriImgName = itemImgFile.getOriginalFilename();
             String imgName = fileService.uploadFile(itemImgLocation, oriImgName, itemImgFile.getBytes());
             String imgUrl = "/productImg/" + imgName;
 
+            System.out.println("ItemImgServiceImpl.updateItemImg Before");
             itemImg.updateItemImg(oriImgName, imgName, imgUrl);
+            System.out.println("ItemImgServiceImpl.updateItemImg After");
         }
     }
 
+    @Override
     public List<ItemImgDTO> findAllItemImg() {
         List<ItemImgEntity> itemImgEntityList = itemImgRepository.findAll();
         List<ItemImgDTO> itemImgDTOList = new ArrayList<>();
@@ -70,6 +77,7 @@ public class ItemImgService {
         return itemImgDTOList;
     }
 
+    @Override
     public List<ItemImgDTO> findItemImgByItemId(Long itemId) {
         List<ItemImgEntity> itemImgEntityList = itemImgRepository.findByItemItemId(itemId);
         List<ItemImgDTO> itemImgDTOList = new ArrayList<>();
