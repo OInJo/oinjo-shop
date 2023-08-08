@@ -109,8 +109,6 @@ public class ItemController {
         if (loginEmail != null && adminAuthenticator.isAdmin(loginEmail)) {
             PageResultDTO<ItemFormDTO, Object[]> itemFormDTOList = itemService.getAllItemList(pageRequestDTO);
             model.addAttribute("itemList", itemFormDTOList);
-            List<ItemImgDTO> itemImgDTO = itemImgService.findAllItemImg();
-            model.addAttribute("itemImgDTO", itemImgDTO);
             return "/admin/itemList";
         }
         else
@@ -122,9 +120,6 @@ public class ItemController {
 
         // 현재 로그인한 사용자의 이메일 주소 가져오기
         String loginEmail = (String) session.getAttribute("loginEmail");
-
-        List<ItemImgDTO> itemImgDTO = itemImgService.findItemImgByItemId(itemId);
-        model.addAttribute("itemImgDTO", itemImgDTO);
 
         if (loginEmail != null && adminAuthenticator.isAdmin(loginEmail)) {
             try {

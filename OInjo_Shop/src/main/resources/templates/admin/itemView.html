@@ -61,13 +61,15 @@
 
                 <p class="item-update-title">상품이미지</p>
                 <!--                 <div th:if="${#lists.isEmpty(itemFormDTO.itemImgDTOList)}">-->
-                <div th:each="num: ${#numbers.sequence(1,5)}" class="img-form-group item-update">
-                    <div class="custom-file img-div">
-                        <input type="file" class="custom-file-input" name="itemImgFile" id="itemImgFile">
-                        <label class="custom-file-label" th:text="상품이미지 + ${num}"></label>
+                <div th:if = "${not #lists.isEmpty(itemFormDTO.itemImgDTOList)}">
+                    <div class="form-group" th:each="itemImgDTO, status: ${itemFormDTO.itemImgDTOList}">
+                        <div class="custom-file img-div">
+                            <input type="file" class="custom-file-input" name="itemImgFile">
+                            <input type="hidden" name="itemImgIds" th:value="${itemImgDTO.itemImgId}">
+                            <label class="custom-file-label" th:text="${itemImgDTO.oriName}"></label>
+                        </div>
                     </div>
                 </div>
-                <!--                 </div>-->
 
                 <div class="itemview-update-button-wrapper">
                     <button type="submit" id="update-btn">상품 수정</button>
