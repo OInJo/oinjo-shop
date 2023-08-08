@@ -28,13 +28,9 @@ import java.util.function.Function;
 public class ItemService {
 
     private final ItemRepository itemRepository;
-
     private final ItemImgService itemImgService;
-
     private final ItemImgRepository itemImgRepository;
-    
     private final ItemLikeRepository itemLikeRepository;
-
     private final MemberRepository memberRepository;
 
     public Long saveItem(ItemFormDTO itemFormDto, List<MultipartFile> itemImgFileList) throws Exception{
@@ -62,9 +58,7 @@ public class ItemService {
 
     public Long updateItem(ItemFormDTO itemFormDTO, List<MultipartFile> itemImgFileList) throws EntityNotFoundException, IOException {
         // 상품 수정
-        System.out.println(itemFormDTO.getItemName());
         ItemEntity item = itemRepository.findById(itemFormDTO.getId()).orElseThrow(EntityNotFoundException::new);
-        System.out.println("ItemService.findById");
         item.updateItem(itemFormDTO);
         System.out.println(itemFormDTO.getItemImgIds());
 
@@ -109,6 +103,10 @@ public class ItemService {
 
         return itemFormDTO;
     }
+    public ItemFormDTO getItemDetail(ItemFormDTO itemFormDTO) {
+        Long itemId = itemFormDTO.getId();
+        return getItemDetail(itemId);
+    }
 
     public void deleteItemById(Long id) {
         System.out.println(id);
@@ -123,7 +121,11 @@ public class ItemService {
                 pageRequestDTO.getType(),
                 pageRequestDTO.getKeyword(),
                 pageRequestDTO.getPageable(Sort.by("itemId").descending()));
-        Function<Object[], ItemFormDTO> fn = (entity -> ItemFormDTO.of((ItemEntity) entity[0]));
+        Function<Object[], ItemFormDTO> fn = (entity -> {
+            ItemEntity itemEntity = (ItemEntity) entity[0];
+            ItemFormDTO itemFormDTO = ItemFormDTO.of(itemEntity);
+            return getItemDetail(itemFormDTO);
+        });
         return new PageResultDTO<>(result, fn, 5);
     }
 

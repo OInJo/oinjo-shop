@@ -59,21 +59,20 @@
         </div>
       </div>
       <div class="article-product-wrapper">
-        <a class="article-product" th:each="ItemFormDTO : ${itemFormDTOList.dtoList}"
-          th:href="@{'/item/' + ${ItemFormDTO.id}}">
-          <p class="hidden article-product-id" th:text="${ItemFormDTO.id}"></p>
-          <img th:each="ItemImgDTO : ${itemImgDTOList}" th:src="${ItemImgDTO.imgUrl}" alt="상품 이미지"
-            class="article-product-image" id="item-img-src"
-            th:if="${ItemImgDTO.itemId.itemId == ItemFormDTO.id && ItemImgDTO.repImgYn == 'Y'}">
+        <a class="article-product" th:each="itemFormDTO : ${itemFormDTOList.dtoList}"
+          th:href="@{'/item/' + ${itemFormDTO.id}}">
+          <p class="hidden article-product-id" th:text="${itemFormDTOList}"></p>
+          <img th:each="itemImgDTO, status: ${itemFormDTO.itemImgDTOList}" th:src="${itemImgDTO.imgUrl}" alt="상품 이미지"
+            class="article-product-image" id="item-img-src"/>
           <ul class="article-product-size">
-            <li th:each="size : ${sizeList}" th:if="${ItemFormDTO.size.sizeId == size.sizeId}"th:text="${size.sizeName}" class="article-product-size-list"></li>
+            <li th:each="size : ${sizeList}" th:if="${itemFormDTO.size.sizeId == size.sizeId}"th:text="${size.sizeName}" class="article-product-size-list"></li>
           </ul>
-          <div class="article-product-name" th:text="${ItemFormDTO.itemName}"></div>
+          <div class="article-product-name" th:text="${itemFormDTO.itemName}"></div>
           <div class="article-product-brand" th:each="brand : ${brandList}" th:text="${brand.brandName}"></div>
           <div class="article-product-category" th:each="category : ${categoryList}"
-               th:if="${ItemFormDTO.category.categoryId == category.categoryId}" th:text="${category.categoryName}"></div>
+               th:if="${itemFormDTO.category.categoryId == category.categoryId}" th:text="${category.categoryName}"></div>
           <div class="article-product-price">
-            <div class="article-product-price-won" th:text="${ItemFormDTO.itemPrice}"></div>
+            <div class="article-product-price-won" th:text="${itemFormDTO.itemPrice}"></div>
             원
           </div>
           <!-- <div class="article-product-color">
