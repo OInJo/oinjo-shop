@@ -69,8 +69,7 @@
             <li th:each="size : ${sizeList}" th:if="${ItemFormDTO.size.sizeId == size.sizeId}"th:text="${size.sizeName}" class="article-product-size-list"></li>
           </ul>
           <div class="article-product-name" th:text="${ItemFormDTO.itemName}"></div>
-          <div class="article-product-brand" th:each="brand : ${brandList}"
-            th:if="${ItemFormDTO.brand.brandId == brand.brandId}" th:text="${brand.brandName}"></div>
+          <div class="article-product-brand" th:each="brand : ${brandList}" th:text="${brand.brandName}"></div>
           <div class="article-product-category" th:each="category : ${categoryList}"
                th:if="${ItemFormDTO.category.categoryId == category.categoryId}" th:text="${category.categoryName}"></div>
           <div class="article-product-price">

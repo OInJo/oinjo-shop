@@ -9,7 +9,7 @@ import kr.idu.OInjo_Shop.entity.Item.ItemImgEntity;
 import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.repository.Cart.CartItemRepository;
 import kr.idu.OInjo_Shop.repository.Cart.CartRepository;
-import kr.idu.OInjo_Shop.service.Item.ItemImgService;
+import kr.idu.OInjo_Shop.service.Item.ItemImg.ItemImgServiceImpl;
 import kr.idu.OInjo_Shop.service.Order.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ import java.util.Optional;
 public class CartService {
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
-    private final ItemImgService itemImgService;
+    private final ItemImgServiceImpl itemImgService;
     private final OrderService orderService;
 
     //장바구니 생성

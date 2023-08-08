@@ -9,7 +9,7 @@ import kr.idu.OInjo_Shop.dto.Item.Relation.SizeDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageRequestDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageResultDTO;
 import kr.idu.OInjo_Shop.service.Admin.AdminAuthenticator;
-import kr.idu.OInjo_Shop.service.Item.ItemImgService;
+import kr.idu.OInjo_Shop.service.Item.ItemImg.ItemImgService;
 import kr.idu.OInjo_Shop.service.Item.ItemService;
 import kr.idu.OInjo_Shop.service.Item.Relation.RelationService;
 import lombok.RequiredArgsConstructor;

@@ -19,7 +19,6 @@ import java.util.List;
 @Entity
 @Table(name = "item")
 @Getter
-@Setter
 @ToString
 @Builder
 @NoArgsConstructor
