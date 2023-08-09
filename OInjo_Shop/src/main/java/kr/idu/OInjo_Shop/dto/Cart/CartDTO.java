@@ -50,7 +50,7 @@ public class CartDTO {
     private static List<CartItemDTO> toCartItemDTOList(List<CartItemEntity> cartItemEntities) {
         List<CartItemDTO> cartItemDTOList = new ArrayList<>();
         for (CartItemEntity cartItemEntity : cartItemEntities) {
-            CartItemDTO cartItemDTO = toCartItemDTO(cartItemEntity.getCart());
+            CartItemDTO cartItemDTO = toCartItemDTO(cartItemEntity);
             cartItemDTOList.add(cartItemDTO);
         }
         return cartItemDTOList;

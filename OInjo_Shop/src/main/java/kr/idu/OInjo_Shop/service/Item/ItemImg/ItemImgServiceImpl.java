@@ -22,7 +22,7 @@ import java.util.List;
 public class ItemImgServiceImpl implements ItemImgService {
 
 
-    @Value("/Users/minwook/Documents/GitHub/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg")
+    @Value("/Users/lgh/Desktop/Code-Crew/OInjo_Shop/OInjo_Shop/src/main/resources/static/images")
 
     private String itemImgLocation;
     private final ItemImgRepository itemImgRepository;
