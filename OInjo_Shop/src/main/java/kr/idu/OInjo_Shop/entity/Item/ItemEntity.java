@@ -18,8 +18,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "item")
-@Getter
 @Setter
+@Getter
 @ToString
 @Builder
 @NoArgsConstructor

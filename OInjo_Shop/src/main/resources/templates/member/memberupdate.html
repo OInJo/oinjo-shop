@@ -58,10 +58,10 @@
     <input type="hidden" th:value="${updateMember.memberPassword}" class="old-password">
     <button type="button" class="passwordupdate-button">비밀번호 변경하기</button>
     <div class="passwordupdate-wrapper hidden">
-      <div class="passwordupdate-row">
+      <!-- <div class="passwordupdate-row">
         <span class="passwordupdate-label">현재 비밀번호</span>
         <input type="text" class="passwordupdate-value" th:value="${updateMember.memberPassword}" readonly>
-      </div>
+      </div> -->
       <div class="passwordupdate-row">
         <span class="passwordupdate-label">새 비밀번호</span>
         <input type="text" class="passwordupdate-value" name="memberPassword" th:value="${updateMember.memberPassword}"

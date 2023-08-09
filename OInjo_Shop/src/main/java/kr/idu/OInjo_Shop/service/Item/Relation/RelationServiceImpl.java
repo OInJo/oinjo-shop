@@ -1,4 +1,4 @@
-package kr.idu.OInjo_Shop.service.Item;
+package kr.idu.OInjo_Shop.service.Item.Relation;
 
 import kr.idu.OInjo_Shop.dto.Item.Relation.BrandDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.CategoryDTO;
@@ -15,20 +15,20 @@ import kr.idu.OInjo_Shop.repository.Item.Relation.SizeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RelationService {
+public class RelationServiceImpl implements RelationService {
 
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
     private final ColorRepository colorRepository;
     private final SizeRepository sizeRepository;
 
-    public Long saveBrand(BrandDTO brandDTO) throws Exception{
+    @Override
+    public Long saveBrand(BrandDTO brandDTO){
 
         // 브랜드 등록
         BrandEntity brand = brandDTO.createBrand();
@@ -36,7 +36,9 @@ public class RelationService {
 
         return brand.getBrandId();
     }
-    public Long saveCategory(CategoryDTO categoryDTO) throws Exception{
+
+    @Override
+    public Long saveCategory(CategoryDTO categoryDTO){
 
         // 브랜드 등록
         CategoryEntity category = categoryDTO.createCategory();
@@ -45,7 +47,8 @@ public class RelationService {
         return category.getCategoryId();
     }
 
-    public Long saveColor(ColorDTO colorDTO) throws Exception{
+    @Override
+    public Long saveColor(ColorDTO colorDTO){
 
         // 브랜드 등록
         ColorEntity color = colorDTO.createColor();
@@ -54,7 +57,8 @@ public class RelationService {
         return color.getColorId();
     }
 
-    public Long saveSize(SizeDTO sizeDTO) throws Exception{
+    @Override
+    public Long saveSize(SizeDTO sizeDTO){
 
         // 브랜드 등록
         SizeEntity size = sizeDTO.createSize();
@@ -62,6 +66,8 @@ public class RelationService {
 
         return size.getSizeId();
     }
+
+    @Override
     public List<BrandDTO> findAllBrand() {
         List<BrandEntity> brandEntityList = brandRepository.findAll();
         List<BrandDTO> brandDTOList = new ArrayList<>();
@@ -70,6 +76,8 @@ public class RelationService {
         }
         return brandDTOList;
     }
+
+    @Override
     public List<CategoryDTO> findAllCategory() {
         List<CategoryEntity> categoryEntityList = categoryRepository.findAll();
         List<CategoryDTO> categoryDTOList = new ArrayList<>();
@@ -79,6 +87,7 @@ public class RelationService {
         return categoryDTOList;
     }
 
+    @Override
     public List<ColorDTO> findAllColor() {
         List<ColorEntity> colorEntityList = colorRepository.findAll();
         List<ColorDTO> colorDTOList = new ArrayList<>();
@@ -88,6 +97,7 @@ public class RelationService {
         return colorDTOList;
     }
 
+    @Override
     public List<SizeDTO> findAllSize() {
         List<SizeEntity> sizeEntityList = sizeRepository.findAll();
         List<SizeDTO> sizeDTOList = new ArrayList<>();
@@ -97,18 +107,22 @@ public class RelationService {
         return sizeDTOList;
     }
 
+    @Override
     public void deleteBrandById(Long id) {
         brandRepository.deleteById(id);
     }
 
+    @Override
     public void deleteCategoryById(Long id) {
         categoryRepository.deleteById(id);
     }
 
+    @Override
     public void deleteColorById(Long id) {
         colorRepository.deleteById(id);
     }
 
+    @Override
     public void deleteSizeById(Long id) {
         sizeRepository.deleteById(id);
     }

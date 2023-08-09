@@ -119,6 +119,7 @@
           <option value="SOLD_OUT">품절</option>
         </select>
       </div>
+      
       <p>상품이미지</p>
       <div th:if="${#lists.isEmpty(itemFormDTO.itemImgDTOList)}">
         <div th:each="num: ${#numbers.sequence(1,5)}" class="img-form-group">

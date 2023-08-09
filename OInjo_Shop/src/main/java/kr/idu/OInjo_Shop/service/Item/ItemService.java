@@ -1,24 +1,16 @@
 package kr.idu.OInjo_Shop.service.Item;
 
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.dto.Item.ItemImgDTO;
-import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageRequestDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageResultDTO;
 import kr.idu.OInjo_Shop.entity.Item.*;
-import kr.idu.OInjo_Shop.entity.Item.Like.ItemLikeEntity;
-import kr.idu.OInjo_Shop.entity.Item.Relation.BrandEntity;
-import kr.idu.OInjo_Shop.entity.Item.Relation.CategoryEntity;
-import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
-import kr.idu.OInjo_Shop.entity.Member.QMemberEntity;
 import kr.idu.OInjo_Shop.repository.Item.*;
 import kr.idu.OInjo_Shop.repository.Item.Like.ItemLikeRepository;
 import kr.idu.OInjo_Shop.repository.Member.MemberRepository;
+import kr.idu.OInjo_Shop.service.Item.ItemImg.ItemImgService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,7 +20,6 @@ import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -37,13 +28,9 @@ import java.util.function.Function;
 public class ItemService {
 
     private final ItemRepository itemRepository;
-
     private final ItemImgService itemImgService;
-
     private final ItemImgRepository itemImgRepository;
-    
     private final ItemLikeRepository itemLikeRepository;
-
     private final MemberRepository memberRepository;
 
     public Long saveItem(ItemFormDTO itemFormDto, List<MultipartFile> itemImgFileList) throws Exception{
@@ -73,9 +60,11 @@ public class ItemService {
         // 상품 수정
         ItemEntity item = itemRepository.findById(itemFormDTO.getId()).orElseThrow(EntityNotFoundException::new);
         item.updateItem(itemFormDTO);
+        System.out.println(itemFormDTO.getItemImgIds());
 
         List<Long> itemImgIds = itemFormDTO.getItemImgIds();
 
+        System.out.println(itemImgFileList.size());
         // 이미지 수정
         for (int i = 0; i < itemImgFileList.size(); i++) {
             itemImgService.updateItemImg(itemImgIds.get(i), itemImgFileList.get(i));
@@ -114,6 +103,10 @@ public class ItemService {
 
         return itemFormDTO;
     }
+    public ItemFormDTO getItemDetail(ItemFormDTO itemFormDTO) {
+        Long itemId = itemFormDTO.getId();
+        return getItemDetail(itemId);
+    }
 
     public void deleteItemById(Long id) {
         System.out.println(id);
@@ -128,7 +121,11 @@ public class ItemService {
                 pageRequestDTO.getType(),
                 pageRequestDTO.getKeyword(),
                 pageRequestDTO.getPageable(Sort.by("itemId").descending()));
-        Function<Object[], ItemFormDTO> fn = (entity -> ItemFormDTO.of((ItemEntity) entity[0]));
+        Function<Object[], ItemFormDTO> fn = (entity -> {
+            ItemEntity itemEntity = (ItemEntity) entity[0];
+            ItemFormDTO itemFormDTO = ItemFormDTO.of(itemEntity);
+            return getItemDetail(itemFormDTO);
+        });
         return new PageResultDTO<>(result, fn, 5);
     }
 
