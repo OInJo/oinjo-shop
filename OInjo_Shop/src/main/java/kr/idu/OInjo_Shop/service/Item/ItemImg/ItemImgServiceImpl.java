@@ -6,6 +6,7 @@ import kr.idu.OInjo_Shop.repository.Item.ItemImgRepository;
 import kr.idu.OInjo_Shop.service.File.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,13 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@PropertySource("classpath:application.yml")
 @RequiredArgsConstructor
 @Transactional
 public class ItemImgServiceImpl implements ItemImgService {
 
 
-    @Value("/Users/minwook/Documents/GitHub/OInjo_Shop/OInjo_Shop/src/main/resources/static/productImg")
-
+    @Value("${itemImgLocation}")
     private String itemImgLocation;
     private final ItemImgRepository itemImgRepository;
     private final FileService fileService;
