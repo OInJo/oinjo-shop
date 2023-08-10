@@ -27,9 +27,10 @@ public class CartEntity {
 
     private int count; // 카트에 담긴 상품 개수
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private MemberEntity member;  //장바구니 사용자
+    private MemberEntity member;  // 장바구니 사용자
+
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cart")
     private final List<CartItemEntity> cartItems = new ArrayList<>();    //상품들
@@ -42,7 +43,7 @@ public class CartEntity {
         this.createDate = LocalDate.now();
     }
 
-    public static CartEntity creatCart(MemberEntity member) {
+    public static CartEntity createCart(MemberEntity member) {
         CartEntity cart = new CartEntity();
         cart.setMember(member);
         cart.count = 0;
