@@ -27,9 +27,8 @@ public class CartItemDTO {
 
     public static CartItemEntity toCartItemEntity(CartDTO cartDTO, ItemFormDTO item, int count, ItemImgEntity image) {
         CartItemEntity cartItemEntity = new CartItemEntity();
-        cartItemEntity.setId(cartDTO.getId());
         cartItemEntity.setCart(CartDTO.toCartEntity(cartDTO));
-        cartItemEntity.setProduct(item.createItem());
+        cartItemEntity.setProduct(item.createItem()); // ItemFormDTO를 ItemEntity로 변환
         cartItemEntity.setCount(count);
         cartItemEntity.setImage(image);
         cartItemEntity.setCreateDate(cartDTO.getCreateDate());
@@ -37,29 +36,27 @@ public class CartItemDTO {
         return cartItemEntity;
     }
 
-
-    public static CartItemDTO toCartItemDTO(CartEntity cartEntity) {
+    public static CartItemDTO toCartItemDTO(CartItemEntity cartItemEntity) {
         CartItemDTO cartItemDTO = new CartItemDTO();
-        cartItemDTO.setId(cartEntity.getId());
-        cartItemDTO.setCart(CartDTO.toCartEntity(CartDTO.toCartDTO(cartEntity)));
-        cartItemDTO.setCount(cartEntity.getCount());
-        cartItemDTO.setCreateDate(cartEntity.getCreateDate());
+        cartItemDTO.setId(cartItemEntity.getId());
+        cartItemDTO.setCart(cartItemEntity.getCart());
+        cartItemDTO.setCount(cartItemEntity.getCount());
+        cartItemDTO.setCreateDate(cartItemEntity.getCreateDate());
 
         // product에 해당하는 ItemEntity가 null이 아닐 경우에만 설정
-        if (cartEntity.getCartItems() != null) {
-            CartItemEntity cartItemEntity = (CartItemEntity) cartEntity.getCartItems();
-            ItemEntity itemEntity = cartItemEntity.getProduct();
+        ItemEntity itemEntity = cartItemEntity.getProduct();
+        if (itemEntity != null) {
             cartItemDTO.setProduct(itemEntity);
 
             // 이미지 정보 설정 (product에 연결된 이미지 정보인지 확인 후 설정)
-            if (itemEntity != null) {
-                ItemImgEntity imageEntity = cartItemEntity.getImage();
+            ItemImgEntity imageEntity = cartItemEntity.getImage();
+            if (imageEntity != null) {
                 cartItemDTO.setImage(imageEntity);
             }
         }
 
-
         return cartItemDTO;
     }
+
 
 }
