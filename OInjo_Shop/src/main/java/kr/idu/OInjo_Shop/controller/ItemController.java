@@ -84,7 +84,7 @@ public class ItemController {
             return "/admin/itemupload";
         }
 
-        return "redirect:/";
+        return "redirect:/admin/item";
     }
 
     @GetMapping(value = {"/admin/item","/admin/item/"})
@@ -159,15 +159,15 @@ public class ItemController {
             return "admin/itemView";
         }
 
-        return "redirect:/";
+        return "redirect:/admin/item";
     }
 
 
-        @DeleteMapping("/admin/item/{itemId}/delete")
+    @DeleteMapping("/admin/item/{itemId}/delete")
     public String deleteItemById(@PathVariable("itemId") Long id, HttpSession session)
     {
         itemService.deleteItemById(id);
-        return "redirect:/member/";
+        return "redirect:/admin/item";
     }
 
     @GetMapping("/item/{itemId}")

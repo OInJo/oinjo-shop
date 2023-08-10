@@ -93,44 +93,13 @@
             })
                 .then(response => {
                     console.log(response)
+                    window.location.href = "/admin/item"; //DELETE MAPPING이라서 return으로 페이지 이동이 불가능해서, 클라이언트 측에서 페이지 이동하도록 구현
                 })
                 .catch(error => {
                     // 오류 발생 시 원하는 동작 수행
                     console.error("Error:", error);
                 });
         });
-
-        // 상품 수정 로직이였는데 img multipart 관련 문제가 발생하여 일단 주석처리하고 수정은 form submit로 처리. 위에 써있는 삭제는 fetch로 처리
-        // const updateBtn = document.querySelector("#update-btn");
-        // updateBtn.addEventListener("click", function (event) {
-        //     const itemName = encodeURIComponent(document.querySelector("#itemName").value);
-        //     const itemPrice = encodeURIComponent(document.querySelector("#itemPrice").value);
-        //     const itemStock = encodeURIComponent(document.querySelector("#itemStock").value);
-        //     const itemDetail = encodeURIComponent(document.querySelector("#itemDetail").value);
-        //     const itemImgFile = document.querySelector("#itemImgFile").files;
-        //     const formData = new FormData();
-        //     formData.append('id', id);
-        //     formData.append('itemName', itemName);
-        //     formData.append('itemPrice', itemPrice);
-        //     formData.append('itemStock', itemStock);
-        //     formData.append('itemDetail', itemDetail);
-        //     for (let i = 0; i < itemImgFile.length; i++) {
-        //         formData.append('itemImgFile', itemImgFile[i]);
-        //     }
-
-        //     event.preventDefault();
-        //     fetch(`/admin/item/${id}`, {
-        //         method: "POST",
-        //         body: formData
-        //     })
-        //         .then(response => {
-        //             console.log(response)
-        //         })
-        //         .catch(error => {
-        //             // 오류 발생 시 원하는 동작 수행
-        //             console.error("Error:", error);
-        //         });
-        // });
     </script>
 
 </body>

@@ -62,13 +62,13 @@
         <a class="article-product" th:each="itemFormDTO : ${itemFormDTOList.dtoList}"
           th:href="@{'/item/' + ${itemFormDTO.id}}">
           <p class="hidden article-product-id" th:text="${itemFormDTOList}"></p>
-          <img th:each="itemImgDTO, status: ${itemFormDTO.itemImgDTOList}" th:src="${itemImgDTO.imgUrl}" alt="상품 이미지"
+          <img th:each="itemImgDTO, status: ${itemFormDTO.itemImgDTOList}" th:src="${itemImgDTO.imgUrl}" alt="상품 이미지" th:if="${itemImgDTO.repImgYn == 'Y'}"
             class="article-product-image" id="item-img-src"/>
           <ul class="article-product-size">
             <li th:each="size : ${sizeList}" th:if="${itemFormDTO.size.sizeId == size.sizeId}"th:text="${size.sizeName}" class="article-product-size-list"></li>
           </ul>
           <div class="article-product-name" th:text="${itemFormDTO.itemName}"></div>
-          <div class="article-product-brand" th:each="brand : ${brandList}" th:text="${brand.brandName}"></div>
+          <div class="article-product-brand" th:each="brand : ${brandList}" th:if="${itemFormDTO.brand.brandId == brand.brandId}" th:text="${brand.brandName}"></div>
           <div class="article-product-category" th:each="category : ${categoryList}"
                th:if="${itemFormDTO.category.categoryId == category.categoryId}" th:text="${category.categoryName}"></div>
           <div class="article-product-price">
