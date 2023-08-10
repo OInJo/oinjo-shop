@@ -140,10 +140,10 @@ public class ItemRelationController {
             }
         } catch (Exception e) {
             model.addAttribute("errorMessage", "브랜드 등록 중 에러가 발생하였습니다.");
-            return "uploadbrand";
+            return "/admin/brandupload";
         }
 
-        return "redirect:/";
+        return "redirect:/admin/brand/new";
     }
 
     @PostMapping(value = "/admin/category/new")
@@ -155,10 +155,10 @@ public class ItemRelationController {
             }
         } catch (Exception e) {
             model.addAttribute("errorMessage", "카테고리 등록 중 에러가 발생하였습니다.");
-            return "uploadcategory";
+            return "/admin/categoryupload";
         }
 
-        return "redirect:/";
+        return "redirect:/admin/category/new";
     }
 
     @PostMapping(value = "/admin/color/new")
@@ -170,10 +170,10 @@ public class ItemRelationController {
             }
         } catch (Exception e) {
             model.addAttribute("errorMessage", "컬러 등록 중 에러가 발생하였습니다.");
-            return "uploadcolor";
+            return "/admin/colorupload";
         }
 
-        return "redirect:/";
+        return "redirect:/admin/color/new";
     }
 
     @PostMapping(value = "/admin/size/new")
@@ -185,10 +185,10 @@ public class ItemRelationController {
             }
         } catch (Exception e){
             model.addAttribute("errorMessage", "사이즈 등록 중 에러가 발생하였습니다.");
-            return "uploadsize";
+            return "/admin/sizeupload";
         }
 
-        return "redirect:/";
+        return "redirect:/admin/size/new";
     }
 
 

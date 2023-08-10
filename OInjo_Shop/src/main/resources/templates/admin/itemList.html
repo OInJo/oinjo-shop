@@ -37,8 +37,8 @@
       <article th:each="item : ${itemList.dtoList}" class="itemlist-article">
         <div class="itemlist-left">
           <a th:href="@{'/admin/item/' + ${item.id}}" th:each="itemImgDTO, status: ${item.itemImgDTOList}">
-            <img class="itemlist-img" th:src="${itemImgDTO.imgUrl}"/>
-            <label class="custom-file-label" th:text="${not #strings.isEmpty(itemImgDTO.oriName)} ? ${itemImgDTO.oriName} : '상품이미지' + ${status.index+1}"></label>
+            <img class="itemlist-img" th:src="${itemImgDTO.imgUrl}" th:if="${itemImgDTO.repImgYn == 'Y'}"/>
+<!--            <label class="custom-file-label" th:text="${not #strings.isEmpty(itemImgDTO.oriName)} ? ${itemImgDTO.oriName} : '상품이미지' + ${status.index+1}"></label>-->
           </a>
           <div class="itemlist-option">
             <p th:text="${item.itemName}" class="itemname-option"></p>
