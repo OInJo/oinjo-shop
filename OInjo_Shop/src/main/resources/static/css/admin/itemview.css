@@ -39,6 +39,11 @@
 .itemview-update-button-wrapper {
   display:flex;
   gap:10px;
+  margin-top:20px;
+}
+
+.custom-file {
+  margin-bottom:10px;
 }
 
 #update-btn, #delete-btn {

@@ -115,8 +115,9 @@ const selectProductTotalPrice = document.querySelector(
 itemCountValue.addEventListener("input", (e) => {
   selectProductCountInput.value = e.target.value;
   selectProductCountInputInForm.value = e.target.value;
-  selectProductTotalPrice.textContent =
-    detailPrice.textContent * e.target.value;
+  selectProductTotalPrice.textContent = (
+    parseInt(document.querySelector(".item-price").value) * e.target.value
+  ).toLocaleString();
 });
 selectProductCountInput.addEventListener("input", (e) => {
   itemCountValue.value = e.target.value;
@@ -129,3 +130,15 @@ document.querySelector(".shopping-bag-button").addEventListener("click", () => {
   const itemCount = document.querySelector(".item-count").value;
   alert(`장바구니에 ${itemName} 상품이 ${itemCount}개 추가되었습니다.`);
 });
+
+// 상품가격에 , 찍는 소스
+document.querySelector(".detail-price").textContent = parseInt(
+  document.querySelector(".item-price").value
+).toLocaleString();
+document.querySelector(".select-product-price").textContent = parseInt(
+  document.querySelector(".item-price").value
+).toLocaleString();
+document.querySelector(".select-product-total-price").textContent = (
+  parseInt(document.querySelector(".item-price").value) *
+  document.querySelector(".select-product-count-input").value
+).toLocaleString();

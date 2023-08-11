@@ -88,11 +88,21 @@ function showAllProducts() {
 function showSelectedProducts() {
   const productItems = document.querySelectorAll(".article-product");
   productItems.forEach(function (productItem) {
-    const brandName = productItem.querySelector(".article-product-brand").textContent.trim();
-    const categoryName = productItem.querySelector(".article-product-category").textContent.trim();
+    const brandName = productItem
+      .querySelector(".article-product-brand")
+      .textContent.trim();
+    const categoryName = productItem
+      .querySelector(".article-product-category")
+      .textContent.trim();
 
-    const isBrandMatched = selectedBrand === null || selectedBrand === brandName || selectedBrand === "전체";
-    const isCategoryMatched = selectedCategories.size === 0 || selectedCategories.has(categoryName) || selectedCategories.has("전체");
+    const isBrandMatched =
+      selectedBrand === null ||
+      selectedBrand === brandName ||
+      selectedBrand === "전체";
+    const isCategoryMatched =
+      selectedCategories.size === 0 ||
+      selectedCategories.has(categoryName) ||
+      selectedCategories.has("전체");
 
     if (isBrandMatched && isCategoryMatched) {
       productItem.style.display = "block";
@@ -300,5 +310,9 @@ priceHighSort.addEventListener("click", sortByPriceDescending);
 const priceLowSort = document.querySelector("#price-low-sort");
 priceLowSort.addEventListener("click", sortByPriceAscending);
 
-
-document.querySelector(".article-product-price-won").textContent = document.querySelector(".item-price").textContent.toLocaleString()
+// , 찍는 소스
+const articleProductPriceWon = document.querySelectorAll(".article-product-price-won")
+const itemPrice = document.querySelectorAll(".item-price")
+for(let j=0; j<articleProductPriceWon.length; j++){
+  articleProductPriceWon[j].textContent = parseInt(itemPrice[j].value).toLocaleString();
+}
