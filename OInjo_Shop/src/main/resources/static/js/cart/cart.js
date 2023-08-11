@@ -29,6 +29,7 @@ for (let i = 0; i < faMinus.length; i++) {
     ".cart-content-total-price-won"
   );
 
+  const itemPrice = document.querySelectorAll(".item-price");
   //마이너스 클릭 시, 수량이 1이 아니라면 1씩 빼줌, 1보다 더 작아질 수는 없음
   faMinus[i].addEventListener("click", () => {
     if (parseInt(cartContentCounting[i].textContent) > 1) {
@@ -57,9 +58,19 @@ for (let i = 0; i < faMinus.length; i++) {
           );
           cartContentCountingElement[i].textContent =
             cartContentCounting[i].textContent;
-          cartContentTotalPriceWon[i].textContent =
-            cartContentPriceWon[i].textContent *
-            cartContentCounting[i].textContent;
+          cartContentTotalPriceWon[i].textContent = (
+            parseInt(itemPrice[i].value) * cartContentCounting[i].textContent
+          ).toLocaleString();
+          let totalPrice = 0;
+          for (let j = 0; j < cartContentTotalPriceWon.length; j++) {
+            const priceText = cartContentTotalPriceWon[j].textContent;
+            const price = parseInt(priceText.replace(/[^0-9]/g, "")); // 숫자 아닌 문자 제거 후 숫자로 변환
+            totalPrice += price;
+          }
+          document.querySelector(".product-price").textContent =
+            totalPrice.toLocaleString();
+          document.querySelector(".total-price").textContent =
+            totalPrice.toLocaleString();
         })
         .catch((error) => {
           console.error("오류 발생:", error);
@@ -94,12 +105,53 @@ for (let i = 0; i < faMinus.length; i++) {
         );
         cartContentCountingElement[i].textContent =
           cartContentCounting[i].textContent;
-        cartContentTotalPriceWon[i].textContent =
-          cartContentPriceWon[i].textContent *
-          cartContentCounting[i].textContent;
+        cartContentTotalPriceWon[i].textContent = (
+          parseInt(itemPrice[i].value) * cartContentCounting[i].textContent
+        ).toLocaleString();
+        let totalPrice = 0;
+        for (let j = 0; j < cartContentTotalPriceWon.length; j++) {
+          const priceText = cartContentTotalPriceWon[j].textContent;
+          const price = parseInt(priceText.replace(/[^0-9]/g, "")); // 숫자 아닌 문자 제거 후 숫자로 변환
+          totalPrice += price;
+        }
+        document.querySelector(".product-price").textContent =
+          totalPrice.toLocaleString();
+        document.querySelector(".total-price").textContent =
+          totalPrice.toLocaleString();
       })
       .catch((error) => {
         console.error("오류 발생:", error);
       });
   });
 }
+
+// 원에 , 찍는 소스
+// document.querySelector(".cart-content-price-won").textContent = parseInt(
+//   document.querySelector(".item-price").value
+// ).toLocaleString();
+
+// document.querySelector(".cart-content-total-price-won").textContent = (
+//   parseInt(document.querySelector(".item-price").value) *
+//   parseInt(document.querySelector(".cart-content-counting").textContent)
+// ).toLocaleString();
+
+const cartContentPriceWon = document.querySelectorAll(
+  ".cart-content-price-won"
+);
+const cartContentTotalPriceWon = document.querySelectorAll(
+  ".cart-content-total-price-won"
+);
+const itemPrice = document.querySelectorAll(".item-price");
+for (let i = 0; i < cartContentPriceWon.length; i++) {
+  cartContentPriceWon[i].textContent = parseInt(
+    itemPrice[i].value
+  ).toLocaleString();
+  cartContentTotalPriceWon[i].textContent = (
+    parseInt(itemPrice[i].value) * parseInt(cartContentCounting[i].textContent)
+  ).toLocaleString();
+}
+const totalPriceWon = parseInt(
+  document.querySelector(".total-price-won").value
+).toLocaleString();
+document.querySelector(".product-price").textContent = totalPriceWon;
+document.querySelector(".total-price").textContent = totalPriceWon;

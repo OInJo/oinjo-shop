@@ -88,7 +88,8 @@
           <i class="fa-solid fa-plus count-icon"></i>
         </div>
         <div class="cart-content-price">
-          <span class="cart-content-price-won" th:text="${cartItem.product.itemPrice}"></span>
+          <input type="hidden" class="item-price" th:value="${cartItem.product.itemPrice}"/>
+          <span class="cart-content-price-won"></span>
           <span>원</span>
         </div>
         <div class="cart-content-total-price">
@@ -104,7 +105,8 @@
       <div class="total-price-content">
         <span class="price-count" th:text="${#lists.size(cartItemList)}"></span>
         <span class="price-content-section">개의 상품 금액</span>
-        <span class="product-price" th:text="${totalPrice}"></span>
+        <input type="hidden" class="total-price-won" th:value="${totalPrice}">
+        <span class="product-price"></span>
         <span class="price-content-section">원</span>
         <i class="fa-solid fa-plus price-content-section total-price-content-icon plus-icon"></i>
         <span class="price-content-section">배송비</span>
@@ -112,7 +114,7 @@
         <span class="price-content-section">원</span>
         <i class="fa-solid fa-equals price-content-section total-price-content-icon equal-icon"></i>
         <span class="price-content-section">합계</span>
-        <span class="total-price" th:text="${totalPrice}"></span>
+        <span class="total-price"></span>
         <span class="price-content-section last-price-content-section">원</span>
       </div>
       <div class="cart-bottom-button">

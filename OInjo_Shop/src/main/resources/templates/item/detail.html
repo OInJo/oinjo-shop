@@ -113,6 +113,7 @@
               <div th:text="${itemFormDTO.brand.brandName}"></div>
               <div th:text="${itemFormDTO.id}"></div>
               <div>1234</div>
+              <input type="hidden" class="item-price" th:value="${itemFormDTO.itemPrice}">
               <div class="detail-price" th:text="${itemFormDTO.itemPrice}"></div>
               <div>
                 <select name="" id="" class="color-select">
@@ -149,7 +150,7 @@
                   class="fa-solid fa-x select-product-delete-icon"></i></button>
             </div>
             <div class="select-product-price-wrapper">
-              <span class="select-product-price" th:text="${itemFormDTO.itemPrice}"></span>원
+              <span class="select-product-price"></span>원
             </div>
           </div>
           <div class="select-product-total-price-wrapper">
