@@ -1,11 +1,11 @@
 .new-address-search {
     position: absolute;
-    margin-top: -40px;
-    right: 50px;
+    margin-left: 8px;
+    margin-top: 5px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 120px;
+    width: 90px;
     height: 30px;
 }
 .current-my-address {
@@ -42,18 +42,19 @@
     height: 25px;
 }
 
-.save-btn {
+.save-btn, .exit, .back-btn {
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: 50px;
     height: 25px;
+    text-align: center;
+    text-decoration: none;
+    max: 5px;
+    background-color: #c7c5c3;
+    color: black;
 }
-
-.exit {
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 50px;
+.back-btn {
+    width: 100px;
     height: 25px;
 }

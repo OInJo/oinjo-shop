@@ -18,8 +18,24 @@
     border-radius: 3px;
     padding-bottom: 10px;
 }
+.address {
+    display: flex;
+    flex-direction: row;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(190, 188, 188);
+}
 
-.address, .name-number{
+.address span {
+    margin-right: 70px;
+}
+
+.address div {
+    margin-right: 6px;
+}
+
+.name-number{
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 10px;

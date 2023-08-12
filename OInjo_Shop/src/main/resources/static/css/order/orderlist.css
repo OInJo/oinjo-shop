@@ -50,7 +50,7 @@
 .order-card {
     margin-left: 5px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     border-bottom: 2px solid #ccc;
 }
 

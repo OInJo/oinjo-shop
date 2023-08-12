@@ -114,8 +114,8 @@
         <div class="info-box">
             <div class="address">
                 <span>배송지</span>
-                <div th:each="address:${addressDtoList}">
-                        <input type="radio" class="current-address" name="addressRadio" th:checked="${address.address == memberDto.memberAddress}" th:value="${address.address}" onchange="updateAddress(this.value)">[[${address.address}]]
+                <div th:each="address, iterStat : ${addressDtoList}" th:if="${iterStat.count <= 3 || address.address == memberDto.memberAddress}">
+                    <input type="radio" class="current-address" name="addressRadio" th:checked="${address.address == memberDto.memberAddress}" th:value="${address.address}" onchange="updateAddress(this.value)">[[${address.address}]]
                 </div>
                 <button type="button" class="new-address" onclick="address_popup()">배송지 변경</button>
             </div>
@@ -145,35 +145,34 @@
         </div>
     </div>
 
-
-
     <div class="items-info-box">
         <h3 class="items-info">상품 정보</h3>
         <div class="info-box2" th:each="orderAndItemFormDto: ${orderAndItemFormDTOList}">
+            <img class="items-img" th:src="${orderAndItemFormDto.itemFormDTO.itemImgDTOList[0].imgUrl}"> <!--상품이미지-->
+            <div class="items-container">
+                <div class="info-row">
+                    <div class="items-option">이름</div>
+                    <div class="items-option">가격</div>
+                    <div class="items-option">색깔</div>
 
-            <img th:src="${orderAndItemFormDto.itemFormDTO.itemImgDTOList[0].imgUrl}" class="items-img"> <!--상품이미지-->
-            <div class="items-option-info">
-                <span>이름: </span>
-                <span class="items-name" th:text="${orderAndItemFormDto.itemFormDTO.itemName}"></span>
-                <span class="items-one-price">가격: </span>
-                <span th:text="${orderAndItemFormDto.itemFormDTO.itemPrice} + ' 원'"></span>
-                <span class="items-option">색깔: </span>
-                <span class="items-option1">white</span>
-                <input type="hidden" th:value="${orderAndItemFormDto.orderDto.count}" id="count" name="count">
-                <input type="hidden" th:value="${orderAndItemFormDto.orderDto.itemId}" id="itemId" name="itemId"/>
-                <span class="items-option2">사이즈: </span>
-                <span class="items-option1">s</span>
-                <span class="items-option-num">수량:</span>
-                <span th:text="${orderAndItemFormDto.orderDto.count} + ' 개'"></span>
-                <span class="delivery-price">배송비:</span>
-                <span class="free">무료</span>
-                <div class="total-price">총 주문금액:
-                    <span class="total-order-price"
-                          th:text="${orderAndItemFormDto.itemFormDTO.itemPrice * orderAndItemFormDto.orderDto.count} + ' 원'"></span>
+                    <div class="items-option">사이즈</div>
+                    <div class="items-option">수량</div>
+                    <div class="items-option">배송비</div>
+                    <div class="items-option">주문금액</div>
+                </div>
+                <div class="info-row">
+                    <div class="items-option" th:text="${orderAndItemFormDto.itemFormDTO.itemName}"></div>
+                    <div class="items-option" th:text="${orderAndItemFormDto.itemFormDTO.itemPrice} + ' 원'"></div>
+                    <div class="items-option">red</div>
+                    <input type="hidden" th:value="${orderAndItemFormDto.orderDto.count}" id="count" name="count">
+                    <input type="hidden" th:value="${orderAndItemFormDto.orderDto.itemId}" id="itemId" name="itemId"/>
+                    <div class="items-option">s</div>
+                    <div class="items-option" th:text="${orderAndItemFormDto.orderDto.count} + ' 개'"></div>
+                    <div class="items-option">무료</div>
+                    <div class="items-option" th:text="${orderAndItemFormDto.itemFormDTO.itemPrice * orderAndItemFormDto.orderDto.count} + ' 원'"></div>
                 </div>
             </div>
         </div>
-    </div>
 
     <div class="payment-info-box">
         <h3 class="payment-info">결제 정보</h3>
