@@ -13,10 +13,12 @@ function DaumPostcode() {
             var postcode = data.zonecode;
             var roadAddr = data.roadAddress; // 도로명 주소 변수
             var detailAddr = "(상세정보입력)";
-            var combinedAddress = postcode + ' ' + roadAddr + ' ' + detailAddr;
+            var combinedAddress =' (' + postcode + ') ' + roadAddr + ' ' + detailAddr;
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('combined-address').value = combinedAddress;
+            document.getElementById('combined-address').disabled = false;
+            document.querySelector('.save-btn').disabled = false;
             // document.getElementById('postcode').value = data.zonecode;
             // document.getElementById("road-address").value = roadAddr;
 

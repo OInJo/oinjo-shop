@@ -13,19 +13,18 @@
 <body>
 
 <h2 class="popup-title">배송지 변경</h2>
-<button type="button " class="new-address-search" onclick="DaumPostcode()">새 배송지 등록</button>
 <p></p>
 
 <h4 class="new-add-address">주소 추가</h4>
 <form th:action="@{'/address/new'}" th:method="post" th:object="${addressDto}">
     <section class="new-search-address">
-
         <div class="go-delivery">주소<br>
-            <input type="text" id="combined-address" th:field="*{address}">
+            <input type="text" id="combined-address" th:field="*{address}" placeholder="주소찾기" disabled>
+            <button type="button" class="new-address-search" onclick="DaumPostcode()">배송지 등록</button>
         </div>
     </section>
     <br>
-    <button class="save-btn">저장</button>
+    <button class="save-btn" disabled>저장</button>
     <button class="exit" onclick="win_close()">닫기</button>
 </form>
 </body>
