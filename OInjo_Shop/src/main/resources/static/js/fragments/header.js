@@ -4,22 +4,27 @@ const updateLink = document.querySelector(".update-link");
 const logoutLink = document.querySelector(".logout-link");
 const loginLink = document.querySelector(".login-link");
 const adminLink = document.querySelector(".admin-link");
-loginCheck.style.display = "none";
+
 window.onload = () => {
-  if(loginCheck.textContent.includes("Admin@naver.com")){
-    adminLink.style.display = "flex";
+  toggleElementDisplay(loginCheck, "none");
+  if (loginCheck.textContent.includes("Admin@naver.com")) {
+    toggleElementDisplay(adminLink, "flex");
+  } else {
+    toggleElementDisplay(adminLink, "none");
   }
-  else{
-    adminLink.style.display = "none"
+
+  if (loginCheck.textContent === "") {
+    toggleElementDisplay(updateLink, "none");
+    toggleElementDisplay(logoutLink, "none");
+    toggleElementDisplay(loginLink, "flex");
+  } else {
+    toggleElementDisplay(updateLink, "flex");
+    toggleElementDisplay(logoutLink, "flex");
+    toggleElementDisplay(loginLink, "none");
   }
-  if(loginCheck.textContent == "") {
-    updateLink.style.display = "none"
-    logoutLink.style.display = "none"
-    loginLink.style.display = "flex"
-  }
-  else if(loginCheck.textContent.length >= 1) {
-    updateLink.style.display = "flex"
-    logoutLink.style.display = "flex"
-    loginLink.style.display = "none"
-  }
+};
+
+function toggleElementDisplay(element, displayValue) {
+  element.style.display = displayValue;
 }
+

@@ -58,10 +58,6 @@
     <input type="hidden" th:value="${updateMember.memberPassword}" class="old-password">
     <button type="button" class="passwordupdate-button">비밀번호 변경하기</button>
     <div class="passwordupdate-wrapper hidden">
-      <!-- <div class="passwordupdate-row">
-        <span class="passwordupdate-label">현재 비밀번호</span>
-        <input type="text" class="passwordupdate-value" th:value="${updateMember.memberPassword}" readonly>
-      </div> -->
       <div class="passwordupdate-row">
         <span class="passwordupdate-label">새 비밀번호</span>
         <input type="text" class="passwordupdate-value" name="memberPassword" th:value="${updateMember.memberPassword}"
@@ -76,26 +72,6 @@
         <button type="button" class="passwordupdate-cancel-button">다음에 변경하기</button>
       </div>
     </div>
-
-    <!-- <div class="update-bottom-button">
-      <input type="button" class="password-update-button" id="open-password" value="비밀번호 변경">
-      <div class="password-update-modal hidden">
-        <div class="modal__overlay"></div>
-        <div class="change-password">
-          <input type="text" th:value="${updateMember.memberPassword}" id="user-password" name="memberPassword">
-          <p class="password">현재 비밀번호<input type="text" id="current-password" class="current-password"
-              placeholder="현재 비밀번호"></p>
-          <p class="password">새 비밀번호<input type="text" id="new-password" class="new-password" placeholder="새 비밀번호" name="memberPassword">
-          </p>
-          <div class="password-check">
-            <p class="password">비밀번호 확인<input type="text" id="renew-password" class="renew-password"
-                onchange="check_password()"  placeholder="새 비밀번호 확인" onkeyup="save()"></p>
-            <span id="check"></span>
-          </div>
-          <button type="button" id="savebtn" class="save-password" disabled>저장</button>
-        </div>
-      </div>
-    </div> -->
     <div class="update-button-wrapper">
       <div class="left-update-button">
         <a href="/member/withdrawal" class="withdrawal-button">회원탈퇴</a>

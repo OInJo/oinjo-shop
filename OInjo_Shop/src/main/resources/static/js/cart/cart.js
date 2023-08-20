@@ -18,7 +18,7 @@ const memberId = parseInt(document.querySelector(".member-id").value);
 const cartItemId = document.querySelectorAll(".cart-item-id");
 const faMinus = document.querySelectorAll(".fa-minus");
 const faPlus = document.querySelectorAll(".fa-plus");
-let cartContentCounting = document.querySelectorAll(".cart-content-counting"); //문자열을 숫자로 변환
+let cartContentCounting = document.querySelectorAll(".cart-content-counting");
 for (let i = 0; i < faMinus.length; i++) {
   const requestUrl = `/member/${memberId}/cart/${cartItemId[i].value}/update`;
 
@@ -126,15 +126,6 @@ for (let i = 0; i < faMinus.length; i++) {
 }
 
 // 원에 , 찍는 소스
-// document.querySelector(".cart-content-price-won").textContent = parseInt(
-//   document.querySelector(".item-price").value
-// ).toLocaleString();
-
-// document.querySelector(".cart-content-total-price-won").textContent = (
-//   parseInt(document.querySelector(".item-price").value) *
-//   parseInt(document.querySelector(".cart-content-counting").textContent)
-// ).toLocaleString();
-
 const cartContentPriceWon = document.querySelectorAll(
   ".cart-content-price-won"
 );

@@ -37,8 +37,7 @@
       <article th:each="item : ${itemList.dtoList}" class="itemlist-article">
         <div class="itemlist-left">
           <a th:href="@{'/admin/item/' + ${item.id}}" th:each="itemImgDTO, status: ${item.itemImgDTOList}">
-            <img class="itemlist-img" th:src="${itemImgDTO.imgUrl}" th:if="${itemImgDTO.repImgYn == 'Y'}"/>
-<!--            <label class="custom-file-label" th:text="${not #strings.isEmpty(itemImgDTO.oriName)} ? ${itemImgDTO.oriName} : '상품이미지' + ${status.index+1}"></label>-->
+            <img class="itemlist-img" th:src="${itemImgDTO.imgUrl}" th:if="${itemImgDTO.repImgYn == 'Y'}" />
           </a>
           <div class="itemlist-option">
             <p th:text="${item.itemName}" class="itemname-option"></p>
@@ -54,13 +53,7 @@
     </section>
 
     <nav aria-label="Pagination">
-      <!-- <hr class="my-0" /> -->
       <div class="row">
-        <!-- <div class="col-sm-12 col-md-5">
-          <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
-            <span th:text="${itemList.curPage}"></span> [[${itemList.perPage}]] of [[${itemList.totalRows}]] entries
-          </div>
-        </div> -->
         <div class="col-sm-12 col-md-7">
           <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
             <ul class="pagination justify-content-center my-4">
@@ -68,17 +61,19 @@
                 th:class="'paginate_button page-item previous ' + ${itemList.prev?'':'disabled'}"
                 id="dataTable_previous">
                 <a href="#" th:href="@{/admin/item(page=${itemList.startNum - 1}, perPage=${itemList.perPage})}"
-                  aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link"><i class="fa-solid fa-caret-left paging-previous-icon"></i></a>
+                  aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link"><i
+                    class="fa-solid fa-caret-left paging-previous-icon"></i></a>
               </li>
               <li th:class="'paginate_button page-item ' + ${itemList.curPage == page?'active':''}"
                 th:each="page : ${itemList.pageList}">
-                <a href="#" th:href="@{/admin/item(page=${page}, perPage=${itemList.perPage})}" aria-controls="dataTable"
-                  data-dt-idx="1" tabindex="0" class="page-link paging-number">[[${page}]]</a>
+                <a href="#" th:href="@{/admin/item(page=${page}, perPage=${itemList.perPage})}"
+                  aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link paging-number">[[${page}]]</a>
               </li>
               <li th:if="${itemList.next}"
                 th:class="'paginate_button page-item next ' + ${itemList.next?'':'disabled'} " id="dataTable_next">
                 <a href="#" th:href="@{/admin/item(page=${itemList.endNum + 1}, perPage=${itemList.perPage})}"
-                  aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link"><i class="fa-solid fa-caret-right  paging-next-icon"></i></a>
+                  aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link"><i
+                    class="fa-solid fa-caret-right  paging-next-icon"></i></a>
               </li>
             </ul>
           </div>

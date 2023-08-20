@@ -49,16 +49,9 @@ form {
   justify-content: space-between;
 }
 
-.password-update-button {
-  /* all: unset;
-  cursor: pointer; */
-  /* color: rgba(0, 0, 0, 0.4); */
-}
-
 .update-button-wrapper {
   display: flex;
   justify-content: space-between;
-  /* margin-top: 15px; */
 }
 
 .left-update-button {
@@ -122,13 +115,10 @@ form {
 .new-password,
 .renew-password {
   font-family: 'GangwonEdu_OTFBoldA';
-  /* border: 0 solid black; */
   width: 150px;
   height: 30px;
   align-items: center;
   margin: 5px;
-  /* margin-right: 20px; */
-  /* margin-left: -20px; */
 }
 
 .change-password>input:focus {
