@@ -1,7 +1,6 @@
 <header class="header-wrapper">
   <p class="login-check" th:text="${session.loginEmail}"></p>
   <div class="header-left">
-    <!-- <h3 class="header-title">OInJo</h3> -->
 
     <form th:action="@{'/'}" th:method="get" class="search-wrapper">
       <select name="type" aria-controls="dataTable" class="search-select">
@@ -14,11 +13,6 @@
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
     </form>
-
-    <!-- <div class="search-wrapper">
-      <input type="text" class="search-input">
-      <i class="fa-solid fa-magnifying-glass search-icon"></i>
-    </div> -->
 
   </div>
   <ul class="header-right">

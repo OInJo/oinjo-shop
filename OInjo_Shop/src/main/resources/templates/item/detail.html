@@ -20,32 +20,6 @@
   <script src="/js/font.js" defer></script>
   <title>상품 상세</title>
 </head>
-
-<!--<script th:inline="javascript">-->
-<!--  function orders() {-->
-<!--    var url = "/orders/form";-->
-
-<!--    var paramData = {-->
-<!--      itemId: document.querySelector("#itemId").value,-->
-<!--      count: document.querySelector("#count").value-->
-<!--    };-->
-<!--    console.log(paramData);-->
-<!--    $.ajax({-->
-<!--      url: url,-->
-<!--      type: "POST",-->
-<!--      contentType: "application/json",-->
-<!--      data: JSON.stringify(paramData),-->
-<!--      success: function (result, status) {-->
-<!--        location.href = "/orders/form";-->
-<!--      },-->
-<!--      error: function (jqXHR, status, error) {-->
-<!--        // 주소 업데이트 실패 시 동작할 코드 작성-->
-<!--        alert("주소 업데이트에 실패했습니다.");-->
-<!--        // 추가 동작이 필요한 경우 여기에 작성-->
-<!--      }-->
-<!--    });-->
-<!--  }-->
-<!--</script>-->
 <script th:inline="javascript">
   function orders() {
     var url = "/orders/form";
@@ -161,10 +135,8 @@
           </div>
           <div class="buy-button-wrapper">
 
-            <!-- 여기부터 -->
             <input type="hidden" name="itemId" id="itemId" th:value="${itemFormDTO.id}">
             <button class="buy-button now-buy-button" onclick="orders()">바로 구매하기</button>
-            <!-- 여기까지 추가했음 주문하기 test 해보고 수정할 것 input type hidden 추가했음-->
 
             <form th:action="@{'/member/' + ${memberId} + '/cart/' + ${itemId}}" method="post">
               <input type="hidden" name="count" value="1" class="select-product-count-input-in-form item-count">
@@ -176,9 +148,6 @@
     </section>
 
   </main>
-  <!--  <footer>-->
-
-  <!--  </footer>-->
 
   <div class="move-btn-wrapper">
     <div class="move-top-btn"><i class="fa-solid fa-arrow-up"></i></div>

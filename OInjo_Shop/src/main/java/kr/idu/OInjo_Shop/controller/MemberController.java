@@ -160,7 +160,8 @@ public class MemberController {
         // 이대로 detail return 시 값 출력 x
         // findById 형식으로 memberDTO를 model에 담아서 return 가능
         // 다른 메서드가 가지고 있는 주소를 요청 - redirect 사용
-        return "redirect:/member/" + memberDTO.getId();
+        // return "redirect:/member/" + memberDTO.getId();
+        return "redirect:/"; //회원정보 변경 후 메인페이지로 이동하도록 구현
 
     }
 

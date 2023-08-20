@@ -1,6 +1,3 @@
-// const loginCheck = document.querySelector(".login-check");
-// loginCheck.style.display = "none";
-
 //처음에 input박스는 수정이 불가능한 readonly 속성이 걸려있음. 하지만 변경 버튼을 클릭 시, readonly가 해제되고 회원의 개인정보를 수정 가능하게 되고 변경완료로 텍스트가 변함
 //변경을 모두 진행했으면 변경완료 버튼을 누르고 readonly속성이 다시 추가되며 변경으로 텍스트가 변경됨,
 // 휴대폰번호, 이메일 등은 사용자에 의도와 맞지 않게 잘못 변경되어버리면 아이디가 사용할 수 없도록 로그인이 불가능한 상황을 방지하도록 버튼을 추가하고 버튼 클릭시에만 변경되도록 구현

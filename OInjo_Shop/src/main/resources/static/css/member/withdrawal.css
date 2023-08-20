@@ -120,7 +120,6 @@ body {
 
 .pw-check input {
   all: unset;
-  /* border-right:1px solid black; */
   margin-right: 5px;
 }
 

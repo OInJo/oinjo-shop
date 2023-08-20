@@ -15,36 +15,36 @@
 </head>
 
 <body>
-<form action="/member/login" method="post" class="login-form">
-    <section class="login-section">
-        <a href="/" class="index-link"><i class="fa-solid fa-angle-left"></i></a>
-        <h3 class="login-title">로그인</h3>
-        <div class="input-wrapper">
-            <i class="fa-regular fa-user icon email-icon"></i>
-            <input type="email" placeholder="이메일" class="input email-input" name="memberEmail">
-            <i class="fa-solid fa-xmark icon x-icon email-delete-button"></i>
-        </div>
-        <div class="input-wrapper">
-            <i class="fa-solid fa-key icon password-icon"></i>
-            <input type="password" placeholder="비밀번호" class="input password-input" name="memberPassword">
-            <i class="fa-solid fa-xmark icon x-icon password-delete-button"></i>
-        </div>
-        <p class="caps-lock-text hidden">Caps Lock이 켜져 있습니다.</p>
-        <p class="login-fail-text hidden">아이디, 비밀번호를 입력하세요.</p>
-        <button type="submit" class="login-button">로그인</button>
-        <div class="other-button">
-            <a href="/member/findid">아이디 찾기</a>
-            <a href="/member/findpw">비밀번호 찾기</a>
-            <a href="/member/save">회원가입</a>
-        </div>
-        <div class="easy-login">
-            <a href="/oauth2/authorization/naver" class="easy-login-link"><img src="/images/naver.png"
-                                                                               class="easy-login-image"></a>
-            <a href="/oauth2/authorization/kakao" class="easy-login-link"><img src="/images/kakao.png"
-                                                                               class="easy-login-image"></a>
-        </div>
-    </section>
-</form>
+    <form action="/member/login" method="post" class="login-form">
+        <section class="login-section">
+            <a href="/" class="index-link"><i class="fa-solid fa-angle-left"></i></a>
+            <h3 class="login-title">로그인</h3>
+            <div class="input-wrapper">
+                <i class="fa-regular fa-user icon email-icon"></i>
+                <input type="email" placeholder="이메일" class="input email-input" name="memberEmail">
+                <i class="fa-solid fa-xmark icon x-icon email-delete-button"></i>
+            </div>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-key icon password-icon"></i>
+                <input type="password" placeholder="비밀번호" class="input password-input" name="memberPassword">
+                <i class="fa-solid fa-xmark icon x-icon password-delete-button"></i>
+            </div>
+            <p class="caps-lock-text hidden">Caps Lock이 켜져 있습니다.</p>
+            <p class="login-fail-text hidden">아이디, 비밀번호를 입력하세요.</p>
+            <button type="submit" class="login-button">로그인</button>
+            <div class="other-button">
+                <a href="/member/findid">아이디 찾기</a>
+                <a href="/member/findpw">비밀번호 찾기</a>
+                <a href="/member/save">회원가입</a>
+            </div>
+            <div class="easy-login">
+                <a href="/oauth2/authorization/naver" class="easy-login-link"><img src="/images/naver.png"
+                        class="easy-login-image"></a>
+                <a href="/oauth2/authorization/kakao" class="easy-login-link"><img src="/images/kakao.png"
+                        class="easy-login-image"></a>
+            </div>
+        </section>
+    </form>
 </body>
 
 </html>

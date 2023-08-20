@@ -24,9 +24,9 @@
     var isDefaultAddress = false;
 
     function upAddress() {      //요청
-        var url = "/address/payment/" + [[${addressDto.addressId}]]; // 실제 주소 ID 값을 가져와서 설정해야 합니다.
+        var url = "/address/payment/" + [[${ addressDto.addressId }]]; // 실제 주소 ID 값을 가져와서 설정해야 합니다.
         var requestData = {
-            addressId: [[${addressDto.addressId}]], // 주소 ID 값을 요청 데이터에 포함합니다.
+            addressId: [[${ addressDto.addressId }]], // 주소 ID 값을 요청 데이터에 포함합니다.
             address: document.getElementById("combined-address").value,
         };
         console.log(url);
@@ -64,41 +64,41 @@
 </script>
 
 <body>
-<div class="location-info">
-    <h3 class="user-info">배송 정보</h3>
-    <div class="info-box">
-        <div class="address">
-            <span>배송지</span>
-            <input type="radio" class="current-address">기존 배송지
-            <button type="button" class="new-address" onclick="DaumPostcode()">배송지 변경</button>
-        </div>
-        <div class="name-number">
-            <span>이름/연락처</span>
-            <span th:text="${memberDto.memberName}" class="name-number-first"></span>/
-            <span th:text="${memberDto.memberPhone}"></span>
-        </div>
-        <div class="new-add-address">
-            <form th:action="@{'/address/up-form/' + ${addressDto.addressId}}" th:object="${addressDto}"
-                  th:method="put">
-                <div class="go-delivery">
-                    <div class="my-juso">
-                        <span>주소</span>
-                        <input type="text" id="combined-address" th:field="*{address}">
+    <div class="location-info">
+        <h3 class="user-info">배송 정보</h3>
+        <div class="info-box">
+            <div class="address">
+                <span>배송지</span>
+                <input type="radio" class="current-address">기존 배송지
+                <button type="button" class="new-address" onclick="DaumPostcode()">배송지 변경</button>
+            </div>
+            <div class="name-number">
+                <span>이름/연락처</span>
+                <span th:text="${memberDto.memberName}" class="name-number-first"></span>/
+                <span th:text="${memberDto.memberPhone}"></span>
+            </div>
+            <div class="new-add-address">
+                <form th:action="@{'/address/up-form/' + ${addressDto.addressId}}" th:object="${addressDto}"
+                    th:method="put">
+                    <div class="go-delivery">
+                        <div class="my-juso">
+                            <span>주소</span>
+                            <input type="text" id="combined-address" th:field="*{address}">
+                        </div>
+                        <div class="n-check-block">
+                            <input type="checkbox" class="n-check" id="delivery_defaultCheck"
+                                onchange="checkDefaultAddress(this);"
+                                th:checked="${addressDto.address == memberDto.memberAddress}">
+                            <label for="delivery_defaultCheck" class="setting-basic">기본 배송지 설정</label>
+                        </div>
                     </div>
-                    <div class="n-check-block">
-                        <input type="checkbox" class="n-check" id="delivery_defaultCheck"
-                               onchange="checkDefaultAddress(this);"
-                               th:checked="${addressDto.address == memberDto.memberAddress}">
-                        <label for="delivery_defaultCheck" class="setting-basic">기본 배송지 설정</label>
+                    <div class="change-address">
+                        <button type="submit" class="btn btn-primary" onclick="submitForm();">수정</button>
                     </div>
-                </div>
-                <div class="change-address">
-                    <button type="submit" class="btn btn-primary" onclick="submitForm();">수정</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </body>
 
 </html>

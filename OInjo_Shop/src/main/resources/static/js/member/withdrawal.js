@@ -1,18 +1,3 @@
-// const pwCheckId = document.querySelector("#pw-check-id");
-// const pwCheckIcon = document.querySelector(".pw-check-icon");
-// const pwCheckFunction = (event) => {
-//   if (event.target.value == "password") {
-//     pwCheckIcon.innerHTML = `<i class="fa-solid fa-check"></i>`;
-//     pwCheckIcon.style.color = "green";
-//   } else {
-//     pwCheckIcon.innerHTML = `<i class="fa-solid fa-x"></i>`;
-//     pwCheckIcon.style.color = "tomato";
-//   }
-//   console.log(event.target.value);
-// };
-// pwCheckId.addEventListener("change", pwCheckFunction);
-
-
 // 회원탈퇴 버튼 클릭 시 유저에게 한번 더 물어보는 로직
 document.addEventListener("DOMContentLoaded", function () {
   // 회원탈퇴 버튼 클릭 이벤트 리스너 등록

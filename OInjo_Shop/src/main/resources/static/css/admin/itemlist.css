@@ -15,7 +15,6 @@
 .itemlist-left {
   display:flex;
   justify-content: center;
-  /* align-items: center; */
 }
 
 .itemlist-img {
@@ -34,7 +33,6 @@
   justify-content: flex-end;
   align-items: flex-end;
   margin-right:5px;
-  /* gap:2px; */
 
 }
 

@@ -64,7 +64,6 @@
     </a>
     <section class="cart-wrapper hidden">
       <header class="cart-header">
-        <!--        <input type="checkbox" name="" id="" class="cart-header-check">-->
         <div class="cart-header-image"></div>
         <div class="cart-header-product-option">상품/옵션</div>
         <div class="cart-header-count">수량</div>
@@ -88,7 +87,7 @@
           <i class="fa-solid fa-plus count-icon"></i>
         </div>
         <div class="cart-content-price">
-          <input type="hidden" class="item-price" th:value="${cartItem.product.itemPrice}"/>
+          <input type="hidden" class="item-price" th:value="${cartItem.product.itemPrice}" />
           <span class="cart-content-price-won"></span>
           <span>원</span>
         </div>

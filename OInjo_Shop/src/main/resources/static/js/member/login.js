@@ -6,41 +6,44 @@ const loginFailText = document.querySelector(".login-fail-text");
 const loginButton = document.querySelector(".login-button");
 const emailDeleteButton = document.querySelector(".email-delete-button");
 const passwordDeleteButton = document.querySelector(".password-delete-button");
-//이메일, 비밀번호에 focus될 시 border를 추가하여 사용자에게 클릭됨을 안내
+
+// 입력 필드에 포커스될 시 아이콘 스타일 변경
+function addInputFocusIcon(icon) {
+  icon.classList.add("input-focus");
+}
+
+function removeInputFocusIcon(icon) {
+  icon.classList.remove("input-focus");
+}
+
 emailInput.addEventListener("focus", () => {
-  emailIcon.classList.add("input-focus");
+  addInputFocusIcon(emailIcon);
 });
+
 emailInput.addEventListener("blur", () => {
-  emailIcon.classList.remove("input-focus");
+  removeInputFocusIcon(emailIcon);
 });
+
 passwordInput.addEventListener("focus", () => {
-  passwordIcon.classList.add("input-focus");
+  addInputFocusIcon(passwordIcon);
 });
+
 passwordInput.addEventListener("blur", () => {
-  passwordIcon.classList.remove("input-focus");
+  removeInputFocusIcon(passwordIcon);
 });
 
-//이메일과 비밀번호 둘 다에 값이 1개라도 존재할 시 loginButton에 클래스명을 추가하여 사용자에게 로그인 시도가 가능함을 표시함
-emailInput.addEventListener("input", () => {
-  if (emailInput.value.length > 0 && passwordInput.value.length > 0) {
-    loginButton.classList.add("validation-pass");
-  } else {
-    loginButton.classList.remove("validation-pass");
-  }
-});
+// 이메일 및 비밀번호가 입력될 시 로그인 버튼 활성화
+function updateLoginButtonState() {
+  const isInputValid = emailInput.value.length > 0 && passwordInput.value.length > 0;
+  loginButton.classList.toggle("validation-pass", isInputValid);
+}
 
-//패스워드도 동일하게 이메일, 비밀번호에 둘 다 값이 있을 경우 로그인 시도가 가능함을 표시
-passwordInput.addEventListener("input", () => {
-  if (emailInput.value.length > 0 && passwordInput.value.length > 0) {
-    loginButton.classList.add("validation-pass");
-  } else {
-    loginButton.classList.remove("validation-pass");
-  }
-});
+emailInput.addEventListener("input", updateLoginButtonState);
+passwordInput.addEventListener("input", updateLoginButtonState);
 
-//로그인 버튼이 클릭되면, 로그인 실패 메시지를 없애줌
+// 로그인 버튼 클릭 시 로그인 실패 메시지 관리
 loginButton.addEventListener("click", (event) => {
-  if (emailInput.value.length == 0 || passwordInput.value.length == 0) {
+  if (emailInput.value.length === 0 || passwordInput.value.length === 0) {
     loginFailText.classList.remove("hidden");
     event.preventDefault();
   } else {
@@ -48,11 +51,13 @@ loginButton.addEventListener("click", (event) => {
   }
 });
 
-// X 버튼 클릭 시 input value 삭제 로직
+// X 버튼 클릭 시 입력값 삭제
 emailDeleteButton.addEventListener("click", () => {
   emailInput.value = "";
+  updateLoginButtonState();
 });
 
 passwordDeleteButton.addEventListener("click", () => {
   passwordInput.value = "";
+  updateLoginButtonState();
 });

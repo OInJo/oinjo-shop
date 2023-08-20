@@ -19,11 +19,9 @@
 
     <div th:replace="~{/fragments/adminheader}"></div>
     <main class="admin-main">
-        <!--        <div th:each="ItemFormDTO : ${itemFormDTO}">-->
         <div>
             <form id="itemForm" th:action="@{'/admin/item/' + ${itemFormDTO.id}}" method="POST"
                 enctype="multipart/form-data">
-                <!-- <form id="itemForm"> -->
                 <input type="hidden" th:value="${itemFormDTO.brand.brandId}" name="brand"></p>
                 <input type="hidden" th:value="${itemFormDTO.category.categoryId}" name="category"></p>
                 <input type="hidden" th:value="${itemFormDTO.color.colorId}" name="color"></p>
@@ -60,8 +58,7 @@
                 </div>
 
                 <p class="item-update-title">상품이미지</p>
-                <!--                 <div th:if="${#lists.isEmpty(itemFormDTO.itemImgDTOList)}">-->
-                <div th:if = "${not #lists.isEmpty(itemFormDTO.itemImgDTOList)}">
+                <div th:if="${not #lists.isEmpty(itemFormDTO.itemImgDTOList)}">
                     <div class="form-group" th:each="itemImgDTO, status: ${itemFormDTO.itemImgDTOList}">
                         <div class="custom-file img-div">
                             <input type="file" class="custom-file-input" name="itemImgFile">

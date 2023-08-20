@@ -17,23 +17,23 @@
 
 <body>
   <div th:replace="~{/fragments/adminheader}"></div>
-    <main class="admin-main">
-      <form action="/admin/size/new" method="post" class="upload-form">
-        <label for="size" class="upload-size">사이즈 등록</label>
-        <div class="upload-input-button-wrapper">
-          <input type="text" name="sizeName" id="size" class="upload-input">
-          <i class="fa-solid fa-plus upload-button"></i>
-        </div>
-      </form>
-      <ul class="ul-wrapper">
-        <li th:each="sizeDto : ${sizeList}" class="database-list">
-            <span th:text="${sizeDto.sizeId}" class="id size-id"></span>
-            <span th:text="${sizeDto.sizeName}" class="name size-name"></span>
-            <a th:href="@{'/admin/size/delete/'+${sizeDto.sizeId}}"><i class="fa-solid fa-trash delete-button"></i></a>
-        </li>
+  <main class="admin-main">
+    <form action="/admin/size/new" method="post" class="upload-form">
+      <label for="size" class="upload-size">사이즈 등록</label>
+      <div class="upload-input-button-wrapper">
+        <input type="text" name="sizeName" id="size" class="upload-input">
+        <i class="fa-solid fa-plus upload-button"></i>
+      </div>
+    </form>
+    <ul class="ul-wrapper">
+      <li th:each="sizeDto : ${sizeList}" class="database-list">
+        <span th:text="${sizeDto.sizeId}" class="id size-id"></span>
+        <span th:text="${sizeDto.sizeName}" class="name size-name"></span>
+        <a th:href="@{'/admin/size/delete/'+${sizeDto.sizeId}}"><i class="fa-solid fa-trash delete-button"></i></a>
+      </li>
     </ul>
-  
-    </main>
+
+  </main>
 </body>
 
 </html>
