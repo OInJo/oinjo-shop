@@ -1,8 +1,6 @@
 package kr.idu.OInjo_Shop.controller;
 
-import com.mysema.commons.lang.Pair;
 import kr.idu.OInjo_Shop.dto.Address.AddressDto;
-import kr.idu.OInjo_Shop.dto.Address.AddressListDto;
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.dto.Order.OrderAndItemFormDTO;
@@ -14,7 +12,7 @@ import kr.idu.OInjo_Shop.repository.Item.ItemRepository;
 import kr.idu.OInjo_Shop.repository.Member.MemberRepository;
 import kr.idu.OInjo_Shop.repository.Order.OrderRepository;
 import kr.idu.OInjo_Shop.service.Address.AddressService;
-import kr.idu.OInjo_Shop.service.Item.ItemService;
+import kr.idu.OInjo_Shop.service.Item.ItemServiceImpl;
 import kr.idu.OInjo_Shop.service.Order.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -42,7 +40,7 @@ import java.util.Optional;
 public class OrderController {
     private final MemberRepository memberRepository;
     private final ItemRepository itemRepository;
-    private final ItemService itemService;
+    private final ItemServiceImpl itemServiceImpl;
     private final OrderRepository orderRepository;
     private final OrderService orderService;
     private final AddressService addressService;
@@ -87,7 +85,7 @@ public class OrderController {
             List<ItemFormDTO> itemFormDtoList = new ArrayList<>();
             for (OrderDto orderDto : orderDtoList) {
                 System.out.println(orderDto.getItemId());
-                ItemFormDTO itemFormDto = itemService.getItemDetail(orderDto.getItemId());
+                ItemFormDTO itemFormDto = itemServiceImpl.getItemDetail(orderDto.getItemId());
                 System.out.println("itemFormDto값 확인= " + itemFormDto);
                 itemFormDtoList.add(itemFormDto);
             }

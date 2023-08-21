@@ -14,7 +14,7 @@ import kr.idu.OInjo_Shop.repository.Item.Relation.CategoryRepository;
 import kr.idu.OInjo_Shop.repository.Item.Relation.ColorRepository;
 import kr.idu.OInjo_Shop.repository.Item.Relation.SizeRepository;
 import kr.idu.OInjo_Shop.service.Item.ItemImg.ItemImgServiceImpl;
-import kr.idu.OInjo_Shop.service.Item.ItemService;
+import kr.idu.OInjo_Shop.service.Item.ItemServiceImpl;
 import kr.idu.OInjo_Shop.service.Item.Relation.RelationServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ import java.util.stream.IntStream;
 public class ItemControllerTest {
 
     @Autowired
-    ItemService itemService; // 아이템 및 아이템 이미지
+    ItemServiceImpl itemServiceImpl; // 아이템 및 아이템 이미지
 
     @Autowired
     ItemImgServiceImpl itemImgService;

@@ -1,7 +1,6 @@
 package kr.idu.OInjo_Shop.controller;
 
 import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
-import kr.idu.OInjo_Shop.dto.Item.ItemImgDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.BrandDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.CategoryDTO;
 import kr.idu.OInjo_Shop.dto.Item.Relation.ColorDTO;
@@ -9,7 +8,7 @@ import kr.idu.OInjo_Shop.dto.Item.Relation.SizeDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageRequestDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageResultDTO;
 import kr.idu.OInjo_Shop.service.Item.ItemImg.ItemImgServiceImpl;
-import kr.idu.OInjo_Shop.service.Item.ItemService;
+import kr.idu.OInjo_Shop.service.Item.ItemServiceImpl;
 import kr.idu.OInjo_Shop.service.Item.Relation.RelationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,7 +23,7 @@ import java.util.List;
 public class HomeController {
     // 기본페이지 요청 메서드
 
-    private final ItemService itemService; // 아이템 및 아이템 이미지
+    private final ItemServiceImpl itemServiceImpl; // 아이템 및 아이템 이미지
     private final ItemImgServiceImpl itemImgService; // 아이템 및 아이템 이미지
     private final RelationService relationService; // 브랜드,카테고리,사이즈,컬러
 
@@ -48,7 +47,7 @@ public class HomeController {
                 .keyword(keyword)
                 .build();
 
-        PageResultDTO<ItemFormDTO, Object[]> itemFormDTOList = itemService.getAllItemList(pageRequestDTO);
+        PageResultDTO<ItemFormDTO, Object[]> itemFormDTOList = itemServiceImpl.getAllItemList(pageRequestDTO);
 
         model.addAttribute("brandList", brandDTOList); // 브랜드 리스트 받아오기
         model.addAttribute("categoryList", categoryDTOList); // 카테고리 리스트 받아오기
