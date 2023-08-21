@@ -7,14 +7,11 @@ import kr.idu.OInjo_Shop.dto.Item.ItemFormDTO;
 import kr.idu.OInjo_Shop.dto.Member.MemberDTO;
 import kr.idu.OInjo_Shop.dto.Order.OrdersDto;
 import kr.idu.OInjo_Shop.entity.Cart.CartEntity;
-import kr.idu.OInjo_Shop.entity.Cart.CartItemEntity;
-import kr.idu.OInjo_Shop.entity.Item.ItemEntity;
-import kr.idu.OInjo_Shop.entity.Member.MemberEntity;
 import kr.idu.OInjo_Shop.repository.Cart.CartItemRepository;
 import kr.idu.OInjo_Shop.repository.Cart.CartRepository;
 import kr.idu.OInjo_Shop.repository.Member.MemberRepository;
 import kr.idu.OInjo_Shop.service.Cart.CartServiceImpl;
-import kr.idu.OInjo_Shop.service.Item.ItemService;
+import kr.idu.OInjo_Shop.service.Item.ItemServiceImpl;
 import kr.idu.OInjo_Shop.service.Member.MemberServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -40,7 +37,7 @@ public class CartController {
     private final CartItemRepository cartItemRepository;
     private final CartServiceImpl cartServiceImpl;
     private final MemberServiceImpl memberServiceImpl;
-    private final ItemService itemService;
+    private final ItemServiceImpl itemServiceImpl;
     private final MemberRepository memberRepository;
 
     @GetMapping("/member/{id}/cart")
@@ -80,7 +77,7 @@ public class CartController {
     @PostMapping("/member/{id}/cart/{itemId}")
     public String myCartAdd(@PathVariable("id") Long id, @PathVariable("itemId") Long itemId, Integer count){
         MemberDTO member = MemberDTO.toMemberDTO(memberServiceImpl.findByMember(id));
-        ItemFormDTO item = ItemFormDTO.of(itemService.findItemId(itemId));
+        ItemFormDTO item = itemServiceImpl.getItemDetail(itemId);
 
         cartServiceImpl.addCart(member, item, count);
 

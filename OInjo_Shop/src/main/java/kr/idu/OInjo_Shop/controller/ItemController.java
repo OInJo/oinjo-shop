@@ -10,7 +10,7 @@ import kr.idu.OInjo_Shop.dto.Page.PageRequestDTO;
 import kr.idu.OInjo_Shop.dto.Page.PageResultDTO;
 import kr.idu.OInjo_Shop.service.Admin.AdminAuthenticator;
 import kr.idu.OInjo_Shop.service.Item.ItemImg.ItemImgService;
-import kr.idu.OInjo_Shop.service.Item.ItemService;
+import kr.idu.OInjo_Shop.service.Item.ItemServiceImpl;
 import kr.idu.OInjo_Shop.service.Item.Relation.RelationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ import java.util.List;
 @Slf4j
 public class ItemController {
 
-    private final ItemService itemService; // 아이템 및 아이템 이미지
+    private final ItemServiceImpl itemServiceImpl; // 아이템 및 아이템 이미지
     private final ItemImgService itemImgService;
     private final RelationService relationService; // 카테고리, 브랜드, 컬러, 사이즈
     private final AdminAuthenticator adminAuthenticator; // 어드민 확인 인터페이스
@@ -77,7 +77,7 @@ public class ItemController {
         }
 
         try {
-            itemService.saveItem(itemFormDTO, itemImgFileList);
+            itemServiceImpl.saveItem(itemFormDTO, itemImgFileList);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "상품 등록 중 에러가 발생하였습니다.");
             model.addAttribute("errorType", e.getMessage());
@@ -107,7 +107,7 @@ public class ItemController {
         String loginEmail = (String) session.getAttribute("loginEmail");
 
         if (loginEmail != null && adminAuthenticator.isAdmin(loginEmail)) {
-            PageResultDTO<ItemFormDTO, Object[]> itemFormDTOList = itemService.getAllItemList(pageRequestDTO);
+            PageResultDTO<ItemFormDTO, Object[]> itemFormDTOList = itemServiceImpl.getAllItemList(pageRequestDTO);
             model.addAttribute("itemList", itemFormDTOList);
             return "/admin/itemList";
         }
@@ -123,7 +123,7 @@ public class ItemController {
 
         if (loginEmail != null && adminAuthenticator.isAdmin(loginEmail)) {
             try {
-                ItemFormDTO itemFormDTO = itemService.getItemDetail(itemId);
+                ItemFormDTO itemFormDTO = itemServiceImpl.getItemDetail(itemId);
                 model.addAttribute("itemFormDTO", itemFormDTO);
 
             } catch (EntityNotFoundException e) {
@@ -153,7 +153,7 @@ public class ItemController {
         }
 
         try {
-            itemService.updateItem(itemFormDTO, itemImgFileList);
+            itemServiceImpl.updateItem(itemFormDTO, itemImgFileList);
         } catch (IOException e) {
             model.addAttribute("errorMessage", "상품 수정 중에 오류가 발생했습니다.");
             return "admin/itemView";
@@ -166,14 +166,14 @@ public class ItemController {
     @DeleteMapping("/admin/item/{itemId}/delete")
     public String deleteItemById(@PathVariable("itemId") Long id, HttpSession session)
     {
-        itemService.deleteItemById(id);
+        itemServiceImpl.deleteItemById(id);
         return "redirect:/admin/item";
     }
 
     @GetMapping("/item/{itemId}")
     public String itemDetail(@PathVariable("itemId") Long itemId, Model model, HttpServletResponse response, HttpSession session) {
 
-            ItemFormDTO itemFormDTO = itemService.getItemDetail(itemId);
+            ItemFormDTO itemFormDTO = itemServiceImpl.getItemDetail(itemId);
             model.addAttribute("itemFormDTO", itemFormDTO);
             List<ItemImgDTO> itemImgDTO = itemImgService.findItemImgByItemId(itemId);
             model.addAttribute("itemImgDTO", itemImgDTO);
