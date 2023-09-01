@@ -7,7 +7,6 @@
     cursor: pointer;
     width: 120px;
     height: 30px;
-
 }
 
 .address-list {
@@ -87,4 +86,14 @@
     cursor: pointer;
     width: 50px;
     height: 25px;
+}
+
+.btn-save {
+    border-color: #818080;
+    border-radius: 5px;
+    background-color: #ffffff;
+    cursor: pointer;
+    width: 110px;
+    height: 30px;
+    margin-left: 433px;
 }

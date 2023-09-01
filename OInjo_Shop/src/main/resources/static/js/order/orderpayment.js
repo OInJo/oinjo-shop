@@ -2,11 +2,8 @@ function address_popup() {
     var popup = window.open('/address/list', '배송지', 'width=600, height=700, left=0, top=0');
 
     '<p><button onclick="window.close()">닫기</button>';
-  // 팝업 창의 document 객체를 사용하여 내용 삽입
-
 }
 
-// 데이터 수신 이벤트 핸들러
 window.addEventListener("message", function(event) {
     var receivedData = event.data;
     
@@ -55,8 +52,6 @@ function PaymentMessage(button, type) {
         paymentMessage2.style.display = 'block';
     }
 }
-
-
 
 function checkAllAgree() {
     const allCheckAgree = document.getElementById("allCheckAgree");

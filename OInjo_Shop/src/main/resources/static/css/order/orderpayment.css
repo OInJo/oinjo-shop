@@ -5,19 +5,18 @@
 
 .user-info {
     margin-top: 30px;
-}
-
-.user-info, .info-box {
     margin-left: 10%;
 }
 
 .info-box {
+    margin-left: 10%;
     width: 80%;
     height: 40%;
     border: 1px solid rgb(190, 188, 188);
     border-radius: 3px;
     padding-bottom: 10px;
 }
+
 .address {
     display: flex;
     flex-direction: row;
