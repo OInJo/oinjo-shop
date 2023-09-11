@@ -17,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.Address;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
@@ -42,7 +41,7 @@ public class AddressController {
         model.addAttribute("page", pageable.getPageNumber());
         model.addAttribute("maxPage", 5);
 
-        return "address/addresslist";
+        return "address/addrlist";
     }
 
     @GetMapping("/address/up-form/{aId}")    //주소의 id로 들어간다.
@@ -99,7 +98,7 @@ public class AddressController {
 
         AddressEntity address = new AddressEntity();
         model.addAttribute("addressDto", new AddressDto());
-        return "address/addresspaymentpopup";
+        return "address/addrpopup";
     }
 
     @PostMapping("/address/new")

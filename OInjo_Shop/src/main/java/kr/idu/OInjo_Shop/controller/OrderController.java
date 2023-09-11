@@ -149,7 +149,7 @@ public class OrderController {
         OrderHistDto orderHistDto = new OrderHistDto(order);
         model.addAttribute("order", orderHistDto);
         model.addAttribute("member", MemberDTO.toMemberDTO(member));
-        return "order/paymentcompleted";
+        return "order/paycompleted";
     }
 
     @GetMapping(value = {"/orders/list", "/orders/list/{page}"})
