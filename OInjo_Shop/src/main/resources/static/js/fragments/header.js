@@ -4,6 +4,7 @@ const updateLink = document.querySelector(".update-link");
 const logoutLink = document.querySelector(".logout-link");
 const loginLink = document.querySelector(".login-link");
 const adminLink = document.querySelector(".admin-link");
+const signUpLink = document.querySelector(".signup-link")
 
 window.onload = () => {
   toggleElementDisplay(loginCheck, "none");
@@ -17,10 +18,12 @@ window.onload = () => {
     toggleElementDisplay(updateLink, "none");
     toggleElementDisplay(logoutLink, "none");
     toggleElementDisplay(loginLink, "flex");
+    toggleElementDisplay(signUpLink, "flex");
   } else {
     toggleElementDisplay(updateLink, "flex");
     toggleElementDisplay(logoutLink, "flex");
     toggleElementDisplay(loginLink, "none");
+    toggleElementDisplay(signUpLink, "none");
   }
 };
 
