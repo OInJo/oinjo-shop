@@ -300,5 +300,48 @@ input[id*="category"]:checked+label+ul {
 }
 
 .hidden {
-  display:none;
+  display: none;
+}
+
+/* 검색필드 스타일링*/
+.search {
+  width:100%;
+  display:flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.search-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 300px;
+  height: 60px;
+  align-items: center;
+  border: 1px solid #111111;
+  border-radius: 20px;
+  padding:0 10px;
+  margin-right:10px;
+}
+
+.search-select {
+  all: unset;
+  width: 20%;
+  height: 100%;
+  display:flex;
+  align-items: center;
+}
+
+.search-option {
+  height: 100%;
+  ;
+}
+
+.search-input {
+  all: unset;
+  width: 70%;
+}
+
+.search-icon {
+  all: unset;
+  width: 10%;
 }

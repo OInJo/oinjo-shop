@@ -52,7 +52,22 @@
           <button type="button" class="sort-option-button" id="price-high-sort">가격 높은 순</button>
           <button type="button" class="sort-option-button" id="price-low-sort">가격 낮은 순</button>
         </div>
+
       </div>
+      <div class="search">
+      <form th:action="@{'/'}" th:method="get" class="search-wrapper">
+        <select name="type" aria-controls="dataTable" class="search-select">
+          <option value="n" class="select-option">상품이름</option>
+          <option value="b" class="select-option">브랜드</option>
+          <option value="c" class="select-option">카테고리</option>
+        </select>
+        <input type="text" name="keyword" aria-controls="dataTable" class="search-input">
+        <button type="submit" class="search-button search-icon">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+    </div>
+
       <div class="article-product-wrapper">
         <a class="article-product" th:each="itemFormDTO : ${itemFormDTOList.dtoList}"
           th:href="@{'/item/' + ${itemFormDTO.id}}">
@@ -66,8 +81,8 @@
           <div class="article-product-name" th:text="${itemFormDTO.itemName}"></div>
           <div class="article-product-brand" th:each="brand : ${brandList}"
             th:if="${itemFormDTO.brand.brandId == brand.brandId}" th:text="${brand.brandName}"></div>
-          <div class="article-product-category" th:each="category : ${categoryList}"
-            th:if="${itemFormDTO.category.categoryId == category.categoryId}" th:text="${category.categoryName}"></div>
+<!--          <div class="article-product-category" th:each="category : ${categoryList}"-->
+<!--            th:if="${itemFormDTO.category.categoryId == category.categoryId}" th:text="${category.categoryName}"></div>-->
           <div class="article-product-price">
             <input type="hidden" class="item-price" th:value="${itemFormDTO.itemPrice}">
             <div class="article-product-price-won"></div>
