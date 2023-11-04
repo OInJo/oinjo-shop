@@ -42,7 +42,6 @@
       contentType: "application/json",
       data: JSON.stringify(orderData),
       success: function (result, status) {
-        alert("주문 페이지로 이동.");
         location.href = "/orders/form";
       },
       error: function (jqXHR, status, error) {
