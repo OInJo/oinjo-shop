@@ -36,9 +36,9 @@
             return;
         }
 
-        // 난수 생성, 주문번호에 사용 (예: 12345)
-        const randomNumber = 12345;
-
+        const array = new Uint32Array(1); // 32비트 정수를 생성
+        crypto.getRandomValues(array);
+        const randomNumber = array[0];
         const { IMP } = window;
         IMP.init("imp33350778");
         IMP.request_pay(
@@ -46,7 +46,7 @@
                 pg: "html5_inicis", // PG사 선택 (예: html5_inicis, kakao, uplus, nice, kcp 등)
                 pay_method: "card", // 결제 수단 선택 (예: card, vbank, trans 등)
                 merchant_uid: randomNumber, // 주문 번호 (고유하게 생성)
-                name: "홍길동님의 세탁", // 상품명
+                name: "오인조 쇼핑몰 상품 주문", // 상품명
                 amount: 100, // 결제 금액 (예: 100)
                 buyer_email: "test@test.com", // 구매자 이메일
                 buyer_name: "홍길동", // 구매자 이름

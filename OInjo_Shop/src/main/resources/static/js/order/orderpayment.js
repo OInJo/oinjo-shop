@@ -14,8 +14,8 @@ window.addEventListener("message", function(event) {
     
     // 주소 정보를 부모 HTML의 특정 요소에 표시
     var deliveryDiv = document.querySelector(".go-delivery");
-    deliveryDiv.innerHTML = "(" + postcode + ")" + " " + roadAddress + " " + detailAddress;
-    deliveryDiv.style.marginLeft = "125px";
+//     deliveryDiv.innerHTML = "(" + postcode + ")" + " " + roadAddress + " " + detailAddress;
+//     deliveryDiv.style.marginLeft = "125px";
 });
 
 var previousSelectedOption = document.querySelector('.card-check'); // 카드 선택이 처음에 나오도록 설정
@@ -25,7 +25,7 @@ function CardSelection(button) {
     if (previousSelectedOption !== null) {
         previousSelectedOption.style.display = 'none';
     }
-
+    //
     // 새로운 선택 옵션을 보이도록 설정
     var cardCheck = button.parentNode.querySelector('.card-check');
     cardCheck.style.display = 'block';
